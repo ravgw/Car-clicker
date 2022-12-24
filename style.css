@@ -1,0 +1,17 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#carBodyRear {
+    background: #cdcdcd;
+    width: 250px;
+    height: 50px;
+    border-radius: 60% 60% 70% 30%;
+}
