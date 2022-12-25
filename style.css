@@ -9,9 +9,48 @@ body {
     justify-content: center;
 }
 
-#carBodyRear {
-    background: #cdcdcd;
-    width: 250px;
-    height: 50px;
-    border-radius: 60% 60% 70% 30%;
+#clicker {
+    padding: 20px;
 }
+
+#carBodyRear {
+    position: relative;
+    display: inline-block;
+    background: #cdcdcd;
+    width: 100px;
+    height: 40px;
+    border-radius: 120% 5% 0% 30%;
+}
+
+#carBodyRear::before {
+    content: '';
+    position: absolute; 
+    top: 0px;
+    left: 55px;
+    height: 5px;
+    width: 64px;
+    border-radius: 40% 0% 40% 0%;
+    background: #000;
+}
+
+#carBodyRear::after {
+    content: '';
+    position: absolute;
+    left: 105px;
+    top: -19px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 0 0 15px;
+    border-color: transparent transparent transparent #007bff;
+}
+
+#carBodyFront {
+    display: inline-block;
+    background: #cdcdc0;
+    width: 100px;
+    height: 40px;
+    border-radius: 0% 40% 40% 0%;
+}
+
+
