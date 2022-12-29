@@ -8,20 +8,36 @@ const carBodyFront = document.createElement('p');
 carBodyFront.id = 'carBodyFront';
 const  door = document.createElement('p');
 door.id = 'door';
+
 const rearTyre = document.createElement('p');
 rearTyre.classList.add('tyres');
-const rearRim = document.createElement('p');
-rearRim.classList.add('rim');
 const frontTyre = document.createElement('p');
 frontTyre.classList.add('tyres');
+
+const rearRim = document.createElement('p');
+rearRim.classList.add('rims')
 const frontRim = document.createElement('p');
-frontRim.classList.add('rim');
+frontRim.classList.add('rims')
+
+const driverBody = document.createElement('p');
+driverBody.id = 'driverBody';
+
 
 clicker.appendChild(carBodyRear);
 clicker.appendChild(carBodyFront);
+
 carBodyRear.appendChild(door);
+carBodyRear.appendChild(driverBody);
+
 carBodyRear.appendChild(rearTyre);
-rearTyre.appendChild(rearRim);
 carBodyFront.appendChild(frontTyre);
-frontTyre.appendChild(frontRim);
+
+carBodyRear.appendChild(rearRim);
+carBodyFront.appendChild(frontRim);
+
 }  
+
+export const createCarBackground = function () {
+    const container = document.getElementById('carBackground');
+    
+}

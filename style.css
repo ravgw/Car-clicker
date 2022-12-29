@@ -6,12 +6,35 @@
 
 body {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
+#clickerBackground {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    background: violet;
+    padding-bottom: 30px;
+}
 
+#carBackground{
+    position: relative;
+    top:300px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #000;
+}
 #clicker {
-    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.counter {
+    display: flex;
 }
 
 #carBodyRear {
@@ -88,47 +111,55 @@ body {
     height: 42px;   
     border: 6px solid #000;
     border-radius: 50%;
-    animation: wheels 10s linear infinite;
 }
 
 #carBodyFront .tyres {
     left: 45px;
 }
 
-.rim {
-    content: '';
+.rims {
     position: absolute;
-    left: 11px;
-    width: 7px;
-    height: 32px;
-    border: 2px solid #222;
-    border-radius: 75%;
-    background-color: #bfb;
-    animation: wheels 10s linear infinite;
+    top: 16px;
+    left: 38px;
+    width: 6px;
+    height: 34px;   
+    background: #777;
+    border: 2px solid #333;
+    border-radius: 10%;
+    animation: wheels 1s infinite linear;
+    opacity: .8;
+}
 
+#carBodyFront .rims {
+    left: 63px;
 }
-/* .rim::before {
+
+.rims::before {
     content: '';
     position: absolute;
-    top: -2px;
     left: -2px;
-    width: 4px;
-    height: 30px;
+    top: -2px;
+    box-sizing: border-box;
+    width: 6px;
+    height: 34px;   
+    background: #777;
     border: 2px solid #222;
-    border-radius: 75%;
-    background-color: #bbb;
-    rotate: 45deg;
+    border-radius: 10%;
+    rotate: 60deg;
 }
-.rim::after {
+.rims::after {
     content: '';
     position: absolute;
-    width: 4px;
-    height: 30px;
+    left: -2px;
+    top: -2px;
+    box-sizing: border-box;
+    width: 6px;
+    height: 34px;   
+    background: #777;
     border: 2px solid #222;
-    border-radius: 75%;
-    background-color: #bbb;
-    rotate: 135deg;
-} */
+    border-radius: 10%;
+    rotate: 120deg;
+}
 
 
 #door {
@@ -156,6 +187,35 @@ body {
     background-color: #fff;
 }
 
+#driverBody {
+    position: absolute;
+    top: -6px;
+    left: 65px;
+    width: 40px;
+    height: 10px;
+    border-radius: 25% 99% 90% 0%;
+    background: #aa3434;
+}
+#driverBody::before {
+    content:'';
+    position: absolute;
+    top: -14px;
+    left: -4px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: #244;
+}
+#driverBody::after {
+    content:'';
+    position: absolute;
+    top: -10px;
+    left: 4px;
+    width: 9px;
+    height: 3px;
+    border-radius: 0% 40% 45% 0%;
+    background: #ccc;
+}
 @keyframes wheels {
     from {
         transform: rotate(0turn);
