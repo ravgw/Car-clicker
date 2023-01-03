@@ -10,28 +10,90 @@ body {
     align-items: center;
     justify-content: center;
 }
-#clickerBackground {
+#carBoard {
+    position: relative;
     display: flex;
-    align-items: flex-end;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
     width: 100%;
     height: 200px;
-    background: violet;
+    background: #6ecde5;
+    /* background: #f9c1b7; */
     padding-bottom: 30px;
+    overflow: hidden;
+}
+/* ------------------------------------ CAR-BACKGROUND ----------------------------------- */
+#carBackground{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.clouds {
+    position: absolute;
+    right: -250px; 
+    border-radius: 50% 40%;
+    background: #bef1fa;
+    opacity: .3;
+}
+.clouds::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -5px;
+    width: 70px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #f1fcfe;
+}
+.clouds::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 30px;
+    width: 70px;
+    height: 9px;
+    border-radius: 50%;
+    background: #d4f5fb;
+}
+#cloud1{
+    top: 40px;
+    width: 150px;
+    height: 20px;
+    animation: wind 58s linear infinite;
+    animation-delay: 5s;
+}
+#cloud2{
+    top: 30px;
+    width: 170px;
+    height: 15px;
+    animation: wind 113s linear infinite;
+    animation-delay: 4s;
+}
+#cloud3{
+    top: 60px;
+    width: 90px;
+    height: 10px;
+    animation: wind 159s linear infinite;
+    opacity: .5;
 }
 
-#carBackground{
-    position: relative;
-    top:300px;
-    width: 300px;
-    height: 300px;
+#track {
+    position: absolute;
+    top: 185px;
+    left: auto;
+    right: auto;
+    width: 900px;
+    height: 900px;
     border-radius: 50%;
-    background-color: #000;
+    background: #000;
 }
+/* ----------------------------------- CAR-CLICKER ----------------------------------- */
 #clicker {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    padding-top: 120px;
 }
 .counter {
     display: flex;
@@ -111,6 +173,31 @@ body {
     height: 42px;   
     border: 6px solid #000;
     border-radius: 50%;
+}
+
+.tyres::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #777;
+    opacity: 1;
+}
+.tyres::after {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #666;
+    opacity: 1;
 }
 
 #carBodyFront .tyres {
@@ -196,14 +283,15 @@ body {
     border-radius: 25% 99% 90% 0%;
     background: #aa3434;
 }
+/* helmet */
 #driverBody::before {
     content:'';
     position: absolute;
-    top: -14px;
+    top: -16px;
     left: -4px;
     width: 17px;
     height: 17px;
-    border-radius: 50%;
+    border-radius: 50% 50% 20% 50%;
     background: #244;
 }
 #driverBody::after {
@@ -216,12 +304,23 @@ body {
     border-radius: 0% 40% 45% 0%;
     background: #ccc;
 }
+
 @keyframes wheels {
     from {
         transform: rotate(0turn);
-      }
+    }
     
-      to {
+    to {
         transform: rotate(1turn);
-      }
+    }
+}
+
+@keyframes wind {
+    from {
+        transform: translateX(0px);
+    }
+    
+    to {
+        transform: translateX(-1200px);
+    }
 }

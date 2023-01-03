@@ -1,6 +1,7 @@
-import { createCarClicker } from "./displaying-elements.js";
+import { createCarClicker, createCarBackground } from "./displaying-elements.js";
 
 createCarClicker();
+createCarBackground();
 const player = {
     actualCoins: 0,
     multiplier: 10,

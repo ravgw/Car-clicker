@@ -39,5 +39,16 @@ carBodyFront.appendChild(frontRim);
 
 export const createCarBackground = function () {
     const container = document.getElementById('carBackground');
+
+    for (let i = 0; i < 3; i++){
+        const clouds = document.createElement('p');
+        clouds.classList.add('clouds');
+        clouds.id = 'cloud' + (i+1);
+        container.appendChild(clouds);
+    }
+
+    const track =document.createElement('p');
+    track.id = 'track';
+    container.appendChild(track);
     
 }
