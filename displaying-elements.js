@@ -47,8 +47,14 @@ export const createCarBackground = function () {
         container.appendChild(clouds);
     }
 
+    const fans = document.createElement('p');
+    fans.id = 'fans';
+    container.appendChild(fans); 
+    const kerbs = document.createElement('p');
+    kerbs.id = 'kerbs';
     const track =document.createElement('p');
     track.id = 'track';
     container.appendChild(track);
+    container.appendChild(kerbs);
     
 }

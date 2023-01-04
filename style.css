@@ -25,6 +25,8 @@ body {
 }
 /* ------------------------------------ CAR-BACKGROUND ----------------------------------- */
 #carBackground{
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -78,16 +80,38 @@ body {
     opacity: .5;
 }
 
+#fans {
+    width: 1000px;
+    position: absolute;
+    top: 90px;
+    right: -1000px;
+    background: url('./fans.webp') repeat-x;
+    height: 124px;
+    border-bottom: 25px solid #565;
+    animation: horizon 20s infinite linear;
+}
+
+#kerbs {
+    position: absolute;
+    top: 185px;
+    width: 1600px;
+    height: 1600px;
+    border-top: 10px dashed #f00;
+    border-radius: 50%;
+    animation: kerbs 20s infinite linear;
+}
+
 #track {
     position: absolute;
     top: 185px;
-    left: auto;
-    right: auto;
-    width: 900px;
-    height: 900px;
+    width: 1600px;
+    height: 1600px;
     border-radius: 50%;
-    background: #000;
+    background: #333;
+    border-top: 10px solid #fff;
+    animation: kerbs 20s infinite linear;
 }
+
 /* ----------------------------------- CAR-CLICKER ----------------------------------- */
 #clicker {
     display: flex;
@@ -315,6 +339,16 @@ body {
     }
 }
 
+@keyframes kerbs {
+    from {
+        transform: rotate(0turn);
+    }
+    
+    to {
+        transform: rotate(-1turn);
+    }
+}
+
 @keyframes wind {
     from {
         transform: translateX(0px);
@@ -322,5 +356,15 @@ body {
     
     to {
         transform: translateX(-1200px);
+    }
+}
+
+@keyframes horizon {
+    from {
+        transform: translateX(0px);
+    }
+    
+    to {
+        transform: translateX(-2000px);
     }
 }
