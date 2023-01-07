@@ -1,3 +1,4 @@
+// import { slider } from "./DOM-utils.js";
 
 export const createCarClicker = function () {
 const clicker = document.getElementById('clicker');
@@ -58,3 +59,17 @@ export const createCarBackground = function () {
     container.appendChild(kerbs);
     
 }
+
+export const createBolidCardElement = function  () {
+    const container = document.getElementById('selectTabInfo');
+    for (let i=0 ; i <5; i++) {
+        const bolidCard = document.createElement('div');
+        const test = document.createElement('div')
+        test.classList.add('xd')
+        // const img = document.createElement('img')
+        // img.src = './fans.webp';
+        bolidCard.classList.add('slide')
+        container.appendChild(bolidCard)
+        bolidCard.appendChild(test);
+        // bolidCard.appendChild(img)}
+}}
