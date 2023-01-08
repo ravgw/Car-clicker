@@ -10,7 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     height: 100vh;
     background: #333;
     max-width: 100vw;
@@ -406,6 +406,8 @@ body {
 
 #navigation {
     display: flex;
+    /* flex-direction: row; */
+    flex-wrap: wrap;
     justify-content: space-around;
     width: 100%;
     background: #333;
@@ -446,39 +448,69 @@ body {
     background: #2565be;
 }
 
+.card-navigation-container {
+    width: 100%;
+    height: 50px;
+    background: #244;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card-navigation-option {
+    width: 48%;
+    height: 80%;
+    background: red;
+    border-radius: 20px 10px;
+    cursor: pointer;
+}
+
 #selectTabInfo {
     position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.card-container {
     display: inline-flex;
+    scrollbar-width: none;
+    overflow: hidden;
+    scrollbar-width: none;
+    transform: translateX(0);
+    will-change: transform;
+    transition: transform 0.3s ease-out;
+    cursor: grab;
+  }
+  .cardElement{
+    max-height: 100vh;
+    width: 100vw;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-    /* overflow: hidden; */
-    transform: translateX(0px);
-    transition: transform 0.3 ease-out;
-}
-
-.slide {
-    cursor: grab;
-    min-width: 70%;
-    height: 80%;
-    margin-left: 50px;
-    margin-right: 50px;
-    border: 2px solid #a2be25;
-    border-radius: 25px 10px;
-    user-select: none;
-}
-
-.grabbing {
+    padding: 1rem;
+  }
+  @media(min-width: 1200px){
+    .slide {
+      padding: 3rem;
+    }
+  }
+  /* .slide img{
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 5px 5px 50px -1px rgba(0, 0, 0.8);
+    border-radius: 4px;
+  } */
+  .grabbing {
     cursor: grabbing;
-    scale: .9;
-    transition: transform 0.3 ease-in-out;
-}
+  }
+  .grabbing .slide img{
+    transform: scale(0.9);
+    box-shadow: 5px 5px 40px -1px rgba(0, 0, 0.8);
+  }
 
-.xd {
-    width: 100%;
-    height: 100%;
-    background-color: #244;
-    opacity: .9;
-    transition: transform 0.3 ease-in-out;
-}
+  .card {
+    width: 200px;
+    height: 200px;
+    background: #007bff;
+  }
+  

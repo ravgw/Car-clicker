@@ -1,4 +1,3 @@
-// import { slider } from "./DOM-utils.js";
 
 export const createCarClicker = function () {
 const clicker = document.getElementById('clicker');
@@ -60,16 +59,50 @@ export const createCarBackground = function () {
     
 }
 
-export const createBolidCardElement = function  () {
+export const createCardElement = function  (category) {
     const container = document.getElementById('selectTabInfo');
+    const cardContainer = document.createElement('div');
+    container.appendChild(cardContainer)
+    cardContainer.classList.add('card-container')
+    cardContainer.id = category
     for (let i=0 ; i <5; i++) {
-        const bolidCard = document.createElement('div');
-        const test = document.createElement('div')
-        test.classList.add('xd')
-        // const img = document.createElement('img')
-        // img.src = './fans.webp';
-        bolidCard.classList.add('slide')
-        container.appendChild(bolidCard)
-        bolidCard.appendChild(test);
-        // bolidCard.appendChild(img)}
+        const cardElement = document.createElement('div')
+        cardElement.classList.add('cardElement')
+        cardContainer.appendChild(cardElement)
+        const card = document.createElement('div')
+        card.classList.add('card')
+        cardElement.appendChild(card)
 }}
+
+
+export const createCardNavigation = function (category, firstOption, secondOption) {
+    const container = document.getElementById('navigation')
+    const navigation = document.createElement('div')
+    navigation.id = category;
+    navigation.classList.add('card-navigation-container')
+    
+    container.appendChild(navigation)
+    
+    const option = document.createElement('div')
+    option.id = firstOption
+    option.innerText = firstOption
+    option.classList.add('card-navigation-option')
+
+    const option2 = document.createElement('div')
+    option2.id = secondOption
+    option2.innerText = secondOption
+    option2.classList.add('card-navigation-option')
+
+    
+    navigation.appendChild(option)
+    navigation.appendChild(option2)
+}
+
+export function hideElements (element) {
+    const hide = document.getElementById(element)
+    hide.style.display = 'none'
+}
+export function showElements (element) {
+    const hide = document.getElementById(element)
+    hide.style.display = 'flex'
+}
