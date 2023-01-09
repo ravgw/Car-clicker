@@ -1,10 +1,12 @@
 import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements } from "./displaying-elements.js";
-import { ssd } from "./DOM-utils.js";
+import { slider } from "./DOM-utils.js";
 createCarClicker();
 createCarBackground();
 
 let bolidMenu = false;
+let bolidCards = false;
 let garageMenu = false;
+let garageCards = false;
 
 const player = {
     actualCoins: 0,
@@ -36,49 +38,77 @@ speed();
 
 const bolidElement = document.getElementById('bolid')
 bolidElement.addEventListener('click', (e) => {
-    if(garageMenu) {
+    if (garageMenu) {
         hideElements('garage-navi');
-        hideElements('garage-cards');
-
+        if (garageCards) {
+            hideElements('garage-cards')
+        }
     }
     
     if(bolidMenu) {
         showElements('car-navi')
-        showElements('car-cards')
-        ssd()
     } else {
         bolidMenu = true
-        createCardNavigation('car-navi', 'Driver', 'Car parts')
-        createCardElement('car-cards')
-        ssd()}
-    })
-    
+        createCardNavigation('car-navi', 'Driver', 'Parts')
+    }
+        const partsCard = document.getElementById('Parts')
+        partsCard.addEventListener('click', (e) =>{
+            
+            
+            if (bolidCards) {
+                showElements('car-cards')
+            } else {
+                bolidCards = true
+                createCardElement('car-cards')
+                slider('.car-cards-container-slider','.car-cards-element-slider')
+            }
+        })
+    }
+    )
     
 const garageElement = document.getElementById('garage')
 garageElement.addEventListener('click', (e) => {
         if(bolidMenu) {
             hideElements('car-navi');
-            hideElements('car-cards');
+            if(bolidCards) {
+                hideElements('car-cards')
+            }
         }
         
         if(garageMenu) {
             showElements('garage-navi')
-            showElements('garage-cards')
-            ssd()
         } else {
-        garageMenu = true
-        createCardNavigation('garage-navi', 'Team Principal', 'Facilities')
-        createCardElement('garage-cards')
-        ssd()}
+            garageMenu = true
+            createCardNavigation('garage-navi', 'Team Principal', 'Facilities')
+        }
+        
+        const facilitiesCard = document.getElementById('Facilities')
+        facilitiesCard.addEventListener('click', (e) =>{
+            
+            
+            if(garageCards) {
+                showElements('garage-cards')
+            } else {
+                garageCards = true
+                createCardElement('garage-cards')
+                slider('.garage-cards-container-slider','.garage-cards-element-slider')
+            }
+})
 })
 
 const homeElement = document.getElementById('home')
 homeElement.addEventListener('click', (e) => {
     if (bolidMenu) {
         hideElements('car-navi')
+        if (bolidCards) {
+        hideElements('car-cards')
+        }
     }
     if (garageMenu) {
         hideElements('garage-navi')
+        if (garageCards) {
+        hideElements('garage-cards')
+        }
     }
 })
 

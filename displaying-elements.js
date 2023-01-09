@@ -1,4 +1,5 @@
 
+
 export const createCarClicker = function () {
 const clicker = document.getElementById('clicker');
 
@@ -64,13 +65,16 @@ export const createCardElement = function  (category) {
     const cardContainer = document.createElement('div');
     container.appendChild(cardContainer)
     cardContainer.classList.add('card-container')
+    cardContainer.classList.add(`${category}-container-slider`)
     cardContainer.id = category
     for (let i=0 ; i <5; i++) {
         const cardElement = document.createElement('div')
         cardElement.classList.add('cardElement')
+        cardElement.classList.add(`${category}-element-slider`)
         cardContainer.appendChild(cardElement)
         const card = document.createElement('div')
         card.classList.add('card')
+        card.classList.add(`${category}-slider`)
         cardElement.appendChild(card)
 }}
 
@@ -104,5 +108,9 @@ export function hideElements (element) {
 }
 export function showElements (element) {
     const hide = document.getElementById(element)
-    hide.style.display = 'flex'
+    if ( element === 'car-cards' || 'garage-cards' ) {
+        hide.style.display = 'inline-flex'
+    } else {
+        hide.style.display = 'flex'
+    }
 }

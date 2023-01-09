@@ -1,14 +1,18 @@
 
-export const ssd = function (){
-const slider = document.querySelector('.card-container'),
-      slides = Array.from(document.querySelectorAll('.cardElement'))
 
-let isDragging = false,
-  startPos = 0,
-  currentTranslate = 0,
-  prevTranslate = 0,
-  animationID,
-  currentIndex = 0
+
+export const slider = function (first , second){
+  const sliderCon = document.querySelector(first),
+  slides = Array.from(document.querySelectorAll(second))
+  let isDragging = false,
+      startPos = 0,
+      currentTranslate = 0,
+      prevTranslate = 0,
+      animationID,
+      currentIndex = 0
+// const slider = document.querySelector('.card-container'),
+//       slides = Array.from(document.querySelectorAll('.cardElement'))
+
 
 slides.forEach((slide, index) => {
   const slideImage = slide.querySelector('.card')
@@ -41,7 +45,7 @@ function touchStart(index) {
     startPos = getPositionX(event)
     isDragging = true
     animationID = requestAnimationFrame(animation)
-    slider.classList.add('grabbing')
+    // slider.classList.add('grabbing')
   }
 }
 function touchMove(event) {
@@ -59,7 +63,7 @@ function touchEnd() {
   // if moved enough positive then snap to previous slide if there is one
   if (movedBy > 100 && currentIndex > 0) currentIndex -= 1
   setPositionByIndex()
-  slider.classList.remove('grabbing')
+  // slider.classList.remove('grabbing')
 }
 function animation() {
   setSliderPosition()
@@ -68,9 +72,9 @@ function animation() {
 function setPositionByIndex() {
   currentTranslate = currentIndex * -window.innerWidth
   prevTranslate = currentTranslate
-  setSliderPosition()
-}
+  setSliderPosition()}
+  
 function setSliderPosition() {
-  slider.style.transform = `translateX(${currentTranslate}px)`
-}
+    sliderCon.style.transform = `translateX(${currentTranslate}px)`
+  }
 }
