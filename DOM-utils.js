@@ -1,6 +1,4 @@
 
-
-
 export const slider = function (first , second){
   const sliderCon = document.querySelector(first),
   slides = Array.from(document.querySelectorAll(second))
