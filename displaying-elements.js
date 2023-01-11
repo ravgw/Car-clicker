@@ -60,25 +60,6 @@ export const createCarBackground = function () {
     
 }
 
-export const createCardElement = function  (category) {
-    const container = document.getElementById('selectTabInfo');
-    const cardContainer = document.createElement('div');
-    container.appendChild(cardContainer)
-    cardContainer.classList.add('card-container')
-    cardContainer.classList.add(`${category}-container-slider`)
-    cardContainer.id = category
-    for (let i=0 ; i <5; i++) {
-        const cardElement = document.createElement('div')
-        cardElement.classList.add('cardElement')
-        cardElement.classList.add(`${category}-element-slider`)
-        cardContainer.appendChild(cardElement)
-        const card = document.createElement('div')
-        card.classList.add('card')
-        card.classList.add(`${category}-slider`)
-        cardElement.appendChild(card)
-}}
-
-
 export const createCardNavigation = function (category, firstOption, secondOption) {
     const container = document.getElementById('navigation')
     const navigation = document.createElement('div')
@@ -100,6 +81,37 @@ export const createCardNavigation = function (category, firstOption, secondOptio
     
     navigation.appendChild(option)
     navigation.appendChild(option2)
+}
+
+export const createCardElement = function  (category) {
+    const container = document.getElementById('selectTabInfo');
+    const cardContainer = document.createElement('div');
+    container.appendChild(cardContainer)
+    cardContainer.classList.add('card-container')
+    cardContainer.classList.add(`${category}-container-slider`)
+    cardContainer.id = category
+    for (let i=0 ; i <5; i++) {
+        const cardElement = document.createElement('div')
+        cardElement.classList.add('cardElement')
+        cardElement.classList.add(`${category}-element-slider`)
+        cardContainer.appendChild(cardElement)
+        const card = document.createElement('div')
+        card.classList.add('card')
+        card.classList.add(`${category}-slider`)
+        cardElement.appendChild(card)}
+}
+
+export const createPersonCard = function (category) {
+    const container = document.getElementById('selectTabInfo')
+
+    const cardElement = document.createElement('div')
+    cardElement.classList.add('cardElement')
+    container.appendChild(cardElement)
+    
+    const card = document.createElement('div')
+    card.classList.add('card')
+    card.classList.add(`${category}-card`)
+    cardElement.appendChild(card)
 }
 
 export function hideElements (element) {

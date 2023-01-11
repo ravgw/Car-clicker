@@ -470,9 +470,11 @@ body {
 #selectTabInfo {
     position: relative;
     width: 100%;
+    height: 100%;
     overflow: hidden;
 }
 .card-container {
+    height: 100%;
     display: inline-flex;
     scrollbar-width: none;
     overflow: hidden;
@@ -483,7 +485,7 @@ body {
     cursor: grab;
   }
   .cardElement{
-    max-height: 100vh;
+    height: 100%;
     width: 100vw;
     display: flex;
     align-items: center;
@@ -497,8 +499,8 @@ body {
   }
 
   .card {
-    width: 200px;
-    height: 200px;
+    width: 85%;
+    height: 90%;
   }
   
   .car-cards-slider {

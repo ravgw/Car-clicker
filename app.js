@@ -1,4 +1,4 @@
-import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements } from "./displaying-elements.js";
+import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard } from "./displaying-elements.js";
 import { slider } from "./DOM-utils.js";
 createCarClicker();
 createCarBackground();
@@ -52,9 +52,7 @@ bolidElement.addEventListener('click', (e) => {
         createCardNavigation('car-navi', 'Driver', 'Parts')
     }
         const partsCard = document.getElementById('Parts')
-        partsCard.addEventListener('click', (e) =>{
-            
-            
+        partsCard.addEventListener('click', (e) =>{     
             if (bolidCards) {
                 showElements('car-cards')
             } else {
@@ -62,6 +60,10 @@ bolidElement.addEventListener('click', (e) => {
                 createCardElement('car-cards')
                 slider('.car-cards-container-slider','.car-cards-element-slider')
             }
+        })
+        const driverCard = document.getElementById('Driver')
+        driverCard.addEventListener('click', (e) => {
+            createPersonCard('driver')
         })
     }
     )
