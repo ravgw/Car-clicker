@@ -105,6 +105,7 @@ export const createPersonCard = function (category) {
     const container = document.getElementById('selectTabInfo')
 
     const cardElement = document.createElement('div')
+    cardElement.id = category
     cardElement.classList.add('cardElement')
     container.appendChild(cardElement)
     
@@ -119,10 +120,10 @@ export function hideElements (element) {
     hide.style.display = 'none'
 }
 export function showElements (element) {
-    const hide = document.getElementById(element)
+    const show = document.getElementById(element)
     if ( element === 'car-cards' || 'garage-cards' ) {
-        hide.style.display = 'inline-flex'
+     show.style.display = 'inline-flex'
     } else {
-        hide.style.display = 'flex'
+     show.style.display = 'flex'
     }
 }
