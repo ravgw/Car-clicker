@@ -8,9 +8,6 @@ export const slider = function (first , second){
       prevTranslate = 0,
       animationID,
       currentIndex = 0
-// const slider = document.querySelector('.card-container'),
-//       slides = Array.from(document.querySelectorAll('.cardElement'))
-
 
 slides.forEach((slide, index) => {
   const slideImage = slide.querySelector('.card')

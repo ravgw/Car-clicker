@@ -38,13 +38,13 @@ const speed = function () {
 
 speed();
 
-const bolidElement = document.getElementById('bolid')
+const bolidElement = document.getElementById('bolid-navigation')
 bolidElement.addEventListener('click', (e) => {
 
     if (garageMenu) {
         hideElements('garage-navi');
         if (garageCards) {
-            hideElements('garage-cards')
+            hideElements('garage')
         }
         if (checkTeamPrincipal) {
             hideElements('teamPrincipal')
@@ -65,23 +65,23 @@ bolidElement.addEventListener('click', (e) => {
         bolidMenu = true
         createCardNavigation('car-navi', 'Driver', 'Parts')
     }
-        const partsCard = document.getElementById('Parts')
+        const partsCard = document.getElementById('Parts-navigation')
         partsCard.addEventListener('click', (e) =>{     
             if (checkPersonal) {
                 hideElements('driver')
             }
             if (bolidCards) {
-                showElements('car-cards')
+                showElements('car')
             } else {
                 bolidCards = true
-                createCardElement('car-cards')
-                slider('.car-cards-container-slider','.car-cards-element-slider')
+                createCardElement('car')
+                slider('.car-cards-container-slider','.car-element-slider')
             }
         })
-        const driverCard = document.getElementById('Driver')
+        const driverCard = document.getElementById('Driver-navigation')
         driverCard.addEventListener('click', (e) => {
             if(bolidCards) {
-                hideElements('car-cards')
+                hideElements('car')
             }
             if(checkPersonal){
                 showElements('driver')
@@ -90,12 +90,12 @@ bolidElement.addEventListener('click', (e) => {
     }
     )
     
-const garageElement = document.getElementById('garage')
+const garageElement = document.getElementById('garage-navigation')
 garageElement.addEventListener('click', (e) => {
         if(bolidMenu) {
             hideElements('car-navi');
             if(bolidCards) {
-                hideElements('car-cards')
+                hideElements('car')
             }
         }
 
@@ -113,24 +113,24 @@ garageElement.addEventListener('click', (e) => {
             createCardNavigation('garage-navi', 'Facilities' ,'Team Principal')
         }
         
-        const facilitiesCard = document.getElementById('Facilities')
+        const facilitiesCard = document.getElementById('Facilities-navigation')
         facilitiesCard.addEventListener('click', (e) =>{
             if (checkTeamPrincipal) {
                 hideElements('teamPrincipal')
             }
             if(garageCards) {
-                showElements('garage-cards')
+                showElements('garage')
             } else {
                 garageCards = true
-                createCardElement('garage-cards')
-                slider('.garage-cards-container-slider','.garage-cards-element-slider')
+                createCardElement('garage')
+                slider('.garage-cards-container-slider','.garage-element-slider')
             }
         })
-        const TeamPrincipalCard = document.getElementById('Team Principal')
+        const TeamPrincipalCard = document.getElementById('Team Principal-navigation')
         TeamPrincipalCard.addEventListener('click', (e) => {
             console.log('test')
             if(garageCards) {
-                hideElements('garage-cards')
+                hideElements('garage')
             }
             if(checkTeamPrincipal){
                 showElements('teamPrincipal')
@@ -138,12 +138,12 @@ garageElement.addEventListener('click', (e) => {
         })
 })
 
-const homeElement = document.getElementById('home')
+const homeElement = document.getElementById('home-navigation')
 homeElement.addEventListener('click', (e) => {
     if (bolidMenu) {
         hideElements('car-navi')
         if (bolidCards) {
-            hideElements('car-cards')
+            hideElements('car')
         }
         if (checkPersonal){
             hideElements('driver')
@@ -152,7 +152,7 @@ homeElement.addEventListener('click', (e) => {
     if (garageMenu) {
         hideElements('garage-navi')
         if (garageCards) {
-        hideElements('garage-cards')
+        hideElements('garage')
         }
         if(checkTeamPrincipal){
             hideElements('teamPrincipal')

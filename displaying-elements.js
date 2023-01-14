@@ -69,12 +69,12 @@ export const createCardNavigation = function (category, firstOption, secondOptio
     container.appendChild(navigation)
     
     const option = document.createElement('div')
-    option.id = firstOption
+    option.id = `${firstOption}-navigation`
     option.innerText = firstOption
     option.classList.add('card-navigation-option')
 
     const option2 = document.createElement('div')
-    option2.id = secondOption
+    option2.id = `${secondOption}-navigation`
     option2.innerText = secondOption
     option2.classList.add('card-navigation-option')
 
@@ -87,8 +87,8 @@ export const createCardElement = function  (category) {
     const container = document.getElementById('selectTabInfo');
     const cardContainer = document.createElement('div');
     container.appendChild(cardContainer)
-    cardContainer.classList.add('card-container')
-    cardContainer.classList.add(`${category}-container-slider`)
+    cardContainer.classList.add('cards-container')
+    cardContainer.classList.add(`${category}-cards-container-slider`)
     cardContainer.id = category
     for (let i=0 ; i <5; i++) {
         const cardElement = document.createElement('div')
@@ -121,7 +121,7 @@ export function hideElements (element) {
 }
 export function showElements (element) {
     const show = document.getElementById(element)
-    if ( element === 'car-cards' || 'garage-cards' ) {
+    if ( element === 'car' || 'garage' ) {
      show.style.display = 'inline-flex'
     } else {
      show.style.display = 'flex'

@@ -413,7 +413,7 @@ body {
     background: #333;
     padding-top: 5px;
 }
-.navi {
+.navigation {
 
     display: flex;
     align-items: center;
@@ -426,25 +426,25 @@ body {
     cursor: pointer;
 }
 
-.navi:hover {
+.navigation:hover {
     background: #ab2124;
 }
 
-#bolid {
+#bolid-navigation {
     width: 39%;
     background: #b1c750;
 }
-#bolid:hover {
+#bolid-navigation:hover {
     background: #a2be25;
 }
-#home {
+#home-navigation {
     width: 20%;
 }
-#garage {
+#garage-navigation {
     width: 39%;
     background: #507dbb;
 }
-#garage:hover {
+#garage-navigation:hover {
     background: #2565be;
 }
 
@@ -473,7 +473,7 @@ body {
     height: 100%;
     overflow: hidden;
 }
-.card-container {
+.cards-container {
     height: 100%;
     display: inline-flex;
     scrollbar-width: none;
@@ -503,10 +503,10 @@ body {
     height: 90%;
   }
   
-  .car-cards-slider {
+  .car-slider {
     background: #981e20;
   }
-  .garage-cards-slider {
+  .garage-slider {
     background: #6ecde5;
   }
 
