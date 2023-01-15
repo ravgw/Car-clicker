@@ -1,5 +1,5 @@
-import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard } from "./displaying-elements.js";
-import { slider } from "./DOM-utils.js";
+import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard, slider } from "./displaying-elements.js";
+
 createCarClicker();
 createCarBackground();
 
@@ -12,7 +12,7 @@ let checkTeamPrincipal = false
 
 const player = {
     actualCoins: 0,
-    actualSpeed: 50,
+    actualSpeed: 1,
     multiplierSponsors: 1,
     multiplierSpeed: 1,
     addCoins: function () {
@@ -42,7 +42,7 @@ const bolidElement = document.getElementById('bolid-navigation')
 bolidElement.addEventListener('click', (e) => {
 
     if (garageMenu) {
-        hideElements('garage-navi');
+        hideElements('garage-options')
         if (garageCards) {
             hideElements('garage')
         }
@@ -60,31 +60,31 @@ bolidElement.addEventListener('click', (e) => {
 
 
     if(bolidMenu) {
-        showElements('car-navi')
+        showElements('bolid-options')
     } else {
         bolidMenu = true
-        createCardNavigation('car-navi', 'Driver', 'Parts')
+        createCardNavigation('bolid-options', 'Driver', 'Parts')
     }
-        const partsCard = document.getElementById('Parts-navigation')
+        const partsCard = document.getElementById('Parts-option')
         partsCard.addEventListener('click', (e) =>{     
             if (checkPersonal) {
                 hideElements('driver')
             }
             if (bolidCards) {
-                showElements('car')
+                showElements('bolid')
             } else {
                 bolidCards = true
-                createCardElement('car')
-                slider('.car-cards-container-slider','.car-element-slider')
+                createCardElement('bolid')
+                slider('.bolid-cards-container-slider','.bolid-element-slider')
             }
         })
-        const driverCard = document.getElementById('Driver-navigation')
+        const driverCard = document.getElementById('Driver-option')
         driverCard.addEventListener('click', (e) => {
             if(bolidCards) {
-                hideElements('car')
+                hideElements('bolid')
             }
             if(checkPersonal){
-                showElements('driver')
+                showElements('driver') 
             }
         })
     }
@@ -92,10 +92,14 @@ bolidElement.addEventListener('click', (e) => {
     
 const garageElement = document.getElementById('garage-navigation')
 garageElement.addEventListener('click', (e) => {
+
         if(bolidMenu) {
-            hideElements('car-navi');
+            hideElements('bolid-options')
             if(bolidCards) {
-                hideElements('car')
+                hideElements('bolid')
+            }
+            if (checkPersonal) {
+                hideElements('driver')
             }
         }
 
@@ -107,13 +111,13 @@ garageElement.addEventListener('click', (e) => {
         }
         
         if(garageMenu) {
-            showElements('garage-navi')
+            showElements('garage-options')
         } else {
             garageMenu = true
-            createCardNavigation('garage-navi', 'Facilities' ,'Team Principal')
+            createCardNavigation('garage-options', 'Facilities' ,'Team Principal')
         }
         
-        const facilitiesCard = document.getElementById('Facilities-navigation')
+        const facilitiesCard = document.getElementById('Facilities-option')
         facilitiesCard.addEventListener('click', (e) =>{
             if (checkTeamPrincipal) {
                 hideElements('teamPrincipal')
@@ -126,9 +130,8 @@ garageElement.addEventListener('click', (e) => {
                 slider('.garage-cards-container-slider','.garage-element-slider')
             }
         })
-        const TeamPrincipalCard = document.getElementById('Team Principal-navigation')
+        const TeamPrincipalCard = document.getElementById('Team Principal-option')
         TeamPrincipalCard.addEventListener('click', (e) => {
-            console.log('test')
             if(garageCards) {
                 hideElements('garage')
             }
@@ -141,16 +144,16 @@ garageElement.addEventListener('click', (e) => {
 const homeElement = document.getElementById('home-navigation')
 homeElement.addEventListener('click', (e) => {
     if (bolidMenu) {
-        hideElements('car-navi')
+        hideElements('bolid-options')
         if (bolidCards) {
-            hideElements('car')
+            hideElements('bolid')
         }
         if (checkPersonal){
             hideElements('driver')
         }
     }
     if (garageMenu) {
-        hideElements('garage-navi')
+        hideElements('garage-options')
         if (garageCards) {
         hideElements('garage')
         }
