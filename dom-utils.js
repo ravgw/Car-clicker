@@ -1,4 +1,4 @@
-
+// import { bolidParts } from "./app-elements.js";
 
 export const createCarClicker = function () {
 const clicker = document.getElementById('clicker');
@@ -83,14 +83,39 @@ export const createCardNavigation = function (category, firstOption, secondOptio
     navigation.appendChild(option2)
 }
 
-export const createCardElement = function  (category) {
+const createCard = function (improvments) {
+  const card = document.createElement('div')
+
+  const title = document.createElement('h1')
+  title.innerText = improvments.name
+
+  const description = document.createElement('p')
+  description.innerText = improvments.description
+
+  const level = document.createElement('p')
+  level.innerText = `Level: ${improvments.level}`
+
+  const cost = document.createElement('p')
+  cost.innerText = `Upgrade ${improvments.cost} $`
+
+  card.appendChild(title)
+  card.appendChild(description)
+  card.appendChild(level)
+  card.appendChild(cost)
+
+
+  return card
+}
+
+export const createCardElement = function  (category, improvments) {
     const container = document.getElementById('selectTabInfo');
     const cardContainer = document.createElement('div');
     container.appendChild(cardContainer)
     cardContainer.classList.add('cards-container')
     cardContainer.classList.add(`${category}-cards-container-slider`)
     cardContainer.id = category
-    for (let i=0 ; i <5; i++) {
+
+    for (let i=0 ; i < improvments.length; i++) {
         const cardElement = document.createElement('div')
         cardElement.classList.add('cardElement')
         cardElement.classList.add(`${category}-element-slider`)
@@ -98,8 +123,14 @@ export const createCardElement = function  (category) {
         const card = document.createElement('div')
         card.classList.add('card')
         card.classList.add(`${category}-slider`)
-        cardElement.appendChild(card)}
+        cardElement.appendChild(card)
+        
+        card.appendChild(createCard(improvments[i]))
+      
+      }
+    
 }
+
 
 export const createPersonCard = function (category) {
     const container = document.getElementById('selectTabInfo')

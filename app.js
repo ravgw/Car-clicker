@@ -1,4 +1,5 @@
-import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard, slider } from "./displaying-elements.js";
+import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard, slider } from "./dom-utils.js";
+import { bolidParts, garageFacilities } from "./app-elements.js"
 
 createCarClicker();
 createCarBackground();
@@ -74,7 +75,7 @@ bolidElement.addEventListener('click', (e) => {
                 showElements('bolid')
             } else {
                 bolidCards = true
-                createCardElement('bolid')
+                createCardElement('bolid', bolidParts )
                 slider('.bolid-cards-container-slider','.bolid-element-slider')
             }
         })
@@ -126,7 +127,7 @@ garageElement.addEventListener('click', (e) => {
                 showElements('garage')
             } else {
                 garageCards = true
-                createCardElement('garage')
+                createCardElement('garage', garageFacilities)
                 slider('.garage-cards-container-slider','.garage-element-slider')
             }
         })
