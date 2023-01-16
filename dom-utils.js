@@ -98,8 +98,12 @@ const createCard = function (improvments) {
   const cost = document.createElement('p')
   cost.innerText = `Upgrade ${improvments.cost} $`
 
+  const image = document.createElement('img')
+  image.src = improvments.img
+
   card.appendChild(title)
   card.appendChild(description)
+  card.appendChild(image)
   card.appendChild(level)
   card.appendChild(cost)
 
