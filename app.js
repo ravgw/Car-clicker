@@ -1,5 +1,5 @@
-import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard, slider } from "./dom-utils.js";
-import { bolidParts, garageFacilities } from "./app-elements.js"
+import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard, slider, createUnlockPerson } from "./dom-utils.js";
+import { bolidParts, garageFacilities, driver } from "./app-elements.js"
 
 createCarClicker();
 createCarBackground();
@@ -16,6 +16,8 @@ const player = {
     actualSpeed: 1,
     multiplierSponsors: 1,
     multiplierSpeed: 1,
+    driver: false,
+    teamPrincipal: false,
     addCoins: function () {
         this.actualCoins = this.actualCoins + 1 * this.multiplierSponsors * this.multiplierSpeed;
     },
@@ -55,6 +57,18 @@ bolidElement.addEventListener('click', (e) => {
     if(!checkPersonal) {
         createPersonCard('driver')
         checkPersonal = true
+        if(!player.driver) {
+            createUnlockPerson('.driver-card')
+            const card = document.querySelector('.driver-card')
+            card.addEventListener('click', (e) => {
+                if( player.actualCoins >= 2) {
+                    player.driver = true
+                    console.log('karolina to śmietana' + player.driver)
+                } else {
+                    console.log('karolina to pieczarki' + player.driver)
+                }
+            })
+        }
     } else {
         showElements('driver')
     }
@@ -107,6 +121,9 @@ garageElement.addEventListener('click', (e) => {
         if(!checkTeamPrincipal) {
             createPersonCard('teamPrincipal')
             checkTeamPrincipal = true
+            if(!player.teamPrincipal) {
+                createUnlockPerson('.teamPrincipal-card')
+            }
         } else {
             showElements('teamPrincipal')
         }
@@ -115,7 +132,7 @@ garageElement.addEventListener('click', (e) => {
             showElements('garage-options')
         } else {
             garageMenu = true
-            createCardNavigation('garage-options', 'Facilities' ,'Team Principal')
+            createCardNavigation('garage-options', 'Facilities' ,'TeamPrincipal')
         }
         
         const facilitiesCard = document.getElementById('Facilities-option')
@@ -131,7 +148,7 @@ garageElement.addEventListener('click', (e) => {
                 slider('.garage-cards-container-slider','.garage-element-slider')
             }
         })
-        const TeamPrincipalCard = document.getElementById('Team Principal-option')
+        const TeamPrincipalCard = document.getElementById('TeamPrincipal-option')
         TeamPrincipalCard.addEventListener('click', (e) => {
             if(garageCards) {
                 hideElements('garage')

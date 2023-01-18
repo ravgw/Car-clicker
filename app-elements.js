@@ -76,3 +76,8 @@ export const garageFacilities = [
     engineers,
     fame
 ]
+
+export const driver = {
+    name: 'Jurek',
+    img: './img/jurek.webp'
+}

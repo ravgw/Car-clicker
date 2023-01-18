@@ -135,8 +135,25 @@ export const createCardElement = function  (category, improvments) {
     
 }
 
+export const createUnlockPerson = function (selector) {
+    const container = document.querySelector(selector)
+    
+    const card = document.createElement('div')
+    container.appendChild(card)
 
-export const createPersonCard = function (category) {
+    const title = document.createElement('h1')
+    title.innerText = 'Unlock'
+    card.appendChild(title)
+
+    const image = document.createElement('img')
+    image.src = './img/unlock.webp'
+    card.appendChild(image)
+
+    const price = document.createElement('p')
+    price.innerText = '150$'
+    card.appendChild(price)
+}
+export const createPersonCard = function (category, object) {
     const container = document.getElementById('selectTabInfo')
 
     const cardElement = document.createElement('div')
@@ -148,6 +165,10 @@ export const createPersonCard = function (category) {
     card.classList.add('card')
     card.classList.add(`${category}-card`)
     cardElement.appendChild(card)
+
+    // const image = document.createElement('img')
+    // img.src = object.img
+    // card.appendChild(image)
 }
 
 export function hideElements (element) {
