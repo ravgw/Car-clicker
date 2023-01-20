@@ -518,10 +518,10 @@ body {
     background: #99e6ff;
   }
 
-  .driver-card {
+  #driver .card {
     background: #ccffcc;
   }
 
-  .teamPrincipal-card {
+  #teamPrincipal .card {
     background: #99e6ff;
   }

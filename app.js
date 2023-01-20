@@ -1,4 +1,4 @@
-import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createPersonCard, slider, createUnlockPerson } from "./dom-utils.js";
+import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver } from "./app-elements.js"
 
 createCarClicker();
@@ -55,15 +55,15 @@ bolidElement.addEventListener('click', (e) => {
     }
 
     if(!checkPersonal) {
-        createPersonCard('driver')
+        createCharacterCard('driver')
         checkPersonal = true
         if(!player.driver) {
-            createUnlockPerson('.driver-card')
-            const card = document.querySelector('.driver-card')
+            createUnlockCharacter('driver')
+            const card = document.getElementById('driver')
             card.addEventListener('click', (e) => {
-                if( player.actualCoins >= 2) {
+                if( player.actualCoins >= 2 && !player.driver) {
                     player.driver = true
-                    console.log('karolina to śmietana' + player.driver)
+                    createCharacter('driver', driver)
                 } else {
                     console.log('karolina to pieczarki' + player.driver)
                 }
@@ -119,10 +119,10 @@ garageElement.addEventListener('click', (e) => {
         }
 
         if(!checkTeamPrincipal) {
-            createPersonCard('teamPrincipal')
+            createCharacterCard('teamPrincipal')
             checkTeamPrincipal = true
             if(!player.teamPrincipal) {
-                createUnlockPerson('.teamPrincipal-card')
+                createUnlockCharacter('teamPrincipal')
             }
         } else {
             showElements('teamPrincipal')
