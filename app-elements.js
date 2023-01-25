@@ -8,7 +8,7 @@ const engine = {
 }
 const aerodynamics = {
     name: 'Aerodynamics',
-    level: 1,
+    level: 567,
     value: 1,
     cost: 10,
     description: 'Lower aerodynamic drag is equal to higher top speed',
@@ -79,5 +79,13 @@ export const garageFacilities = [
 
 export const driver = {
     name: 'Jurek',
+    lvl: 1,
+    multiplier: 1,
     img: './img/jurek.webp'
+}
+export const teamPrincipal = {
+    name: 'Mateusz',
+    lvl: 1,
+    multiplier: 1,
+    img: './img/mateusz.webp'
 }

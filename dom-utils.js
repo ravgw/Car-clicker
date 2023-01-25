@@ -85,27 +85,47 @@ export const createCardNavigation = function (category, firstOption, secondOptio
 
 const createCard = function (improvments) {
   const card = document.createElement('div')
+  card.classList.add('card-content')
 
-  const title = document.createElement('h1')
-  title.innerText = improvments.name
+  const titleContainer = document.createElement('div')
+  titleContainer.classList.add('card-title')
+  card.appendChild(titleContainer)
 
-  const description = document.createElement('p')
-  description.innerText = improvments.description
+    const title = document.createElement('h1')
+    titleContainer.appendChild(title)
+    title.innerText = `${improvments.name}`
 
-  const level = document.createElement('p')
-  level.innerText = `Level: ${improvments.level}`
+    const level = document.createElement('p')
+    titleContainer.appendChild(level)
+    level.innerText = `Lvl. ${improvments.level}`
+      
+  
+  const cardMainContent = document.createElement('div')
+  cardMainContent.classList.add('cardMainContent')
+  card.appendChild(cardMainContent)
 
-  const cost = document.createElement('p')
-  cost.innerText = `Upgrade ${improvments.cost} $`
+    const description = document.createElement('p')
+    cardMainContent.appendChild(description)
+    description.classList.add('description')
+    description.innerText = improvments.description
+    
+    const image = document.createElement('img')
+    cardMainContent.appendChild(image)
+    image.src = improvments.img
 
-  const image = document.createElement('img')
-  image.src = improvments.img
+  
+  const upgradeContainer = document.createElement('div')
+  card.appendChild(upgradeContainer)
 
-  card.appendChild(title)
-  card.appendChild(description)
-  card.appendChild(image)
-  card.appendChild(level)
-  card.appendChild(cost)
+      const upgrade = document.createElement('h2')
+      upgrade.innerText = 'Upgrade'
+      upgradeContainer.classList.add('upgrade')
+      const cost = document.createElement('p')
+      cost.innerText = `${improvments.cost}`
+      upgradeContainer.appendChild(cost)
+      upgradeContainer.appendChild(upgrade)
+      
+
 
 
   return card
@@ -146,11 +166,7 @@ export const createCharacterCard = function (category) {
     const card = document.createElement('div')
     card.classList.add('card')  
     card.classList.add(`${category}-card`)
-    // cardElement.appendChild(card)
-
-    // const image = document.createElement('img')
-    // img.src = object.img
-    // card.appendChild(image)
+    
 }
 
 export const createUnlockCharacter = function (id) {
@@ -187,12 +203,20 @@ export const createCharacter = function (id, object) {
   container.appendChild(card)
 
   const title = document.createElement('h1')
-  title.innerText = 'Unlock'
+  title.innerText = object.name
   card.appendChild(title)
+
+  const level = document.createElement('h2')
+  level.innerText = `Lvl. ${object.lvl}`
+  card.appendChild(level)
 
   const image = document.createElement('img')
   image.src = object.img
   card.appendChild(image)
+
+  const upgrade = document.createElement('p')
+  upgrade.innerText = 'Upgrade'
+  card.appendChild(upgrade)
 
   const price = document.createElement('p')
   price.innerText = '150$'
