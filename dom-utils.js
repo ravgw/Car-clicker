@@ -196,31 +196,43 @@ export const createCharacter = function (id, object) {
     const toRemove = document.getElementById(`unlock-${id}`)
     node.removeChild(toRemove)
   }
-  const container = document.getElementById(id)
+  const handle = document.getElementById(id)
 
   const card = document.createElement('div')
+  card.id = `${id}-character-card`
   card.classList.add('card')
-  container.appendChild(card)
+  handle.appendChild(card)
+  const cardContent = document.createElement('div')
+  cardContent.classList.add('card-content')
+  card.appendChild(cardContent)
 
-  const title = document.createElement('h1')
-  title.innerText = object.name
-  card.appendChild(title)
+    const titleContent = document.createElement('div')
+    titleContent.classList.add('card-title')
+    cardContent.appendChild(titleContent)
 
-  const level = document.createElement('h2')
-  level.innerText = `Lvl. ${object.lvl}`
-  card.appendChild(level)
+      const title = document.createElement('h1')
+      title.innerText = object.name
+      titleContent.appendChild(title)
 
-  const image = document.createElement('img')
-  image.src = object.img
-  card.appendChild(image)
+      const level = document.createElement('p')
+      level.innerText = `Lvl. ${object.lvl}`
+      titleContent.appendChild(level)
 
-  const upgrade = document.createElement('p')
-  upgrade.innerText = 'Upgrade'
-  card.appendChild(upgrade)
+    const image = document.createElement('img')
+    image.src = object.img
+    cardContent.appendChild(image)
 
-  const price = document.createElement('p')
-  price.innerText = '150$'
-  card.appendChild(price)
+    const upgradeContent = document.createElement('div')
+    upgradeContent.classList.add('character-upgrade')
+    cardContent.appendChild(upgradeContent)
+
+    const upgrade = document.createElement('h1')
+    upgrade.innerText = 'Upgrade'  
+    upgradeContent.appendChild(upgrade)
+
+    const price = document.createElement('p')
+    price.innerText = `${object.cost}`
+    upgradeContent.appendChild(price)
 }
 
 export function hideElements (element) {

@@ -1,5 +1,5 @@
 import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter } from "./dom-utils.js";
-import { bolidParts, garageFacilities, driver } from "./app-elements.js"
+import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-elements.js"
 
 createCarClicker();
 createCarBackground();
@@ -123,6 +123,15 @@ garageElement.addEventListener('click', (e) => {
             checkTeamPrincipal = true
             if(!player.teamPrincipal) {
                 createUnlockCharacter('teamPrincipal')
+                const card = document.getElementById('teamPrincipal')
+                card.addEventListener('click', (e) => {
+                    if( player.actualCoins >= 2 && !player.teamPrincipal) {
+                        player.teamPrincipal = true
+                        createCharacter('teamPrincipal', teamPrincipal)
+                    } else {
+                        console.log('karolina to pieczarki' + player.driver)
+                    }
+                })
             }
         } else {
             showElements('teamPrincipal')

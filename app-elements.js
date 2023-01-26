@@ -81,11 +81,13 @@ export const driver = {
     name: 'Jurek',
     lvl: 1,
     multiplier: 1,
+    cost: 10,
     img: './img/jurek.webp'
 }
 export const teamPrincipal = {
     name: 'Mateusz',
     lvl: 1,
     multiplier: 1,
+    cost: 10,
     img: './img/mateusz.webp'
 }
