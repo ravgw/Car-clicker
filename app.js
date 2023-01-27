@@ -62,12 +62,17 @@ bolidElement.addEventListener('click', (e) => {
     if(!checkPersonal) {
         createCharacterCard('driver')
         checkPersonal = true
-        if(!driver.bought) {
+        if(!player.driver) {
             createUnlockCharacter(driver, buyCharacter)
-            if(driver.bought === true) {
-                player.driver = true
-            }
-            console.log(player)
+            // const card = document.getElementById('driver')
+            // card.addEventListener('click', (e) => {
+            //     if( player.actualCoins >= 200 && !player.driver) {
+            //         player.driver = true
+            //         createCharacter('driver', driver)
+            //     } else {
+            //         console.log('karolina to pieczarki' + player.driver)
+            //     }
+            // })
         }
     } else {
         showElements('driver')
@@ -193,8 +198,8 @@ homeElement.addEventListener('click', (e) => {
 const buyCharacter = function (object) {
     if (!object.bought) {
         if(player.actualCoins >= object.cost) {
-            object.bought = true
-            showElements('driver')
+            console.log(' kupiony ')
+            createCharacter('driver', driver)
         } else {
             console.log(' za mało kaski ')
         }
