@@ -21,6 +21,11 @@ const player = {
     addCoins: function () {
         this.actualCoins = this.actualCoins + 1 * this.multiplierSponsors * this.multiplierSpeed;
     },
+    spendCoins: function (cost) {
+        if(this.actualCoins >= cost) {
+            this.actualCoins = this.actualCoins - cost
+        }
+    }
 };
 
 
@@ -57,17 +62,12 @@ bolidElement.addEventListener('click', (e) => {
     if(!checkPersonal) {
         createCharacterCard('driver')
         checkPersonal = true
-        if(!player.driver) {
-            createUnlockCharacter('driver')
-            const card = document.getElementById('driver')
-            card.addEventListener('click', (e) => {
-                if( player.actualCoins >= 2 && !player.driver) {
-                    player.driver = true
-                    createCharacter('driver', driver)
-                } else {
-                    console.log('karolina to pieczarki' + player.driver)
-                }
-            })
+        if(!driver.bought) {
+            createUnlockCharacter(driver, buyCharacter)
+            if(driver.bought === true) {
+                player.driver = true
+            }
+            console.log(player)
         }
     } else {
         showElements('driver')
@@ -122,7 +122,7 @@ garageElement.addEventListener('click', (e) => {
             createCharacterCard('teamPrincipal')
             checkTeamPrincipal = true
             if(!player.teamPrincipal) {
-                createUnlockCharacter('teamPrincipal')
+                createUnlockCharacter(teamPrincipal)
                 const card = document.getElementById('teamPrincipal')
                 card.addEventListener('click', (e) => {
                     if( player.actualCoins >= 2 && !player.teamPrincipal) {
@@ -190,3 +190,13 @@ homeElement.addEventListener('click', (e) => {
     }
 })
 
+const buyCharacter = function (object) {
+    if (!object.bought) {
+        if(player.actualCoins >= object.cost) {
+            object.bought = true
+            showElements('driver')
+        } else {
+            console.log(' za mało kaski ')
+        }
+    } 
+}

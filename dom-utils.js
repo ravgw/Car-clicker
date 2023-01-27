@@ -169,12 +169,15 @@ export const createCharacterCard = function (category) {
     
 }
 
-export const createUnlockCharacter = function (id) {
-  const container = document.getElementById(id)
+export const createUnlockCharacter = function (object, action) {
+  const container = document.getElementById(object.function)
   
   const card = document.createElement('div')
-  card.id = `unlock-${id}`
+  card.id = `unlock-${object.function}`
   card.classList.add('card')
+  card.addEventListener('click', () => {
+    action(object)
+  })
   container.appendChild(card)
 
   const title = document.createElement('h1')
@@ -186,7 +189,7 @@ export const createUnlockCharacter = function (id) {
   card.appendChild(image)
 
   const price = document.createElement('p')
-  price.innerText = '150$'
+  price.innerText = `${object.cost} $`
   card.appendChild(price)
 }
 
@@ -231,7 +234,7 @@ export const createCharacter = function (id, object) {
     upgradeContent.appendChild(upgrade)
 
     const price = document.createElement('p')
-    price.innerText = `${object.cost}`
+    price.innerText = `${object.cost} $`
     upgradeContent.appendChild(price)
 }
 

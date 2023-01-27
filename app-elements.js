@@ -79,6 +79,8 @@ export const garageFacilities = [
 
 export const driver = {
     name: 'Jurek',
+    function: 'driver',
+    bought: false,
     lvl: 1,
     multiplier: 1,
     cost: 10,
@@ -86,8 +88,10 @@ export const driver = {
 }
 export const teamPrincipal = {
     name: 'Mateusz',
+    function: 'teamPrincipal',
+    bought: false,
     lvl: 1,
     multiplier: 1,
-    cost: 10,
+    cost: 15,
     img: './img/mateusz.webp'
 }
