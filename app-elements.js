@@ -1,3 +1,4 @@
+
 const engine = {
     name: 'Engine',
     level: 1,
@@ -84,7 +85,7 @@ export const driver = {
     lvl: 1,
     multiplier: 1,
     cost: 10,
-    img: './img/jurek.webp'
+    img: './img/jurek.webp',
 }
 export const teamPrincipal = {
     name: 'Mateusz',

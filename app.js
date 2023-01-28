@@ -25,7 +25,7 @@ const player = {
         if(this.actualCoins >= cost) {
             this.actualCoins = this.actualCoins - cost
         }
-    }
+    },
 };
 
 
@@ -196,12 +196,14 @@ homeElement.addEventListener('click', (e) => {
 })
 
 const buyCharacter = function (object) {
+    const character = object.function
     if (!object.bought) {
         if(player.actualCoins >= object.cost) {
+            player[`${character}`] = 'true'
             console.log(' kupiony ')
             createCharacter('driver', driver)
         } else {
-            console.log(' za mało kaski ')
+            console.log('za mało kaski smutna minka')
         }
     } 
 }

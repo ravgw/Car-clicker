@@ -1,4 +1,3 @@
-// import { bolidParts } from "./app-elements.js";
 
 export const createCarClicker = function () {
 const clicker = document.getElementById('clicker');
