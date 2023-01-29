@@ -666,27 +666,28 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 1.1em;
 }
 
 #teamPrincipal-character-card .character-upgrade h1 {
     width: 60%;
     background: #2565be;
     border-radius: 0px 40px 0px 0px;
+    font-size: 1.1em;
     font-weight: 300;
 }
 #driver-character-card .character-upgrade h1{
     width: 60%;
     background: #a2be25;
     border-radius: 0px 40px 0px 0px;
+    font-size: 1.1em;
     font-weight: 300;
 }
 
 #teamPrincipal-character-card .character-upgrade p {
-    width: 30%;
+    width: 39%;
     font-weight: 700;
 }
 #driver-character-card .character-upgrade p {
-    width: 30%;
+    width: 39%;
     font-weight: 700;
 }

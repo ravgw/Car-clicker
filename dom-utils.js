@@ -192,7 +192,7 @@ export const createUnlockCharacter = function (object, action) {
   card.appendChild(price)
 }
 
-export const createCharacter = function (id, object) {
+export const createCharacter = function (id, object, action) {
   if (document.getElementById(`unlock-${id}`)) {
     const node = document.getElementById(id)
     const toRemove = document.getElementById(`unlock-${id}`)
@@ -217,6 +217,7 @@ export const createCharacter = function (id, object) {
       titleContent.appendChild(title)
 
       const level = document.createElement('p')
+      level.id = `${id}Lvl`
       level.innerText = `Lvl. ${object.lvl}`
       titleContent.appendChild(level)
 
@@ -227,13 +228,18 @@ export const createCharacter = function (id, object) {
     const upgradeContent = document.createElement('div')
     upgradeContent.classList.add('character-upgrade')
     cardContent.appendChild(upgradeContent)
-
+    
+    const price = document.createElement('p')
+    price.innerText = `${object.cost} $`
+    
     const upgrade = document.createElement('h1')
     upgrade.innerText = 'Upgrade'  
     upgradeContent.appendChild(upgrade)
-
-    const price = document.createElement('p')
-    price.innerText = `${object.cost} $`
+    upgrade.addEventListener('click', (e) => {
+      action(object)
+      numbers(object, price)
+    })
+    
     upgradeContent.appendChild(price)
 }
 
@@ -325,3 +331,17 @@ export const slider = function (first , second){
     }
 }
   
+const numbers = function (object, price) {
+  // console.log(object.cost + 'toxic')
+  const k = 10 ** 3
+  const m = 10 ** 6
+  const origin = object.cost
+  if(origin >= k && origin <= m) {
+  const amount = (origin * (10** -3)).toFixed(0)
+    price.innerText = amount + 'k$'
+  } else if (origin >= m) {
+    const amount =(origin * (10  ** -4)).toPrecision(3)
+    price.innerText = `${amount} m$`
+  }
+}
+

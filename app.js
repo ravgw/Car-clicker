@@ -3,6 +3,10 @@ import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-eleme
 
 createCarClicker();
 createCarBackground();
+console.log( (2137 * (10  ** -3)).toPrecision(3))
+
+const counter = document.getElementById('money')
+const clicker = document.getElementById('clicker')
 
 let bolidMenu = false;
 let bolidCards = false;
@@ -12,7 +16,7 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const player = {
-    actualCoins: 15,
+    actualCoins: 999000,
     actualSpeed: 1,
     multiplierSponsors: 1,
     multiplierSpeed: 1,
@@ -24,13 +28,12 @@ const player = {
     spendCoins: function (cost) {
         if(this.actualCoins >= cost) {
             this.actualCoins = this.actualCoins - cost
+            counter.innerText = this.actualCoins
         }
     },
 };
 
 
-const counter = document.getElementById('money')
-const clicker = document.getElementById('clicker')
 
 
 
@@ -200,11 +203,41 @@ const buyCharacter = function (object) {
     if (!object.bought) {
         if(player.actualCoins >= object.cost) {
             player[`${character}`] = 'true'
-            console.log(character)
-
-            createCharacter(character, object)
+            player.spendCoins(object.cost)
+            createCharacter(character, object, upgrade)
         } else {
-            console.log('za mało kaski smutna minka')
+            console.log('not enaugh money - buy character')
         }
     } 
+}
+
+const upgrade = function (object) {
+    if(verifyCoinnsAmount(object)) {
+        player.spendCoins(object.cost)
+        object.upgrade()
+        document.getElementById(`${object.function}Lvl`).innerText = 'Lvl. ' + object.lvl
+    } else { 
+        console.log('not enaugh money - upgrade')
+        counterAdjust()
+        // console.log(player.actualCoins + 'mój kasz')
+    }
+}
+
+const verifyCoinnsAmount = function (object) {
+    if(player.actualCoins >= object.cost) {
+        return true
+    }
+}
+
+const coinsAmount = []
+const coinsAmountName = ['k','m','t','aa','ab','ac','ad','ae','af','ag']
+
+
+const counterAdjust = function () {
+    for ( let i = 1; i < 11; i++) {
+        let base = 3
+        const next = base * i
+        coinsAmount.push(next)     
+    }
+    
 }

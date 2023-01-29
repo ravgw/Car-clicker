@@ -1,4 +1,5 @@
 
+
 const engine = {
     name: 'Engine',
     level: 1,
@@ -84,15 +85,35 @@ export const driver = {
     bought: false,
     lvl: 1,
     multiplier: 1,
-    cost: 10,
+    cost: 987123,
+    lvlUpCost: 15,
     img: './img/jurek.webp',
-}
+    upgrade: function () {
+        upgrade(this)
+    },
+    }
 export const teamPrincipal = {
     name: 'Mateusz',
     function: 'teamPrincipal',
     bought: false,
     lvl: 1,
     multiplier: 1,
-    cost: 15,
-    img: './img/mateusz.webp'
+    cost: 987123,
+    lvlUpCost: 25,
+    img: './img/mateusz.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
+    nextLvl: 'sdg'
+}
+
+
+const upgrade = function  (object) {
+    object.lvl = object.lvl + 1
+    nextLvl(object)
+}
+
+const nextLvl = function (object) {
+    object.cost = Math.round(object.cost * object.lvlUpCost)
+    object.multiplier = Math.round(object.multiplier * 1.2)
 }
