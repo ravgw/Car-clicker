@@ -12,7 +12,7 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const player = {
-    actualCoins: 0,
+    actualCoins: 15,
     actualSpeed: 1,
     multiplierSponsors: 1,
     multiplierSpeed: 1,
@@ -127,16 +127,16 @@ garageElement.addEventListener('click', (e) => {
             createCharacterCard('teamPrincipal')
             checkTeamPrincipal = true
             if(!player.teamPrincipal) {
-                createUnlockCharacter(teamPrincipal)
-                const card = document.getElementById('teamPrincipal')
-                card.addEventListener('click', (e) => {
-                    if( player.actualCoins >= 2 && !player.teamPrincipal) {
-                        player.teamPrincipal = true
-                        createCharacter('teamPrincipal', teamPrincipal)
-                    } else {
-                        console.log('karolina to pieczarki' + player.driver)
-                    }
-                })
+                createUnlockCharacter(teamPrincipal, buyCharacter)
+                // const card = document.getElementById('teamPrincipal')
+                // card.addEventListener('click', (e) => {
+                //     if( player.actualCoins >= 2 && !player.teamPrincipal) {
+                //         player.teamPrincipal = true
+                //         createCharacter('teamPrincipal', teamPrincipal)
+                //     } else {
+                //         console.log('karolina to pieczarki' + player.driver)
+                //     }
+                // })
             }
         } else {
             showElements('teamPrincipal')
@@ -196,12 +196,13 @@ homeElement.addEventListener('click', (e) => {
 })
 
 const buyCharacter = function (object) {
-    const character = object.function
+    let character = object.function
     if (!object.bought) {
         if(player.actualCoins >= object.cost) {
             player[`${character}`] = 'true'
-            console.log(' kupiony ')
-            createCharacter('driver', driver)
+            console.log(character)
+
+            createCharacter(character, object)
         } else {
             console.log('za mało kaski smutna minka')
         }
