@@ -3,7 +3,6 @@ import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-eleme
 
 createCarClicker();
 createCarBackground();
-console.log( (2137 * (10  ** -3)).toPrecision(3))
 
 const counter = document.getElementById('money')
 const clicker = document.getElementById('clicker')
@@ -16,30 +15,27 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const player = {
-    actualCoins: 999000,
+    actualCoins: 7107651054548,
     actualSpeed: 1,
     multiplierSponsors: 1,
     multiplierSpeed: 1,
     driver: false,
     teamPrincipal: false,
     addCoins: function () {
-        this.actualCoins = this.actualCoins + 1 * this.multiplierSponsors * this.multiplierSpeed;
+        this.actualCoins = this.actualCoins + 1 * this.multiplierSponsors * this.multiplierSpeed
     },
     spendCoins: function (cost) {
         if(this.actualCoins >= cost) {
             this.actualCoins = this.actualCoins - cost
-            counter.innerText = this.actualCoins
-        }
+            counter.innerText = this.actualCoins}
     },
-};
-
-
-
+}
 
 
 clicker.addEventListener('click', (e) => {
     player.addCoins();
-    counter.textContent = `${player.actualCoins}`;
+    // counter.textContent = `${player.actualCoins}`
+    counterAdjust()
 })
 
 const speed = function () {
@@ -218,7 +214,6 @@ const upgrade = function (object) {
         document.getElementById(`${object.function}Lvl`).innerText = 'Lvl. ' + object.lvl
     } else { 
         console.log('not enaugh money - upgrade')
-        counterAdjust()
         // console.log(player.actualCoins + 'mój kasz')
     }
 }
@@ -233,11 +228,28 @@ const coinsAmount = []
 const coinsAmountName = ['k','m','t','aa','ab','ac','ad','ae','af','ag']
 
 
-const counterAdjust = function () {
+const counterParam1 = function () {
     for ( let i = 1; i < 11; i++) {
         let base = 3
         const next = base * i
         coinsAmount.push(next)     
     }
-    
+}
+
+
+const counterAdjust = function () {
+    const coins = player.actualCoins
+    if (coins > 1000 && coins < 10 ** 6) {
+        const value = (player.actualCoins * (10 ** -3)).toPrecision(3)
+        counter.textContent = `${value}k`
+    } else if (coins > 10 ** 6 && coins < 10 ** 9) {
+        const value = (player.actualCoins * (10 ** -6)).toPrecision(3)
+        counter.textContent = `${value}m`
+    } else if (coins > 10 ** 9 && coins < 10 ** 12) {
+        const value = (player.actualCoins * (10 ** -9)).toPrecision(3)
+        counter.textContent = `${value}t`
+    } else if (coins > 10 ** 12 && coins < 10 ** 15) {
+        const value = (player.actualCoins * (10 ** -12)).toPrecision(3)
+        counter.textContent = `${value}aa`
+    }
 }
