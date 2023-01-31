@@ -15,7 +15,7 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const player = {
-    actualCoins: 7107651054548,
+    actualCoins: 99000,
     actualSpeed: 1,
     multiplierSponsors: 1,
     multiplierSpeed: 1,
@@ -27,7 +27,7 @@ const player = {
     spendCoins: function (cost) {
         if(this.actualCoins >= cost) {
             this.actualCoins = this.actualCoins - cost
-            counter.innerText = this.actualCoins}
+            numbersAdjust(player.actualCoins, counter)}
     },
 }
 
@@ -35,7 +35,7 @@ const player = {
 clicker.addEventListener('click', (e) => {
     player.addCoins();
     // counter.textContent = `${player.actualCoins}`
-    counterAdjust()
+    numbersAdjust(player.actualCoins, counter)
 })
 
 const speed = function () {
@@ -93,7 +93,7 @@ bolidElement.addEventListener('click', (e) => {
                 showElements('bolid')
             } else {
                 bolidCards = true
-                createCardElement('bolid', bolidParts )
+                createCardElement('bolid', bolidParts, upgrade )
                 slider('.bolid-cards-container-slider','.bolid-element-slider')
             }
         })
@@ -157,7 +157,7 @@ garageElement.addEventListener('click', (e) => {
                 showElements('garage')
             } else {
                 garageCards = true
-                createCardElement('garage', garageFacilities)
+                createCardElement('garage', garageFacilities, upgrade)
                 slider('.garage-cards-container-slider','.garage-element-slider')
             }
         })
@@ -195,7 +195,7 @@ homeElement.addEventListener('click', (e) => {
 })
 
 const buyCharacter = function (object) {
-    let character = object.function
+    let character = object.type
     if (!object.bought) {
         if(player.actualCoins >= object.cost) {
             player[`${character}`] = 'true'
@@ -208,13 +208,14 @@ const buyCharacter = function (object) {
 }
 
 const upgrade = function (object) {
+    const displayCost = document.getElementById(`${object.type}-price`)
     if(verifyCoinnsAmount(object)) {
         player.spendCoins(object.cost)
         object.upgrade()
-        document.getElementById(`${object.function}Lvl`).innerText = 'Lvl. ' + object.lvl
+        document.getElementById(`${object.type}Lvl`).innerText = 'Lvl. ' + object.level
+        numbersAdjust(object.cost, displayCost)
     } else { 
         console.log('not enaugh money - upgrade')
-        // console.log(player.actualCoins + 'mój kasz')
     }
 }
 
@@ -236,20 +237,30 @@ const counterParam1 = function () {
     }
 }
 
+let counterParam1Check = false
+const numbersAdjust = function (toAdjust, target) {
 
-const counterAdjust = function () {
-    const coins = player.actualCoins
-    if (coins > 1000 && coins < 10 ** 6) {
-        const value = (player.actualCoins * (10 ** -3)).toPrecision(3)
-        counter.textContent = `${value}k`
-    } else if (coins > 10 ** 6 && coins < 10 ** 9) {
-        const value = (player.actualCoins * (10 ** -6)).toPrecision(3)
-        counter.textContent = `${value}m`
-    } else if (coins > 10 ** 9 && coins < 10 ** 12) {
-        const value = (player.actualCoins * (10 ** -9)).toPrecision(3)
-        counter.textContent = `${value}t`
-    } else if (coins > 10 ** 12 && coins < 10 ** 15) {
-        const value = (player.actualCoins * (10 ** -12)).toPrecision(3)
-        counter.textContent = `${value}aa`
+    if (counterParam1){
+        counterParam1()
+        counterParam1Check = true
+    }
+
+    const coins = toAdjust
+    
+    for (let i = 0; i <= coinsAmount.length; i++) {
+        
+        if 
+        (coins < 10 ** coinsAmount[i]) 
+        {
+            target.textContent = `${coins} \u2234`
+            break
+        } 
+        else if 
+        (coins > 10 ** coinsAmount[i] && coins < 10 ** coinsAmount[i + 1]) 
+        {
+            const value = (coins * (10 ** -(coinsAmount[i]))).toFixed(1)
+            target.textContent = `${value}${coinsAmountName[i]} \u2234`
+            break
+        }
     }
 }

@@ -82,7 +82,7 @@ export const createCardNavigation = function (category, firstOption, secondOptio
     navigation.appendChild(option2)
 }
 
-const createCard = function (improvments) {
+const createCard = function (improvments, action) {
   const card = document.createElement('div')
   card.classList.add('card-content')
 
@@ -95,6 +95,7 @@ const createCard = function (improvments) {
     title.innerText = `${improvments.name}`
 
     const level = document.createElement('p')
+    level.id = `${improvments.type}Lvl`
     titleContainer.appendChild(level)
     level.innerText = `Lvl. ${improvments.level}`
       
@@ -119,18 +120,25 @@ const createCard = function (improvments) {
       const upgrade = document.createElement('h2')
       upgrade.innerText = 'Upgrade'
       upgradeContainer.classList.add('upgrade')
-      const cost = document.createElement('p')
-      cost.innerText = `${improvments.cost}`
-      upgradeContainer.appendChild(cost)
-      upgradeContainer.appendChild(upgrade)
       
+      const cost = document.createElement('p')
+      cost.id = `${improvments.type}-price`
+      cost.innerText = `${improvments.cost}`
+      const forex = document.createElement('p')
+      forex.innerText = '$'
+      upgradeContainer.appendChild(cost)
+      upgradeContainer.appendChild(forex)
+      upgradeContainer.appendChild(upgrade)
 
-
+      upgrade.addEventListener('click', (e) => {
+        action(improvments)
+      })
+      
 
   return card
 }
 
-export const createCardElement = function  (category, improvments) {
+export const createCardElement = function  (category, improvments, action) {
     const container = document.getElementById('selectTabInfo');
     const cardContainer = document.createElement('div');
     container.appendChild(cardContainer)
@@ -148,7 +156,7 @@ export const createCardElement = function  (category, improvments) {
         card.classList.add(`${category}-slider`)
         cardElement.appendChild(card)
         
-        card.appendChild(createCard(improvments[i]))
+        card.appendChild(createCard(improvments[i], action))
       
       }
     
@@ -169,10 +177,10 @@ export const createCharacterCard = function (category) {
 }
 
 export const createUnlockCharacter = function (object, action) {
-  const container = document.getElementById(object.function)
+  const container = document.getElementById(object.type)
   
   const card = document.createElement('div')
-  card.id = `unlock-${object.function}`
+  card.id = `unlock-${object.type}`
   card.classList.add('card')
   card.addEventListener('click', () => {
     action(object)
@@ -230,16 +238,19 @@ export const createCharacter = function (id, object, action) {
     cardContent.appendChild(upgradeContent)
     
     const price = document.createElement('p')
-    price.innerText = `${object.cost} $`
+    price.id = `${object.type}-price`
+    price.innerText = `${object.cost}`
+    const forex = document.createElement('p')
+    forex.innerText = '$'
     
     const upgrade = document.createElement('h1')
     upgrade.innerText = 'Upgrade'  
     upgradeContent.appendChild(upgrade)
     upgrade.addEventListener('click', (e) => {
       action(object)
-      numbers(object, price)
     })
     
+    upgradeContent.appendChild(forex)
     upgradeContent.appendChild(price)
 }
 
@@ -331,17 +342,3 @@ export const slider = function (first , second){
     }
 }
   
-const numbers = function (object, price) {
-  // console.log(object.cost + 'toxic')
-  const k = 10 ** 3
-  const m = 10 ** 6
-  const origin = object.cost
-  if(origin >= k && origin <= m) {
-  const amount = (origin * (10** -3)).toFixed(0)
-    price.innerText = amount + 'k$'
-  } else if (origin >= m) {
-    const amount =(origin * (10  ** -4)).toPrecision(3)
-    price.innerText = `${amount} m$`
-  }
-}
-

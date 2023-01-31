@@ -2,35 +2,59 @@
 
 const engine = {
     name: 'Engine',
+    type: 'engine',
     level: 1,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Increase the engine power to gain more speed on straights',
-    img: './img/engine.webp'
+    img: './img/engine.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 const aerodynamics = {
     name: 'Aerodynamics',
+    type: 'aerodynamics',
     level: 567,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Lower aerodynamic drag is equal to higher top speed',
-    img: './img/aero.webp'
+    img: './img/aero.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 const suspension = {
     name: 'Suspension',
+    type: 'suspension',
     level: 1,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Better suspension helps driving through turns faster',
-    img: './img/suspension.webp'
+    img: './img/suspension.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 const turbo = {
     name: 'Turbo',
+    type: 'turbo',
     level: 1,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Speeeeeeeeeeeeeeeeeed',
-    img: './img/turbo.webp'
+    img: './img/turbo.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 
 export const bolidParts = [
@@ -41,35 +65,59 @@ export const bolidParts = [
 ]
 const sponsors = {
     name: 'Sponsors',
+    type: 'sponsors',
     level: 1,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Take more money for your speed',
-    img: './img/sponsors.webp'
+    img: './img/sponsors.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 const windTunnel = {
     name: 'Wind tunnel',
+    type: 'windTunnel',
     level: 1,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Better aerodynamics performance',
-    img: './img/windtunnel.webp'
+    img: './img/windtunnel.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 const engineers = {
     name: 'Engineers',
+    type: 'engineers',
     level: 1,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Hire appropriate people to improve bolid parts efficient',
-    img: './img/engineers.webp'
+    img: './img/engineers.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 const fame = {
     name: 'Fame',
+    type: 'fame',
     level: 1,
     value: 1,
     cost: 10,
+    multiplier: 1,
+    lvlUpCost: 2,
     description: 'Grow the celebrity of your team to attract richer sponsors',
-    img: './img/fame.webp'
+    img: './img/fame.webp',
+    upgrade: function () {
+        upgrade(this)
+    },
 }
 
 export const garageFacilities = [
@@ -81,12 +129,12 @@ export const garageFacilities = [
 
 export const driver = {
     name: 'Jurek',
-    function: 'driver',
+    type: 'driver',
     bought: false,
-    lvl: 1,
+    level: 1,
     multiplier: 1,
-    cost: 987123,
-    lvlUpCost: 15,
+    cost: 50,
+    lvlUpCost: 2,
     img: './img/jurek.webp',
     upgrade: function () {
         upgrade(this)
@@ -94,22 +142,21 @@ export const driver = {
     }
 export const teamPrincipal = {
     name: 'Mateusz',
-    function: 'teamPrincipal',
+    type: 'teamPrincipal',
     bought: false,
-    lvl: 1,
+    level: 1,
     multiplier: 1,
-    cost: 987123,
-    lvlUpCost: 25,
+    cost: 25,
+    lvlUpCost: 2,
     img: './img/mateusz.webp',
     upgrade: function () {
         upgrade(this)
     },
-    nextLvl: 'sdg'
 }
 
 
 const upgrade = function  (object) {
-    object.lvl = object.lvl + 1
+    object.level = object.level + 1
     nextLvl(object)
 }
 
