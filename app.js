@@ -15,26 +15,27 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const player = {
-    actualCoins: 99000,
-    actualSpeed: 1,
+    actualCoins: 100,
+    actualSpeed: 0,
     multiplierSponsors: 1,
     multiplierSpeed: 1,
     driver: false,
     teamPrincipal: false,
     addCoins: function () {
-        this.actualCoins = this.actualCoins + 1 * this.multiplierSponsors * this.multiplierSpeed
+        this.actualCoins = this.actualCoins + ( this.actualSpeed * this.multiplierSponsors * this.multiplierSpeed)
+        numbersAdjust(player.actualCoins, counter)
     },
     spendCoins: function (cost) {
         if(this.actualCoins >= cost) {
             this.actualCoins = this.actualCoins - cost
             numbersAdjust(player.actualCoins, counter)}
     },
+
 }
 
 
 clicker.addEventListener('click', (e) => {
     player.addCoins();
-    // counter.textContent = `${player.actualCoins}`
     numbersAdjust(player.actualCoins, counter)
 })
 
@@ -127,15 +128,6 @@ garageElement.addEventListener('click', (e) => {
             checkTeamPrincipal = true
             if(!player.teamPrincipal) {
                 createUnlockCharacter(teamPrincipal, buyCharacter)
-                // const card = document.getElementById('teamPrincipal')
-                // card.addEventListener('click', (e) => {
-                //     if( player.actualCoins >= 2 && !player.teamPrincipal) {
-                //         player.teamPrincipal = true
-                //         createCharacter('teamPrincipal', teamPrincipal)
-                //     } else {
-                //         console.log('karolina to pieczarki' + player.driver)
-                //     }
-                // })
             }
         } else {
             showElements('teamPrincipal')
@@ -201,6 +193,9 @@ const buyCharacter = function (object) {
             player[`${character}`] = 'true'
             player.spendCoins(object.cost)
             createCharacter(character, object, upgrade)
+            if (player.teamPrincipal){
+                autoClick()
+            }
         } else {
             console.log('not enaugh money - buy character')
         }
@@ -214,6 +209,7 @@ const upgrade = function (object) {
         object.upgrade()
         document.getElementById(`${object.type}Lvl`).innerText = 'Lvl. ' + object.level
         numbersAdjust(object.cost, displayCost)
+        countMultiplierSpeed()
     } else { 
         console.log('not enaugh money - upgrade')
     }
@@ -264,3 +260,22 @@ const numbersAdjust = function (toAdjust, target) {
         }
     }
 }
+
+const autoClick = function () {
+    setTimeout(() => {
+        player.addCoins()
+        autoClick()
+    }, 1000)
+}
+
+const countMultiplierSpeed = function () {
+    let multiplier = 0
+    for ( let i = 0; i < bolidParts.length; i++){
+        const x = bolidParts[i]
+        multiplier = multiplier + x.value
+        console.log(x.value)
+    }
+    player.actualSpeed = multiplier
+    document.getElementById('speed').innerText = `${player.actualSpeed} km/h`
+}
+

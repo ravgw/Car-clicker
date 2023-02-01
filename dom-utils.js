@@ -123,11 +123,9 @@ const createCard = function (improvments, action) {
       
       const cost = document.createElement('p')
       cost.id = `${improvments.type}-price`
-      cost.innerText = `${improvments.cost}`
-      const forex = document.createElement('p')
-      forex.innerText = '$'
+      cost.innerText = `${improvments.cost} \u2234`
+
       upgradeContainer.appendChild(cost)
-      upgradeContainer.appendChild(forex)
       upgradeContainer.appendChild(upgrade)
 
       upgrade.addEventListener('click', (e) => {
@@ -196,7 +194,7 @@ export const createUnlockCharacter = function (object, action) {
   card.appendChild(image)
 
   const price = document.createElement('p')
-  price.innerText = `${object.cost} $`
+  price.innerText = `${object.cost} \u2234`
   card.appendChild(price)
 }
 
@@ -226,7 +224,7 @@ export const createCharacter = function (id, object, action) {
 
       const level = document.createElement('p')
       level.id = `${id}Lvl`
-      level.innerText = `Lvl. ${object.lvl}`
+      level.innerText = `Lvl. ${object.level}`
       titleContent.appendChild(level)
 
     const image = document.createElement('img')
@@ -239,9 +237,7 @@ export const createCharacter = function (id, object, action) {
     
     const price = document.createElement('p')
     price.id = `${object.type}-price`
-    price.innerText = `${object.cost}`
-    const forex = document.createElement('p')
-    forex.innerText = '$'
+    price.innerText = `${object.cost} \u2234`
     
     const upgrade = document.createElement('h1')
     upgrade.innerText = 'Upgrade'  
@@ -249,8 +245,6 @@ export const createCharacter = function (id, object, action) {
     upgrade.addEventListener('click', (e) => {
       action(object)
     })
-    
-    upgradeContent.appendChild(forex)
     upgradeContent.appendChild(price)
 }
 

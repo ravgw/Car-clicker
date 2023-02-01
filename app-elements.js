@@ -1,10 +1,8 @@
-
-
 const engine = {
     name: 'Engine',
     type: 'engine',
-    level: 1,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -17,8 +15,8 @@ const engine = {
 const aerodynamics = {
     name: 'Aerodynamics',
     type: 'aerodynamics',
-    level: 567,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -31,8 +29,8 @@ const aerodynamics = {
 const suspension = {
     name: 'Suspension',
     type: 'suspension',
-    level: 1,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -45,8 +43,8 @@ const suspension = {
 const turbo = {
     name: 'Turbo',
     type: 'turbo',
-    level: 1,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -66,8 +64,8 @@ export const bolidParts = [
 const sponsors = {
     name: 'Sponsors',
     type: 'sponsors',
-    level: 1,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -80,8 +78,8 @@ const sponsors = {
 const windTunnel = {
     name: 'Wind tunnel',
     type: 'windTunnel',
-    level: 1,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -94,8 +92,8 @@ const windTunnel = {
 const engineers = {
     name: 'Engineers',
     type: 'engineers',
-    level: 1,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -108,8 +106,8 @@ const engineers = {
 const fame = {
     name: 'Fame',
     type: 'fame',
-    level: 1,
-    value: 1,
+    level: 0,
+    value: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -132,6 +130,7 @@ export const driver = {
     type: 'driver',
     bought: false,
     level: 1,
+    value: 0,
     multiplier: 1,
     cost: 50,
     lvlUpCost: 2,
@@ -145,6 +144,7 @@ export const teamPrincipal = {
     type: 'teamPrincipal',
     bought: false,
     level: 1,
+    value: 0,
     multiplier: 1,
     cost: 25,
     lvlUpCost: 2,
@@ -158,6 +158,7 @@ export const teamPrincipal = {
 const upgrade = function  (object) {
     object.level = object.level + 1
     nextLvl(object)
+    object.value = object.value +1
 }
 
 const nextLvl = function (object) {
