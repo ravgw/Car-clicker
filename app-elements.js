@@ -1,8 +1,8 @@
 const engine = {
     name: 'Engine',
     type: 'engine',
-    level: 0,
-    value: 0,
+    level: 1,
+    value: 1,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -130,13 +130,19 @@ export const driver = {
     type: 'driver',
     bought: false,
     level: 1,
-    value: 0,
+    value: 1,
     multiplier: 1,
-    cost: 50,
+    cost: 25,
     lvlUpCost: 2,
     img: './img/jurek.webp',
     upgrade: function () {
-        upgrade(this)
+        console.log('start')
+        this.level = this.level +1
+        this.cost = Math.round(this.cost * this.lvlUpCost)
+        const x = (this.value + .05)
+        this.value = x
+        console.log(x)
+        console.log(typeof(x))
     },
     }
 export const teamPrincipal = {
@@ -146,7 +152,7 @@ export const teamPrincipal = {
     level: 1,
     value: 0,
     multiplier: 1,
-    cost: 25,
+    cost: 50,
     lvlUpCost: 2,
     img: './img/mateusz.webp',
     upgrade: function () {

@@ -4,6 +4,7 @@ import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-eleme
 createCarClicker();
 createCarBackground();
 
+
 const counter = document.getElementById('money')
 const clicker = document.getElementById('clicker')
 
@@ -15,14 +16,14 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const player = {
-    actualCoins: 100,
+    actualCoins: 150,
     actualSpeed: 0,
     multiplierSponsors: 1,
-    multiplierSpeed: 1,
     driver: false,
     teamPrincipal: false,
     addCoins: function () {
-        this.actualCoins = this.actualCoins + ( this.actualSpeed * this.multiplierSponsors * this.multiplierSpeed)
+        const bonusSpeed = driver.value
+        this.actualCoins = this.actualCoins + ( this.actualSpeed * this.multiplierSponsors * bonusSpeed)
         numbersAdjust(player.actualCoins, counter)
     },
     spendCoins: function (cost) {
@@ -196,6 +197,9 @@ const buyCharacter = function (object) {
             if (player.teamPrincipal){
                 autoClick()
             }
+            if (character === 'driver') {
+                driver.value = 1.05
+            }
         } else {
             console.log('not enaugh money - buy character')
         }
@@ -241,7 +245,7 @@ const numbersAdjust = function (toAdjust, target) {
         counterParam1Check = true
     }
 
-    const coins = toAdjust
+    const coins = Math.floor(toAdjust)
     
     for (let i = 0; i <= coinsAmount.length; i++) {
         
@@ -273,9 +277,9 @@ const countMultiplierSpeed = function () {
     for ( let i = 0; i < bolidParts.length; i++){
         const x = bolidParts[i]
         multiplier = multiplier + x.value
-        console.log(x.value)
     }
     player.actualSpeed = multiplier
     document.getElementById('speed').innerText = `${player.actualSpeed} km/h`
 }
+countMultiplierSpeed();
 
