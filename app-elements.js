@@ -150,7 +150,7 @@ export const teamPrincipal = {
     type: 'teamPrincipal',
     bought: false,
     level: 1,
-    value: 0,
+    value: 1,
     multiplier: 1,
     cost: 50,
     lvlUpCost: 2,

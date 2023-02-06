@@ -608,6 +608,20 @@ body {
     border-radius: 0px 5px 12px 0px;
 }
 
+.sub-lvl-container {
+    width: 100%;
+    display: flex;
+    background-color: #007bff !important;
+}
+
+.sub-lvl {
+    height: 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    background: #244;
+}
+
 .description {
     width: 100%;
     padding: .5rem 0rem .5rem 0rem;

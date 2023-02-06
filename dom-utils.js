@@ -227,6 +227,16 @@ export const createCharacter = function (id, object, action) {
       level.innerText = `Lvl. ${object.level}`
       titleContent.appendChild(level)
 
+      // const subLevelContainer = document.createElement('div')
+      // subLevelContainer.classList.add('sub-lvl-container')
+      // titleContent.appendChild(subLevelContainer)
+
+      //   for ( let i = 0; i <= 2; i ++ ) {
+      //     const subLvl = document.createElement('p')
+      //     subLvl.classList.add('sub-lvl')
+      //     subLevelContainer.appendChild(subLvl)
+      //   }
+
     const image = document.createElement('img')
     image.src = object.img
     cardContent.appendChild(image)

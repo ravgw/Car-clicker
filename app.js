@@ -21,9 +21,15 @@ const player = {
     multiplierSponsors: 1,
     driver: false,
     teamPrincipal: false,
-    addCoins: function () {
+    autoCoins: function () {
         const bonusSpeed = driver.value
         this.actualCoins = this.actualCoins + ( this.actualSpeed * this.multiplierSponsors * bonusSpeed)
+        numbersAdjust(player.actualCoins, counter)
+    },
+    addCoins: function () {
+        const tpBonus = teamPrincipal.value
+        const bonusSpeed = driver.value
+        this.actualCoins = this.actualCoins + ( this.actualSpeed * this.multiplierSponsors * bonusSpeed * tpBonus) 
         numbersAdjust(player.actualCoins, counter)
     },
     spendCoins: function (cost) {
@@ -267,7 +273,7 @@ const numbersAdjust = function (toAdjust, target) {
 
 const autoClick = function () {
     setTimeout(() => {
-        player.addCoins()
+        player.autoCoins()
         autoClick()
     }, 1000)
 }
