@@ -24,6 +24,7 @@ const aerodynamics = {
     img: './img/aero.webp',
     upgrade: function () {
         upgrade(this)
+        this.value = this.value * windTunnel.value
     },
 }
 const suspension = {
@@ -61,32 +62,36 @@ export const bolidParts = [
     suspension,
     turbo
 ]
+
 const sponsors = {
     name: 'Sponsors',
     type: 'sponsors',
     level: 0,
-    value: 0,
+    value: 1,
     cost: 10,
     multiplier: 1,
-    lvlUpCost: 2,
+    lvlUpCost: 3,
     description: 'Take more money for your speed',
     img: './img/sponsors.webp',
     upgrade: function () {
-        upgrade(this)
+        nextLvl(this)
+        this.value = this.value * 2
     },
 }
 const windTunnel = {
     name: 'Wind tunnel',
     type: 'windTunnel',
     level: 0,
-    value: 0,
+    value: 1,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
     description: 'Better aerodynamics performance',
     img: './img/windtunnel.webp',
     upgrade: function () {
-        upgrade(this)
+        nextLvl(this)
+        this.value = this.value + .2
+        aerodynamics.value = aerodynamics.value
     },
 }
 const engineers = {
@@ -100,7 +105,7 @@ const engineers = {
     description: 'Hire appropriate people to improve bolid parts efficient',
     img: './img/engineers.webp',
     upgrade: function () {
-        upgrade(this)
+        nextLvl(this)
     },
 }
 const fame = {
@@ -114,7 +119,7 @@ const fame = {
     description: 'Grow the celebrity of your team to attract richer sponsors',
     img: './img/fame.webp',
     upgrade: function () {
-        upgrade(this)
+        nextLvl(this)
     },
 }
 
@@ -130,19 +135,24 @@ export const driver = {
     type: 'driver',
     bought: false,
     level: 1,
+    subLevel: 0,
     value: 1,
     multiplier: 1,
     cost: 25,
     lvlUpCost: 2,
     img: './img/jurek.webp',
     upgrade: function () {
-        console.log('start')
-        this.level = this.level +1
+
+        if (this.subLevel === 3){
+            this.level++
+            this.subLevel = 0
+        } else {
+            this.subLevel++
+        }
+
         this.cost = Math.round(this.cost * this.lvlUpCost)
         const x = (this.value + .05)
         this.value = x
-        console.log(x)
-        console.log(typeof(x))
     },
     }
 export const teamPrincipal = {
@@ -150,24 +160,36 @@ export const teamPrincipal = {
     type: 'teamPrincipal',
     bought: false,
     level: 1,
+    subLevel: 0,
     value: 1,
     multiplier: 1,
     cost: 50,
     lvlUpCost: 2,
     img: './img/mateusz.webp',
     upgrade: function () {
-        upgrade(this)
+
+        if (this.subLevel === 3){
+            this.level++
+            this.subLevel = 0
+        } else {
+            this.subLevel++
+        }
+
+        this.cost = Math.round(this.cost * this.lvlUpCost)
+        const x = (this.value + .5)
+        this.value = x
     },
 }
 
 
 const upgrade = function  (object) {
-    object.level = object.level + 1
+    object.level++
+    object.value++
     nextLvl(object)
-    object.value = object.value +1
 }
 
 const nextLvl = function (object) {
+    object.level++
     object.cost = Math.round(object.cost * object.lvlUpCost)
     object.multiplier = Math.round(object.multiplier * 1.2)
 }

@@ -227,15 +227,17 @@ export const createCharacter = function (id, object, action) {
       level.innerText = `Lvl. ${object.level}`
       titleContent.appendChild(level)
 
-      // const subLevelContainer = document.createElement('div')
-      // subLevelContainer.classList.add('sub-lvl-container')
-      // titleContent.appendChild(subLevelContainer)
+    const subLevelContainer = document.createElement('div')
+    subLevelContainer.classList.add('sub-lvl-container')
+    titleContent.appendChild(subLevelContainer)
 
-      //   for ( let i = 0; i <= 2; i ++ ) {
-      //     const subLvl = document.createElement('p')
-      //     subLvl.classList.add('sub-lvl')
-      //     subLevelContainer.appendChild(subLvl)
-      //   }
+    for( let i = 0; i <=2; i++) {
+      const subLevel = document.createElement('div')
+      subLevel.classList.add('sub-lvl')
+      subLevel.id = `${object.name}-sub-lvl-${i}`
+      subLevelContainer.appendChild(subLevel)
+    }
+
 
     const image = document.createElement('img')
     image.src = object.img
@@ -253,9 +255,38 @@ export const createCharacter = function (id, object, action) {
     upgrade.innerText = 'Upgrade'  
     upgradeContent.appendChild(upgrade)
     upgrade.addEventListener('click', (e) => {
+
+      const paramX = object.subLevel
       action(object)
+      const paramY = object.subLevel
+
+      if (paramX !== paramY) {
+        subUpgrade()
+      }
+  
     })
     upgradeContent.appendChild(price)
+
+    let subLvl = 0
+    const subUpgrade = function () {
+      if (subLvl <= 2) {
+        const element = document.querySelector(`#${object.name}-sub-lvl-${subLvl}`)
+        element.classList.add('sub-lvl-bck')
+        subLvl++
+        if (subLvl === 3) {
+          upgrade.innerText = 'LEVEL UP'
+        }
+      } else {
+        for( let i = 0; i <=2; i++) {
+        const element = document.querySelector(`#${object.name}-sub-lvl-${i}`)
+        element.classList.remove('sub-lvl-bck')
+        upgrade.innerText = 'Upgrade'
+        subLvl = 0
+      }
+    }}
+
+
+
 }
 
 export function hideElements (element) {

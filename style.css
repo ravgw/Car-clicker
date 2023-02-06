@@ -609,17 +609,33 @@ body {
 }
 
 .sub-lvl-container {
+    min-height: 15px;
     width: 100%;
     display: flex;
-    background-color: #007bff !important;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .sub-lvl {
-    height: 20px;
+    height: 10px;
     display: flex;
     justify-content: space-around;
-    width: 30%;
-    background: #244;
+    width: 33%;
+    border-radius: 5px 10px 0px 12px;
+}
+
+#driver .sub-lvl {
+    border: solid 1px #a2be25;
+}
+#teamPrincipal .sub-lvl {
+    border: solid 1px #2565be;
+}
+
+#driver .sub-lvl-bck {
+    background: #c7ee19;
+}
+#teamPrincipal .sub-lvl-bck {
+    background: #2f7ff0;
 }
 
 .description {
