@@ -8,7 +8,6 @@ createCarBackground();
 const counter = document.getElementById('money')
 const clicker = document.getElementById('clicker')
 
-const sponsors = garageFacilities[0]
 
 let bolidMenu = false;
 let bolidCards = false;
@@ -18,14 +17,14 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const player = {
-    actualCoins: 500,
+    actualCoins: 49,
     actualSpeed: 0,
     driver: false,
     teamPrincipal: false,
     autoCoins: function () {
         const bonusSpeed = driver.value
         const tpBonus = teamPrincipal.value
-        const sponsorsBonus = sponsors.value
+        const sponsorsBonus = garageFacilities[0].value
 
         this.actualCoins = this.actualCoins + (this.actualSpeed * bonusSpeed) * tpBonus + sponsorsBonus
         numbersAdjust(player.actualCoins, counter)

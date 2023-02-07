@@ -3,57 +3,80 @@ const engine = {
     type: 'engine',
     level: 1,
     value: 1,
+    subValue: 1,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
     description: 'Increase the engine power to gain more speed on straights',
     img: './img/engine.webp',
     upgrade: function () {
-        upgrade(this)
+        nextLvl(this)
+        this.subValue++
+        this.calculateValue()
     },
+    calculateValue: function () {
+        this.value = this.subValue * engineers.value
+    }
 }
 const aerodynamics = {
     name: 'Aerodynamics',
     type: 'aerodynamics',
     level: 0,
     value: 0,
+    subValue: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
     description: 'Lower aerodynamic drag is equal to higher top speed',
     img: './img/aero.webp',
     upgrade: function () {
-        upgrade(this)
-        this.value = this.value * windTunnel.value
+        nextLvl(this)
+        this.subValue++
+        this.calculateValue()
     },
+    calculateValue: function () {
+        this.value = this.subValue * windTunnel.value
+    }
 }
 const suspension = {
     name: 'Suspension',
     type: 'suspension',
     level: 0,
     value: 0,
+    subValue: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
     description: 'Better suspension helps driving through turns faster',
     img: './img/suspension.webp',
     upgrade: function () {
-        upgrade(this)
+        nextLvl(this)
+        this.subValue++
+        this.calculateValue()
     },
+    calculateValue: function () {
+        this.value = this.subValue * engineers.value
+    }
 }
 const turbo = {
     name: 'Turbo',
     type: 'turbo',
     level: 0,
     value: 0,
+    subValue: 0,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
     description: 'Speeeeeeeeeeeeeeeeeed',
     img: './img/turbo.webp',
     upgrade: function () {
-        upgrade(this)
+        nextLvl(this)
+        this.subValue++
+        this.calculateValue()
     },
+    calculateValue: function () {
+        this.value = this.subValue * engineers.value
+    }
 }
 
 export const bolidParts = [
@@ -67,16 +90,22 @@ const sponsors = {
     name: 'Sponsors',
     type: 'sponsors',
     level: 0,
-    value: 1,
+    value: 0,
+    subValue: 0,
     cost: 10,
-    multiplier: 1,
+    bonus: 1,
     lvlUpCost: 3,
     description: 'Take more money for your speed',
     img: './img/sponsors.webp',
     upgrade: function () {
         nextLvl(this)
-        this.value = this.value * 2
+        this.subValue++
+        this.calculateValue()
+        console.log(this.value + 'sponsors')
     },
+    calculateValue: function () {
+        this.value = this.subValue * this.bonus
+    }
 }
 const windTunnel = {
     name: 'Wind tunnel',
@@ -91,14 +120,14 @@ const windTunnel = {
     upgrade: function () {
         nextLvl(this)
         this.value = this.value + .2
-        aerodynamics.value = aerodynamics.value
+        aerodynamics.calculateValue()
     },
 }
 const engineers = {
     name: 'Engineers',
     type: 'engineers',
     level: 0,
-    value: 0,
+    value: 1,
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
@@ -106,6 +135,10 @@ const engineers = {
     img: './img/engineers.webp',
     upgrade: function () {
         nextLvl(this)
+        this.value = this.value + .2
+        engine.calculateValue()
+        suspension.calculateValue()
+        turbo.calculateValue()
     },
 }
 const fame = {
@@ -120,6 +153,10 @@ const fame = {
     img: './img/fame.webp',
     upgrade: function () {
         nextLvl(this)
+        this.value = this.value + 2
+        sponsors.bonus = this.value
+        sponsors.calculateValue()
+        console.log(this.value + 'fame')
     },
 }
 
@@ -183,7 +220,6 @@ export const teamPrincipal = {
 
 
 const upgrade = function  (object) {
-    object.level++
     object.value++
     nextLvl(object)
 }
