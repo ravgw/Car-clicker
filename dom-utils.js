@@ -82,17 +82,18 @@ export const createCardNavigation = function (category, firstOption, secondOptio
     navigation.appendChild(option2)
 }
 
-export const createHomeBoard = function (values)  {
+export const createHomeBoard = function (array1, array2)  {
   const node = document.querySelector('#selectTabInfo')
   const board = document.createElement('div')
   board.id = 'homeBoard'
   node.appendChild(board)
 
   const countersContainer = document.createElement('div')
+  board.appendChild(countersContainer)
   for (let i=0; i <3; i ++) {
   const counters = document.createElement('div')
   countersContainer.appendChild(counters)
-    
+
     const names = ['Total','PS','PC']
     const nameTag = document.createElement('p')
     nameTag.innerText = names[i]
@@ -101,7 +102,30 @@ export const createHomeBoard = function (values)  {
     counters.appendChild(nameTag)
     counters.appendChild(value)
   }
-  board.appendChild(countersContainer)
+  
+  const cardsStatsContainer = function (arr) {
+    const cardsStatsContainer = document.createElement('div')
+    for (let i=0; i < arr.length; i++){
+
+      const infoDiv = document.createElement('div')
+
+      const nameTag = document.createElement('p')
+      nameTag.innerText = `${arr[i].name}`
+      infoDiv.appendChild(nameTag)
+      
+      const value = document.createElement('p')
+      value.innerText = arr[i].value
+      infoDiv.appendChild(value)
+
+      cardsStatsContainer.appendChild(infoDiv)
+      console.log(arr[i].name)
+      console.log(arr[i].value)
+    }
+    return cardsStatsContainer
+  }
+
+  board.appendChild(cardsStatsContainer(array1))
+  board.appendChild(cardsStatsContainer(array2))
 
 
 } 

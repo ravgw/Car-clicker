@@ -61,7 +61,7 @@ const player = {
 const stats = {
     totalCoins: 0,
     perSec: 0,
-    perClick: 0,
+    perClick: 1,
 }
 
 
@@ -320,8 +320,11 @@ const countMultiplierSpeed = function () {
     document.getElementById('speed').innerText = `${player.actualSpeed} km/h`
 }
 countMultiplierSpeed();
-createHomeBoard(stats, bolidParts, garageFacilities);
+createHomeBoard(bolidParts, garageFacilities);
 
 const totalValueStats = document.querySelector('#Total-stats-value')
+totalValueStats.innerText = stats.totalCoins
 const perSecStats = document.querySelector('#PS-stats-value')
+perSecStats.innerText = stats.perSec
 const perClickStats = document.querySelector('#PC-stats-value')
+perClickStats.innerText = stats.perClick
