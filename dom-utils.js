@@ -82,6 +82,30 @@ export const createCardNavigation = function (category, firstOption, secondOptio
     navigation.appendChild(option2)
 }
 
+export const createHomeBoard = function (values)  {
+  const node = document.querySelector('#selectTabInfo')
+  const board = document.createElement('div')
+  board.id = 'homeBoard'
+  node.appendChild(board)
+
+  const countersContainer = document.createElement('div')
+  for (let i=0; i <3; i ++) {
+  const counters = document.createElement('div')
+  countersContainer.appendChild(counters)
+    
+    const names = ['Total','PS','PC']
+    const nameTag = document.createElement('p')
+    nameTag.innerText = names[i]
+    const value = document.createElement('p')
+    value.id = `${names[i]}-stats-value`
+    counters.appendChild(nameTag)
+    counters.appendChild(value)
+  }
+  board.appendChild(countersContainer)
+
+
+} 
+
 const createCard = function (improvments, action) {
   const card = document.createElement('div')
   card.classList.add('card-content')

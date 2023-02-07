@@ -1,20 +1,23 @@
-import { createCarClicker, createCarBackground, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter } from "./dom-utils.js";
+import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-elements.js"
 
 createCarClicker();
 createCarBackground();
 
 
+
+
 const counter = document.getElementById('money')
 const clicker = document.getElementById('clicker')
 
-
+let homeBoard = true
 let bolidMenu = false;
 let bolidCards = false;
 let garageMenu = false;
 let garageCards = false;
 let checkPersonal = false 
 let checkTeamPrincipal = false 
+
 
 const player = {
     actualCoins: 49,
@@ -25,15 +28,27 @@ const player = {
         const bonusSpeed = driver.value
         const tpBonus = teamPrincipal.value
         const sponsorsBonus = garageFacilities[0].value
+        const perSec = (this.actualSpeed * bonusSpeed) * tpBonus + sponsorsBonus
 
-        this.actualCoins = this.actualCoins + (this.actualSpeed * bonusSpeed) * tpBonus + sponsorsBonus
+        this.actualCoins = this.actualCoins + perSec
         numbersAdjust(player.actualCoins, counter)
+        stats.totalCoins = stats.totalCoins + perSec
+        numbersAdjust(stats.totalCoins, totalValueStats)
+        stats.perSec = perSec
+        numbersAdjust(stats.perSec, perSecStats)
     },
     addCoins: function () {
         const tpBonus = teamPrincipal.value
         const bonusSpeed = driver.value
-        this.actualCoins = this.actualCoins + ( this.actualSpeed * bonusSpeed * tpBonus) 
+        const perClick = ( this.actualSpeed * bonusSpeed * tpBonus)
+    
+        this.actualCoins = this.actualCoins + perClick 
         numbersAdjust(player.actualCoins, counter)
+        stats.totalCoins = stats.totalCoins + perClick 
+        numbersAdjust(stats.totalCoins, totalValueStats)
+        stats.perClick = perClick
+        numbersAdjust(stats.perClick, perClickStats)
+
     },
     spendCoins: function (cost) {
         if(this.actualCoins >= cost) {
@@ -41,6 +56,12 @@ const player = {
             numbersAdjust(player.actualCoins, counter)}
     },
 
+}
+
+const stats = {
+    totalCoins: 0,
+    perSec: 0,
+    perClick: 0,
 }
 
 
@@ -59,6 +80,11 @@ speed();
 const bolidElement = document.getElementById('bolid-navigation')
 bolidElement.addEventListener('click', (e) => {
 
+    if(homeBoard) {
+        hideElements('homeBoard')
+        homeBoard = false
+    }
+
     if (garageMenu) {
         hideElements('garage-options')
         if (garageCards) {
@@ -74,15 +100,6 @@ bolidElement.addEventListener('click', (e) => {
         checkPersonal = true
         if(!player.driver) {
             createUnlockCharacter(driver, buyCharacter)
-            // const card = document.getElementById('driver')
-            // card.addEventListener('click', (e) => {
-            //     if( player.actualCoins >= 200 && !player.driver) {
-            //         player.driver = true
-            //         createCharacter('driver', driver)
-            //     } else {
-            //         console.log('karolina to pieczarki' + player.driver)
-            //     }
-            // })
         }
     } else {
         showElements('driver')
@@ -122,6 +139,11 @@ bolidElement.addEventListener('click', (e) => {
     
 const garageElement = document.getElementById('garage-navigation')
 garageElement.addEventListener('click', (e) => {
+
+    if(homeBoard) {
+        hideElements('homeBoard')
+        homeBoard = false
+    }
 
         if(bolidMenu) {
             hideElements('bolid-options')
@@ -176,6 +198,13 @@ garageElement.addEventListener('click', (e) => {
 
 const homeElement = document.getElementById('home-navigation')
 homeElement.addEventListener('click', (e) => {
+
+
+    if(!homeBoard) {
+        showElements('homeBoard')
+        homeBoard = true
+    }
+
     if (bolidMenu) {
         hideElements('bolid-options')
         if (bolidCards) {
@@ -291,4 +320,8 @@ const countMultiplierSpeed = function () {
     document.getElementById('speed').innerText = `${player.actualSpeed} km/h`
 }
 countMultiplierSpeed();
+createHomeBoard(stats, bolidParts, garageFacilities);
 
+const totalValueStats = document.querySelector('#Total-stats-value')
+const perSecStats = document.querySelector('#PS-stats-value')
+const perClickStats = document.querySelector('#PC-stats-value')
