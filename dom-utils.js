@@ -83,51 +83,82 @@ export const createCardNavigation = function (category, firstOption, secondOptio
 }
 
 export const createHomeBoard = function (array1, array2)  {
+
   const node = document.querySelector('#selectTabInfo')
   const board = document.createElement('div')
   board.id = 'homeBoard'
   node.appendChild(board)
 
+  // counters
   const countersContainer = document.createElement('div')
+  countersContainer.id = 'home-counters-container'
   board.appendChild(countersContainer)
   for (let i=0; i <3; i ++) {
   const counters = document.createElement('div')
+  counters.classList.add('home-counters')
   countersContainer.appendChild(counters)
+
 
     const names = ['Total','PS','PC']
     const nameTag = document.createElement('p')
     nameTag.innerText = names[i]
     const value = document.createElement('p')
-    value.id = `${names[i]}-stats-value`
+    value.id = `${names[i]}-counter-value`
     counters.appendChild(nameTag)
     counters.appendChild(value)
   }
   
-  const cardsStatsContainer = function (arr) {
-    const cardsStatsContainer = document.createElement('div')
+  // stats
+  const homeStatsContainer = document.createElement('div')
+  homeStatsContainer.id = 'home-stats-container'
+  board.appendChild(homeStatsContainer)
+
+  const statsCardsContainer = function (arr) {
+
+    const statsCardsContainer = document.createElement('div')
+    statsCardsContainer.id = 'stats-cards-container'
+    homeStatsContainer.appendChild(statsCardsContainer)
+
     for (let i=0; i < arr.length; i++){
 
-      const infoDiv = document.createElement('div')
-
+      const cardInfo = document.createElement('div')
+      cardInfo.classList.add('stats-card-infoDiv')
+      
       const nameTag = document.createElement('p')
       nameTag.innerText = `${arr[i].name}`
-      infoDiv.appendChild(nameTag)
+      nameTag.classList.add('stats-card-nameTag')
+      cardInfo.appendChild(nameTag)
       
       const value = document.createElement('p')
-      value.innerText = arr[i].value
-      infoDiv.appendChild(value)
+      value.classList.add('stats-card-value')
+      value.id = `${arr[i].name}-card-stats-value`
+      value.innerText = `${arr[i].value}${arr[i].actionSign}`
+      cardInfo.appendChild(value)
 
-      cardsStatsContainer.appendChild(infoDiv)
-      console.log(arr[i].name)
-      console.log(arr[i].value)
+      statsCardsContainer.appendChild(cardInfo)
     }
-    return cardsStatsContainer
+    return statsCardsContainer
   }
 
-  board.appendChild(cardsStatsContainer(array1))
-  board.appendChild(cardsStatsContainer(array2))
+  homeStatsContainer.appendChild(statsCardsContainer(array1))
+  homeStatsContainer.appendChild(statsCardsContainer(array2))
+  
+  // skills
+  const homeSkillsContainer = document.createElement('div')
+  homeSkillsContainer.id = 'home-skills-container'
+  board.appendChild(homeSkillsContainer)
 
+    const skill1 = document.createElement('div')
+    skill1.id = 'skill-1'
+    skill1.classList.add('skills')
 
+    const skill2 = document.createElement('div')
+    skill2.id = 'skill-2'
+    skill2.classList.add('skills')
+
+    homeSkillsContainer.appendChild(skill1)
+    homeSkillsContainer.appendChild(skill2)
+  
 } 
 
 const createCard = function (improvments, action) {
@@ -425,3 +456,8 @@ export const slider = function (first , second){
     }
 }
   
+
+export const createSkillButton = function (character) {
+  const skillContainer = document.createElement('div')
+  skillContainer.id = `${character.name}-skill`
+}

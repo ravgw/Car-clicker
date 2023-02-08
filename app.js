@@ -322,9 +322,9 @@ const countMultiplierSpeed = function () {
 countMultiplierSpeed();
 createHomeBoard(bolidParts, garageFacilities);
 
-const totalValueStats = document.querySelector('#Total-stats-value')
-totalValueStats.innerText = stats.totalCoins
-const perSecStats = document.querySelector('#PS-stats-value')
-perSecStats.innerText = stats.perSec
-const perClickStats = document.querySelector('#PC-stats-value')
-perClickStats.innerText = stats.perClick
+const totalValueStats = document.querySelector('#Total-counter-value')
+totalValueStats.innerText = `${stats.totalCoins} \u2234`
+const perSecStats = document.querySelector('#PS-counter-value')
+perSecStats.innerText = `${stats.perSec} \u2234`
+const perClickStats = document.querySelector('#PC-counter-value')
+perClickStats.innerText = `${stats.perClick} \u2234`

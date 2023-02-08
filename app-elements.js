@@ -7,6 +7,7 @@ const engine = {
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
+    actionSign: '\u2234',
     description: 'Increase the engine power to gain more speed on straights',
     img: './img/engine.webp',
     upgrade: function () {
@@ -27,6 +28,7 @@ const aerodynamics = {
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
+    actionSign: '\u2234',
     description: 'Lower aerodynamic drag is equal to higher top speed',
     img: './img/aero.webp',
     upgrade: function () {
@@ -47,6 +49,7 @@ const suspension = {
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
+    actionSign: '\u2234',
     description: 'Better suspension helps driving through turns faster',
     img: './img/suspension.webp',
     upgrade: function () {
@@ -67,6 +70,7 @@ const turbo = {
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
+    actionSign: '\u2234',
     description: 'Speeeeeeeeeeeeeeeeeed',
     img: './img/turbo.webp',
     upgrade: function () {
@@ -95,6 +99,7 @@ const sponsors = {
     cost: 10,
     bonus: 1,
     lvlUpCost: 3,
+    actionSign: '\u2234',
     description: 'Take more money for your speed',
     img: './img/sponsors.webp',
     upgrade: function () {
@@ -115,6 +120,7 @@ const windTunnel = {
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
+    actionSign: 'x',
     description: 'Better aerodynamics performance',
     img: './img/windtunnel.webp',
     upgrade: function () {
@@ -131,6 +137,7 @@ const engineers = {
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
+    actionSign: 'x',
     description: 'Hire appropriate people to improve bolid parts efficient',
     img: './img/engineers.webp',
     upgrade: function () {
@@ -149,6 +156,7 @@ const fame = {
     cost: 10,
     multiplier: 1,
     lvlUpCost: 2,
+    actionSign: 'x',
     description: 'Grow the celebrity of your team to attract richer sponsors',
     img: './img/fame.webp',
     upgrade: function () {
@@ -156,7 +164,6 @@ const fame = {
         this.value = this.value + 2
         sponsors.bonus = this.value
         sponsors.calculateValue()
-        console.log(this.value + 'fame')
     },
 }
 
