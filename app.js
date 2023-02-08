@@ -20,7 +20,7 @@ let checkTeamPrincipal = false
 
 
 const player = {
-    actualCoins: 49,
+    actualCoins: 0,
     actualSpeed: 0,
     driver: false,
     teamPrincipal: false,
@@ -118,11 +118,14 @@ bolidElement.addEventListener('click', (e) => {
                 hideElements('driver')
             }
             if (bolidCards) {
+                document.querySelector('#bolid').classList.remove('showMeHowToSlide')
                 showElements('bolid')
             } else {
                 bolidCards = true
                 createCardElement('bolid', bolidParts, upgrade )
                 slider('.bolid-cards-container-slider','.bolid-element-slider')
+                document.querySelector('#bolid').classList.add('showMeHowToSlide')
+                console.log('cards')
             }
         })
         const driverCard = document.getElementById('Driver-option')
@@ -178,11 +181,13 @@ garageElement.addEventListener('click', (e) => {
                 hideElements('teamPrincipal')
             }
             if(garageCards) {
+                document.querySelector('#garage').classList.remove('showMeHowToSlide')
                 showElements('garage')
             } else {
                 garageCards = true
                 createCardElement('garage', garageFacilities, upgrade)
                 slider('.garage-cards-container-slider','.garage-element-slider')
+                document.querySelector('#garage').classList.add('showMeHowToSlide')
             }
         })
         const TeamPrincipalCard = document.getElementById('TeamPrincipal-option')
