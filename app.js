@@ -333,3 +333,6 @@ const perSecStats = document.querySelector('#PS-counter-value')
 perSecStats.innerText = `${stats.perSec} \u2234`
 const perClickStats = document.querySelector('#PC-counter-value')
 perClickStats.innerText = `${stats.perClick} \u2234`
+
+
+console.log()

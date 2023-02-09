@@ -447,7 +447,13 @@ export const slider = function (first , second){
     if (isDragging) requestAnimationFrame(animation)
   }
   function setPositionByIndex() {
-    currentTranslate = currentIndex * -window.innerWidth
+    const mediaQuery = window.matchMedia('(max-width: 600px)')
+    
+    if (mediaQuery.matches) {
+      currentTranslate = currentIndex * -window.innerWidth
+    } else {
+      currentTranslate = currentIndex * (-window.innerWidth*0.65)
+    }
     prevTranslate = currentTranslate
     setSliderPosition()}
     
