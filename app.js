@@ -125,7 +125,6 @@ bolidElement.addEventListener('click', (e) => {
                 createCardElement('bolid', bolidParts, upgrade )
                 slider('.bolid-cards-container-slider','.bolid-element-slider')
                 document.querySelector('#bolid').classList.add('showMeHowToSlide')
-                console.log('cards')
             }
         })
         const driverCard = document.getElementById('Driver-option')

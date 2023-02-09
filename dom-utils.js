@@ -447,12 +447,21 @@ export const slider = function (first , second){
     if (isDragging) requestAnimationFrame(animation)
   }
   function setPositionByIndex() {
+    const calcWidth = function () {
+      let gameWidth
+      if (window.innerWidth <= 1000) {
+        gameWidth = window.innerWidth
+      } else {
+        gameWidth = 1000;
+      }
+      return gameWidth
+    }
     const mediaQuery = window.matchMedia('(max-width: 600px)')
     
     if (mediaQuery.matches) {
-      currentTranslate = currentIndex * -window.innerWidth
+      currentTranslate = currentIndex * -calcWidth()
     } else {
-      currentTranslate = currentIndex * (-window.innerWidth*0.65)
+      currentTranslate = currentIndex * (-(calcWidth())*0.65)
     }
     prevTranslate = currentTranslate
     setSliderPosition()}
