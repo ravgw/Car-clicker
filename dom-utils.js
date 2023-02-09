@@ -29,11 +29,12 @@ clicker.appendChild(carBodyFront);
 carBodyRear.appendChild(door);
 carBodyRear.appendChild(driverBody);
 
+carBodyRear.appendChild(rearRim);
+carBodyFront.appendChild(frontRim);
+
 carBodyRear.appendChild(rearTyre);
 carBodyFront.appendChild(frontTyre);
 
-carBodyRear.appendChild(rearRim);
-carBodyFront.appendChild(frontRim);
 
 }  
 
