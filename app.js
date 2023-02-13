@@ -107,10 +107,12 @@ bolidElement.addEventListener('click', (e) => {
 
 
     if(bolidMenu) {
+        document.querySelector('#bolid-options').style.background = 'var(--darkorange)'
         showElements('bolid-options')
     } else {
         bolidMenu = true
         createCardNavigation('bolid-options', 'Driver', 'Parts')
+        document.querySelector('#bolid-options').style.background = 'var(--darkorange)'
     }
         const partsCard = document.getElementById('Parts-option')
         partsCard.addEventListener('click', (e) =>{     
@@ -169,9 +171,11 @@ garageElement.addEventListener('click', (e) => {
         
         if(garageMenu) {
             showElements('garage-options')
+            document.querySelector('#garage-options').style.background = 'var(--carrot)'
         } else {
             garageMenu = true
             createCardNavigation('garage-options', 'Facilities' ,'TeamPrincipal')
+            document.querySelector('#garage-options').style.background = 'var(--carrot)'
         }
         
         const facilitiesCard = document.getElementById('Facilities-option')
@@ -206,6 +210,7 @@ homeElement.addEventListener('click', (e) => {
 
     if(!homeBoard) {
         showElements('homeBoard')
+        document.querySelector('#navigation').style.background = 'var(--darkblue)'
         homeBoard = true
     }
 
