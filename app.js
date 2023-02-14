@@ -107,12 +107,12 @@ bolidElement.addEventListener('click', (e) => {
 
 
     if(bolidMenu) {
-        document.querySelector('#bolid-options').style.background = 'var(--darkorange)'
+        document.querySelector('#navigation').style.background = 'transparent'
         showElements('bolid-options')
     } else {
         bolidMenu = true
         createCardNavigation('bolid-options', 'Driver', 'Parts')
-        document.querySelector('#bolid-options').style.background = 'var(--darkorange)'
+        document.querySelector('#navigation').style.background = 'transparent'
     }
         const partsCard = document.getElementById('Parts-option')
         partsCard.addEventListener('click', (e) =>{     
@@ -121,6 +121,13 @@ bolidElement.addEventListener('click', (e) => {
             }
             if (bolidCards) {
                 document.querySelector('#bolid').classList.remove('showMeHowToSlide')
+                let animation
+                const elements = document.querySelectorAll('.bolid-slider')
+                if(!animation) {
+                    elements.forEach((selector) => {
+                        selector.style = 'animation: fadeIn .3s'})
+                        animation = true
+                }
                 showElements('bolid')
             } else {
                 bolidCards = true
@@ -171,11 +178,9 @@ garageElement.addEventListener('click', (e) => {
         
         if(garageMenu) {
             showElements('garage-options')
-            document.querySelector('#garage-options').style.background = 'var(--carrot)'
         } else {
             garageMenu = true
             createCardNavigation('garage-options', 'Facilities' ,'TeamPrincipal')
-            document.querySelector('#garage-options').style.background = 'var(--carrot)'
         }
         
         const facilitiesCard = document.getElementById('Facilities-option')
@@ -185,6 +190,13 @@ garageElement.addEventListener('click', (e) => {
             }
             if(garageCards) {
                 document.querySelector('#garage').classList.remove('showMeHowToSlide')
+                let animation
+                const elements = document.querySelectorAll('.garage-slider')
+                if(!animation) {
+                    elements.forEach((selector) => {
+                        selector.style = 'animation: fadeIn .3s'})
+                        animation = true
+                }
                 showElements('garage')
             } else {
                 garageCards = true
@@ -210,7 +222,7 @@ homeElement.addEventListener('click', (e) => {
 
     if(!homeBoard) {
         showElements('homeBoard')
-        document.querySelector('#navigation').style.background = 'var(--darkblue)'
+        // document.querySelector('#navigation').style.background = 'var(--black)'
         homeBoard = true
     }
 
