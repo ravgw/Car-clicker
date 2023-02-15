@@ -1,10 +1,10 @@
 :root {
-    --darkorange: #DA0B05;
-    --carrot: #D18D07;
-    --black: #061206;
-    --beige: #E8E1C9;
-    --darkblue: #0D1B55;
-    --body: #142777;
+    --fireengine: rgb(226, 60, 71);
+    --steelblue: rgb(63, 136, 197);
+    --selectiveyellow: rgb(255, 186, 8);
+    --prusianblue: rgb(28, 49, 68);
+    --slategray: rgb(113, 131, 152);
+    --body: rgb(88, 134, 175)
 }
 
 
@@ -37,10 +37,10 @@ body {
     height: 100%;
     max-width: 1000px;
     max-height: 1000px;
-    background: rgb(78,70,230);
-    background: linear-gradient(180deg, rgba(78,70,230,1) 0%, rgba(110,205,229,1) 48%);
+    background: rgb(104, 176, 252);
+    background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
     border: 3px solid #22232e;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 #carBoard {
@@ -48,21 +48,20 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    max-width: 450px;
-    height: 250px;
+    max-width: 600px;
+    height: fit-content;
     /* max-height: 250px; */
     /* background: rgb(78,70,230);
     background: linear-gradient(180deg, rgba(78,70,230,1) 0%, rgba(110,205,229,1) 48%); */
 }
 
 #car {
-    /* display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; */
+    justify-content: flex-end;
     width: 100%;
-    /* background: #6ecde5; */
-    /* background: #f9c1b7; */
+    height: 250px;
     overflow: hidden;
 }
 
@@ -72,22 +71,22 @@ body {
     justify-content: space-around;
     width: 100%;
     align-items: center;
-    height: calc(100% - 250px);
-    background: var(--darkblue);
+    height: calc(100% - 296px);
+    background: var(--slategray);
     padding: 5px;
 }
 /* ------------------------------------ CAR-BACKGROUND ----------------------------------- */
 #background-container {
     width: 100%;
     height: 100%;
-    min-height: 250px;
+    height: 250px;
     position: relative;
 }
 #carBackground{
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 300px;
+    height: 250px;
     position: absolute;
 }
 .clouds {
@@ -444,19 +443,21 @@ body {
     /* height: 10%; */
     width: 100%;
     background: #58534F;
-    padding: 5px 0px 5px 0px;
+    padding: 10px;
 }
 
 .counter {
     align-items: center;
     justify-content: center;
     width: 49%;
-    color: #E8E1C9;
+    color: var(--prusianblue);
     font-weight: 700;
-    background: #061206;
-    border: 2px solid #fff;
-    border-radius: 10px 0px;
-
+    background: var(--steelblue);
+    border: 2px solid var(--prusianblue);
+    border-radius: 0px 10px 0px 0px;
+}
+#speed {
+    border-radius: 0px 0px 0px 10px;
 }
 /* ----------------------------------- NAVIGATION ----------------------------------- */
 
@@ -469,7 +470,6 @@ body {
     /* background: #E8E1C9; */
     padding: 4px;
     border-radius: 10px 0px;
-    transition: background .5s;
 }
 .navigation {
     display: flex;
@@ -477,8 +477,7 @@ body {
     justify-content: center;
     height: 40px;
     color: #fff;
-    font-weight: 400;
-    border-radius: 10px 0px;
+    font-weight: 700;
     cursor: pointer;
     letter-spacing: .1rem;
     transition: letter-spacing .3s;
@@ -489,14 +488,29 @@ body {
     background: #ab2124;
 }
 
+
 #home-navigation {
-    background: var(--black);
+    background: var(--steelblue);
+    color: var(--prusianblue);
+    border: 2px solid var(--prusianblue);
 }
 
 #bolid-navigation {
     width: 39%;
-    background: var(--darkorange);
+    background: var(--fireengine);
+    color: var(--prusianblue);
+    border: 2px solid var(--prusianblue);
+    border-radius: 20px 0px 0px 0px;
 }
+#garage-navigation {
+    width: 39%;
+    background: var(--selectiveyellow);
+    color: var(--prusianblue);
+    border: 2px solid var(--prusianblue);
+    border-radius: 0px 0px 20px 0px;
+}
+
+
 #bolid-navigation:hover {
     letter-spacing: .4rem;
 }
@@ -505,15 +519,13 @@ body {
 }
 
 #Driver-option, #Parts-option {
-    background: var(--darkorange);
+    background: var(--fireengine);
+    font-weight: 700;
 }
 #home-navigation {
     width: 20%;
 }
-#garage-navigation {
-    width: 39%;
-    background: var(--carrot);
-}
+
 #garage-navigation:hover {
     letter-spacing: .4rem;
 }
@@ -532,7 +544,7 @@ body {
 
 .card-options-container {
     width: 100%;
-    height: 38%;
+    height: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -913,12 +925,15 @@ q
         width: 35%;
         height: 100%;
         max-height: 1000px;
+        flex-direction: column-reverse;
+        justify-content: space-between;
     }
 
     #cardsBoard {
         width: 65%;
         height: 100%;
         border-left: 3px solid #333;
+        background: none;
     }
 
     .cards-container {
@@ -955,6 +970,9 @@ q
         padding-right: 1rem;
     }
 
+    #counters {
+        background: transparent;
+    }
 }
 
 
