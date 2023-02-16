@@ -68,12 +68,12 @@ export const createCardNavigation = function (category, firstOption, secondOptio
     
     container.appendChild(navigation)
     
-    const option = document.createElement('div')
+    const option = document.createElement('p')
     option.id = `${firstOption}-option`
     option.innerText = firstOption
     option.classList.add('card-navigation-option')
 
-    const option2 = document.createElement('div')
+    const option2 = document.createElement('p')
     option2.id = `${secondOption}-option`
     option2.innerText = secondOption
     option2.classList.add('card-navigation-option')

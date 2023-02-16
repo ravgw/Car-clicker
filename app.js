@@ -107,12 +107,12 @@ bolidElement.addEventListener('click', (e) => {
 
 
     if(bolidMenu) {
-        document.querySelector('#navigation').style.background = 'transparent'
         showElements('bolid-options')
+        styleActive('menuBolid')
     } else {
         bolidMenu = true
         createCardNavigation('bolid-options', 'Driver', 'Parts')
-        document.querySelector('#navigation').style.background = 'transparent'
+        styleActive('menuBolid')
     }
         const partsCard = document.getElementById('Parts-option')
         partsCard.addEventListener('click', (e) =>{     
@@ -178,9 +178,11 @@ garageElement.addEventListener('click', (e) => {
         
         if(garageMenu) {
             showElements('garage-options')
+            styleActive('menuGarage')
         } else {
             garageMenu = true
-            createCardNavigation('garage-options', 'Facilities' ,'TeamPrincipal')
+            createCardNavigation('garage-options','TeamPrincipal', 'Facilities' )
+            styleActive('menuGarage')
         }
         
         const facilitiesCard = document.getElementById('Facilities-option')
@@ -222,7 +224,7 @@ homeElement.addEventListener('click', (e) => {
 
     if(!homeBoard) {
         showElements('homeBoard')
-        // document.querySelector('#navigation').style.background = 'var(--black)'
+        styleActive('menuHome')
         homeBoard = true
     }
 
@@ -351,4 +353,72 @@ const perClickStats = document.querySelector('#PC-counter-value')
 perClickStats.innerText = `${stats.perClick} \u2234`
 
 
-console.log()
+
+const styleActive = function (activeNavigation) {
+    let menu = activeNavigation
+
+    const speed = document.querySelector('#speed')
+    const coins = document.querySelector('#money')
+
+    const bolid = document.querySelector('#bolid-navigation')
+    const garage = document.querySelector('#garage-navigation')
+    
+    const driver = document.querySelector('#Driver-option')
+    const parts = document.querySelector('#Parts-option')
+    const tp = document.querySelector('#TeamPrincipal-option')
+    const facilities = document.querySelector('#Facilities-option')
+
+    const elements = [speed,coins,bolid,garage,driver,parts,tp,facilities]
+    // const style = []
+
+    const leftUp = 'left-up'
+    const leftDown = 'left-down'
+    const rightUp = 'right-up'
+    const rightDown = 'right-down'
+    const nbr = 'nbr'
+
+    const bolidActive = function () {
+        removeStyle()
+        const steps = [leftUp,rightDown,leftDown,rightUp,leftUp,rightDown,nbr,nbr]
+        activate(steps)
+    }
+    
+    const homeActive = function () {
+        removeStyle()
+        const steps = [leftDown,rightDown,leftUp,rightUp,nbr,nbr,nbr,nbr]
+        activate(steps)
+    }
+    
+    const garageActive = function () {
+        removeStyle()
+        const steps = [leftDown,rightUp,leftUp,rightDown,nbr,nbr,leftDown,rightUp]
+        activate(steps)
+    }
+    
+    const activate = function (steps) {
+        for (let i = 0; i < elements.length; i++){
+            if (elements[i]){
+                elements[i].classList.add(steps[i])
+                // style[i] = steps[i]
+            }
+        }
+    }
+    
+    const removeStyle = function () {
+        for (let i = 0; i < elements.length; i++){
+            if (elements[i]){
+                elements[i].classList.remove('left-up')
+                elements[i].classList.remove('left-down')
+                elements[i].classList.remove('right-up')
+                elements[i].classList.remove('right-down')
+                elements[i].classList.remove('nbr')
+            // elements[i].classList.remove(style[i])
+            }
+        }
+    }
+
+    if (menu == 'menuBolid') {bolidActive()}
+    if (menu == 'menuHome') {homeActive()}
+    if (menu == 'menuGarage') {garageActive()}
+}
+styleActive('menuHome')
