@@ -115,7 +115,11 @@ bolidElement.addEventListener('click', (e) => {
         styleActive('menuBolid')
     }
         const partsCard = document.getElementById('Parts-option')
-        partsCard.addEventListener('click', (e) =>{     
+        partsCard.addEventListener('click', (e) =>{
+
+        driverCard.classList.remove('pushedKey')    
+        partsCard.classList.add('pushedKey')  
+
             if (checkPersonal) {
                 hideElements('driver')
             }
@@ -138,6 +142,10 @@ bolidElement.addEventListener('click', (e) => {
         })
         const driverCard = document.getElementById('Driver-option')
         driverCard.addEventListener('click', (e) => {
+
+        driverCard.classList.add('pushedKey')    
+        partsCard.classList.remove('pushedKey')  
+
             if(bolidCards) {
                 hideElements('bolid')
             }
@@ -187,6 +195,10 @@ garageElement.addEventListener('click', (e) => {
         
         const facilitiesCard = document.getElementById('Facilities-option')
         facilitiesCard.addEventListener('click', (e) =>{
+
+            TeamPrincipalCard.classList.remove('pushedKey')    
+            facilitiesCard.classList.add('pushedKey')  
+
             if (checkTeamPrincipal) {
                 hideElements('teamPrincipal')
             }
@@ -209,6 +221,11 @@ garageElement.addEventListener('click', (e) => {
         })
         const TeamPrincipalCard = document.getElementById('TeamPrincipal-option')
         TeamPrincipalCard.addEventListener('click', (e) => {
+
+            TeamPrincipalCard.classList.add('pushedKey')    
+            facilitiesCard.classList.remove('pushedKey')  
+
+
             if(garageCards) {
                 hideElements('garage')
             }
@@ -343,7 +360,7 @@ const countMultiplierSpeed = function () {
     document.getElementById('speed').innerText = `${player.actualSpeed} km/h`
 }
 countMultiplierSpeed();
-createHomeBoard(bolidParts, garageFacilities);
+createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
 
 const totalValueStats = document.querySelector('#Total-counter-value')
 totalValueStats.innerText = `${stats.totalCoins} \u2234`
@@ -359,8 +376,9 @@ const styleActive = function (activeNavigation) {
 
     const speed = document.querySelector('#speed')
     const coins = document.querySelector('#money')
-
+    
     const bolid = document.querySelector('#bolid-navigation')
+    const homeButton = document.querySelector('#home-navigation')
     const garage = document.querySelector('#garage-navigation')
     
     const driver = document.querySelector('#Driver-option')
@@ -368,8 +386,7 @@ const styleActive = function (activeNavigation) {
     const tp = document.querySelector('#TeamPrincipal-option')
     const facilities = document.querySelector('#Facilities-option')
 
-    const elements = [speed,coins,bolid,garage,driver,parts,tp,facilities]
-    // const style = []
+    const elements = [speed,coins,bolid,homeButton,garage,driver,parts,tp,facilities]
 
     const leftUp = 'left-up'
     const leftDown = 'left-down'
@@ -379,20 +396,25 @@ const styleActive = function (activeNavigation) {
 
     const bolidActive = function () {
         removeStyle()
-        const steps = [leftUp,rightDown,leftDown,rightUp,leftUp,rightDown,nbr,nbr]
+        const steps = [leftUp,rightDown,leftDown,nbr,rightUp,leftUp,rightDown,nbr,nbr]
         activate(steps)
+        bolid.classList.add('pushedKey')
+        driver.classList.add('pushedKey')
     }
     
     const homeActive = function () {
         removeStyle()
-        const steps = [leftDown,rightDown,leftUp,rightUp,nbr,nbr,nbr,nbr]
+        const steps = [leftDown,rightDown,leftUp,nbr,rightUp,nbr,nbr,nbr,nbr]
         activate(steps)
+        homeButton.classList.add('pushedKey')
     }
     
     const garageActive = function () {
         removeStyle()
-        const steps = [leftDown,rightUp,leftUp,rightDown,nbr,nbr,leftDown,rightUp]
+        const steps = [leftDown,rightUp,leftUp,nbr,rightDown,nbr,nbr,leftDown,rightUp]
         activate(steps)
+        garage.classList.add('pushedKey')
+        tp.classList.add('pushedKey')
     }
     
     const activate = function (steps) {
@@ -412,7 +434,7 @@ const styleActive = function (activeNavigation) {
                 elements[i].classList.remove('right-up')
                 elements[i].classList.remove('right-down')
                 elements[i].classList.remove('nbr')
-            // elements[i].classList.remove(style[i])
+                elements[i].classList.remove('pushedKey')
             }
         }
     }

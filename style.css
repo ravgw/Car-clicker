@@ -1,4 +1,5 @@
 :root {
+    --light: rgb(250,250,250);
     --fireengine: rgb(226, 60, 71);
     --steelblue: rgb(63, 136, 197);
     --selectiveyellow: rgb(255, 186, 8);
@@ -146,8 +147,8 @@ body {
     top: 92px;
     right: -1000px;
     background: url('./fans.webp') repeat-x;
-    height: 124px;
-    border-bottom: 25px solid #565;
+    height: 148px;
+    border-bottom: 50px solid #565;
     animation: horizon 20s infinite linear;
 }
 
@@ -456,7 +457,10 @@ body {
     font-weight: 700;
     background: var(--steelblue);
     border: 2px solid var(--prusianblue);
+    border-top: 5px double var(--prusianblue);
+    border-left: 4px double var(--prusianblue);
     transform: border-radius 1s;
+
 }
 
 /* ----------------------------------- NAVIGATION ----------------------------------- */
@@ -480,7 +484,12 @@ body {
     cursor: pointer;
     letter-spacing: .1rem;
     transition: letter-spacing .3s;
-    transform: border-radius 1s;
+    transition: border-radius 1s;
+    /* transition: border-style 1s; */
+    border-width: 2px;
+    border-bottom-width: 4px;
+    border-left-width: 6px;
+    border-style: double;
 }
 
 
@@ -492,7 +501,7 @@ body {
 #home-navigation {
     background: var(--steelblue);
     color: var(--prusianblue);
-    border: 2px solid var(--prusianblue);
+    border-color: var(--prusianblue);
     width: 20%;
 }
 
@@ -500,13 +509,13 @@ body {
     width: 39%;
     background: var(--fireengine);
     color: var(--prusianblue);
-    border: 2px solid var(--prusianblue);
+    border-color: var(--prusianblue);
 }
 #garage-navigation {
     width: 39%;
     background: var(--selectiveyellow);
     color: var(--prusianblue);
-    border: 2px solid var(--prusianblue);
+    border-color:  var(--prusianblue);
 }
 
 
@@ -557,7 +566,9 @@ body {
     cursor: pointer;
     color: var(--prusianblue);
     border: 2px solid var(--prusianblue);
-    letter-spacing: .1rem;
+    border-bottom: 4px double var(--prusianblue);
+    border-left: 3px double var(--prusianblue);
+    letter-spacing: .1rem; 
     transition: letter-spacing .3s;
     animation: fadeIn .3s;
     transform: border-radius 1s;
@@ -857,24 +868,31 @@ q
     justify-content: space-around;
 }
 
+
 .home-counters {
     width: 30%;
     display: block;
     text-align: center;
-    border: solid 3px var(--black);
-    border-radius: 10px 5px;
-    color: var(--black);
+    border: solid 3px var(--prusianblue);
+    color: var(--prusianblue);
     font-weight: 700;
     overflow: hidden;
+    background: var(--steelblue);
 }
+
 #Total-counter-value, #PS-counter-value, #PC-counter-value {
-    background: var(--black);
-    color: var(--beige);
+    background: var(--prusianblue);
+    color: var(--light);
     position: relative;
-    /* z-index: -1; */
     font-weight: 300;
 }
 
+.home-counters:first-child {
+    border-radius: 20px 0px 0px 0px;
+}
+.home-counters:last-child {
+    border-radius: 0px 20px 0px 0px;
+}
 #home-stats-container {
     height: 50%;
     width: 100%;
@@ -889,20 +907,39 @@ q
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    color: #fff;
-}
-
-.stats-card-value {
-    /* min-width: 20%; */
-    padding: 3px;
-    background: #941616;
 }
 
 .stats-card-infoDiv {
     display: flex;
     justify-content: space-between;
+    text-align: center;
+    overflow: hidden;
+    border: 2px solid var(--prusianblue);
+    color: var(--prusianblue);
+}   
+.stats-card-value {
+    min-width: 20%;
 }
 
+.stats-card-infoDiv:first-child{ 
+    border-radius: 0px 20px 0px 0px;
+}
+.stats-card-infoDiv:last-child{ 
+    border-radius: 0px 0px 20px 0px;
+}
+
+#engine-card-stats-value, 
+#aerodynamics-card-stats-value,
+#suspension-card-stats-value,
+#turbo-card-stats-value{
+    background: var(--fireengine);
+}
+#sponsors-card-stats-value, 
+#windTunnel-card-stats-value,
+#engineers-card-stats-value,
+#fame-card-stats-value{
+  background: var(--selectiveyellow);
+}
 #home-skills-container {
     display: flex;
     width: 100%;
@@ -913,9 +950,34 @@ q
 .skills {
     width: 50%;
     height: 100%;
-    border: solid 3px #941616;
+    border: solid 2px var(--prusianblue);
+    overflow: hidden;
 }
 
+.skills p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 90%;
+    background-image: url('./img/unlock.webp');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* font-size: 1.; */
+}
+
+#skill-1 {
+    border-bottom-width: 5px;
+    border-radius: 0px 0px 0px 30px;
+    margin-right: 1px;
+}
+#skill-2 {
+    border-bottom-width: 5px;
+    border-radius: 0px 0px 30px 0px;
+    margin-left: 1px;
+}
 
 
 @media only screen and (min-width: 600px){
@@ -967,6 +1029,7 @@ q
 
     .stats-card-nameTag {
         padding-right: 1rem;
+        color: var(--prusianblue);
     }
 
     #counters {
@@ -984,23 +1047,28 @@ q
 
 
 .left-up {
-    transition: border-radius .5s;
+    transition: border-radius 1s;
     border-radius: 0px 0px 0px 20px;
 }
 .left-down {
-    transition: border-radius .5s;
+    transition: border-radius 1s;
     border-radius: 20px 0px 0px 0px;
 }
 .right-up {
-    transition: border-radius .5s;
+    transition: border-radius 1s;
     border-radius: 0px 0px 20px 0px;
 }
 .right-down {
-    transition: border-radius .5s;
+    transition: border-radius 1s;
     border-radius: 0px 20px 0px 0px;
 }
 .nbr {
-    transition: border-radius .5s;
+    transition: border-radius 1s;
     border-radius: 0px;
+}
+.pushedKey {
+    /* border-bottom-style: solid;
+    border-left-style: solid; */
+    transition: border-style 3s;
 }
  

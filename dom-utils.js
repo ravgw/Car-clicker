@@ -132,7 +132,7 @@ export const createHomeBoard = function (array1, array2)  {
       
       const value = document.createElement('p')
       value.classList.add('stats-card-value')
-      value.id = `${arr[i].name}-card-stats-value`
+      value.id = `${arr[i].type}-card-stats-value`
       value.innerText = `${arr[i].value}${arr[i].actionSign}`
       cardInfo.appendChild(value)
 
@@ -151,10 +151,18 @@ export const createHomeBoard = function (array1, array2)  {
 
     const skill1 = document.createElement('div')
     skill1.id = 'skill-1'
+    const img = document.createElement('img')
+    img.src = './img/unlock.webp'
+    const info = document.createElement('p')
+    info.innerText = 'Upgrade character to unlock'
+    skill1.appendChild(info)
     skill1.classList.add('skills')
-
+    
     const skill2 = document.createElement('div')
     skill2.id = 'skill-2'
+    const info2 = document.createElement('p')
+    info2.innerText = 'Upgrade character to unlock'
+    skill2.appendChild(info2)
     skill2.classList.add('skills')
 
     homeSkillsContainer.appendChild(skill1)
