@@ -456,11 +456,8 @@ body {
     color: var(--prusianblue);
     font-weight: 700;
     background: var(--steelblue);
-    border: 2px solid var(--prusianblue);
-    border-top: 5px double var(--prusianblue);
-    border-left: 4px double var(--prusianblue);
-    transform: border-radius 1s;
-
+    border: 3px solid var(--prusianblue);
+    border-bottom: 5px double var(--prusianblue);
 }
 
 /* ----------------------------------- NAVIGATION ----------------------------------- */
@@ -482,14 +479,10 @@ body {
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    letter-spacing: .1rem;
-    transition: letter-spacing .3s;
     transition: border-radius 1s;
     /* transition: border-style 1s; */
-    border-width: 2px;
-    border-bottom-width: 4px;
-    border-left-width: 6px;
-    border-style: double;
+    border: 3px solid var(--prusianblue);
+    border-bottom: 6px double var(--prusianblue);
 }
 
 
@@ -518,14 +511,6 @@ body {
     border-color:  var(--prusianblue);
 }
 
-
-#bolid-navigation:hover {
-    letter-spacing: .4rem;
-}
-#home-navigation:hover {
-    letter-spacing: .4rem;
-}
-
 #Driver-option, #Parts-option {
     background: var(--fireengine);
     font-weight: 700;
@@ -534,11 +519,6 @@ body {
 #Facilities-option, #TeamPrincipal-option {
     background: var(--selectiveyellow);
     font-weight: 700;
-}
-
-
-#garage-navigation:hover {
-    letter-spacing: .4rem;
 }
 /* ----------------------------------- CARDS STYLES ----------------------------------- */
 
@@ -565,20 +545,9 @@ body {
     margin: 2px;
     cursor: pointer;
     color: var(--prusianblue);
-    border: 2px solid var(--prusianblue);
-    border-bottom: 4px double var(--prusianblue);
-    border-left: 3px double var(--prusianblue);
-    letter-spacing: .1rem; 
-    transition: letter-spacing .3s;
+    border: 3px solid var(--prusianblue);
+    border-bottom: 6px double var(--prusianblue);
     animation: fadeIn .3s;
-    transform: border-radius 1s;
-}
-
-
-  
-
-.card-navigation-option:hover {
-    letter-spacing: .3rem;
 }
 
 
@@ -874,6 +843,8 @@ q
     display: block;
     text-align: center;
     border: solid 3px var(--prusianblue);
+    border-bottom: double 6px var(--prusianblue);
+    border-left: double 6px var(--prusianblue);
     color: var(--prusianblue);
     font-weight: 700;
     overflow: hidden;
@@ -1047,28 +1018,28 @@ q
 
 
 .left-up {
-    transition: border-radius 1s;
+    transition: border-radius .5s, border-width .5s;
     border-radius: 0px 0px 0px 20px;
+
 }
 .left-down {
-    transition: border-radius 1s;
+    transition: border-radius .5s, border-width .5s;
     border-radius: 20px 0px 0px 0px;
 }
 .right-up {
-    transition: border-radius 1s;
+    transition: border-radius .5s, border-width .5s;
     border-radius: 0px 0px 20px 0px;
 }
 .right-down {
-    transition: border-radius 1s;
+    transition: border-radius .5s, border-width .5s;
     border-radius: 0px 20px 0px 0px;
 }
 .nbr {
-    transition: border-radius 1s;
+    transition: border-radius .5s, border-width .5s;
     border-radius: 0px;
 }
 .pushedKey {
-    /* border-bottom-style: solid;
-    border-left-style: solid; */
-    transition: border-style 3s;
+    border-bottom-width: 4px; 
 }
+
  

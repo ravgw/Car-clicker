@@ -397,7 +397,7 @@ const styleActive = function (activeNavigation) {
     const bolidActive = function () {
         removeStyle()
         const steps = [leftUp,rightDown,leftDown,nbr,rightUp,leftUp,rightDown,nbr,nbr]
-        activate(steps)
+        activate(steps, bolid)
         bolid.classList.add('pushedKey')
         driver.classList.add('pushedKey')
     }
@@ -405,19 +405,20 @@ const styleActive = function (activeNavigation) {
     const homeActive = function () {
         removeStyle()
         const steps = [leftDown,rightDown,leftUp,nbr,rightUp,nbr,nbr,nbr,nbr]
-        activate(steps)
+        activate(steps, homeButton)
         homeButton.classList.add('pushedKey')
     }
     
     const garageActive = function () {
         removeStyle()
         const steps = [leftDown,rightUp,leftUp,nbr,rightDown,nbr,nbr,leftDown,rightUp]
-        activate(steps)
+        activate(steps, garage)
         garage.classList.add('pushedKey')
         tp.classList.add('pushedKey')
     }
     
-    const activate = function (steps) {
+    const activate = function (steps, button) {
+        // button.classList.add('pushedKey')
         for (let i = 0; i < elements.length; i++){
             if (elements[i]){
                 elements[i].classList.add(steps[i])
