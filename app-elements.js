@@ -178,6 +178,8 @@ export const driver = {
     name: 'Jurek',
     type: 'driver',
     bought: false,
+    skill: false,
+    skillId: '#skill-1',
     level: 1,
     subLevel: 0,
     value: 1,
@@ -197,12 +199,18 @@ export const driver = {
         this.cost = Math.round(this.cost * this.lvlUpCost)
         const x = (this.value + .05)
         this.value = x
+
+        if (this.level === 2) {
+            this.skill = true
+        }
     },
     }
 export const teamPrincipal = {
     name: 'Mateusz',
     type: 'teamPrincipal',
     bought: false,
+    skill: false,
+    skillId: '#skill-2',
     level: 1,
     subLevel: 0,
     value: 1,
@@ -222,14 +230,18 @@ export const teamPrincipal = {
         this.cost = Math.round(this.cost * this.lvlUpCost)
         const x = (this.value + .5)
         this.value = x
+
+        if (this.level === 2) {
+            this.skill = true
+        }
     },
 }
 
 
-const upgrade = function  (object) {
-    object.value++
-    nextLvl(object)
-}
+// const upgrade = function  (object) {
+//     object.value++
+//     nextLvl(object)
+// }
 
 const nextLvl = function (object) {
     object.level++

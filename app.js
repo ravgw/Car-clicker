@@ -1,4 +1,4 @@
-import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter } from "./dom-utils.js";
+import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, activeSkill } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-elements.js"
 
 createCarClicker();
@@ -20,7 +20,7 @@ let checkTeamPrincipal = false
 
 
 const player = {
-    actualCoins: 0,
+    actualCoins: 150000,
     actualSpeed: 0,
     driver: false,
     teamPrincipal: false,
@@ -36,6 +36,8 @@ const player = {
         numbersAdjust(stats.totalCoins, totalValueStats)
         stats.perSec = perSec
         numbersAdjust(stats.perSec, perSecStats)
+
+        console.log('1-2-3')
     },
     addCoins: function () {
         const tpBonus = teamPrincipal.value
@@ -292,6 +294,9 @@ const upgrade = function (object) {
         document.getElementById(`${object.type}Lvl`).innerText = 'Lvl. ' + object.level
         numbersAdjust(object.cost, displayCost)
         countMultiplierSpeed()
+            if(object.skill === true) {
+                unlockSkill(object)
+            }
     } else { 
         console.log('not enaugh money - upgrade')
     }
@@ -445,3 +450,10 @@ const styleActive = function (activeNavigation) {
     if (menu == 'menuGarage') {garageActive()}
 }
 styleActive('menuHome')
+
+
+const unlockSkill = function (character) {
+    const container = document.querySelector(character.skillId)
+    container.firstChild.style = 'display: none'
+    activeSkill(character)
+}

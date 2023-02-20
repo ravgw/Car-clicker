@@ -170,6 +170,15 @@ export const createHomeBoard = function (array1, array2)  {
   
 } 
 
+export const activeSkill = function (character) {
+  const container = document.querySelector(character.skillId)
+
+  const img = document.createElement('img')
+  img.src = character.img
+
+  container.appendChild(img)
+}
+
 const createCard = function (improvments, action) {
   const card = document.createElement('div')
   card.classList.add('card-content')
