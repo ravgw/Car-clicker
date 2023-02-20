@@ -117,7 +117,7 @@ export const createHomeBoard = function (array1, array2)  {
   const statsCardsContainer = function (arr) {
 
     const statsCardsContainer = document.createElement('div')
-    statsCardsContainer.id = 'stats-cards-container'
+    statsCardsContainer.id = `stats-cards-container`
     homeStatsContainer.appendChild(statsCardsContainer)
 
     for (let i=0; i < arr.length; i++){
