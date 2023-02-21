@@ -39,6 +39,7 @@ body {
     width: 100%;
     height: 100%;
     max-width: 1000px;
+    min-height: 440px;
     max-height: 1000px;
     background: rgb(104, 176, 252);
     background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
@@ -936,48 +937,75 @@ q
     overflow: hidden;
 }
 
-.skills p {
+.unlock-info {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.unlock-info p:first-child {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-image: url('./img/unlock.webp');
+    background-repeat: no-repeat;
+    background-size: 80px;
+    opacity: .6;
+}
+
+.unlock-info p:last-child {
+    position: absolute;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.8rem; 
     width: 100%;
     height: 100%;
     padding: 10px;
-    background-image: url('./img/unlock.webp');
-    background-repeat: no-repeat;
-    background-size: 80px;
-    opacity: .8;
-}
-
-.skills img {
-    width: 40%
 }
 
 #skill-1 {
+    width: 50%;
+    height: 100%;
     border: solid 2px var(--prusianblue);
     border-bottom: solid 8px var(--prusianbluelight);
     border-left: double 6px var(--prusianbluelight);
     border-radius: 0px 0px 0px 30px;
     margin-right: 1px;
     background-color: var(--fireengine);
-    /* background-image: url('./img/unlock.webp');
-    background-repeat: no-repeat;
-    background-size: 80px;
-    opacity: .8; */
 }
 #skill-2 {
+    width: 50%;
+    height: 100%;
     border: solid 2px var(--prusianblue);
     border-bottom: solid 8px var(--prusianbluelight);
     border-radius: 0px 0px 30px 0px;
     margin-left: 1px;
     background-color: var(--selectiveyellow);
-    /* background-image: url('./img/unlock.webp');
-    background-repeat: no-repeat;
-    background-size: 80px;
-    opacity: .8; */
+}
+
+.character-skills {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.character-skills:last-child {
+    flex-direction: row-reverse;
+}
+.character-skills img {
+    height: 100%;
+}
+
+.character-skills p {
+    text-align: center;
+    padding: 5px;
 }
 
 
@@ -1044,11 +1072,26 @@ q
     #engine-card-stats-value {
         border-radius: 0px 20px 0px 0px;
     }
-    
-    .skills p {
+
+    .unlock-info p:first-child {
         background-size: auto;
-        font-size: 1.5rem;
     }
+    .unlock-info p:last-child {
+        font-size: 1.6rem;
+    }
+    .character-skills img {
+        width: 40%;
+        height: auto;
+    }
+    .character-skills,  .character-skills:last-child  {
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    .character-skills p {
+        font-size: 1.3rem;
+        padding: 10px;
+    }
+    
 }
 
 

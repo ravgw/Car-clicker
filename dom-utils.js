@@ -151,19 +151,31 @@ export const createHomeBoard = function (array1, array2)  {
 
     const skill1 = document.createElement('div')
     skill1.id = 'skill-1'
-    const img = document.createElement('img')
-    img.src = './img/unlock.webp'
+    skill1.classList.add('skills')
+    const unlockContainer = document.createElement('div')
+    unlockContainer.id = 'unlock-info-1'
+    unlockContainer.classList.add('unlock-info')
+    const img = document.createElement('p')
+    unlockContainer.appendChild(img)
     const info = document.createElement('p')
     info.innerText = 'Upgrade character to unlock'
-    skill1.appendChild(info)
-    skill1.classList.add('skills')
+    unlockContainer.appendChild(info)
+    
+    skill1.appendChild(unlockContainer)
     
     const skill2 = document.createElement('div')
     skill2.id = 'skill-2'
+    skill2.classList.add('skills')
+    const unlockContainer2 = document.createElement('div')
+    unlockContainer2.id = 'unlock-info-2'
+    unlockContainer2.classList.add('unlock-info')
+    const img2 = document.createElement('p')
+    unlockContainer2.appendChild(img2)
     const info2 = document.createElement('p')
     info2.innerText = 'Upgrade character to unlock'
-    skill2.appendChild(info2)
-    skill2.classList.add('skills')
+    unlockContainer2.appendChild(info2)
+    
+    skill2.appendChild(unlockContainer2)
 
     homeSkillsContainer.appendChild(skill1)
     homeSkillsContainer.appendChild(skill2)
@@ -171,12 +183,21 @@ export const createHomeBoard = function (array1, array2)  {
 } 
 
 export const activeSkill = function (character) {
+
+  const remove = document.querySelector(`${character.skillId} .unlock-info`)
+  remove.style.display = 'none'
+
   const container = document.querySelector(character.skillId)
+  container.classList.add('character-skills')
 
   const img = document.createElement('img')
   img.src = character.img
 
+  const description = document.createElement('p')
+  description.innerText = character.skillDescription
+
   container.appendChild(img)
+  container.appendChild(description)
 }
 
 const createCard = function (improvments, action) {

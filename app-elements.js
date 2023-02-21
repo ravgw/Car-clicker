@@ -178,8 +178,11 @@ export const driver = {
     name: 'Jurek',
     type: 'driver',
     bought: false,
-    skill: false,
+    addSkill: false,
     skillId: '#skill-1',
+    skillLoading: 10,
+    skillAvailability: true,
+    skillDescription: `Gain x2 speed`,
     level: 1,
     subLevel: 0,
     value: 1,
@@ -200,17 +203,39 @@ export const driver = {
         const x = (this.value + .05)
         this.value = x
 
-        if (this.level === 2) {
-            this.skill = true
+        if (this.level === 2 && this.subLevel === 0) {
+            this.addSkill = true
+        } else {
+            this.addSkill = false
         }
     },
+    skillTimer: function () {
+        this.skillAvailability = false
+        const timer = function () {
+        if (driver.skillLoading >= 1) {
+            setTimeout(()=>{
+                driver.skillLoading--
+                console.log(driver.skillLoading)
+                timer()
+            },1000)
+        } else if (driver.skillLoading === 0) {
+            driver.skillAvailability = true
+            driver.skillLoading = 10
+            console.log(driver.skillAvailability + 'DSA')
+        }
+        }
+        timer()
+        }
     }
 export const teamPrincipal = {
     name: 'Mateusz',
     type: 'teamPrincipal',
     bought: false,
-    skill: false,
+    addSkill: false,
     skillId: '#skill-2',
+    skillLoading: 10,
+    skillAvailability: true,
+    skillDescription: `Speed up time x4`,
     level: 1,
     subLevel: 0,
     value: 1,
@@ -231,10 +256,29 @@ export const teamPrincipal = {
         const x = (this.value + .5)
         this.value = x
 
-        if (this.level === 2) {
-            this.skill = true
+        if (this.level === 2 && this.subLevel === 0) {
+            this.addSkill = true
+        } else {
+            this.addSkill = false
         }
     },
+    skillTimer: function () {
+        this.skillAvailability = false
+        const timer = function () {
+        if (teamPrincipal.skillLoading >= 1) {
+            setTimeout(()=>{
+                teamPrincipal.skillLoading--
+                console.log(teamPrincipal.skillLoading)
+                timer()
+            },1000)
+        } else if (teamPrincipal.skillLoading === 0) {
+            teamPrincipal.skillAvailability = true
+            teamPrincipal.skillLoading = 10
+            console.log(teamPrincipal.skillAvailability + 'DSA')
+        }
+        }
+        timer()
+        }
 }
 
 

@@ -6,7 +6,7 @@ createCarBackground();
 
 
 
-
+const speed = document.getElementById('speed')
 const counter = document.getElementById('money')
 const clicker = document.getElementById('clicker')
 
@@ -21,9 +21,13 @@ let checkTeamPrincipal = false
 
 const player = {
     actualCoins: 150000,
+    speed: 0,
+    speedBooster: 0,
     actualSpeed: 0,
     driver: false,
+    driverSkill: true,
     teamPrincipal: false,
+    teamPrincipalSkill: true,
     autoCoins: function () {
         const bonusSpeed = driver.value
         const tpBonus = teamPrincipal.value
@@ -70,12 +74,12 @@ clicker.addEventListener('click', (e) => {
     numbersAdjust(player.actualCoins, counter)
 })
 
-const speed = function () {
-    const container = document.getElementById('speed');
-    container.textContent = `${player.actualSpeed} km/h`
+const speedAdjust = function () {
+    player.actualSpeed = player.speed + player.speedBooster
+    speed.textContent = `${player.actualSpeed} km/h`
 }
 
-speed();
+speedAdjust();
 
 const bolidElement = document.getElementById('bolid-navigation')
 bolidElement.addEventListener('click', (e) => {
@@ -272,7 +276,7 @@ const buyCharacter = function (object) {
             player[`${character}`] = 'true'
             player.spendCoins(object.cost)
             createCharacter(character, object, upgrade)
-            if (player.teamPrincipal){
+            if (character === 'teamPrincipal'){
                 startAutoClick()
             }
             if (character === 'driver') {
@@ -285,23 +289,27 @@ const buyCharacter = function (object) {
 }
 
 const upgrade = function (object) {
+    
     const displayCost = document.getElementById(`${object.type}-price`)
+    const displayLvl = document.getElementById(`${object.type}Lvl`)
+
+
     if(verifyCoinnsAmount(object)) {
-        player.spendCoins(object.cost)
         object.upgrade()
-        document.getElementById(`${object.type}Lvl`).innerText = 'Lvl. ' + object.level
         numbersAdjust(object.cost, displayCost)
         countMultiplierSpeed()
-            if(object.skill === true) {
-                unlockSkill(object)
-                const skill = document.querySelector(object.skillId)
-                skill.addEventListener('click',() => {
-                    boostAutoClick()
-                })
-            }
+
+        player.spendCoins(object.cost)
+        displayLvl.innerText = 'Lvl. ' + object.level
+
+        if(object.addSkill) {
+            unlockSkill(object)
+        }
+
     } else { 
         console.log('not enaugh money - upgrade')
     }
+
 }
 
 const verifyCoinnsAmount = function (object) {
@@ -350,12 +358,33 @@ const numbersAdjust = function (toAdjust, target) {
     }
 }
 
-let timerClick;
+// --------------------------------------------------- SKILLS
+const unlockSkill = function (character) {
+    activeSkill(character)
+
+    const skill = document.querySelector(character.skillId)
+    skill.addEventListener('click',() => {
+        if (character.type === 'teamPrincipal') {
+            if(character.skillAvailability){
+                boostAutoClick()
+                character.skillTimer()
+            }
+        }
+        if (character.type === 'driver') {
+            if(character.skillAvailability){
+                boostSpeed()
+                character.skillTimer()
+            }
+        }
+    })
+}
+
+let clickTimer;
 let timerOn = 0;
 
 const autoClick = function () {
     player.autoCoins()
-    timerClick = setTimeout(autoClick, 1000)
+    clickTimer = setTimeout(autoClick, 1000)
 }
 
 const startAutoClick = () => {
@@ -363,14 +392,28 @@ const startAutoClick = () => {
 }
 
 const stopAutoClick = () => {
-    clearTimeout(timerClick)
+    clearTimeout(clickTimer)
+}
+
+const boostSpeed = () => {
+
+    // const actualSpeed = player.actualSpeed
+    player.speedBooster = player.actualSpeed
+    console.log('start speed')
+    speedAdjust()
+    setTimeout( () => {
+        player.speedBooster = 0
+        speedAdjust()
+        console.log('stop--speed')
+    },1000)
 }
 
 const boostAutoClick = () => {
+
     stopAutoClick()
-    const boost = function () {
+    const boost = function (callback) {
         player.autoCoins()
-        timerClick = setTimeout(boost, 500)
+        clickTimer = setTimeout(boost, 250)
     }
     const stopBoost = function () {
         setTimeout(() => {
@@ -381,15 +424,15 @@ const boostAutoClick = () => {
     boost()
     stopBoost()
 }
-
+// ------------------------------------------------- END SKILLS
 const countMultiplierSpeed = function () {
     let multiplier = 0
     for ( let i = 0; i < bolidParts.length; i++){
         const x = bolidParts[i]
         multiplier = multiplier + x.value
     }
-    player.actualSpeed = multiplier
-    document.getElementById('speed').innerText = `${player.actualSpeed} km/h`
+    player.speed = multiplier
+    speedAdjust()
 }
 countMultiplierSpeed();
 createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
@@ -479,8 +522,3 @@ const styleActive = function (activeNavigation) {
 styleActive('menuHome')
 
 
-const unlockSkill = function (character) {
-    const container = document.querySelector(character.skillId)
-    container.firstChild.style = 'display: none'
-    activeSkill(character)
-}
