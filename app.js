@@ -36,8 +36,6 @@ const player = {
         numbersAdjust(stats.totalCoins, totalValueStats)
         stats.perSec = perSec
         numbersAdjust(stats.perSec, perSecStats)
-
-        console.log('1-2-3')
     },
     addCoins: function () {
         const tpBonus = teamPrincipal.value
@@ -268,14 +266,14 @@ homeElement.addEventListener('click', (e) => {
 })
 
 const buyCharacter = function (object) {
-    let character = object.type
+    const character = object.type
     if (!object.bought) {
         if(player.actualCoins >= object.cost) {
             player[`${character}`] = 'true'
             player.spendCoins(object.cost)
             createCharacter(character, object, upgrade)
             if (player.teamPrincipal){
-                autoClick()
+                startAutoClick()
             }
             if (character === 'driver') {
                 driver.value = 1.05
@@ -296,6 +294,10 @@ const upgrade = function (object) {
         countMultiplierSpeed()
             if(object.skill === true) {
                 unlockSkill(object)
+                const skill = document.querySelector(object.skillId)
+                skill.addEventListener('click',() => {
+                    boostAutoClick()
+                })
             }
     } else { 
         console.log('not enaugh money - upgrade')
@@ -348,11 +350,36 @@ const numbersAdjust = function (toAdjust, target) {
     }
 }
 
+let timerClick;
+let timerOn = 0;
+
 const autoClick = function () {
-    setTimeout(() => {
+    player.autoCoins()
+    timerClick = setTimeout(autoClick, 1000)
+}
+
+const startAutoClick = () => {
+    autoClick()
+}
+
+const stopAutoClick = () => {
+    clearTimeout(timerClick)
+}
+
+const boostAutoClick = () => {
+    stopAutoClick()
+    const boost = function () {
         player.autoCoins()
-        autoClick()
-    }, 1000)
+        timerClick = setTimeout(boost, 500)
+    }
+    const stopBoost = function () {
+        setTimeout(() => {
+            stopAutoClick()
+            startAutoClick()
+        }, 30*1000)
+    }
+    boost()
+    stopBoost()
 }
 
 const countMultiplierSpeed = function () {

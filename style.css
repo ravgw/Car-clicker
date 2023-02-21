@@ -952,6 +952,10 @@ q
     opacity: .8;
 }
 
+.skills img {
+    width: 40%
+}
+
 #skill-1 {
     border: solid 2px var(--prusianblue);
     border-bottom: solid 8px var(--prusianbluelight);
