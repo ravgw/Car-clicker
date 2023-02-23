@@ -194,6 +194,7 @@ export const activeSkill = function (character) {
   img.src = character.img
 
   const description = document.createElement('p')
+  description.id = `skill-info-${character.type}`
   description.innerText = character.skillDescription
 
   container.appendChild(img)

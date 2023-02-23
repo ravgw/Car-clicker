@@ -112,11 +112,11 @@ bolidElement.addEventListener('click', (e) => {
 
     if(bolidMenu) {
         showElements('bolid-options')
-        styleActive('menuBolid')
+        activeStyleNavigation('menuBolid')
     } else {
         bolidMenu = true
         createCardNavigation('bolid-options', 'Driver', 'Parts')
-        styleActive('menuBolid')
+        activeStyleNavigation('menuBolid')
     }
         const partsCard = document.getElementById('Parts-option')
         partsCard.addEventListener('click', (e) =>{
@@ -190,11 +190,11 @@ garageElement.addEventListener('click', (e) => {
         
         if(garageMenu) {
             showElements('garage-options')
-            styleActive('menuGarage')
+            activeStyleNavigation('menuGarage')
         } else {
             garageMenu = true
             createCardNavigation('garage-options','TeamPrincipal', 'Facilities' )
-            styleActive('menuGarage')
+            activeStyleNavigation('menuGarage')
         }
         
         const facilitiesCard = document.getElementById('Facilities-option')
@@ -245,7 +245,7 @@ homeElement.addEventListener('click', (e) => {
 
     if(!homeBoard) {
         showElements('homeBoard')
-        styleActive('menuHome')
+        activeStyleNavigation('menuHome')
         homeBoard = true
     }
 
@@ -367,16 +367,40 @@ const unlockSkill = function (character) {
         if (character.type === 'teamPrincipal') {
             if(character.skillAvailability){
                 boostAutoClick()
+                activateSkill(character)
                 character.skillTimer()
             }
         }
         if (character.type === 'driver') {
             if(character.skillAvailability){
                 boostSpeed()
+                activateSkill(character)
                 character.skillTimer()
             }
         }
     })
+}
+
+const activateSkill = function (character) {
+
+    const displayCounter = document.querySelector(`#skill-info-${character.type}`)
+    displayCounter.classList.add('animDuration')
+    let counter = character.skillDuration
+    
+    const timer = function () {
+        displayCounter.textContent = counter
+        counter--
+        setTimeout( () => {
+            if (counter >= 0) {
+                timer()
+            } else {
+                displayCounter.classList.remove('animDuration')
+            }
+        },1000)
+    }
+
+    timer()
+
 }
 
 let clickTimer;
@@ -446,7 +470,7 @@ perClickStats.innerText = `${stats.perClick} \u2234`
 
 
 
-const styleActive = function (activeNavigation) {
+const activeStyleNavigation = function (activeNavigation) {
     let menu = activeNavigation
 
     const speed = document.querySelector('#speed')
@@ -519,6 +543,8 @@ const styleActive = function (activeNavigation) {
     if (menu == 'menuHome') {homeActive()}
     if (menu == 'menuGarage') {garageActive()}
 }
-styleActive('menuHome')
+activeStyleNavigation('menuHome')
+
+
 
 
