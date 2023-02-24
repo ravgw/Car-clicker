@@ -393,9 +393,6 @@ const activateSkill = function (character) {
         setTimeout( () => {
             if (counter > 0) {
                 timer()
-            } else {
-                displayCounter.classList.remove('anim-skill-duration')
-                displayCounter.textContent = character.skillDescription
             }
         },1000)
     }

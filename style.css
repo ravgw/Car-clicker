@@ -1,11 +1,13 @@
 :root {
-    --light: rgb(250,250,250);
+    --light: rgb(209, 238, 252);
+    --black: rgb(4,4,4);
     --fireengine: rgb(226, 60, 71);
     --steelblue: rgb(63, 136, 197);
     --selectiveyellow: rgb(255, 186, 8);
     --prusianblue: rgb(28, 49, 68);
     --prusianbluelight: rgb(34, 59, 82);
     --slategray: rgb(113, 131, 152);
+    --spacecadet: rgb(45, 48, 71);
     --body: rgb(88, 134, 175)
 }
 
@@ -71,7 +73,7 @@ body {
     width: 100%;
     align-items: center;
     height: calc(100% - 296px);
-    background: var(--slategray);
+    background: var(--spacecadet);
     padding: 5px;
     padding-top: 0px;
 }
@@ -165,7 +167,7 @@ body {
     width: 1600px;
     height: 1600px;
     border-radius: 50%;
-    background: #58534F;
+    background: var(--spacecadet);
     border-top: 10px solid #fff;
     animation: kerbs 20s infinite linear;
 }
@@ -441,7 +443,7 @@ body {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    background: #58534F;
+    background: var(--spacecadet);
     padding: 2px 10px 0px 10px;
 }
 
@@ -450,7 +452,7 @@ body {
     justify-content: center;
     width: 49%;
     height: 30px;
-    color: var(--prusianblue);
+    color: var(--spacecadet);
     font-weight: 700;
     background: var(--steelblue);
     border: 3px solid var(--prusianblue);
@@ -581,7 +583,7 @@ body {
     cursor: grab;
     width: 85%;
     height: 100%;
-    border-radius: 30px 10px;
+    border-radius: 25px 5px;
     font-size: 1rem;
     display: block;
     text-align: center;
@@ -589,23 +591,22 @@ body {
   }
 
   
-  .bolid-slider {
-    background: #ccffcc;
+.bolid-slider {
+    background: var(--steelblue);
+  }
+.garage-slider {
+    background: var(--steelblue);
   }
 
-  .garage-slider {
-    background: #99e6ff;
-  }
-
-  #driver .card {
-    background: var(--beige);
+#driver .card {
+    background: var(--steelblue);
     cursor: default;
     animation: fadeIn .3s;
 }
 
 #teamPrincipal .card {
+    background: var(--steelblue);
     cursor: default;
-    background: #99e6ff;
     animation: fadeIn .3s;
   }
 
@@ -639,24 +640,44 @@ body {
 }
 
 #driver .card, .bolid-element-slider .card {
-    border: 4px solid var(--darkorange);
+    color: var(--spacecadet);
+    border: 4px solid var(--fireengine);
 }
 
 #teamPrincipal .card, .garage-element-slider .card {
-    border: 4px solid #2565be;
+    color: var(--spacecadet);
+    border: 4px solid var(--selectiveyellow);
 }
+
+.bolid-slider .upgrade p, .bolid-slider .card-title p {  
+    width: 90%;
+    color: var(--light);
+    font-weight: 700;
+    background: var(--fireengine);
+}
+
+.garage-slider .upgrade p, .garage-slider .card-title p {  
+    width: 80%;
+    color: var(--spacecadet);
+    font-weight: 700;
+    background: var(--selectiveyellow);
+}
+
 
 .cardMainContent {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 85%;
-    height: 50%;
-    background: #aaaaaa6b;
+    width: 96%;
+    height: 60%;
+    padding: .5em;
+    background: var(--steelblue);
     overflow: hidden;
-    border: 4px solid #676767a3;
-    border-radius: 20px 10px;
+    /* border-left: 10px solid var(--steelblue); */
+    /* border-right: 10px solid var(--steelblue); */
+    /* border-radius: 10px 10px; */
+    color: var(--light);
 }
 
 .card img {
@@ -666,36 +687,21 @@ body {
 .upgrade, .card-title {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     width: 100%;
-    height: 25%;
+    height: 30%;
 }
 
 .upgrade {
     align-items: flex-end;
 }
 
-.bolid-slider .upgrade p, .bolid-slider .card-title p {  
-    width: 80%;
-    color: #fff;
-    font-weight: 700;
-    background: #a2be25;
-}
-
-.garage-slider .upgrade p, .garage-slider .card-title p {  
-    width: 80%;
-    color: #fff;
-    font-weight: 700;
-    background: #2565be;
-}
-
-
 .upgrade p {
-    border-radius: 5px 0px 0px 12px;
+    border-radius: 0px 0px 0px 15px;
 }
 
 .card-title p {
-    border-radius: 0px 5px 12px 0px;
+    border-radius: 0px 15px 0px 0px;
 }
 
 .sub-lvl-container {
@@ -742,10 +748,12 @@ q
 .card-content h1 {
     width: 100%;
     font-size: 1.4em;
+    border-bottom: 2px solid var(--prusianblue);
 }
 .card-content h2 {
     width: 100%;
     font-size: 1.1em;
+    border-top: 2px solid var(--prusianblue);
 }
 
 /* unlock cards */
@@ -760,12 +768,6 @@ q
 #unlock-driver p, #unlock-teamPrincipal p {
     font-size: 2.5em;
     font-weight: 700;
-}
-#unlock-driver {
-    color: var(--darkorange);
-}
-#unlock-teamPrincipal{
-    color: #2565be;
 }
 
 /* character cards */
@@ -848,11 +850,10 @@ q
     border: solid 3px var(--prusianblue);
     border-bottom: double 4px var(--prusianbluelight);
     border-left: double 6px var(--prusianblue);
-    color: var(--prusianblue);
+    color: var(--spacecadet);
     font-weight: 700;
     overflow: hidden;
     background: var(--steelblue);
-        /* background: var(--prusianblue); */
 }
 
 #Total-counter-value, #PS-counter-value, #PC-counter-value {
@@ -869,15 +870,16 @@ q
     border-radius: 0px 20px 0px 0px;
 }
 #home-stats-container {
-    height: 60%;
+    height: 55%;
     width: 97%;
+    padding: .5em;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    /* background: var(--steelblue);
-    border: solid 3px var(--prusianblue);
-    border-bottom: solid 6px var(--prusianbluelight);
-    border-left: double 7px var(--prusianbluelight); */
+    background: var(--steelblue);
+    border: 2px solid var(--prusianblue);
+    border-bottom: 6px double var(--prusianblue);
+    border-left: 6px double var(--prusianblue);
 }
 
 #stats-cards-container {
@@ -893,11 +895,12 @@ q
     justify-content: space-between;
     text-align: center;
     overflow: hidden;
-    color: var(--prusianblue);
-    font-weight: 700;
+    color: var(--spacecadet);
+    font-weight: 500;
 }   
 .stats-card-value {
     min-width: 25%;
+    color: var(--black);
 }
 
 #sponsors-card-stats-value {
@@ -949,10 +952,10 @@ q
     display: flex;
     width: 100%;
     height: 100%;
+    opacity: .6;
     background-image: url('./img/unlock.webp');
     background-repeat: no-repeat;
     background-size: 80px;
-    opacity: .6;
 }
 
 .unlock-info p:last-child {
@@ -1090,6 +1093,8 @@ q
     #home-stats-container {
         flex-direction: column;
         align-items: center;
+        background: transparent;
+        border: none;
     }
     
     #stats-cards-container {
@@ -1121,7 +1126,7 @@ q
     }
 
     .unlock-info p:first-child {
-        background-size: auto;
+        background-size: 100%;
     }
     .unlock-info p:last-child {
         font-size: 1.6rem;
@@ -1186,23 +1191,10 @@ q
 
 @keyframes anim-duration {
     0% {
-        /* rotate: 180deg; */
         font-size: 1em;
-        /* border-width: 0px; */
     }
     100% {
         font-size: 3em;
-        background: var(--selectiveyellow);
-        /* rotate: 0deg */
-        /* border-width: 0px; */
-    }
-}
 
-@keyframes animDuration-background {
-    0%{
-        background-size: 100%;
-    }
-    100% {
-        background-size: 0%;
     }
 }
