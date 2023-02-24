@@ -179,7 +179,7 @@ export const driver = {
     type: 'driver',
     bought: false,
     addSkill: false,
-    skillDuration: 30,
+    skillDuration: 5,
     skillId: '#skill-1',
     skillLoading: 10,
     skillAvailability: true,

@@ -383,18 +383,19 @@ const unlockSkill = function (character) {
 
 const activateSkill = function (character) {
 
-    const displayCounter = document.querySelector(`#skill-info-${character.type}`)
-    displayCounter.classList.add('animDuration')
     let counter = character.skillDuration
+    const displayCounter = document.querySelector(`#skill-info-${character.type}`)
+    displayCounter.classList.add('anim-skill-duration')
     
     const timer = function () {
         displayCounter.textContent = counter
         counter--
         setTimeout( () => {
-            if (counter >= 0) {
+            if (counter > 0) {
                 timer()
             } else {
-                displayCounter.classList.remove('animDuration')
+                displayCounter.classList.remove('anim-skill-duration')
+                displayCounter.textContent = character.skillDescription
             }
         },1000)
     }

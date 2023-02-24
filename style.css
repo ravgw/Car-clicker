@@ -38,7 +38,7 @@ body {
     width: 100%;
     height: 100%;
     max-width: 1000px;
-    min-height: 635px;
+    min-height: 550px;
     max-height: 1000px;
     background: rgb(104, 176, 252);
     background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
@@ -994,7 +994,7 @@ q
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
 }
 .character-skills:last-child {
@@ -1009,14 +1009,50 @@ q
     padding: 5px;
 }
 
-#skill-info-driver, #skill-info-teamPrincipal {
+.skill-info-bcg {
+    position: relative;
     display: flex;
-    height: 100%;
-    width: 100%;
-    border: solid 1px #000;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    width: 50%;
     justify-content: center;
     align-items: center;
     font-weight: 700;
+}
+.skill-info-bcg::before{
+    content: '';
+    width: 90%;
+    height: 90%;
+    border-width: 0px 5px;
+    border-style: solid;
+    border-color: inherit;
+    border-radius: 50%;
+    animation: skill-bcg-anim 3s infinite;
+}
+#skill-1 .skill-info-bcg {
+    border-color: var(--selectiveyellow);
+}
+#skill-2 .skill-info-bcg {
+    border-color: var(--fireengine);
+}
+
+#skill-info-driver, #skill-info-teamPrincipal {
+    position: absolute; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes skill-bcg-anim {
+    0% {
+        rotate: 0deg;
+    }
+    25% {
+        rotate: 0deg;
+    }
+    100% {
+        rotate: 720deg;
+    }
 }
 
 
@@ -1095,7 +1131,7 @@ q
         height: auto;
     }
     .character-skills,  .character-skills:last-child  {
-        justify-content: space-between;
+        /* justify-content: space-between; */
         align-items: flex-end;
     }
     .character-skills p {
@@ -1140,15 +1176,33 @@ q
 }
 
 
-.animDuration {
-    animation: animDuration 1s infinite;
+.anim-skill-duration {
+    animation: anim-duration 1s infinite;
 }
- 
-@keyframes animDuration {
+
+.anim-skill-bcg {
+    background: var(--selectiveyellow); 
+} 
+
+@keyframes anim-duration {
     0% {
+        /* rotate: 180deg; */
         font-size: 1em;
+        /* border-width: 0px; */
     }
     100% {
-        font-size: 2em;
+        font-size: 3em;
+        background: var(--selectiveyellow);
+        /* rotate: 0deg */
+        /* border-width: 0px; */
+    }
+}
+
+@keyframes animDuration-background {
+    0%{
+        background-size: 100%;
+    }
+    100% {
+        background-size: 0%;
     }
 }

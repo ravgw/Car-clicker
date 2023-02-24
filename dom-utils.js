@@ -184,8 +184,9 @@ export const createHomeBoard = function (array1, array2)  {
 
 export const activeSkill = function (character) {
 
-  const remove = document.querySelector(`${character.skillId} .unlock-info`)
-  remove.style.display = 'none'
+  const unuse = document.querySelector(`${character.skillId} .unlock-info`)
+  unuse.remove()
+  
 
   const container = document.querySelector(character.skillId)
   container.classList.add('character-skills')
@@ -193,12 +194,15 @@ export const activeSkill = function (character) {
   const img = document.createElement('img')
   img.src = character.img
 
+  const bcgAnimation = document.createElement('div')
+  bcgAnimation.classList.add('skill-info-bcg')
   const description = document.createElement('p')
   description.id = `skill-info-${character.type}`
   description.innerText = character.skillDescription
 
   container.appendChild(img)
-  container.appendChild(description)
+  container.appendChild(bcgAnimation)
+  bcgAnimation.appendChild(description)
 }
 
 const createCard = function (improvments, action) {
