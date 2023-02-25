@@ -620,7 +620,7 @@ body {
 }
 
 .showMeHowToSlide {
-    animation: showMeHowToSlideA 2s;
+    animation: showMeHowToSlideA 1.5s;
 }
 
 @keyframes showMeHowToSlideA {
@@ -630,7 +630,7 @@ body {
     }
     
     50% {
-        scale: .7;
+        /* scale: .7; */
         transform: translateX(-1000px);
     }
     100% {
@@ -674,14 +674,18 @@ body {
     padding: .5em;
     background: var(--steelblue);
     overflow: hidden;
-    /* border-left: 10px solid var(--steelblue); */
-    /* border-right: 10px solid var(--steelblue); */
-    /* border-radius: 10px 10px; */
     color: var(--light);
 }
 
 .card img {
-    height: 50%;
+    height: 60%;
+    border: 2px solid var(--light);
+    border-radius: 5px;
+    /* border-left: 6px double var(--light);
+    border-bottom: 8px double var(--light);
+    border-radius: 0px 0px 0px 15px; */
+    padding: .5em;
+    pointer-events: none;
 }
 
 .upgrade, .card-title {
@@ -694,6 +698,18 @@ body {
 
 .upgrade {
     align-items: flex-end;
+    font-size: 1.2em;
+}
+
+.upgrade h2 {
+    color: var(--spacecadet);
+    font-size: 1.2em;
+    letter-spacing: 0em;
+    transition: color .3s, letter-spacing .3s;
+}
+.upgrade h2:hover {
+    letter-spacing: .3em;
+    color: var(--light);
 }
 
 .upgrade p {
@@ -716,22 +732,19 @@ body {
     height: 10px;
     display: flex;
     justify-content: space-around;
-    width: 33%;
-    border-radius: 5px 10px 0px 12px;
+    width: 10%;
+    border-radius: 10px 10px 10px 10px;
 }
 
-#driver .sub-lvl {
-    border: solid 1px #a2be25;
+.sub-lvl  {
+    border: solid 2px var(--spacecadet);
 }
-#teamPrincipal .sub-lvl {
-    border: solid 1px #2565be;
-}
-q
+
 #driver .sub-lvl-bck {
-    background: #c7ee19;
+    background: var(--fireengine);
 }
 #teamPrincipal .sub-lvl-bck {
-    background: #2f7ff0;
+    background: var(--selectiveyellow);
 }
 
 .description {
@@ -747,12 +760,12 @@ q
 
 .card-content h1 {
     width: 100%;
-    font-size: 1.4em;
+    font-size: 1.6em;
     border-bottom: 2px solid var(--prusianblue);
 }
 .card-content h2 {
     width: 100%;
-    font-size: 1.1em;
+    font-size: 1.2em;
     border-top: 2px solid var(--prusianblue);
 }
 
@@ -763,53 +776,67 @@ q
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-}
-
-#unlock-driver p, #unlock-teamPrincipal p {
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: 700;
 }
+#unlock-driver img, #unlock-teamPrincipal img{
+    border: none;
+}
+
 
 /* character cards */
+#teamPrincipal-character-card img, #driver-character-card img{
+    padding: 0px;
+    border-radius: 10px;
+    border-color: var(--spacecadet);
+}
 
 #teamPrincipal-character-card .card-title p,
 #driver-character-card .card-title p {
     width: 100%;
-    color: #fff;
     font-weight: 700;
     border-radius: 0px;
 }
 
 #driver-character-card .card-title p {
-    background: #a2be25;
+    background: var(--fireengine);
 }
 
 #teamPrincipal-character-card .card-title p {
-    background: #2565be;
+    background: var(--selectiveyellow);
 }
 
 .character-upgrade {
+    height: 15%;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#teamPrincipal-character-card .character-upgrade h1 {
-    width: 60%;
-    background: #2565be;
-    border-radius: 0px 40px 0px 0px;
-    font-size: 1.1em;
-    font-weight: 300;
+#teamPrincipal-character-card .character-upgrade h1, #driver-character-card .character-upgrade h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 50%;
+    border-radius: 0px 20px 0px 0px;
+    font-size: 1.5em;
+    font-weight: 500;
     cursor: pointer;
+    border: none;
+    transition: width .3s;
+}
+
+#teamPrincipal-character-card .character-upgrade h1:hover , #driver-character-card .character-upgrade h1:hover {
+    width: 100%;
+    border-radius: 0px;
+}
+#teamPrincipal-character-card .character-upgrade h1 {
+    background: var(--selectiveyellow);
 }
 #driver-character-card .character-upgrade h1{
-    width: 60%;
-    background: #a2be25;
-    border-radius: 0px 40px 0px 0px;
-    font-size: 1.1em;
-    font-weight: 300;
-    cursor: pointer;
+    background: var(--fireengine);
 }
 
 #teamPrincipal-character-card .character-upgrade p {
