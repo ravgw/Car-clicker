@@ -297,11 +297,33 @@ export const createCharacterCard = function (category) {
     
 }
 
+const grabbingAnimation = function (element) {
+
+  function addGrab () {
+    element.classList.add('grabbing')
+  }
+  function removeGrab () {
+    element.classList.remove('grabbing')
+  }
+
+  element.addEventListener('touchstart', addGrab)
+  element.addEventListener('touchend',removeGrab)
+  element.addEventListener('touchmove', removeGrab)
+  // mouse events
+  element.addEventListener('mousedown', addGrab)
+  element.addEventListener('mouseup', removeGrab)
+  // element.addEventListener('mousemove', touchMove)
+  element.addEventListener('mouseleave', removeGrab)
+
+  
+}
+
 export const createUnlockCharacter = function (object, action) {
   const container = document.getElementById(object.type)
   
   const card = document.createElement('div')
   card.id = `unlock-${object.type}`
+  grabbingAnimation(card)
   card.classList.add('card')
   card.addEventListener('click', () => {
     action(object)
@@ -331,6 +353,11 @@ export const createCharacter = function (id, object, action) {
 
   const card = document.createElement('div')
   card.id = `${id}-character-card`
+  grabbingAnimation(card)
+  card.addEventListener('click', (e) => {
+    console.log('card')
+    // action(object)
+  })
   card.classList.add('card')
   handle.appendChild(card)
   const cardContent = document.createElement('div')
@@ -377,7 +404,14 @@ export const createCharacter = function (id, object, action) {
     const upgrade = document.createElement('h1')
     upgrade.innerText = 'Upgrade'  
     upgradeContent.appendChild(upgrade)
-    upgrade.addEventListener('click', (e) => {
+
+    upgrade.addEventListener('click',
+    (e) => {
+
+      e.stopPropagation()
+      grabbingAnimation(card)
+      console.log('apgrejd')
+
 
       const paramX = object.subLevel
       action(object)
@@ -387,7 +421,12 @@ export const createCharacter = function (id, object, action) {
         subUpgrade()
       }
   
-    })
+    }
+    )
+    upgrade.addEventListener('mousedown', (e) => e.stopPropagation())
+    upgrade.addEventListener('mouseup', (e) => e.stopPropagation())
+    upgrade.addEventListener('touchstart', (e) => e.stopPropagation())
+    upgrade.addEventListener('touchend', (e) => e.stopPropagation())
     upgradeContent.appendChild(price)
 
     let subLvl = 0
@@ -466,7 +505,7 @@ export const slider = function (first , second){
       startPos = getPositionX(event)
       isDragging = true
       animationID = requestAnimationFrame(animation)
-      // slider.classList.add('grabbing')
+      sliderCon.classList.add('grabbing-slider')
     }
   }
   function touchMove(event) {
@@ -484,7 +523,7 @@ export const slider = function (first , second){
     // if moved enough positive then snap to previous slide if there is one
     if (movedBy > 100 && currentIndex > 0) currentIndex -= 1
     setPositionByIndex()
-    // slider.classList.remove('grabbing')
+    sliderCon.classList.remove('grabbing-slider')
   }
   function animation() {
     setSliderPosition()

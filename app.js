@@ -20,7 +20,7 @@ let checkTeamPrincipal = false
 
 
 const player = {
-    actualCoins: 150000,
+    actualCoins: 1353260,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,

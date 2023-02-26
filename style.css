@@ -45,6 +45,7 @@ body {
     background: rgb(104, 176, 252);
     background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
     border: 3px solid #22232e;
+    overflow: hidden;
 }
 
 #carBoard {
@@ -485,12 +486,6 @@ body {
     border-bottom: 6px double var(--prusianblue);
 }
 
-
-.navigation:hover {
-    background: #ab2124;
-}
-
-
 #home-navigation {
     background: var(--steelblue);
     color: var(--prusianblue);
@@ -588,6 +583,7 @@ body {
     display: block;
     text-align: center;
     overflow: hidden;
+    transition: scale .3s;
   }
 
   
@@ -602,13 +598,29 @@ body {
     background: var(--steelblue);
     cursor: default;
     animation: fadeIn .3s;
+    transition: scale .2s;
 }
 
 #teamPrincipal .card {
     background: var(--steelblue);
     cursor: default;
     animation: fadeIn .3s;
-  }
+    transition: scale .2s;
+}
+
+.grabbing {
+    transition: scale .2s;
+    scale: .95;
+}
+.grabbing .character-upgrade {
+    transition: scale 4s;
+    scale: 1;
+}
+
+.grabbing-slider .card{
+    transition: scale .2s;
+    scale: .95;
+}
 
 /* ----------------------------------- CARDS ELEMENTS STYLES ----------------------------------- */
 .card-content {
@@ -707,10 +719,7 @@ body {
     letter-spacing: 0em;
     transition: color .3s, letter-spacing .3s;
 }
-.upgrade h2:hover {
-    letter-spacing: .3em;
-    color: var(--light);
-}
+
 
 .upgrade p {
     border-radius: 0px 0px 0px 15px;
@@ -828,10 +837,7 @@ body {
     transition: width .3s;
 }
 
-#teamPrincipal-character-card .character-upgrade h1:hover , #driver-character-card .character-upgrade h1:hover {
-    width: 100%;
-    border-radius: 0px;
-}
+
 #teamPrincipal-character-card .character-upgrade h1 {
     background: var(--selectiveyellow);
 }
@@ -1087,6 +1093,9 @@ body {
 
 
 @media only screen and (min-width: 600px){
+    #car {
+        overflow: visible;
+    }
 
     #carBoard {
         width: 35%;
@@ -1163,14 +1172,22 @@ body {
         height: auto;
     }
     .character-skills,  .character-skills:last-child  {
-        /* justify-content: space-between; */
         align-items: flex-end;
     }
     .character-skills p {
         font-size: 1.3rem;
         padding: 10px;
     }
+
+    .upgrade h2:hover {
+        letter-spacing: .3em;
+        color: var(--light);
+    }
     
+    #teamPrincipal-character-card .character-upgrade:hover h1, #driver-character-card .character-upgrade h1:hover {
+        width: 100%;
+        border-radius: 0px;
+    }
 }
 
 
