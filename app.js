@@ -20,7 +20,7 @@ let checkTeamPrincipal = false
 
 
 const player = {
-    actualCoins: 1353260,
+    actualCoins: 0,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,
@@ -272,7 +272,7 @@ homeElement.addEventListener('click', (e) => {
 const buyCharacter = function (object) {
     const character = object.type
     if (!object.bought) {
-        if(player.actualCoins >= object.cost) {
+        if(verifyCoinnsAmount(object)) {
             player[`${character}`] = 'true'
             player.spendCoins(object.cost)
             createCharacter(character, object, upgrade)
@@ -282,8 +282,10 @@ const buyCharacter = function (object) {
             if (character === 'driver') {
                 driver.value = 1.05
             }
-        } else {
-            console.log('not enaugh money - buy character')
+        } 
+        else {
+            notEnaugh()
+            console.log('abba')
         }
     } 
 }
@@ -307,7 +309,7 @@ const upgrade = function (object) {
         }
 
     } else { 
-        console.log('not enaugh money - upgrade')
+        notEnaugh()
     }
 
 }
@@ -315,7 +317,16 @@ const upgrade = function (object) {
 const verifyCoinnsAmount = function (object) {
     if(player.actualCoins >= object.cost) {
         return true
-    }
+    } 
+    // else {
+    //    notEnaugh()
+    // }
+}
+function notEnaugh () {
+    console.log('xD')
+    counter.classList.remove('not-enaugh');
+    counter.offsetWidth;
+    counter.classList.add('not-enaugh');
 }
 
 const coinsAmount = []
