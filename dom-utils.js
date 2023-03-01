@@ -309,10 +309,10 @@ const grabbingAnimation = function (element) {
   element.addEventListener('touchstart', addGrab)
   element.addEventListener('touchend',removeGrab)
   element.addEventListener('touchmove', removeGrab)
-  // mouse events
+
   element.addEventListener('mousedown', addGrab)
   element.addEventListener('mouseup', removeGrab)
-  // element.addEventListener('mousemove', touchMove)
+
   element.addEventListener('mouseleave', removeGrab)
 
   

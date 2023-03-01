@@ -20,7 +20,7 @@ let checkTeamPrincipal = false
 
 
 const player = {
-    actualCoins: 0,
+    actualCoins: 13523470,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,
@@ -283,10 +283,10 @@ const buyCharacter = function (object) {
                 driver.value = 1.05
             }
         } 
-        else {
-            notEnaugh()
-            console.log('abba')
-        }
+        // else {
+        //     notEnaugh()
+        //     console.log('abba')
+        // }
     } 
 }
 
@@ -308,9 +308,10 @@ const upgrade = function (object) {
             unlockSkill(object)
         }
 
-    } else { 
-        notEnaugh()
-    }
+    } 
+    // else { 
+    //     notEnaugh()
+    // }
 
 }
 
@@ -318,12 +319,11 @@ const verifyCoinnsAmount = function (object) {
     if(player.actualCoins >= object.cost) {
         return true
     } 
-    // else {
-    //    notEnaugh()
-    // }
+    else {
+       notEnaugh()
+    }
 }
 function notEnaugh () {
-    console.log('xD')
     counter.classList.remove('not-enaugh');
     counter.offsetWidth;
     counter.classList.add('not-enaugh');
