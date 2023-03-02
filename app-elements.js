@@ -216,13 +216,11 @@ export const driver = {
         if (driver.skillLoading >= 1) {
             setTimeout(()=>{
                 driver.skillLoading--
-                console.log(driver.skillLoading)
                 timer()
             },1000)
         } else if (driver.skillLoading === 0) {
             driver.skillAvailability = true
             driver.skillLoading = 10
-            console.log(driver.skillAvailability + 'DSA')
         }
         }
         timer()

@@ -805,6 +805,7 @@ body {
     width: 100%;
     font-size: 1.2em;
     border-top: 2px solid var(--prusianblue);
+    cursor: pointer;
 }
 
 /* unlock cards */
@@ -1081,6 +1082,7 @@ body {
     text-align: center;
     padding: 5px;
 }
+/* ---------- SKILL INFO ------------- */
 
 .skill-info-bcg {
     position: relative;
@@ -1092,7 +1094,7 @@ body {
     align-items: center;
     font-weight: 700;
 }
-.skill-info-bcg::before{
+.skill-info-bcg::after{
     content: '';
     width: 90%;
     height: 90%;
@@ -1127,6 +1129,45 @@ body {
         rotate: 720deg;
     }
 }
+
+/* ---------- SKILL ACTIVE ----------- */
+
+.skill-activated {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 80%;
+    margin-bottom: 5%;
+}
+
+.skill-activated::before {
+    position: absolute;
+    content: '';
+    bottom: 0px;
+    left: 0px;
+    height: 10%;
+    width: 0%;
+    background-color: var(--fireengine);
+    animation: skillActivatedTimerAnimation 1s infinite;
+}
+
+@keyframes skillActivatedTimerAnimation {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
 @media only screen and (max-height: 550px){
     .cardMainContent img {
         display: none;

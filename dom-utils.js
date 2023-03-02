@@ -559,3 +559,15 @@ export const createSkillButton = function (character) {
   const skillContainer = document.createElement('div')
   skillContainer.id = `${character.name}-skill`
 }
+
+export const createSkillActivated = function (character) {
+  const container = document.querySelector(character.skillId)
+
+  const ActivatedSkillTimer = document.createElement('div')
+  ActivatedSkillTimer.classList.add('skill-activated')
+  const timer = document.createElement('p')
+  timer.textContent = 'XD'
+  timer.classList.add('anim-skill-duration')
+  container.appendChild(ActivatedSkillTimer)
+  ActivatedSkillTimer.appendChild(timer)
+}

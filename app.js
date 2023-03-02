@@ -1,4 +1,4 @@
-import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, activeSkill } from "./dom-utils.js";
+import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, activeSkill, createSkillActivated } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-elements.js"
 
 createCarClicker();
@@ -283,10 +283,6 @@ const buyCharacter = function (object) {
                 driver.value = 1.05
             }
         } 
-        // else {
-        //     notEnaugh()
-        //     console.log('abba')
-        // }
     } 
 }
 
@@ -309,9 +305,6 @@ const upgrade = function (object) {
         }
 
     } 
-    // else { 
-    //     notEnaugh()
-    // }
 
 }
 
@@ -320,10 +313,10 @@ const verifyCoinnsAmount = function (object) {
         return true
     } 
     else {
-       notEnaugh()
+       notEnaughtCoinsAnimation()
     }
 }
-function notEnaugh () {
+function notEnaughtCoinsAnimation () {
     counter.classList.remove('not-enaugh');
     counter.offsetWidth;
     counter.classList.add('not-enaugh');
@@ -393,21 +386,24 @@ const unlockSkill = function (character) {
 }
 
 const activateSkill = function (character) {
+    document.querySelector('.skill-info-bcg').style.display ='none'
+
+    createSkillActivated(character)
 
     let counter = character.skillDuration
     const displayCounter = document.querySelector(`#skill-info-${character.type}`)
-    displayCounter.classList.add('anim-skill-duration')
+    // .classList.add('anim-skill-duration')
     
     const timer = function () {
         displayCounter.textContent = counter
-        counter--
         setTimeout( () => {
-            if (counter > 0) {
+            if (counter >= 1) {
+                counter--
                 timer()
+                // console.log(displayBcg)
             }
         },1000)
     }
-
     timer()
 
 }
