@@ -743,7 +743,7 @@ body {
     color: var(--spacecadet);
     font-size: 1.2em;
     letter-spacing: 0em;
-    transition: color .3s, letter-spacing .3s;
+    transition: background .3s;
 }
 
 
@@ -1001,6 +1001,7 @@ body {
     display: flex;
     width: 100%;
     height: 25%;
+    max-height: 180px;
     padding: 5px;
 }
 
@@ -1138,7 +1139,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 50%;
-    height: 80%;
+    height: 80%; 
     margin-bottom: 5%;
 }
 
@@ -1149,9 +1150,11 @@ body {
     left: 0px;
     height: 10%;
     width: 0%;
-    background-color: var(--fireengine);
+    background-color: var(--light);
     animation: skillActivatedTimerAnimation 1s infinite;
 }
+
+
 
 @keyframes skillActivatedTimerAnimation {
     0% {
@@ -1265,8 +1268,8 @@ body {
     }
 
     .upgrade h2:hover {
-        letter-spacing: .3em;
-        color: var(--light);
+        /* letter-spacing: .3em; */
+        background: var(--selectiveyellow);
     }
     
     #teamPrincipal-character-card .character-upgrade:hover h1, #driver-character-card .character-upgrade h1:hover {
