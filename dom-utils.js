@@ -195,6 +195,7 @@ export const activeSkill = function (character) {
   img.src = character.img
 
   const bcgAnimation = document.createElement('div')
+  bcgAnimation.id = `${character.type}-skill-background`
   bcgAnimation.classList.add('skill-info-bcg')
   const description = document.createElement('p')
   description.id = `skill-info-${character.type}`
@@ -566,8 +567,7 @@ export const createSkillActivated = function (character) {
   const ActivatedSkillTimer = document.createElement('div')
   ActivatedSkillTimer.classList.add('skill-activated')
   const timer = document.createElement('p')
-  timer.textContent = 'XD'
-  timer.classList.add('anim-skill-duration')
+  timer.id = `${character.type}-skill-timer`
   container.appendChild(ActivatedSkillTimer)
   ActivatedSkillTimer.appendChild(timer)
 }

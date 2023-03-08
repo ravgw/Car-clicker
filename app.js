@@ -386,21 +386,23 @@ const unlockSkill = function (character) {
 }
 
 const activateSkill = function (character) {
-    document.querySelector('.skill-info-bcg').style.display ='none'
+    document.querySelector(`#${character.type}-skill-background`).style.display = 'none'
 
     createSkillActivated(character)
 
     let counter = character.skillDuration
-    const displayCounter = document.querySelector(`#skill-info-${character.type}`)
-    // .classList.add('anim-skill-duration')
+    const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
     
     const timer = function () {
         displayCounter.textContent = counter
         setTimeout( () => {
             if (counter >= 1) {
+                if (counter === 4) {
+                    displayCounter.classList.add('anim-skill-duration')
+                }
                 counter--
+                displayCounter.textContent = counter
                 timer()
-                // console.log(displayBcg)
             }
         },1000)
     }
@@ -453,7 +455,7 @@ const boostAutoClick = () => {
     boost()
     stopBoost()
 }
-// ------------------------------------------------- END SKILLS
+// ------------------------------------------------- END SKILLS -------------------------------------------------
 const countMultiplierSpeed = function () {
     let multiplier = 0
     for ( let i = 0; i < bolidParts.length; i++){

@@ -1141,6 +1141,7 @@ body {
     width: 50%;
     height: 80%; 
     margin-bottom: 5%;
+    font-size: 5rem;
 }
 
 .skill-activated::before {
@@ -1159,9 +1160,14 @@ body {
 @keyframes skillActivatedTimerAnimation {
     0% {
         width: 0%;
+        opacity: 1;
+    }
+    85%{
+        opacity: 1;
     }
     100% {
         width: 100%;
+        opacity: .2;
     }
 }
 
@@ -1327,7 +1333,7 @@ body {
         font-size: 1em;
     }
     100% {
-        font-size: 3em;
+        font-size: 2em;
 
     }
 }
