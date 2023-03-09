@@ -2,8 +2,10 @@
     --light: rgb(209, 238, 252);
     --black: rgb(4,4,4);
     --fireengine: rgb(226, 60, 71);
+    --fireengineTR: rgba(226, 60, 71, 0.800);
     --steelblue: rgb(63, 136, 197);
     --selectiveyellow: rgb(255, 186, 8);
+    --selectiveyellowTR: rgba(255, 185, 8, 0.800);
     --prusianblue: rgb(28, 49, 68);
     --prusianbluelight: rgb(34, 59, 82);
     --slategray: rgb(113, 131, 152);
@@ -1053,6 +1055,9 @@ body {
     border-radius: 0px 0px 0px 30px;
     margin-right: 1px;
     background-color: var(--fireengine);
+    /* background-image: url(./img/jurek.webp);
+    background-position: center;
+    background-size: cover; */
 }
 #skill-2 {
     width: 50%;
@@ -1064,115 +1069,42 @@ body {
     background-color: var(--selectiveyellow);
 }
 
-.character-skills {
+.skill-available-container {
     width: 100%;
     height: 100%;
+    /* background-position-x: 45%;
+    background-position-y: 35%; */
+    background-repeat: no-repeat;
+    background-size: 50%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.character-skills:last-child {
-    flex-direction: row-reverse;
-}
-.character-skills img {
-    height: 100%;
+    justify-content: center;
+    align-items: flex-end;
 }
 
-.character-skills p {
+.skill-available-container p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding: 5px;
-}
-/* ---------- SKILL INFO ------------- */
-
-.skill-info-bcg {
-    position: relative;
-    display: flex;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-    font-weight: 700;
-}
-.skill-info-bcg::after{
-    content: '';
-    width: 90%;
-    height: 90%;
-    border-width: 0px 5px;
-    border-style: solid;
-    border-color: inherit;
-    border-radius: 50%;
-    animation: skill-bcg-anim 3s infinite;
-}
-#skill-1 .skill-info-bcg {
-    border-color: var(--selectiveyellow);
-}
-#skill-2 .skill-info-bcg {
-    border-color: var(--fireengine);
-}
-
-#skill-info-driver, #skill-info-teamPrincipal {
-    position: absolute; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@keyframes skill-bcg-anim {
-    0% {
-        rotate: 0deg;
-    }
-    25% {
-        rotate: 0deg;
-    }
-    100% {
-        rotate: 720deg;
-    }
-}
-
-/* ---------- SKILL ACTIVE ----------- */
-
-.skill-activated {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    height: 80%; 
     margin-bottom: 5%;
-    font-size: 5rem;
+    width: 85%;
+    color: var(--black);
 }
 
-.skill-activated::before {
-    position: absolute;
-    content: '';
-    bottom: 0px;
-    left: 0px;
-    height: 10%;
-    width: 0%;
-    background-color: var(--light);
-    animation: skillActivatedTimerAnimation 1s infinite;
+#skill-1 .skill-available-container {
+    background-image: url(./img/spedometer.webp);
 }
-
-
-
-@keyframes skillActivatedTimerAnimation {
-    0% {
-        width: 0%;
-        opacity: 1;
-    }
-    85%{
-        opacity: 1;
-    }
-    100% {
-        width: 100%;
-        opacity: .2;
-    }
+#skill-1 .skill-available-container p{
+    background: var(--fireengineTR);
+    border: 2px solid var(--selectiveyellow);
 }
-
-
-
+#skill-2 .skill-available-container {
+    background-image: url(./img/stopwatch.webp);
+}
+#skill-2 .skill-available-container p{
+    background: var(--selectiveyellowTR);
+    border: 2px solid var(--fireengine);
+}
 
 
 
@@ -1283,6 +1215,10 @@ body {
         border-radius: 0px;
         cursor: pointer;
     }
+
+    .skill-available-container p {
+        font-size: 1.4em;
+    }
 }
 
 
@@ -1333,7 +1269,7 @@ body {
         font-size: 1em;
     }
     100% {
-        font-size: 2em;
+        font-size: 1.5em;
 
     }
 }

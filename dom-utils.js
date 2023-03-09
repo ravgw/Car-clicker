@@ -182,28 +182,25 @@ export const createHomeBoard = function (array1, array2)  {
   
 } 
 
-export const activeSkill = function (character) {
+export const activeSkill = function (character) { 
 
   const unuse = document.querySelector(`${character.skillId} .unlock-info`)
   unuse.remove()
   
 
-  const container = document.querySelector(character.skillId)
-  container.classList.add('character-skills')
+  const node = document.querySelector(character.skillId)
+  // node.classList.add('skills-available-container')
 
-  const img = document.createElement('img')
-  img.src = character.img
+  const container = document.createElement('div')
+  container.classList.add('skill-available-container')
+  // container.style.background = `url(${character.img})`
 
-  const bcgAnimation = document.createElement('div')
-  bcgAnimation.id = `${character.type}-skill-background`
-  bcgAnimation.classList.add('skill-info-bcg')
   const description = document.createElement('p')
   description.id = `skill-info-${character.type}`
   description.innerText = character.skillDescription
 
-  container.appendChild(img)
-  container.appendChild(bcgAnimation)
-  bcgAnimation.appendChild(description)
+  node.appendChild(container)
+  container.appendChild(description)
 }
 
 const createCard = function (improvments, action) {
