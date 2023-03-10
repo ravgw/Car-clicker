@@ -1055,9 +1055,6 @@ body {
     border-radius: 0px 0px 0px 30px;
     margin-right: 1px;
     background-color: var(--fireengine);
-    /* background-image: url(./img/jurek.webp);
-    background-position: center;
-    background-size: cover; */
 }
 #skill-2 {
     width: 50%;
@@ -1070,38 +1067,40 @@ body {
 }
 
 .skill-available-container {
+    position: relative;
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
+    background-position-x: 15%;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    opacity: .8;
+    align-items: flex-end;
 }
+
+.skill-available-container::after {
+    content: '';
+    position: absolute;
+    width: 10%;
+    aspect-ratio: 1;
+    top: -100%;
+    left: -10%;
+    border-radius: 50%;
+    border: 30px double var(--light);
+    opacity: .4;
+    animation: skillAvailable 5s infinite;
+}
+
 
 .skill-available-container p {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 65%;
-    height: 100%;
+    width: 100%;
     color: var(--black);
-    position: relative;
-}
-
-.skill-available-container p::after {
-    content: '';
-    position: absolute;
-    width: 200%;
-    aspect-ratio: 1;
-    /* top: center; */
-    /* right: center; */
-    border-radius: 50%;
-    border: 30px double var(--light);
-    opacity: .7;
-    animation: skillAvailable 3s infinite;
+    font-weight: 500;
+    border-top: 6px double var(--prusianblue);
 }
 
 #skill-1 .skill-available-container {
@@ -1109,8 +1108,6 @@ body {
 }
 #skill-1 .skill-available-container p{
     background: var(--fireengineTR);
-    border: 0px solid var(--prusianbluelight);
-    border-left-width: 5px;
     animation-delay: 1s;
 }
 #skill-2 .skill-available-container {
@@ -1118,16 +1115,19 @@ body {
 }
 #skill-2 .skill-available-container p{
     background: var(--selectiveyellowTR);
-    border: 0px solid var(--fireengine);
-    border-left-width: 5px;
 }
 
 @keyframes skillAvailable {
-    40% {
-        transform: scale(0.2);
+    0% {
+        transform: scale(.4);
+        opacity: .6;
+    }
+    45% {
+        transform: scale(10);
         opacity: 0;
     }
     100% {
+        transform: scale(10);
         opacity: 0;
     }
 }
