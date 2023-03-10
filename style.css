@@ -1072,13 +1072,12 @@ body {
 .skill-available-container {
     width: 100%;
     height: 100%;
-    /* background-position-x: 45%;
-    background-position-y: 35%; */
     background-repeat: no-repeat;
-    background-size: 50%;
+    background-size: contain;
     display: flex;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: .8;
 }
 
 .skill-available-container p {
@@ -1086,9 +1085,23 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    margin-bottom: 5%;
-    width: 85%;
+    width: 65%;
+    height: 100%;
     color: var(--black);
+    position: relative;
+}
+
+.skill-available-container p::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    aspect-ratio: 1;
+    /* top: center; */
+    /* right: center; */
+    border-radius: 50%;
+    border: 30px double var(--light);
+    opacity: .7;
+    animation: skillAvailable 3s infinite;
 }
 
 #skill-1 .skill-available-container {
@@ -1096,14 +1109,27 @@ body {
 }
 #skill-1 .skill-available-container p{
     background: var(--fireengineTR);
-    border: 2px solid var(--selectiveyellow);
+    border: 0px solid var(--prusianbluelight);
+    border-left-width: 5px;
+    animation-delay: 1s;
 }
 #skill-2 .skill-available-container {
     background-image: url(./img/stopwatch.webp);
 }
 #skill-2 .skill-available-container p{
     background: var(--selectiveyellowTR);
-    border: 2px solid var(--fireengine);
+    border: 0px solid var(--fireengine);
+    border-left-width: 5px;
+}
+
+@keyframes skillAvailable {
+    40% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 
