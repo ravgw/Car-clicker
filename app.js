@@ -386,7 +386,9 @@ const unlockSkill = function (character) {
 }
 
 const activateSkill = function (character) {
-    document.querySelector(`#${character.type}-skill-background`).style.display = 'none'
+    const hide = document.querySelector(`${character.skillId} .skill-available-container`)
+    console.log(hide)
+    hide.style.display = 'none'
 
     createSkillActivated(character)
 
