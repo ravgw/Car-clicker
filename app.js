@@ -20,7 +20,7 @@ let checkTeamPrincipal = false
 
 
 const player = {
-    actualCoins: 13523470,
+    actualCoins: 10000,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,
@@ -106,6 +106,7 @@ bolidElement.addEventListener('click', (e) => {
             createUnlockCharacter(driver, buyCharacter)
         }
     } else {
+        removeAlertCssClass()
         showElements('driver')
     }
 
@@ -121,6 +122,8 @@ bolidElement.addEventListener('click', (e) => {
         const partsCard = document.getElementById('Parts-option')
         partsCard.addEventListener('click', (e) =>{
 
+
+        removeAlertCssClass()
         driverCard.classList.remove('pushedKey')    
         partsCard.classList.add('pushedKey')  
 
@@ -200,6 +203,7 @@ garageElement.addEventListener('click', (e) => {
         const facilitiesCard = document.getElementById('Facilities-option')
         facilitiesCard.addEventListener('click', (e) =>{
 
+            removeAlertCssClass()
             TeamPrincipalCard.classList.remove('pushedKey')    
             facilitiesCard.classList.add('pushedKey')  
 
@@ -234,6 +238,7 @@ garageElement.addEventListener('click', (e) => {
                 hideElements('garage')
             }
             if(checkTeamPrincipal){
+                removeAlertCssClass()
                 showElements('teamPrincipal')
             }
         })
@@ -313,13 +318,24 @@ const verifyCoinnsAmount = function (object) {
         return true
     } 
     else {
-       notEnaughtCoinsAnimation()
+       notEnaughtCoinsAnimation(object.type)
     }
 }
-function notEnaughtCoinsAnimation () {
-    counter.classList.remove('not-enaugh');
+function notEnaughtCoinsAnimation (cardObjectname) {
+    const element = document.querySelector(`#${cardObjectname}-price`)
+
+    removeAlertCssClass()
     counter.offsetWidth;
     counter.classList.add('not-enaugh');
+    element.classList.add('upgrade-price-alert');
+}
+
+const removeAlertCssClass = function () {
+
+    const elements = document.querySelectorAll('.upgrade-price-alert')
+
+    elements.forEach((e) => e.classList.remove('upgrade-price-alert'))
+    counter.classList.remove('not-enaugh');
 }
 
 const coinsAmount = []
