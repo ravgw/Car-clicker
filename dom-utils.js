@@ -241,6 +241,11 @@ const createCard = function (improvments, action) {
       const upgrade = document.createElement('h2')
       upgrade.innerText = 'Upgrade'
       upgradeContainer.classList.add('upgrade')
+
+      upgrade.addEventListener('mousedown', (e) => e.stopPropagation())
+      upgrade.addEventListener('mouseup', (e) => e.stopPropagation())
+      upgrade.addEventListener('touchstart', (e) => e.stopPropagation())
+      upgrade.addEventListener('touchend', (e) => e.stopPropagation())
       
       const cost = document.createElement('p')
       cost.id = `${improvments.type}-price`
