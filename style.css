@@ -734,7 +734,6 @@ body {
     width: 100%;
     height: 20%;
 }
-
 .upgrade {
     align-items: flex-end;
     justify-content: space-between;
@@ -755,10 +754,16 @@ body {
     max-height: 25px;
     margin-top: 1em;
     border-radius: 0px 0px 0px 15px;
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;
+    border-color: var(--prusianbluelight);
 }
 
 .card-title p {
     border-radius: 0px 15px 0px 0px;
+    border-width: 2px 0px 0px 0px;
+    border-style: solid;
+    border-color: var(--prusianbluelight);
 }
 
 .sub-lvl-container {
@@ -896,47 +901,46 @@ body {
 
 /* upgrade alert */
 
-.upgrade-price-alert {
-    animation: upgradePriceAlert 1s;
+#garage .upgrade-price-alert {
+    animation: upgradePriceAlert .6s, priceAlertBackgroundGarage .6s;
+}
+
+#bolid .upgrade-price-alert {
+    animation: upgradePriceAlert .6s, priceAlertBackgroundParts .6s;
+}
+
+@keyframes priceAlertBackgroundGarage{
+    50%{
+        background-color: var(--fireengine);
+    }
+}
+@keyframes priceAlertBackgroundParts{
+    50%{
+        background-color: var(--slategray);
+    }
 }
 
 @keyframes upgradePriceAlert {
-    0% {
-        /* font-size: 1.2em; */
-        transform: scale(1);
-        color: var(--light);
-    }
-    10% {
-        /* font-size: 1em; */
-        transform: scale(1.2);
-        color: var(--alert);
-    }
-    20% {
-        /* font-size: 1.2em; */
-        transform: scale(1.2);
-        color: var(--light);
-    }
-    30% {
-        /* font-size: 1em; */
-        transform: scale(1.2);
-        color: var(--alert);
-    }
-    40% {
-        /* font-size: 1.2em; */
-        transform: scale(1.2);
-        color: var(--light);
-    }
-    80% {
-        /* font-size: 1.2em; */
-        transform: scale(1.2);
-        color: var(--alert);
-    }
-    100% {
-        /* font-size: 1.2em; */
-        transform: scale(1);
-        color: var(--light);
-    }
-}
+        0%{
+            transform: translateY(3px); 
+        }
+        20%{
+            transform: translateY(-3px); 
+        }
+        40%{
+            transform: translateY(3px);        
+        }
+        60%{
+            /* background-color: var(--slategray); */
+            transform: translateY(-3px); 
+        }
+        80%{
+            transform: translateY(3px);        
+        }
+        100%{
+            transform: translateY(0px);
+        }
+} 
 
 
 /* ----------------------------------- HOME ELEMENTS STYLES ----------------------------------- */

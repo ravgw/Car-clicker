@@ -257,7 +257,6 @@ const createCard = function (improvments, action) {
       upgrade.addEventListener('click', (e) => {
         action(improvments)
       })
-      
 
   return card
 }

@@ -223,6 +223,7 @@ garageElement.addEventListener('click', (e) => {
             } else {
                 garageCards = true
                 createCardElement('garage', garageFacilities, upgrade)
+                
                 slider('.garage-cards-container-slider','.garage-element-slider')
                 document.querySelector('#garage').classList.add('showMeHowToSlide')
             }
@@ -329,6 +330,7 @@ function notEnaughtCoinsAnimation (cardObjectname) {
     counter.classList.add('not-enaugh');
     element.classList.add('upgrade-price-alert');
 }
+
 
 const removeAlertCssClass = function () {
 
