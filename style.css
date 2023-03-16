@@ -748,7 +748,6 @@ body {
     transition: background .3s;
 }
 
-
 .upgrade p {
     height: 60%;
     max-height: 25px;
@@ -835,6 +834,7 @@ body {
 }
 
 
+
 /* character cards */
 #teamPrincipal-character-card, #driver-character-card{
     cursor: default;
@@ -901,6 +901,11 @@ body {
 
 /* upgrade alert */
 
+.character-upgrade .upgrade-price-alert {
+    animation: upgradePriceAlert .6s, priceAlertCharacter .6s;
+}
+
+
 #garage .upgrade-price-alert {
     animation: upgradePriceAlert .6s, priceAlertBackgroundGarage .6s;
 }
@@ -909,33 +914,53 @@ body {
     animation: upgradePriceAlert .6s, priceAlertBackgroundParts .6s;
 }
 
+@keyframes priceAlertCharacter {
+    0% {
+        color: var(--fireengine);
+    }
+    100% {
+        color: var(--fireengine);
+    }
+}
+
 @keyframes priceAlertBackgroundGarage{
-    50%{
+    0%{
         background-color: var(--fireengine);
+    }
+    80%{
+        background-color: var(--fireengine);
+    }
+    100%{
+        background-color: var(--selectiveyellow);
     }
 }
 @keyframes priceAlertBackgroundParts{
-    50%{
+    0%{
         background-color: var(--slategray);
+    }
+    80%{
+        background-color: var(--slategray);
+    }
+    100%{
+        background-color: var(--fireengine);
     }
 }
 
 @keyframes upgradePriceAlert {
         0%{
-            transform: translateY(3px); 
+            transform: translateY(4px); 
         }
         20%{
-            transform: translateY(-3px); 
+            transform: translateY(-4px); 
         }
         40%{
-            transform: translateY(3px);        
+            transform: translateY(4px);        
         }
         60%{
-            /* background-color: var(--slategray); */
-            transform: translateY(-3px); 
+            transform: translateY(-4px); 
         }
         80%{
-            transform: translateY(3px);        
+            transform: translateY(4px);
         }
         100%{
             transform: translateY(0px);
@@ -1290,9 +1315,11 @@ body {
         padding: 10px;
     }
 
-    .upgrade h2:hover {
-        /* letter-spacing: .3em; */
+    #garage .upgrade h2:hover {
         background: var(--selectiveyellow);
+    }
+    #bolid .upgrade h2:hover {
+        background: var(--fireengine);
     }
     
     #teamPrincipal-character-card .character-upgrade:hover h1, #driver-character-card .character-upgrade h1:hover {
