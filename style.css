@@ -1216,7 +1216,93 @@ body {
 
  }
 
+ #driver-skill-timer, #teamPrincipal-skill-timer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    font-size: 2.5em;
+ }
 
+ #driver-skill-timer::before {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 20%;
+    height: 35%;
+    width: 70%;
+    border-top: 5px dashed var(--selectiveyellow);
+    border-bottom: 5px double var(--selectiveyellow);
+    animation: activatedSkillSlide .8s infinite;
+ }
+ #driver-skill-timer::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 35%;
+    height: 50%;
+    width: 95%;
+    border-top: 5px solid var(--selectiveyellowTR);
+    border-bottom: 5px dotted var(--selectiveyellowTR);
+    animation: activatedSkillSlide 1s infinite;
+ }
+ #teamPrincipal-skill-timer::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    left: center;
+    height: 115%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border-color: var(--fireengine);
+    border-width: 10px;
+    border-style: double;
+    border-bottom-style: solid;
+    /* border-left-style: none; */
+    animation: activatedSkillRotateL 2s linear infinite;
+ }
+ #teamPrincipal-skill-timer::before {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    left: center;
+    height: 150%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border-color: var(--fireengineTR);
+    border-width: 20px;
+    border-style: dotted;
+    border-bottom-style: solid;
+    animation: activatedSkillRotateR 10s linear infinite;
+ }
+
+ @keyframes activatedSkillSlide {
+    0% {
+       transform: translateX(100%); 
+    }
+    100% {
+       transform: translateX(-150%); 
+    }
+ }
+ @keyframes activatedSkillRotateR {
+    0% {
+       transform: rotate(360deg); 
+    }
+    100% {
+       transform: rotate(-360deg); 
+    }
+ }
+ @keyframes activatedSkillRotateL {
+    0% {
+       transform: rotate(0deg); 
+    }
+    100% {
+       transform: rotate(360deg); 
+    }
+ }
 
 
 @media only screen and (max-height: 550px){
@@ -1378,10 +1464,10 @@ body {
 
 @keyframes anim-duration {
     0% {
-        font-size: 1em;
+        font-size: 3em;
     }
     100% {
-        font-size: 1.5em;
+        font-size: 4em;
 
     }
 }
