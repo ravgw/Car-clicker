@@ -1,6 +1,7 @@
 :root {
     --light: rgb(209, 238, 252);
     --black: rgb(4,4,4);
+    --blackTR: rgba(4, 4, 4, 0.644);
     --fireengine: rgb(226, 60, 71);
     --alert: rgb(27, 27, 27);
     --fireengineTR: rgba(226, 60, 71, 0.800);
@@ -1140,6 +1141,8 @@ body {
     background-color: var(--selectiveyellow);
 }
 
+/* -----------------  SKILL AVAILABLE --------------------------- */
+
 .skill-available-container {
     position: relative;
     width: 100%;
@@ -1177,14 +1180,14 @@ body {
     border-top: 2px solid var(--prusianblue);
 }
 
-#skill-1 .skill-available-container {
+#skill-1 .skill-available-container, #skill-1 .skill-cooldown {
     background-image: url(./img/spedometer.webp);
 }
 #skill-1 .skill-available-container p{
     background: var(--fireengineTR);
     animation-delay: 1s;
 }
-#skill-2 .skill-available-container {
+#skill-2 .skill-available-container,  #skill-2 .skill-cooldown {
     background-image: url(./img/stopwatch.webp);
 }
 #skill-2 .skill-available-container p{
@@ -1261,9 +1264,9 @@ body {
     border-width: 10px;
     border-style: double;
     border-bottom-style: solid;
-    /* border-left-style: none; */
     animation: activatedSkillRotateL 2s linear infinite;
  }
+
  #teamPrincipal-skill-timer::before {
     position: absolute;
     z-index: -1;
@@ -1304,6 +1307,37 @@ body {
     }
  }
 
+ /* -----------------  SKILL COOLDOWN --------------------------- */
+
+ .skill-cooldown {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: var(--blackTR);
+ }
+
+ #skill-1 .skill-cooldown::after {
+    position: absolute;
+    content: '';
+    bottom: center;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border-color: var(--fireengine);
+    border-width: 30px;
+    border-style: double;
+    animation: activatedSkillRotateL 2s linear infinite;
+ }
+
+
+ #driver-cooldown-timer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+ }
 
 @media only screen and (max-height: 550px){
     .cardMainContent img {

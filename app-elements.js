@@ -181,7 +181,7 @@ export const driver = {
     addSkill: false,
     skillDuration: 5,
     skillId: '#skill-1',
-    skillLoading: 10,
+    skillCooldown: 10,
     skillAvailability: true,
     skillDescription: `Gain x2 speed`,
     level: 1,
@@ -213,14 +213,14 @@ export const driver = {
     skillTimer: function () {
         this.skillAvailability = false
         const timer = function () {
-        if (driver.skillLoading >= 1) {
+        if (driver.skillCooldown >= 1) {
             setTimeout(()=>{
-                driver.skillLoading--
+                driver.skillCooldown--
                 timer()
             },1000)
-        } else if (driver.skillLoading === 0) {
+        } else if (driver.skillCooldown === 0) {
             driver.skillAvailability = true
-            driver.skillLoading = 10
+            driver.skillCooldown = 10
         }
         }
         timer()
@@ -233,7 +233,7 @@ export const teamPrincipal = {
     addSkill: false,
     skillId: '#skill-2',
     skillDuration: 20,
-    skillLoading: 10,
+    skillCooldown: 10,
     skillAvailability: true,
     skillDescription: `Speed up time x4`,
     level: 1,
@@ -265,16 +265,15 @@ export const teamPrincipal = {
     skillTimer: function () {
         this.skillAvailability = false
         const timer = function () {
-        if (teamPrincipal.skillLoading >= 1) {
+        if (teamPrincipal.skillCooldown >= 1) {
             setTimeout(()=>{
-                teamPrincipal.skillLoading--
-                console.log(teamPrincipal.skillLoading)
+                teamPrincipal.skillCooldown--
+                console.log(teamPrincipal.skillCooldown)
                 timer()
             },1000)
-        } else if (teamPrincipal.skillLoading === 0) {
+        } else if (teamPrincipal.skillCooldown === 0) {
             teamPrincipal.skillAvailability = true
-            teamPrincipal.skillLoading = 10
-            console.log(teamPrincipal.skillAvailability + 'DSA')
+            teamPrincipal.skillCooldown = 10
         }
         }
         timer()

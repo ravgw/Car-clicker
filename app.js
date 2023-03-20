@@ -1,4 +1,4 @@
-import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, activeSkill, createSkillActivated } from "./dom-utils.js";
+import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, activeSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-elements.js"
 
 createCarClicker();
@@ -405,7 +405,6 @@ const unlockSkill = function (character) {
 
 const activateSkill = function (character) {
     const hide = document.querySelector(`${character.skillId} .skill-available-container`)
-    console.log(hide)
     hide.style.display = 'none'
 
     createSkillActivated(character)
@@ -425,9 +424,42 @@ const activateSkill = function (character) {
                 timer()
             }
         },1000)
+        if ( counter === 0 ) {
+            skillCooldown(character)
+        }
     }
     timer()
+    
+}
 
+const skillCooldown = function (character) {
+    
+    document.querySelector(`${character.skillId} .skill-activated`).style.display = 'none'
+    createSkillCooldown(character)
+    
+    const displayCounter = document.querySelector(`#${character.type}-cooldown-timer`)
+    
+    let counter = character.skillDCooldown
+    const timer = function () {
+
+    displayCounter.textContent = counter
+    
+    setTimeout( () => {
+        if (counter >= 1) {
+            if (counter === 1) {
+                console.log('timer equal 1')
+            }
+            displayCounter.textContent = counter
+            counter--
+            console.log('timer')
+            timer()
+        }
+    },(60 * 1000))
+        if ( counter === 0 ) {
+            console.log('timer zero')
+        }
+    };
+    timer()
 }
 
 let clickTimer;
@@ -448,14 +480,11 @@ const stopAutoClick = () => {
 
 const boostSpeed = () => {
 
-    // const actualSpeed = player.actualSpeed
     player.speedBooster = player.actualSpeed
-    console.log('start speed')
     speedAdjust()
     setTimeout( () => {
         player.speedBooster = 0
         speedAdjust()
-        console.log('stop--speed')
     },1000)
 }
 

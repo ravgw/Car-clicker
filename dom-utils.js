@@ -203,6 +203,21 @@ export const activeSkill = function (character) {
   container.appendChild(description)
 }
 
+export const createSkillCooldown = function (character) {
+  const hook = document.querySelector(character.skillId)
+
+  const container = document.createElement('div')
+  container.classList.add(`skill-cooldown`)
+
+  hook.appendChild(container)
+  
+  const timer = document.createElement('p')
+  timer.id = `${character.type}-cooldown-timer`
+
+  container.appendChild(timer)
+
+}
+
 const createCard = function (improvments, action) {
   const card = document.createElement('div')
   card.classList.add('card-content')
@@ -357,8 +372,6 @@ export const createCharacter = function (id, object, action) {
   card.id = `${id}-character-card`
   grabbingAnimation(card)
   card.addEventListener('click', (e) => {
-    console.log('card')
-    // action(object)
   })
   card.classList.add('card')
   handle.appendChild(card)
@@ -412,7 +425,6 @@ export const createCharacter = function (id, object, action) {
 
       e.stopPropagation()
       grabbingAnimation(card)
-      console.log('apgrejd')
 
 
       const paramX = object.subLevel
