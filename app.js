@@ -1,8 +1,12 @@
-import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, activeSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
+import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-elements.js"
 
 createCarClicker();
 createCarBackground();
+
+const clog = function (param) {
+    return console.log(param)
+}
 
 
 
@@ -17,6 +21,11 @@ let garageMenu = false;
 let garageCards = false;
 let checkPersonal = false 
 let checkTeamPrincipal = false 
+
+const game = {
+    driverSkillCreated: false,
+    TPSkillCreated: false,
+}
 
 
 const player = {
@@ -382,7 +391,7 @@ const numbersAdjust = function (toAdjust, target) {
 
 // --------------------------------------------------- SKILLS
 const unlockSkill = function (character) {
-    activeSkill(character)
+    createActiveSkill(character)
 
     const skill = document.querySelector(character.skillId)
     skill.addEventListener('click',() => {
@@ -390,42 +399,55 @@ const unlockSkill = function (character) {
             if(character.skillAvailability){
                 boostAutoClick()
                 activateSkill(character)
-                character.skillTimer()
+                // character.skillTimer()
             }
         }
         if (character.type === 'driver') {
             if(character.skillAvailability){
                 boostSpeed()
                 activateSkill(character)
-                character.skillTimer()
+                // character.skillTimer()
             }
         }
     })
 }
 
+let skillActivatedCreated = false
+let skillCooldownCreated = false
 const activateSkill = function (character) {
     const hide = document.querySelector(`${character.skillId} .skill-available-container`)
     hide.style.display = 'none'
 
-    createSkillActivated(character)
+
+    if (game) {
+        const show = document.querySelector(`${character.skillId} .skill-activated`)
+        show.style.display = 'flex'
+    }
+    if (!game.driverSkillCreated){ 
+        createSkillActivated(character)
+        skillActivatedCreated = true
+    }
+    
+    // console.log(created)
 
     let counter = character.skillDuration
     const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
     
     const timer = function () {
-        displayCounter.textContent = counter
+        displayCounter.innerText = counter
         setTimeout( () => {
             if (counter >= 1) {
                 if (counter === 4) {
                     displayCounter.classList.add('anim-skill-duration')
                 }
                 counter--
-                displayCounter.textContent = counter
+                displayCounter.innerText = counter
                 timer()
             }
         },1000)
         if ( counter === 0 ) {
             skillCooldown(character)
+            displayCounter.classList.remove('anim-skill-duration')
         }
     }
     timer()
@@ -435,31 +457,34 @@ const activateSkill = function (character) {
 const skillCooldown = function (character) {
     
     document.querySelector(`${character.skillId} .skill-activated`).style.display = 'none'
-    createSkillCooldown(character)
+
+
+    if (character.addSkill) {
+        const show = document.querySelector(`${character.skillId} .skill-cooldown`)
+        show.style.display = 'flex'
+    }
+    if (!character.addSkill){ 
+        createSkillCooldown(character)
+        skillCooldownCreated = true
+    }
+    
     
     const displayCounter = document.querySelector(`#${character.type}-cooldown-timer`)
-    
-    let counter = character.skillDCooldown
-    const timer = function () {
 
-    displayCounter.textContent = counter
+    let time = character.skillCooldown
+
+    displayCounter.innerText = time
+
+    const openSkillUp = function () {
+        const show = document.querySelector(`${character.skillId} .skill-available-container`)
+        const hide = document.querySelector(`${character.skillId} .skill-cooldown`)
+        console.log('openskillup')
+        hide.style.display = 'none'
+        show.style.display = 'flex'
+    }
+
+    character.skillTimer(openSkillUp)
     
-    setTimeout( () => {
-        if (counter >= 1) {
-            if (counter === 1) {
-                console.log('timer equal 1')
-            }
-            displayCounter.textContent = counter
-            counter--
-            console.log('timer')
-            timer()
-        }
-    },(60 * 1000))
-        if ( counter === 0 ) {
-            console.log('timer zero')
-        }
-    };
-    timer()
 }
 
 let clickTimer;

@@ -1,3 +1,8 @@
+const clog = function (param) {
+    console.log(param)
+}
+
+
 const engine = {
     name: 'Engine',
     type: 'engine',
@@ -179,9 +184,9 @@ export const driver = {
     type: 'driver',
     bought: false,
     addSkill: false,
-    skillDuration: 5,
+    skillDuration: 2,
     skillId: '#skill-1',
-    skillCooldown: 10,
+    skillCooldown: 3,
     skillAvailability: true,
     skillDescription: `Gain x2 speed`,
     level: 1,
@@ -210,21 +215,27 @@ export const driver = {
             this.addSkill = false
         }
     },
-    skillTimer: function () {
+    skillTimer: function (callback) {
         this.skillAvailability = false
+
+        const displayCounter = document.querySelector('#driver-cooldown-timer')
+
+        console.log('skilltimer')
         const timer = function () {
         if (driver.skillCooldown >= 1) {
             setTimeout(()=>{
                 driver.skillCooldown--
+                displayCounter.innerText = driver.skillCooldown
                 timer()
             },1000)
         } else if (driver.skillCooldown === 0) {
             driver.skillAvailability = true
             driver.skillCooldown = 10
+            callback()
         }
-        }
-        timer()
-        }
+    }
+    timer()
+    }
     }
 export const teamPrincipal = {
     name: 'Mateusz',
@@ -262,22 +273,26 @@ export const teamPrincipal = {
             this.addSkill = false
         }
     },
-    skillTimer: function () {
+    skillTimer: function (callback) {
         this.skillAvailability = false
+
+        const displayCounter = document.querySelector('#teamPrincipal-cooldown-timer')
+
         const timer = function () {
         if (teamPrincipal.skillCooldown >= 1) {
             setTimeout(()=>{
                 teamPrincipal.skillCooldown--
-                console.log(teamPrincipal.skillCooldown)
+                displayCounter.innerText = teamPrincipal.skillCooldown
                 timer()
             },1000)
         } else if (teamPrincipal.skillCooldown === 0) {
             teamPrincipal.skillAvailability = true
             teamPrincipal.skillCooldown = 10
+            callback()
         }
-        }
-        timer()
-        }
+    }
+    timer()
+    }
 }
 
 

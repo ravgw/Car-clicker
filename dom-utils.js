@@ -182,7 +182,7 @@ export const createHomeBoard = function (array1, array2)  {
   
 } 
 
-export const activeSkill = function (character) { 
+export const createActiveSkill = function (character) { 
 
   const unuse = document.querySelector(`${character.skillId} .unlock-info`)
   unuse.remove()

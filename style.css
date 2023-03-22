@@ -1314,12 +1314,12 @@ body {
     width: 100%;
     height: 100%;
     background-position: center;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-color: var(--blackTR);
  }
 
- #skill-1 .skill-cooldown::after {
+ /* #skill-1 .skill-cooldown::after {
     position: absolute;
     content: '';
     bottom: center;
@@ -1330,13 +1330,13 @@ body {
     border-width: 30px;
     border-style: double;
     animation: activatedSkillRotateL 2s linear infinite;
- }
+ } */
 
 
  #driver-cooldown-timer {
-    position: fixed;
     width: 100%;
     height: 100%;
+    color: var(--fireengine);
  }
 
 @media only screen and (max-height: 550px){
