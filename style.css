@@ -1332,11 +1332,20 @@ body {
     animation: activatedSkillRotateL 2s linear infinite;
  } */
 
-
- #driver-cooldown-timer {
+.cooldown-timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    font-weight: 700;
     width: 100%;
     height: 100%;
+}
+ #driver-cooldown-timer {
     color: var(--fireengine);
+ }
+ #teamPrincipal-cooldown-timer {
+    color: var(--selectiveyellow);
  }
 
 @media only screen and (max-height: 550px){

@@ -212,6 +212,7 @@ export const createSkillCooldown = function (character) {
   hook.appendChild(container)
   
   const timer = document.createElement('p')
+  timer.classList.add('cooldown-timer')
   timer.id = `${character.type}-cooldown-timer`
 
   container.appendChild(timer)

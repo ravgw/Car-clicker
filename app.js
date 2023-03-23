@@ -4,10 +4,6 @@ import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-eleme
 createCarClicker();
 createCarBackground();
 
-const clog = function (param) {
-    return console.log(param)
-}
-
 
 
 const speed = document.getElementById('speed')
@@ -23,8 +19,8 @@ let checkPersonal = false
 let checkTeamPrincipal = false 
 
 const game = {
-    driverSkillCreated: false,
-    TPSkillCreated: false,
+    driverActivatedSkillCreated: false,
+    teamPrincipalActivatedSkillCreated: false,
 }
 
 
@@ -412,42 +408,52 @@ const unlockSkill = function (character) {
     })
 }
 
-let skillActivatedCreated = false
-let skillCooldownCreated = false
+
 const activateSkill = function (character) {
+
     const hide = document.querySelector(`${character.skillId} .skill-available-container`)
-    hide.style.display = 'none'
+        hide.style.display = 'none'
 
+    const gameRequiredElement = game[`${character.type}ActivatedSkillCreated`]
 
-    if (game) {
-        const show = document.querySelector(`${character.skillId} .skill-activated`)
-        show.style.display = 'flex'
-    }
-    if (!game.driverSkillCreated){ 
-        createSkillActivated(character)
-        skillActivatedCreated = true
-    }
+        if (!gameRequiredElement){ 
+            createSkillActivated(character)
+            game[`${character.type}ActivatedSkillCreated`] = true
+            console.log('activate create')
+        }
+        if (gameRequiredElement) {
+            const show = document.querySelector(`${character.skillId} .skill-activated`)
+            show.style.display = 'flex'
+            console.log('actvate show')
+        }
     
-    // console.log(created)
 
-    let counter = character.skillDuration
     const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
+    let counter = character.skillDuration
     
     const timer = function () {
+
         displayCounter.innerText = counter
+        
         setTimeout( () => {
             if (counter >= 1) {
+
                 if (counter === 4) {
                     displayCounter.classList.add('anim-skill-duration')
                 }
+
                 counter--
                 displayCounter.innerText = counter
                 timer()
+
             }
         },1000)
+
         if ( counter === 0 ) {
+
             skillCooldown(character)
             displayCounter.classList.remove('anim-skill-duration')
+            
         }
     }
     timer()
@@ -456,16 +462,17 @@ const activateSkill = function (character) {
 
 const skillCooldown = function (character) {
     
+    
     document.querySelector(`${character.skillId} .skill-activated`).style.display = 'none'
 
 
-    if (character.addSkill) {
+    if (game[`${character.type}CooldownSkillCreated`]) {
         const show = document.querySelector(`${character.skillId} .skill-cooldown`)
         show.style.display = 'flex'
     }
-    if (!character.addSkill){ 
+    if (!game[`${character.type}CooldownSkillCreated`]){ 
         createSkillCooldown(character)
-        skillCooldownCreated = true
+        game[`${character.type}CooldownSkillCreated`] = true
     }
     
     
