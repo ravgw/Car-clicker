@@ -186,7 +186,7 @@ export const driver = {
     addSkill: false,
     skillDuration: 2,
     skillId: '#skill-1',
-    skillCooldown: 3,
+    skillCooldown: 2,
     skillCurrentCooldown: 0,
     skillAvailability: true,
     skillDescription: `Gain x2 speed`,
@@ -226,17 +226,17 @@ export const driver = {
         if (driver.skillCooldown > 1) {
             setTimeout(()=>{
                 driver.skillCooldown--
-                displayCounter.innerText = driver.skillCooldown
+                displayCounter.innerText = driver.skillCooldown + 'm'
                 timer()
-            },1000)
+            },60*1000)
         } else if (driver.skillCooldown === 1) {
-            let i = 10
+            let i = 59
             const seconds = function() {
                 console.log('seconds')
                 if (i >= 1) {
                 setTimeout(()=> {
-                    displayCounter.innerText = i + 's'
                     i--
+                    displayCounter.innerText = i + 's'
                     seconds()
                 },1000)
             } else {
@@ -250,7 +250,7 @@ export const driver = {
 }
 timer()
 }
-    }
+}
 
 export const teamPrincipal = {
     name: 'Mateusz',
@@ -290,30 +290,38 @@ export const teamPrincipal = {
         }
     },
     skillTimer: function (callback) {
-
         this.skillAvailability = false
 
-        const displayCounter = document.querySelector(`#${this.type}-cooldown-timer`)
+        const displayCounter = document.querySelector('#teamPrincipal-cooldown-timer')
 
-        this.skillAvailability = false
-
-        console.log('skilltimer')
+        console.log('skilltimerTP')
         const timer = function () {
-        if (driver.skillCooldown >= 1) {
+        if (teamPrincipal.skillCooldown > 1) {
             setTimeout(()=>{
-                driver.skillCooldown--
-                displayCounter.innerText = driver.skillCooldown
+                teamPrincipal.skillCooldown--
+                displayCounter.innerText = teamPrincipal.skillCooldown + 'm'
                 timer()
-            },1000)
-        } else if (driver.skillCooldown === 0) {
-            driver.skillAvailability = true
-            driver.skillCooldown = 5
-            callback()
-        }
+            },60*1000)
+        } else if (teamPrincipal.skillCooldown === 1) {
+            let i = 10
+            const seconds = function() {
+                console.log('seconds')
+                if (i >= 1) {
+                setTimeout(()=> {
+                    i--
+                    displayCounter.innerText = i + 's'
+                    seconds()
+                },1000)
+            } else {
+                teamPrincipal.skillAvailability = true
+                teamPrincipal.skillCooldown = 5
+                callback()
+            }
+        } 
+        seconds()
     }
-    timer()
-
-
+}
+timer()
     }
 }
 

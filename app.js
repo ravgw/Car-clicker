@@ -480,7 +480,7 @@ const skillCooldown = function (character) {
 
     let time = character.skillCooldown
 
-    displayCounter.innerText = time
+    displayCounter.innerText = time + 'm'
 
     const openSkillUp = function () {
         const show = document.querySelector(`${character.skillId} .skill-available-container`)
