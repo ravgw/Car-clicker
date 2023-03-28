@@ -25,7 +25,7 @@ const game = {
 
 
 const player = {
-    actualCoins: 0,
+    actualCoins: 9000,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,
@@ -62,7 +62,8 @@ const player = {
     spendCoins: function (cost) {
         if(this.actualCoins >= cost) {
             this.actualCoins = this.actualCoins - cost
-            numbersAdjust(player.actualCoins, counter)}
+            numbersAdjust(player.actualCoins, counter)
+        }
     },
 
 }
@@ -302,13 +303,15 @@ const upgrade = function (object) {
     const displayCost = document.getElementById(`${object.type}-price`)
     const displayLvl = document.getElementById(`${object.type}Lvl`)
 
+    console.log('upgrade')
+
 
     if(verifyCoinnsAmount(object)) {
+        player.spendCoins(object.cost)
         object.upgrade()
         numbersAdjust(object.cost, displayCost)
         countMultiplierSpeed()
 
-        player.spendCoins(object.cost)
         displayLvl.innerText = 'Lvl. ' + object.level
 
         if(object.addSkill) {
@@ -330,8 +333,6 @@ const verifyCoinnsAmount = function (object) {
 function notEnaughtCoinsAnimation (cardObjectname) {
     const element = document.querySelector(`#${cardObjectname}-price`) || document.querySelector(`#${cardObjectname}-unlock-price`)
     
-    console.log(element)
-
     removeAlertCssClass()
     counter.offsetWidth;
     counter.classList.add('not-enaugh');
