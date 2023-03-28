@@ -905,6 +905,9 @@ body {
 .character-upgrade .upgrade-price-alert {
     animation: upgradePriceAlert .6s, priceAlertCharacter .6s;
 }
+#unlock-driver .upgrade-price-alert, #unlock-teamPrincipal .upgrade-price-alert {
+    animation: upgradePriceAlert .6s, priceAlertCharacter .6s;
+}
 
 
 #garage .upgrade-price-alert {

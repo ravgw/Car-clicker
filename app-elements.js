@@ -184,9 +184,9 @@ export const driver = {
     type: 'driver',
     bought: false,
     addSkill: false,
-    skillDuration: 2,
+    skillDuration: 30,
     skillId: '#skill-1',
-    skillCooldown: 2,
+    skillCooldown: 5,
     skillCurrentCooldown: 0,
     skillAvailability: true,
     skillDescription: `Gain x2 speed`,
@@ -241,7 +241,7 @@ export const driver = {
                 },1000)
             } else {
                 driver.skillAvailability = true
-                driver.skillCooldown = 5
+                driver.skillCurrentCooldown = driver.skillCooldown 
                 callback()
             }
         } 
@@ -258,8 +258,8 @@ export const teamPrincipal = {
     bought: false,
     addSkill: false,
     skillId: '#skill-2',
-    skillDuration: 4,
-    skillCooldown: 5,
+    skillDuration: 45,
+    skillCooldown: 7,
     skillCurrentCooldown: 0,
     skillAvailability: true,
     skillDescription: `Speed up time x4`,
@@ -294,7 +294,6 @@ export const teamPrincipal = {
 
         const displayCounter = document.querySelector('#teamPrincipal-cooldown-timer')
 
-        console.log('skilltimerTP')
         const timer = function () {
         if (teamPrincipal.skillCooldown > 1) {
             setTimeout(()=>{
@@ -314,7 +313,7 @@ export const teamPrincipal = {
                 },1000)
             } else {
                 teamPrincipal.skillAvailability = true
-                teamPrincipal.skillCooldown = 5
+                teamPrincipal.skillCurrentCooldown = teamPrincipal.skillCooldown
                 callback()
             }
         } 

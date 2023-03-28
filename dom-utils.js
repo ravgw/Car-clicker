@@ -357,6 +357,7 @@ export const createUnlockCharacter = function (object, action) {
   card.appendChild(image)
 
   const price = document.createElement('p')
+  price.id = `${object.type}-unlock-price`
   price.innerText = `${object.cost} \u2234`
   card.appendChild(price)
 }

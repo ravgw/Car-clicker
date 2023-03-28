@@ -25,7 +25,7 @@ const game = {
 
 
 const player = {
-    actualCoins: 10000,
+    actualCoins: 0,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,
@@ -324,11 +324,13 @@ const verifyCoinnsAmount = function (object) {
         return true
     } 
     else {
-       notEnaughtCoinsAnimation(object.type)
+        notEnaughtCoinsAnimation(object.type)
     }
 }
 function notEnaughtCoinsAnimation (cardObjectname) {
-    const element = document.querySelector(`#${cardObjectname}-price`)
+    const element = document.querySelector(`#${cardObjectname}-price`) || document.querySelector(`#${cardObjectname}-unlock-price`)
+    
+    console.log(element)
 
     removeAlertCssClass()
     counter.offsetWidth;
