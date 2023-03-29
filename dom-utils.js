@@ -114,7 +114,7 @@ export const createHomeBoard = function (array1, array2)  {
   homeStatsContainer.id = 'home-stats-container'
   board.appendChild(homeStatsContainer)
 
-  const statsCardsContainer = function (arr) {
+  const createStatsCardsContainer = function (arr) {
 
     const statsCardsContainer = document.createElement('div')
     statsCardsContainer.id = `stats-cards-container`
@@ -141,8 +141,8 @@ export const createHomeBoard = function (array1, array2)  {
     return statsCardsContainer
   }
 
-  homeStatsContainer.appendChild(statsCardsContainer(array1))
-  homeStatsContainer.appendChild(statsCardsContainer(array2))
+  homeStatsContainer.appendChild(createStatsCardsContainer(array1))
+  homeStatsContainer.appendChild(createStatsCardsContainer(array2))
   
   // skills
   const homeSkillsContainer = document.createElement('div')

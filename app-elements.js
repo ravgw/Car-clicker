@@ -9,7 +9,7 @@ const engine = {
     level: 1,
     value: 1,
     subValue: 1,
-    cost: 10,
+    cost: 20,
     multiplier: 1,
     lvlUpCost: 2.25,
     actionSign: '\u2234',
@@ -21,7 +21,7 @@ const engine = {
         this.calculateValue()
     },
     calculateValue: function () {
-        this.value = this.subValue * engineers.value
+        this.value =  Math.round(this.subValue * engineers.value)
     }
 }
 const aerodynamics = {
@@ -30,7 +30,7 @@ const aerodynamics = {
     level: 0,
     value: 0,
     subValue: 0,
-    cost: 15,
+    cost: 40,
     multiplier: 1,
     lvlUpCost: 2,
     actionSign: '\u2234',
@@ -42,7 +42,7 @@ const aerodynamics = {
         this.calculateValue()
     },
     calculateValue: function () {
-        this.value = this.subValue * windTunnel.value
+        this.value =  Math.round(this.subValue * windTunnel.value)
     }
 }
 const suspension = {
@@ -51,7 +51,7 @@ const suspension = {
     level: 0,
     value: 0,
     subValue: 0,
-    cost: 20,
+    cost: 120,
     multiplier: 1,
     lvlUpCost: 2,
     actionSign: '\u2234',
@@ -63,7 +63,7 @@ const suspension = {
         this.calculateValue()
     },
     calculateValue: function () {
-        this.value = this.subValue * engineers.value
+        this.value =  Math.round(this.subValue * engineers.value)
     }
 }
 const turbo = {
@@ -72,7 +72,7 @@ const turbo = {
     level: 0,
     value: 0,
     subValue: 0,
-    cost: 25,
+    cost: 200,
     multiplier: 1,
     lvlUpCost: 2,
     actionSign: '\u2234',
@@ -84,7 +84,7 @@ const turbo = {
         this.calculateValue()
     },
     calculateValue: function () {
-        this.value = this.subValue * engineers.value
+        this.value =  Math.round(this.subValue * engineers.value)
     }
 }
 
@@ -101,7 +101,7 @@ const sponsors = {
     level: 0,
     value: 0,
     subValue: 0,
-    cost: 10,
+    cost: 11000,
     bonus: 1,
     lvlUpCost: 3,
     actionSign: '\u2234',
@@ -111,10 +111,9 @@ const sponsors = {
         nextLvl(this)
         this.subValue++
         this.calculateValue()
-        console.log(this.value + 'sponsors')
     },
     calculateValue: function () {
-        this.value = this.subValue * this.bonus
+        this.value =  Math.round(this.subValue * this.bonus)
     }
 }
 const windTunnel = {
@@ -122,7 +121,7 @@ const windTunnel = {
     type: 'windTunnel',
     level: 0,
     value: 1,
-    cost: 10,
+    cost: 2600,
     multiplier: 1,
     lvlUpCost: 2,
     actionSign: 'x',
@@ -130,7 +129,7 @@ const windTunnel = {
     img: './img/windtunnel.webp',
     upgrade: function () {
         nextLvl(this)
-        this.value = this.value + .2
+        this.value =  Number((this.value + .3).toPrecision(2))
         aerodynamics.calculateValue()
     },
 }
@@ -139,7 +138,7 @@ const engineers = {
     type: 'engineers',
     level: 0,
     value: 1,
-    cost: 10,
+    cost: 3000,
     multiplier: 1,
     lvlUpCost: 2,
     actionSign: 'x',
@@ -147,7 +146,11 @@ const engineers = {
     img: './img/engineers.webp',
     upgrade: function () {
         nextLvl(this)
-        this.value = this.value + .2
+
+        console.log(this.level+ 'level')
+        console.log(this.value + 'before')
+        this.value =  Number((this.value + .2).toPrecision(2))
+        console.log(this.value + 'after')
         engine.calculateValue()
         suspension.calculateValue()
         turbo.calculateValue()
@@ -158,15 +161,15 @@ const fame = {
     type: 'fame',
     level: 0,
     value: 0,
-    cost: 10,
+    cost: 33000,
     multiplier: 1,
-    lvlUpCost: 2,
+    lvlUpCost: 4,
     actionSign: 'x',
     description: 'Grow the celebrity of your team to attract richer sponsors',
     img: './img/fame.webp',
     upgrade: function () {
         nextLvl(this)
-        this.value = this.value + 2
+        this.value = Math.round(this.value + 2)
         sponsors.bonus = this.value
         sponsors.calculateValue()
     },
@@ -194,7 +197,7 @@ export const driver = {
     subLevel: 0,
     value: 1,
     multiplier: 1,
-    cost: 250,
+    cost: 750,
     lvlUpCost: 2,
     img: './img/jurek.webp',
     upgrade: function () {
@@ -207,7 +210,7 @@ export const driver = {
         }
 
         this.cost = Math.round(this.cost * this.lvlUpCost)
-        const x = (this.value + .05)
+        const x = Number((this.value + .05).toPrecision(3))
         this.value = x
 
         if (this.level === 2 && this.subLevel === 0) {
@@ -221,7 +224,6 @@ export const driver = {
 
         const displayCounter = document.querySelector('#driver-cooldown-timer')
 
-        console.log('skilltimer')
         const timer = function () {
         if (driver.skillCooldown > 1) {
             setTimeout(()=>{
@@ -232,7 +234,6 @@ export const driver = {
         } else if (driver.skillCooldown === 1) {
             let i = 59
             const seconds = function() {
-                console.log('seconds')
                 if (i >= 1) {
                 setTimeout(()=> {
                     i--
@@ -267,7 +268,7 @@ export const teamPrincipal = {
     subLevel: 0,
     value: 1,
     multiplier: 1,
-    cost: 750,
+    cost: 3900,
     lvlUpCost: 2,
     img: './img/mateusz.webp',
     upgrade: function () {
@@ -304,7 +305,6 @@ export const teamPrincipal = {
         } else if (teamPrincipal.skillCooldown === 1) {
             let i = 10
             const seconds = function() {
-                console.log('seconds')
                 if (i >= 1) {
                 setTimeout(()=> {
                     i--

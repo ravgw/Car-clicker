@@ -25,7 +25,7 @@ const game = {
 
 
 const player = {
-    actualCoins: 9000,
+    actualCoins: 42642620765,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,
@@ -50,6 +50,7 @@ const player = {
         const tpBonus = teamPrincipal.value
         const bonusSpeed = driver.value
         const perClick = ( this.actualSpeed * bonusSpeed * tpBonus)
+        console.log(bonusSpeed)
     
         this.actualCoins = this.actualCoins + perClick 
         numbersAdjust(player.actualCoins, counter)
@@ -303,9 +304,6 @@ const upgrade = function (object) {
     const displayCost = document.getElementById(`${object.type}-price`)
     const displayLvl = document.getElementById(`${object.type}Lvl`)
 
-    console.log('upgrade')
-
-
     if(verifyCoinnsAmount(object)) {
         player.spendCoins(object.cost)
         object.upgrade()
@@ -313,12 +311,14 @@ const upgrade = function (object) {
         countMultiplierSpeed()
 
         displayLvl.innerText = 'Lvl. ' + object.level
+        updateHomeStats(object)
 
         if(object.addSkill) {
             unlockSkill(object)
         }
 
     } 
+
 
 }
 
@@ -396,14 +396,14 @@ const unlockSkill = function (character) {
     skill.addEventListener('click',() => {
         if (character.type === 'teamPrincipal') {
             if(character.skillAvailability){
-                boostAutoClick()
+                boostAutoClick(character.skillDuration)
                 activateSkill(character)
                 // character.skillTimer()
             }
         }
         if (character.type === 'driver') {
             if(character.skillAvailability){
-                boostSpeed()
+                boostSpeed(character.skillDuration)
                 activateSkill(character)
                 // character.skillTimer()
             }
@@ -513,17 +513,21 @@ const stopAutoClick = () => {
     clearTimeout(clickTimer)
 }
 
-const boostSpeed = () => {
+const boostSpeed = (duration) => {
+
+    const time = duration * 1000
 
     player.speedBooster = player.actualSpeed
     speedAdjust()
     setTimeout( () => {
         player.speedBooster = 0
         speedAdjust()
-    },1000)
+    }, time)
 }
 
-const boostAutoClick = () => {
+const boostAutoClick = (duration) => {
+
+    const time = duration * 1000
 
     stopAutoClick()
     const boost = function (callback) {
@@ -534,10 +538,11 @@ const boostAutoClick = () => {
         setTimeout(() => {
             stopAutoClick()
             startAutoClick()
-        }, 30*1000)
+        }, time)
     }
     boost()
     stopBoost()
+    updateHomeStats()
 }
 // ------------------------------------------------- END SKILLS -------------------------------------------------
 const countMultiplierSpeed = function () {
@@ -558,6 +563,13 @@ const perSecStats = document.querySelector('#PS-counter-value')
 perSecStats.innerText = `${stats.perSec} \u2234`
 const perClickStats = document.querySelector('#PC-counter-value')
 perClickStats.innerText = `${stats.perClick} \u2234`
+
+const updateHomeStats = function (object) {
+    const element = document.querySelector(`#${object.type}-card-stats-value`)
+    if (element) {
+        element.innerText = `${object.value}${object.actionSign}` 
+    }
+}
 
 
 
