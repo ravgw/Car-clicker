@@ -50,7 +50,6 @@ const player = {
         const tpBonus = teamPrincipal.value
         const bonusSpeed = driver.value
         const perClick = ( this.actualSpeed * bonusSpeed * tpBonus)
-        console.log(bonusSpeed)
     
         this.actualCoins = this.actualCoins + perClick 
         numbersAdjust(player.actualCoins, counter)
@@ -414,52 +413,68 @@ const unlockSkill = function (character) {
 
 const activateSkill = function (character) {
 
-    const hide = document.querySelector(`${character.skillId} .skill-available-container`)
-        hide.style.display = 'none'
-
-    const gameRequiredElement = game[`${character.type}ActivatedSkillCreated`]
-
-        if (!gameRequiredElement){ 
-            createSkillActivated(character)
-            game[`${character.type}ActivatedSkillCreated`] = true
-            console.log('activate create')
-        }
-        if (gameRequiredElement) {
-            const show = document.querySelector(`${character.skillId} .skill-activated`)
-            show.style.display = 'flex'
-            console.log('actvate show')
-        }
+    const status = game[`${character.type}SkillStatus`]
     
+    const skillActivation = function () {
+        const hidePreviousElement = document.querySelector(`${character.skillId} .skill-available-container`)
+        hidePreviousElement.style.display = 'none'
+        const requiredElement = game[`${character.type}ActivatedSkillCreated`]
 
-    const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
-    let counter = character.skillDuration
-    
-    const timer = function () {
-
-        displayCounter.innerText = counter
-        
-        setTimeout( () => {
-            if (counter >= 1) {
-
-                if (counter === 4) {
-                    displayCounter.classList.add('anim-skill-duration')
-                }
-
-                counter--
-                displayCounter.innerText = counter
-                timer()
-
+            if (!requiredElement){ 
+                createSkillActivated(character)
+                game[`${character.type}ActivatedSkillCreated`] = true
             }
-        },1000)
-
-        if ( counter === 0 ) {
-
-            skillCooldown(character)
-            displayCounter.classList.remove('anim-skill-duration')
+            if (requiredElement) {
+                const showElement = document.querySelector(`${character.skillId} .skill-activated`)
+                showElement.style.display = 'flex'
+            }
+        
+        const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
+        let counter = character.skillDuration
+        
+        const skillTimer = function () {
+            displayCounter.innerText = counter
             
+            setTimeout( () => {
+                if ( counter === 0 ) 
+                {
+                    skillCooldown(character)
+                    game[`${character.type}SkillStatus`] = 'available'
+                    displayCounter.classList.remove('anim-skill-duration')
+                } 
+                else if (counter >= 1) 
+                {
+                    if (counter === 4) 
+                    {
+                        displayCounter.classList.add('anim-skill-duration')
+                    }
+                    counter--
+                    displayCounter.innerText = counter
+                    skillTimer()
+                }
+            },1000)
         }
+        skillTimer()
     }
-    timer()
+
+    if(!status) {
+        game[`${character.type}SkillStatus`] = 'activated'
+        skillActivation()
+        } else { 
+            switch(status) {
+                case 'activated':
+                    console.log('act')
+                    break
+                case 'available':
+                    skillActivation()
+                    game[`${character.type}SkillStatus`] = 'activated'
+                    break
+                default:
+                    console.log('activeSkill switch default')
+            }
+        }
+    
+        console.log('function')
     
 }
 
@@ -542,7 +557,7 @@ const boostAutoClick = (duration) => {
     }
     boost()
     stopBoost()
-    updateHomeStats()
+    // updateHomeStats()
 }
 // ------------------------------------------------- END SKILLS -------------------------------------------------
 const countMultiplierSpeed = function () {
