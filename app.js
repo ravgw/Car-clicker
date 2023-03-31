@@ -25,7 +25,7 @@ const game = {
 
 
 const player = {
-    actualCoins: 42642620765,
+    actualCoins: 0,
     speed: 0,
     speedBooster: 0,
     actualSpeed: 0,
@@ -72,6 +72,11 @@ const stats = {
     totalCoins: 0,
     perSec: 0,
     perClick: 1,
+    update: function () {
+        (document.querySelector('#Total-counter-value')).innerText = this.totalCoins
+        // document.querySelector('#PS-counter-value').innerText(this.perSec)
+        // document.querySelector('#PC-counter-value').innerText(this.perClick)
+    }
 }
 
 
@@ -584,6 +589,7 @@ const updateHomeStats = function (object) {
     if (element) {
         element.innerText = `${object.value}${object.actionSign}` 
     }
+    stats.update()
 }
 
 

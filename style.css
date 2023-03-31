@@ -50,6 +50,7 @@ body {
     background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
     border: 3px solid #22232e;
     overflow: hidden;
+    z-index: 1;
 }
 
 #carBoard {
@@ -71,17 +72,19 @@ body {
 }
 
 #cardsBoard {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
     align-items: center;
-    /* height: calc(100% - 296px); */
     height: 70%;
     background: var(--spacecadet);
     padding: 5px;
     padding-top: 0px;
 }
+
+
 /* ------------------------------------ CAR-BACKGROUND ----------------------------------- */
 #background-container {
     /* display: flex;
@@ -92,6 +95,7 @@ body {
     height: 250px;
     position: relative;
 }
+
 #carBackground{
     display: flex;
     justify-content: center;
@@ -157,6 +161,7 @@ body {
     height: 148px;
     border-bottom: 50px solid #565;
     animation: horizon 20s infinite linear;
+    z-index: -1;
 }
 
 #kerbs {
@@ -424,17 +429,17 @@ body {
 
 @keyframes wind {
     from {
-        transform: translateX(0px);
+        transform: translateX(500px);
     }
     
     to {
-        transform: translateX(-1200px);
+        transform: translateX(-1800px);
     }
 }
 
 @keyframes horizon {
     from {
-        transform: translateX(0px);
+        transform: translateX(650px);
     }
     
     to {
@@ -1322,6 +1327,7 @@ body {
     background-color: var(--blackTR);
  }
 
+
  /* #skill-1 .skill-cooldown::after {
     position: absolute;
     content: '';
@@ -1379,7 +1385,34 @@ body {
         border-left: 3px solid #333;
         background: none;
     }
-
+    
+    /* #background-container::before {
+        content: '';
+        position: absolute;
+        height: 15%;
+        width: 1000px;
+        top: 220px;
+        background-color: #0D1B55;
+        z-index: -1;
+    } */
+        
+    #cardsBoard::before {
+        content: '';
+        position: absolute;
+        height: 30px;
+        width: 100%;
+        top: 98%;
+        z-index: -1;
+        border-top: 1px solid rgb(109, 71, 0);
+        background-color: #1e6400;
+        background-color: #b47c26;
+        background-color: #C2B280;
+        background-color: #C2B280;
+        /* opacity: 1;
+        background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #C2B280 8px ), repeating-linear-gradient( #9a928255, #9a9282 ); */
+        background: rgb(52,134,24);
+        background: linear-gradient(180deg, rgba(52,134,24,1) 23%, rgba(255,212,132,1) 58%);
+    }
     .cards-container {
         max-width: 2600px;
     }
@@ -1463,6 +1496,7 @@ body {
     .skill-available-container p {
         font-size: 1.4em;
     }
+
 }
 
 
@@ -1501,7 +1535,7 @@ body {
 
 
 .anim-skill-duration {
-    animation: anim-duration 1s infinite;
+    animation: anim-duration 4s ease-in forwards;
 }
 
 .anim-skill-bcg {
@@ -1513,7 +1547,7 @@ body {
         font-size: 3em;
     }
     100% {
-        font-size: 4em;
+        font-size: 18em;
 
     }
 }
