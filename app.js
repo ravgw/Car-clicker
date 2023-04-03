@@ -395,7 +395,6 @@ const numbersAdjust = function (toAdjust, target) {
 // --------------------------------------------------- SKILLS
 const unlockSkill = function (character) {
     createActiveSkill(character)
-
     const skill = document.querySelector(character.skillId)
     skill.addEventListener('click',() => {
         if (character.type === 'teamPrincipal') {
