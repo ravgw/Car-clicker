@@ -24,6 +24,7 @@ const game = {
 }
 
 
+
 const player = {
     actualCoins: 0,
     speed: 0,
@@ -74,8 +75,6 @@ const stats = {
     perClick: 1,
     update: function () {
         (document.querySelector('#Total-counter-value')).innerText = this.totalCoins
-        // document.querySelector('#PS-counter-value').innerText(this.perSec)
-        // document.querySelector('#PC-counter-value').innerText(this.perClick)
     }
 }
 
