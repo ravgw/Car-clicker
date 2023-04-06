@@ -1,6 +1,16 @@
-const clog = function (param) {
-    console.log(param)
+export const game = {
+    autoclickStatus: false,
 }
+export const player = {
+    coins: 0,
+    speed: 1,
+    bonusSpeed: 0,
+}
+
+export const stats = {
+    perClick: 1,
+}
+
 
 
 const engine = {
@@ -99,7 +109,7 @@ const sponsors = {
     name: 'Sponsors',
     type: 'sponsors',
     level: 0,
-    value: 0,
+    value: 1,
     subValue: 0,
     cost: 11000,
     bonus: 1,
@@ -329,3 +339,5 @@ const nextLvl = function (object) {
     object.cost = Math.round(object.cost * object.lvlUpCost)
     object.multiplier = Math.round(object.multiplier * 1.2)
 }
+
+

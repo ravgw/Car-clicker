@@ -1,8 +1,9 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
-import { bolidParts, garageFacilities, driver, teamPrincipal } from "./app-elements.js"
+import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats } from "./app-elements.js"
 
 createCarClicker();
 createCarBackground();
+
 
 
 
@@ -22,14 +23,43 @@ const game = {
     driverActivatedSkillCreated: false,
     teamPrincipalActivatedSkillCreated: false,
 }
+// ------------------------------------------------------------------- NEW
+function calculateSpeed () {
+    let speed = 0
+    bolidParts.forEach(e => speed += e.value)
+    player.speed = speed + player.bonusSpeed
+    statsUpDate()
+    console.log(player.speed + 'PS')
+}
 
 
+function addCoins () {
+    calculateSpeed()
 
-const player = {
-    actualCoins: 0,
-    speed: 0,
+    const perClick = calcPerClick()
+
+    player.coins = player.coins + perClick 
+    OLDstats.totalCoins = OLDstats.totalCoins + perClick 
+    stats.perClick = perClick
+
+    statsUpDate()
+    
+}
+
+function calcPerClick () {
+    const sponsors = garageFacilities[0] // sponsors object
+    const speedBonus = driver.value
+    const perClick = player.speed * driver.value * sponsors.value
+
+    return perClick
+}
+// -----------------------------------------------------------------------------------------------------------------
+
+
+const Splayer = {
+    speed: 3,
     speedBooster: 0,
-    actualSpeed: 0,
+    actualSpeed: 3,
     driver: false,
     driverSkill: true,
     teamPrincipal: false,
@@ -40,53 +70,50 @@ const player = {
         const sponsorsBonus = garageFacilities[0].value
         const perSec = (this.actualSpeed * bonusSpeed) * tpBonus + sponsorsBonus
 
-        this.actualCoins = this.actualCoins + perSec
-        numbersAdjust(player.actualCoins, counter)
-        stats.totalCoins = stats.totalCoins + perSec
-        numbersAdjust(stats.totalCoins, totalValueStats)
-        stats.perSec = perSec
-        numbersAdjust(stats.perSec, perSecStats)
+        player.coins = player.coins + perSec
+        numbersAdjust(player.coins, counter)
+        OLDstats.totalCoins = OLDstats.totalCoins + perSec
+        numbersAdjust(OLDstats.totalCoins, totalValueStats)
+        OLDstats.perSec = perSec
+        numbersAdjust(OLDstats.perSec, perSecStats)
     },
-    addCoins: function () {
-        const tpBonus = teamPrincipal.value
-        const bonusSpeed = driver.value
-        const perClick = ( this.actualSpeed * bonusSpeed * tpBonus)
+    // addCoins: function () {
+    //     const tpBonus = teamPrincipal.value
+    //     const bonusSpeed = driver.value
+    //     const perClick = ( this.actualSpeed * bonusSpeed * tpBonus)
     
-        this.actualCoins = this.actualCoins + perClick 
-        numbersAdjust(player.actualCoins, counter)
-        stats.totalCoins = stats.totalCoins + perClick 
-        numbersAdjust(stats.totalCoins, totalValueStats)
-        stats.perClick = perClick
-        numbersAdjust(stats.perClick, perClickStats)
-
-    },
+    //     player.coins = player.coins + perClick 
+    //     numbersAdjust(player.coins, counter)
+    //     OLDstats.totalCoins = OLDstats.totalCoins + perClick 
+    //     numbersAdjust(OLDstats.totalCoins, totalValueStats)
+    //     OLDstats.perClick = perClick
+    //     numbersAdjust(OLDstats.perClick, perClickStats)
+        
+    // },
     spendCoins: function (cost) {
-        if(this.actualCoins >= cost) {
-            this.actualCoins = this.actualCoins - cost
-            numbersAdjust(player.actualCoins, counter)
+        if(player.coins >= cost) {
+            player.coins = player.coins - cost
+            numbersAdjust(player.coins, counter)
         }
     },
 
 }
 
-const stats = {
+const OLDstats = {
     totalCoins: 0,
     perSec: 0,
     perClick: 1,
-    update: function () {
-        (document.querySelector('#Total-counter-value')).innerText = this.totalCoins
-    }
 }
 
 
 clicker.addEventListener('click', (e) => {
-    player.addCoins();
-    numbersAdjust(player.actualCoins, counter)
+    addCoins();
+    numbersAdjust(player.coins, counter)
 })
 
 const speedAdjust = function () {
-    player.actualSpeed = player.speed + player.speedBooster
-    speed.textContent = `${player.actualSpeed} km/h`
+    // Splayer.actualSpeed = Splayer.speed + Splayer.speedBooster
+    speed.textContent = `${player.speed} km/h`
 }
 
 speedAdjust();
@@ -112,7 +139,7 @@ bolidElement.addEventListener('click', (e) => {
     if(!checkPersonal) {
         createCharacterCard('driver')
         checkPersonal = true
-        if(!player.driver) {
+        if(!Splayer.driver) {
             createUnlockCharacter(driver, buyCharacter)
         }
     } else {
@@ -194,7 +221,7 @@ garageElement.addEventListener('click', (e) => {
         if(!checkTeamPrincipal) {
             createCharacterCard('teamPrincipal')
             checkTeamPrincipal = true
-            if(!player.teamPrincipal) {
+            if(!Splayer.teamPrincipal) {
                 createUnlockCharacter(teamPrincipal, buyCharacter)
             }
         } else {
@@ -289,7 +316,7 @@ const buyCharacter = function (object) {
     const character = object.type
     if (!object.bought) {
         if(verifyCoinnsAmount(object)) {
-            player[`${character}`] = 'true'
+            Splayer[`${character}`] = 'true'
             player.spendCoins(object.cost)
             createCharacter(character, object, upgrade)
             if (character === 'teamPrincipal'){
@@ -303,30 +330,33 @@ const buyCharacter = function (object) {
 }
 
 const upgrade = function (object) {
+
     
     const displayCost = document.getElementById(`${object.type}-price`)
     const displayLvl = document.getElementById(`${object.type}Lvl`)
-
+    
     if(verifyCoinnsAmount(object)) {
-        player.spendCoins(object.cost)
+        Splayer.spendCoins(object.cost)
         object.upgrade()
         numbersAdjust(object.cost, displayCost)
         countMultiplierSpeed()
-
+        
         displayLvl.innerText = 'Lvl. ' + object.level
-        updateHomeStats(object)
-
+        // updateHomeStats(object)
+        
         if(object.addSkill) {
             unlockSkill(object)
         }
-
+        
     } 
-
+    
+    calculateSpeed()
+    statsUpDate();
 
 }
 
 const verifyCoinnsAmount = function (object) {
-    if(player.actualCoins >= object.cost) {
+    if(player.coins >= object.cost) {
         return true
     } 
     else {
@@ -378,14 +408,14 @@ const numbersAdjust = function (toAdjust, target) {
         if 
         (coins < 10 ** coinsAmount[i]) 
         {
-            target.textContent = `${coins} \u2234`
+            target.innerText = `${coins} \u2234`
             break
         } 
         else if 
         (coins > 10 ** coinsAmount[i] && coins < 10 ** coinsAmount[i + 1]) 
         {
             const value = (coins * (10 ** -(coinsAmount[i]))).toFixed(1)
-            target.textContent = `${value}${coinsAmountName[i]} \u2234`
+            target.innerText = `${value}${coinsAmountName[i]} \u2234`
             break
         }
     }
@@ -576,19 +606,19 @@ countMultiplierSpeed();
 createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
 
 const totalValueStats = document.querySelector('#Total-counter-value')
-totalValueStats.innerText = `${stats.totalCoins} \u2234`
+totalValueStats.innerText = `${OLDstats.totalCoins} \u2234`
 const perSecStats = document.querySelector('#PS-counter-value')
-perSecStats.innerText = `${stats.perSec} \u2234`
+perSecStats.innerText = `${OLDstats.perSec} \u2234`
 const perClickStats = document.querySelector('#PC-counter-value')
-perClickStats.innerText = `${stats.perClick} \u2234`
+perClickStats.innerText = `${OLDstats.perClick} \u2234`
 
-const updateHomeStats = function (object) {
-    const element = document.querySelector(`#${object.type}-card-stats-value`)
-    if (element) {
-        element.innerText = `${object.value}${object.actionSign}` 
-    }
-    stats.update()
-}
+// const updateHomeStats = function (object) {
+//     const element = document.querySelector(`#${object.type}-card-OLDstats-value`)
+//     if (element) {
+//         element.innerText = `${object.value}${object.actionSign}` 
+//     }
+//     OLDstats.update()
+// }
 
 
 
@@ -667,6 +697,14 @@ const activeStyleNavigation = function (activeNavigation) {
 }
 activeStyleNavigation('menuHome')
 
+function statsUpDate () {
 
+    stats.perClick = calcPerClick()
+    numbersAdjust(player.coins, counter)
+    numbersAdjust(OLDstats.totalCoins, totalValueStats)
+    numbersAdjust(stats.perClick, perClickStats)
+
+    console.log(stats.perClick)
+} 
 
 
