@@ -29,7 +29,7 @@ function calculateSpeed () {
     bolidParts.forEach(e => speed += e.value)
     player.speed = speed + player.bonusSpeed
     statsUpDate()
-    console.log(player.speed + 'PS')
+    // console.log(player.speed + 'PS')
 }
 
 
@@ -37,19 +37,23 @@ function addCoins () {
     calculateSpeed()
 
     const perClick = calcPerClick()
-
+    
     player.coins = player.coins + perClick 
     OLDstats.totalCoins = OLDstats.totalCoins + perClick 
     stats.perClick = perClick
-
+    
     statsUpDate()
     
+    console.log(player.coins)
+
 }
 
 function calcPerClick () {
     const sponsors = garageFacilities[0] // sponsors object
     const speedBonus = driver.value
     const perClick = player.speed * driver.value * sponsors.value
+
+    // console.log('calcPC')
 
     return perClick
 }
@@ -107,6 +111,8 @@ const OLDstats = {
 
 
 clicker.addEventListener('click', (e) => {
+    console.log('LISTENER')
+
     addCoins();
     numbersAdjust(player.coins, counter)
 })
@@ -339,12 +345,12 @@ const upgrade = function (object) {
         Splayer.spendCoins(object.cost)
         object.upgrade()
         numbersAdjust(object.cost, displayCost)
-        countMultiplierSpeed()
+        // countMultiplierSpeed()
         
         displayLvl.innerText = 'Lvl. ' + object.level
         // updateHomeStats(object)
         
-        if(object.addSkill) {
+        if(object.addSkill) { /// TO REBUILD    
             unlockSkill(object)
         }
         
@@ -593,16 +599,16 @@ const boostAutoClick = (duration) => {
     // updateHomeStats()
 }
 // ------------------------------------------------- END SKILLS -------------------------------------------------
-const countMultiplierSpeed = function () {
-    let multiplier = 0
-    for ( let i = 0; i < bolidParts.length; i++){
-        const x = bolidParts[i]
-        multiplier = multiplier + x.value
-    }
-    player.speed = multiplier
-    speedAdjust()
-}
-countMultiplierSpeed();
+// const countMultiplierSpeed = function () {
+//     let multiplier = 0
+//     for ( let i = 0; i < bolidParts.length; i++){
+//         const x = bolidParts[i]
+//         multiplier = multiplier + x.value
+//     }
+//     player.speed = multiplier
+//     speedAdjust()
+// }
+// countMultiplierSpeed();
 createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
 
 const totalValueStats = document.querySelector('#Total-counter-value')
@@ -700,11 +706,14 @@ activeStyleNavigation('menuHome')
 function statsUpDate () {
 
     stats.perClick = calcPerClick()
+    // console.log('2')
     numbersAdjust(player.coins, counter)
     numbersAdjust(OLDstats.totalCoins, totalValueStats)
     numbersAdjust(stats.perClick, perClickStats)
 
-    console.log(stats.perClick)
+    speed.innerText = `${player.speed} km/h`
+
+    // console.log(stats.perClick)
 } 
 
 

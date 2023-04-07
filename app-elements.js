@@ -18,20 +18,19 @@ const engine = {
     type: 'engine',
     level: 1,
     value: 1,
-    subValue: 1,
+    originValue: 1,
     cost: 20,
-    multiplier: 1,
-    lvlUpCost: 2.25,
+    lvlUpCostMultiplier: 2.25,
     actionSign: '\u2234',
     description: 'Increase the engine power to gain more speed on straights',
     img: './img/engine.webp',
     upgrade: function () {
         nextLvl(this)
-        this.subValue++
+        this.originValue++
         this.calculateValue()
     },
     calculateValue: function () {
-        this.value =  Math.round(this.subValue * engineers.value)
+        this.value =  Math.round(this.originValue * engineers.value)
     }
 }
 const aerodynamics = {
@@ -41,8 +40,7 @@ const aerodynamics = {
     value: 0,
     subValue: 0,
     cost: 40,
-    multiplier: 1,
-    lvlUpCost: 2,
+    lvlUpCostMultiplier: 2,
     actionSign: '\u2234',
     description: 'Lower aerodynamic drag is equal to higher top speed',
     img: './img/aero.webp',
@@ -60,20 +58,19 @@ const suspension = {
     type: 'suspension',
     level: 0,
     value: 0,
-    subValue: 0,
+    originValue: 0,
     cost: 120,
-    multiplier: 1,
-    lvlUpCost: 2,
+    lvlUpCostMultiplier: 2,
     actionSign: '\u2234',
     description: 'Better suspension helps driving through turns faster',
     img: './img/suspension.webp',
     upgrade: function () {
         nextLvl(this)
-        this.subValue++
+        this.originValue++
         this.calculateValue()
     },
     calculateValue: function () {
-        this.value =  Math.round(this.subValue * engineers.value)
+        this.value =  Math.round(this.originValue * engineers.value)
     }
 }
 const turbo = {
@@ -81,20 +78,19 @@ const turbo = {
     type: 'turbo',
     level: 0,
     value: 0,
-    subValue: 0,
+    originValue: 0,
     cost: 200,
-    multiplier: 1,
-    lvlUpCost: 2,
+    lvlUpCostMultiplier: 2,
     actionSign: '\u2234',
     description: 'Speeeeeeeeeeeeeeeeeed',
     img: './img/turbo.webp',
     upgrade: function () {
         nextLvl(this)
-        this.subValue++
+        this.originValue++
         this.calculateValue()
     },
     calculateValue: function () {
-        this.value =  Math.round(this.subValue * engineers.value)
+        this.value =  Math.round(this.originValue * engineers.value)
     }
 }
 
@@ -111,35 +107,31 @@ const sponsors = {
     level: 0,
     value: 1,
     subValue: 0,
-    cost: 11000,
+    cost: 89000,
     bonus: 1,
-    lvlUpCost: 3,
+    lvlUpCostMultiplier: 3,
     actionSign: '\u2234',
     description: 'Take more money for your speed',
     img: './img/sponsors.webp',
     upgrade: function () {
         nextLvl(this)
-        this.subValue++
-        this.calculateValue()
+        this.value++
     },
-    calculateValue: function () {
-        this.value =  Math.round(this.subValue * this.bonus)
-    }
+
 }
 const windTunnel = {
     name: 'Wind tunnel',
     type: 'windTunnel',
     level: 0,
     value: 1,
-    cost: 2600,
-    multiplier: 1,
-    lvlUpCost: 2,
+    cost: 26000,
+    lvlUpCostMultiplier: 2,
     actionSign: 'x',
     description: 'Better aerodynamics performance',
     img: './img/windtunnel.webp',
     upgrade: function () {
         nextLvl(this)
-        this.value =  Number((this.value + .3).toPrecision(2))
+        this.value =  Number((this.value + .5).toPrecision(2))
         aerodynamics.calculateValue()
     },
 }
@@ -149,33 +141,29 @@ const engineers = {
     level: 0,
     value: 1,
     cost: 3000,
-    multiplier: 1,
-    lvlUpCost: 2,
+    lvlUpCostMultiplier: 2,
     actionSign: 'x',
     description: 'Hire appropriate people to improve bolid parts efficient',
     img: './img/engineers.webp',
     upgrade: function () {
         nextLvl(this)
 
-        console.log(this.level+ 'level')
-        console.log(this.value + 'before')
-        this.value =  Number((this.value + .2).toPrecision(2))
-        console.log(this.value + 'after')
+        // console.log(this.level+ 'level')
+        this.value =  Number((this.value + .25).toPrecision(3))
         engine.calculateValue()
         suspension.calculateValue()
         turbo.calculateValue()
     },
 }
 const fame = {
-    name: 'Fame',
+    name: '?Fame?',
     type: 'fame',
     level: 0,
     value: 0,
     cost: 33000,
-    multiplier: 1,
-    lvlUpCost: 4,
+    lvlUpCostMultiplier: 4,
     actionSign: 'x',
-    description: 'Grow the celebrity of your team to attract richer sponsors',
+    description: 'skills time duration',
     img: './img/fame.webp',
     upgrade: function () {
         nextLvl(this)
@@ -208,7 +196,7 @@ export const driver = {
     value: 1,
     multiplier: 1,
     cost: 750,
-    lvlUpCost: 2,
+    lvlUpCostMultiplier: 2,
     img: './img/jurek.webp',
     upgrade: function () {
 
@@ -219,7 +207,7 @@ export const driver = {
             this.subLevel++
         }
 
-        this.cost = Math.round(this.cost * this.lvlUpCost)
+        this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
         const x = Number((this.value + .05).toPrecision(3))
         this.value = x
 
@@ -279,7 +267,7 @@ export const teamPrincipal = {
     value: 1,
     multiplier: 1,
     cost: 3900,
-    lvlUpCost: 2,
+    lvlUpCostMultiplier: 2,
     img: './img/mateusz.webp',
     upgrade: function () {
 
@@ -290,7 +278,7 @@ export const teamPrincipal = {
             this.subLevel++
         }
 
-        this.cost = Math.round(this.cost * this.lvlUpCost)
+        this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
         const x = (this.value + .5)
         this.value = x
 
@@ -336,8 +324,7 @@ timer()
 
 const nextLvl = function (object) {
     object.level++
-    object.cost = Math.round(object.cost * object.lvlUpCost)
-    object.multiplier = Math.round(object.multiplier * 1.2)
+    object.cost = Math.round(object.cost * object.lvlUpCostMultiplier)
 }
 
 
