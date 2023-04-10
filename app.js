@@ -1,5 +1,5 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
-import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats } from "./app-elements.js"
+import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 
 createCarClicker();
 createCarBackground();
@@ -19,33 +19,41 @@ let garageCards = false;
 let checkPersonal = false 
 let checkTeamPrincipal = false 
 
-const game = {
-    driverActivatedSkillCreated: false,
-    teamPrincipalActivatedSkillCreated: false,
-}
 // ------------------------------------------------------------------- NEW
 function calculateSpeed () {
     let speed = 0
+    let bonusSpeed = 0
     bolidParts.forEach(e => speed += e.value)
-    player.speed = speed + player.bonusSpeed
+
+    if(game.driverSkillStatus) {
+        bonusSpeed = player.speed
+    } else {
+        bonusSpeed = 0
+    }
+
+    player.speed = speed + bonusSpeed
     statsUpDate()
     // console.log(player.speed + 'PS')
 }
 
 
 function addCoins () {
-    calculateSpeed()
 
+    calculateSpeed()
     const perClick = calcPerClick()
-    
+
     player.coins = player.coins + perClick 
     OLDstats.totalCoins = OLDstats.totalCoins + perClick 
     stats.perClick = perClick
-    
-    statsUpDate()
-    
-    console.log(player.coins)
 
+    statsUpDate()
+}
+
+function spendCoins(cost) {
+    if(player.coins >= cost) {
+        player.coins = player.coins - cost
+        numbersAdjust(player.coins, counter)
+    }
 }
 
 function calcPerClick () {
@@ -57,50 +65,44 @@ function calcPerClick () {
 
     return perClick
 }
+
+function calcPerSeconds () {
+
+    const display = document.querySelector('#PS-counter-value')
+    // console.log(display)
+
+    let param1 = player.coins
+    let param2
+
+    const timer = function () { setTimeout( ()=> {
+        param2 = player.coins
+        calc()
+        calcPerSeconds()
+    }, 1000) }
+
+    function calc () {
+        const value = param2 - param1
+        if (value > 0) {
+            numbersAdjust(value,display)
+        } else {
+            display.innerText = 0
+        }
+    }
+    timer()
+}
+
+
 // -----------------------------------------------------------------------------------------------------------------
 
 
 const Splayer = {
-    speed: 3,
-    speedBooster: 0,
-    actualSpeed: 3,
-    driver: false,
-    driverSkill: true,
-    teamPrincipal: false,
-    teamPrincipalSkill: true,
-    autoCoins: function () {
-        const bonusSpeed = driver.value
-        const tpBonus = teamPrincipal.value
-        const sponsorsBonus = garageFacilities[0].value
-        const perSec = (this.actualSpeed * bonusSpeed) * tpBonus + sponsorsBonus
-
-        player.coins = player.coins + perSec
-        numbersAdjust(player.coins, counter)
-        OLDstats.totalCoins = OLDstats.totalCoins + perSec
-        numbersAdjust(OLDstats.totalCoins, totalValueStats)
-        OLDstats.perSec = perSec
-        numbersAdjust(OLDstats.perSec, perSecStats)
-    },
-    // addCoins: function () {
-    //     const tpBonus = teamPrincipal.value
-    //     const bonusSpeed = driver.value
-    //     const perClick = ( this.actualSpeed * bonusSpeed * tpBonus)
-    
-    //     player.coins = player.coins + perClick 
-    //     numbersAdjust(player.coins, counter)
-    //     OLDstats.totalCoins = OLDstats.totalCoins + perClick 
-    //     numbersAdjust(OLDstats.totalCoins, totalValueStats)
-    //     OLDstats.perClick = perClick
-    //     numbersAdjust(OLDstats.perClick, perClickStats)
-        
-    // },
-    spendCoins: function (cost) {
-        if(player.coins >= cost) {
-            player.coins = player.coins - cost
-            numbersAdjust(player.coins, counter)
-        }
-    },
-
+    // speed: 3,
+    // speedBooster: 0,
+    // actualSpeed: 3,
+    // driver: false,
+    // driverSkill: true,
+    // teamPrincipal: false,
+    // teamPrincipalSkill: true,
 }
 
 const OLDstats = {
@@ -109,9 +111,8 @@ const OLDstats = {
     perClick: 1,
 }
 
-
 clicker.addEventListener('click', (e) => {
-    console.log('LISTENER')
+    // console.log('LISTENER')
 
     addCoins();
     numbersAdjust(player.coins, counter)
@@ -145,7 +146,7 @@ bolidElement.addEventListener('click', (e) => {
     if(!checkPersonal) {
         createCharacterCard('driver')
         checkPersonal = true
-        if(!Splayer.driver) {
+        if(!game.driverOwn) {
             createUnlockCharacter(driver, buyCharacter)
         }
     } else {
@@ -323,7 +324,7 @@ const buyCharacter = function (object) {
     if (!object.bought) {
         if(verifyCoinnsAmount(object)) {
             Splayer[`${character}`] = 'true'
-            player.spendCoins(object.cost)
+            spendCoins(object.cost)
             createCharacter(character, object, upgrade)
             if (character === 'teamPrincipal'){
                 startAutoClick()
@@ -342,7 +343,7 @@ const upgrade = function (object) {
     const displayLvl = document.getElementById(`${object.type}Lvl`)
     
     if(verifyCoinnsAmount(object)) {
-        Splayer.spendCoins(object.cost)
+        spendCoins(object.cost)
         object.upgrade()
         numbersAdjust(object.cost, displayCost)
         // countMultiplierSpeed()
@@ -356,7 +357,7 @@ const upgrade = function (object) {
         
     } 
     
-    calculateSpeed()
+    calculateSpeed();
     statsUpDate();
 
 }
@@ -555,7 +556,7 @@ let clickTimer;
 let timerOn = 0;
 
 const autoClick = function () {
-    player.autoCoins()
+    addCoins()
     clickTimer = setTimeout(autoClick, 1000)
 }
 
@@ -565,18 +566,6 @@ const startAutoClick = () => {
 
 const stopAutoClick = () => {
     clearTimeout(clickTimer)
-}
-
-const boostSpeed = (duration) => {
-
-    const time = duration * 1000
-
-    player.speedBooster = player.actualSpeed
-    speedAdjust()
-    setTimeout( () => {
-        player.speedBooster = 0
-        speedAdjust()
-    }, time)
 }
 
 const boostAutoClick = (duration) => {
@@ -598,6 +587,24 @@ const boostAutoClick = (duration) => {
     stopBoost()
     // updateHomeStats()
 }
+
+const boostSpeed = (duration) => {
+
+    const time = duration * 1000
+    game.driverSkillStatus = true
+    calculateSpeed()
+    speedAdjust()
+    
+    setTimeout( () => {
+        game.driverSkillStatus = false
+        calculateSpeed()
+        speedAdjust()
+        console.log('boostSpeed Set timeOut')
+    }, time)
+
+}
+
+
 // ------------------------------------------------- END SKILLS -------------------------------------------------
 // const countMultiplierSpeed = function () {
 //     let multiplier = 0
@@ -713,7 +720,9 @@ function statsUpDate () {
 
     speed.innerText = `${player.speed} km/h`
 
-    // console.log(stats.perClick)
+    console.log(stats.perClick)
 } 
+
+calcPerSeconds()
 
 

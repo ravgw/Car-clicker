@@ -1,8 +1,12 @@
 export const game = {
+    driverActivatedSkillCreated: false,
+    teamPrincipalActivatedSkillCreated: false,
+    driverSkillStatus: false,
     autoclickStatus: false,
+    driverOwn: false,
 }
 export const player = {
-    coins: 0,
+    coins: 1313130,
     speed: 1,
     bonusSpeed: 0,
 }
@@ -109,7 +113,7 @@ const sponsors = {
     subValue: 0,
     cost: 89000,
     bonus: 1,
-    lvlUpCostMultiplier: 3,
+    lvlUpCostMultiplier: 11,
     actionSign: '\u2234',
     description: 'Take more money for your speed',
     img: './img/sponsors.webp',
