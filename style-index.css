@@ -1,0 +1,115 @@
+:root {
+    --light: rgb(209, 238, 252);
+    --black: rgb(4,4,4);
+    --blackTR: rgba(4, 4, 4, 0.644);
+    --fireengine: rgb(226, 60, 71);
+    --alert: rgb(27, 27, 27);
+    --fireengineTR: rgba(226, 60, 71, 0.800);
+    --steelblue: rgb(63, 136, 197);
+    --selectiveyellow: rgb(255, 186, 8);
+    --selectiveyellowTR: rgba(255, 185, 8, 0.800);
+    --prusianblue: rgb(28, 49, 68);
+    --prusianbluelight: rgb(34, 59, 82);
+    --slategray: rgb(113, 131, 152);
+    --spacecadet: rgb(45, 48, 71);
+    --body: rgb(88, 134, 175)
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    /* min-height: 550px; */
+    max-height: 1000px;
+    background: rgb(104, 176, 252);
+    background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
+    border: 3px solid #22232e;
+    overflow: hidden;
+}
+
+.menu__board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 35%;
+    max-height: 300px;
+    width: 55%;
+    max-width: 400px;
+    min-width: 245px;
+}
+
+.menu__button {
+    border-width: 2px 2px 6px 3px;
+    border-radius: 0 0 10px 10px;
+    border-style: solid;
+    border-bottom-style: double;
+    border-left-style: double;
+    border-color: var(--prusianblue);
+}
+
+.menu__button_large {
+    width: 100%;
+    height: fit-content;
+    padding: 1rem 3rem;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.menu__button_small {
+    padding: 0.1rem 1rem;
+    width: 100%;
+    background-color: var(--steelblue);
+    font-style: italic;
+}
+
+#menu__new-game {
+    background-color: var(--fireengine) ;
+}
+
+#menu__load-container {
+    background-color: transparent;
+    border-color: var(--prusianblue);
+    border-style: solid;
+    border-width:  0 2px;
+    border-radius: 10px;
+    font-weight: 100;
+    width: 100%;
+}
+#load-container__save-game {
+    background-color: var(--selectiveyellow) ;
+    border-radius: 10px 10px 0 0;
+}
+.load-container__save-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+#save-details__remove-game {
+    width: 100%;
+}
+
+.menu__accessory {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#accessory__info {
+    border-radius: 0 0 0 10px;
+}
+#accessory__credits {
+    border-radius: 0 0 10px 0;
+
+}
+
+
+
+

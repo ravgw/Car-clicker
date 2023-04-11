@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style-index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,300;1,700&display=swap" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <section class="menu">
+        <div class="menu__board">
+            <button id="menu__new-game" class="menu__button menu__button_large">new game</button>
+            <div id="menu__load-container">
+                <button id="load-container__save-game" class="menu__button menu__button_large"> load save</button>
+                <p class="load-container__save-details">
+                    <span id="save-details__data">(empty)</span>
+                    <span id="save-details__-value">--&#8756;</span>
+                    <button id="save-details__remove-game" class="menu__button menu__button_small">remove</button>
+                </p>
+            </div>
+            <div class="menu__accessory">
+                <button id="accessory__info" class="menu__button menu__button_small">info</button>
+                <button id="accessory__credits" class="menu__button menu__button_small">credits</button>
+            </div>
+        </div>
+    </section>
+
+    <script  type="module" src="./index-utils.js"></script>
+</body>
+</html>

@@ -3,16 +3,19 @@ export const game = {
     teamPrincipalActivatedSkillCreated: false,
     driverSkillStatus: false,
     autoclickStatus: false,
-    driverOwn: false,
+    // driverOwn: false,
 }
 export const player = {
     coins: 1313130,
     speed: 1,
     bonusSpeed: 0,
+    teamPrincipalOwned: false,
+    driverOwned: false,
 }
 
 export const stats = {
     perClick: 1,
+    totalCoins: 0,
 }
 
 

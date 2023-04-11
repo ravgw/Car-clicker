@@ -43,7 +43,7 @@ function addCoins () {
     const perClick = calcPerClick()
 
     player.coins = player.coins + perClick 
-    OLDstats.totalCoins = OLDstats.totalCoins + perClick 
+    stats.totalCoins = stats.totalCoins + perClick 
     stats.perClick = perClick
 
     statsUpDate()
@@ -85,7 +85,7 @@ function calcPerSeconds () {
         if (value > 0) {
             numbersAdjust(value,display)
         } else {
-            display.innerText = 0
+            display.innerText = `0\u2234`
         }
     }
     timer()
@@ -95,21 +95,11 @@ function calcPerSeconds () {
 // -----------------------------------------------------------------------------------------------------------------
 
 
-const Splayer = {
-    // speed: 3,
-    // speedBooster: 0,
-    // actualSpeed: 3,
-    // driver: false,
-    // driverSkill: true,
-    // teamPrincipal: false,
-    // teamPrincipalSkill: true,
-}
-
-const OLDstats = {
-    totalCoins: 0,
-    perSec: 0,
-    perClick: 1,
-}
+// const OLDstats = {
+//     totalCoins: 0,
+//     perSec: 0,
+//     perClick: 1,
+// }
 
 clicker.addEventListener('click', (e) => {
     // console.log('LISTENER')
@@ -146,7 +136,7 @@ bolidElement.addEventListener('click', (e) => {
     if(!checkPersonal) {
         createCharacterCard('driver')
         checkPersonal = true
-        if(!game.driverOwn) {
+        if(!player.driverOwned) {
             createUnlockCharacter(driver, buyCharacter)
         }
     } else {
@@ -228,7 +218,7 @@ garageElement.addEventListener('click', (e) => {
         if(!checkTeamPrincipal) {
             createCharacterCard('teamPrincipal')
             checkTeamPrincipal = true
-            if(!Splayer.teamPrincipal) {
+            if(!player.teamPrincipalOwned) {
                 createUnlockCharacter(teamPrincipal, buyCharacter)
             }
         } else {
@@ -323,7 +313,7 @@ const buyCharacter = function (object) {
     const character = object.type
     if (!object.bought) {
         if(verifyCoinnsAmount(object)) {
-            Splayer[`${character}`] = 'true'
+            player[`${character}Owned`] = 'true'
             spendCoins(object.cost)
             createCharacter(character, object, upgrade)
             if (character === 'teamPrincipal'){
@@ -619,11 +609,11 @@ const boostSpeed = (duration) => {
 createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
 
 const totalValueStats = document.querySelector('#Total-counter-value')
-totalValueStats.innerText = `${OLDstats.totalCoins} \u2234`
+totalValueStats.innerText = `${stats.totalCoins} \u2234`
 const perSecStats = document.querySelector('#PS-counter-value')
-perSecStats.innerText = `${OLDstats.perSec} \u2234`
+perSecStats.innerText = `0\u2234`
 const perClickStats = document.querySelector('#PC-counter-value')
-perClickStats.innerText = `${OLDstats.perClick} \u2234`
+perClickStats.innerText = `${stats.perClick} \u2234`
 
 // const updateHomeStats = function (object) {
 //     const element = document.querySelector(`#${object.type}-card-OLDstats-value`)
@@ -715,7 +705,7 @@ function statsUpDate () {
     stats.perClick = calcPerClick()
     // console.log('2')
     numbersAdjust(player.coins, counter)
-    numbersAdjust(OLDstats.totalCoins, totalValueStats)
+    numbersAdjust(stats.totalCoins, totalValueStats)
     numbersAdjust(stats.perClick, perClickStats)
 
     speed.innerText = `${player.speed} km/h`
