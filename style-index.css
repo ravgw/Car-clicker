@@ -110,6 +110,43 @@
 
 }
 
+.information-box {
+    display: none;
+    width: 100px;
+    height: 100px;
+    background-color: var(--prusianbluelight);
+    animation: show_box .4s ;
+}
+
+/* ________________________ ANIMATIONS ________________________ */
+
+.hide-menu {
+    animation: hide_menu .4s ;
+}
+.show-box {
+    animation: show_box .4s ;
+}
+
+@keyframes hide_menu {
+    0% {
+        scale: 1;
+    }
+    100% {
+        opacity: .2;
+        scale: .2;
+    }
+}
+
+@keyframes show_box {
+    0% {
+        scale: 0.2;
+        opacity: 0.2;
+    }
+    100% {
+        scale: 1;
+        opacity:  1;
+    }
+}
 
 
 
