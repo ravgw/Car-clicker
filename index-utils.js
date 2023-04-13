@@ -28,7 +28,7 @@ function showInformationBox () {
     }, 300)
 
     function showBox () {
-        document.querySelector('.information-box').style.display = 'flex'
+        document.querySelector('.accessory-box').style.display = 'flex'
     }
 }
 

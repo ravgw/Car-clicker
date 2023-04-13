@@ -110,10 +110,13 @@
 
 }
 
-.information-box {
+.accessory-box {
     display: none;
-    width: 100px;
-    height: 100px;
+    max-width: 75%;
+    max-height: 75%;
+    overflow: scroll;
+    padding: 1rem;
+    color: aliceblue;
     background-color: var(--prusianbluelight);
     animation: show_box .4s ;
 }
