@@ -42,6 +42,7 @@
     width: 55%;
     max-width: 400px;
     min-width: 245px;
+    animation: show_box .4s;
 }
 
 .menu__button {
@@ -66,6 +67,10 @@
     width: 100%;
     background-color: var(--steelblue);
     font-style: italic;
+}
+
+.accessory-box__back {
+    font-size: 1rem;
 }
 
 #menu__new-game {
@@ -102,7 +107,7 @@
     width: 100%;
 }
 
-#accessory__info {
+#accessory__game-rules {
     border-radius: 0 0 0 10px;
 }
 #accessory__credits {
@@ -110,27 +115,38 @@
 
 }
 
-.accessory-box {
+.accessory__box {
+    position: relative;
     display: none;
-    max-width: 75%;
+    width: 75%;
     max-height: 75%;
     overflow: scroll;
     padding: 1rem;
     color: aliceblue;
     background-color: var(--prusianbluelight);
     animation: show_box .4s ;
+    border: double 4px var(--steelblue);
+    border-bottom: none;
+}
+
+.accessory__box_back {
+    width: 75%;
+    display: none;
+    animation: show_box .4s;
+    justify-content: center;
 }
 
 /* ________________________ ANIMATIONS ________________________ */
 
-.hide-menu {
-    animation: hide_menu .4s ;
+.hide-element {
+    animation: hide_element .4s ;
 }
+
 .show-box {
     animation: show_box .4s ;
 }
 
-@keyframes hide_menu {
+@keyframes hide_element {
     0% {
         scale: 1;
     }
