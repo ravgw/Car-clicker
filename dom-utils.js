@@ -1,6 +1,6 @@
 
-export const createCarClicker = function () {
-const clicker = document.getElementById('clicker');
+export const createCarClicker = function (target) {
+const clicker = target
 
 const carBodyRear = document.createElement('p');
 carBodyRear.id = 'carBodyRear';

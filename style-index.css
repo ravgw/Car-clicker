@@ -107,7 +107,7 @@
     width: 100%;
 }
 
-#accessory__game-rules {
+#accessory__guidebook {
     border-radius: 0 0 0 10px;
 }
 #accessory__credits {
@@ -127,6 +127,16 @@
     animation: show_box .4s ;
     border: double 4px var(--steelblue);
     border-bottom: none;
+}
+
+.accessory__box_guidebook {
+    display: flex;
+    flex-direction: column;
+}
+
+.accessory__box_credits {
+    display: flex;
+    flex-direction: column;
 }
 
 .accessory__box_back {

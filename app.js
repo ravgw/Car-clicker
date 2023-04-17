@@ -1,7 +1,8 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 
-createCarClicker();
+const car = document.getElementById('clicker');
+createCarClicker(car);
 createCarBackground();
 
 

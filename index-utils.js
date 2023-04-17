@@ -1,3 +1,4 @@
+import { createCarClicker } from './dom-utils.js'
 
 function addHover () {
     const hoverElements = document.querySelectorAll('.menu__button')
@@ -14,6 +15,22 @@ function addHover () {
             hover.innerText = text
         }) 
     });
+}
+
+function showGuidebook () {
+    const credits = document.querySelector('.accessory__box_credits')
+    credits.style.display = 'none'
+
+    const guidebook = document.querySelector('.accessory__box_guidebook')
+    guidebook.style.display = 'flex'
+}
+
+function showCredits () {
+    const guidebook = document.querySelector('.accessory__box_guidebook')
+    guidebook.style.display = 'none'
+
+    const credits = document.querySelector('.accessory__box_credits')
+    credits.style.display = 'flex'
 }
 
 function setAccessory () {
@@ -60,19 +77,22 @@ newGame.addEventListener('click', () => {
     console.log('new game')
 })
 
-const accessoryButton = document.querySelectorAll('.menu__accessory button')
-accessoryButton.forEach( e => {
-    e.addEventListener('click', () => {
-        setAccessory()
-    })
+const giudebookButton = document.querySelector('#accessory__guidebook')
+giudebookButton.addEventListener('click', () => {
+    setAccessory()
+    showGuidebook()
+})
+
+const creditsButton = document.querySelector('#accessory__credits')
+creditsButton.addEventListener('click', () => {
+    setAccessory()
+    showCredits()
 })
 
 const backButton = document.querySelector('.accessory__box_back')
 backButton.addEventListener('click', () => {
     setMenu()
 })
-
-
 
 addHover()
 

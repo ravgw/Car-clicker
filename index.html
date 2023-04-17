@@ -9,12 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,500;0,700;1,300;1,700&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>Car clicker</title>
 </head>
 <body>
     <section class="menu">
         <div class="menu__board">
-            <button id="menu__new-game" class="menu__button menu__button_large">new game</button>
+            <button id="menu__new-game" class="menu__button menu__button_large"> <a href="creating-game.html">new game</a></button>
             <div id="menu__load-container">
                 <button id="load-container__save-game" class="menu__button menu__button_large"> load save</button>
                 <p class="load-container__save-details">
@@ -24,21 +24,21 @@
                 </p>
             </div>
             <div class="menu__accessory">
-                <button id="accessory__game-rules" class="menu__button menu__button_small">info</button>
+                <button id="accessory__guidebook" class="menu__button menu__button_small">info</button>
                 <button id="accessory__credits" class="menu__button menu__button_small">credits</button>
             </div>
         </div>
-        <div class="accessory__box">
-            <article class="accessory__box_game-rules">
-                <h1 id="gr__game-rules">GAME RULES</h1>
-                <navigation class="gr__navigation">
+        <div class="accessory__box"> 
+            <article class="accessory__box_guidebook">
+                <h1 id="gb__guidebook">GUIDEBOOK</h1>
+                <navigation class="gb__navigation">
                     <ol>
                         <li>General
                             <ul>
-                                <li> <a href="#gr__coins">Coins</a></li>
-                                <li><a href="#gr__speed">Speed</a></li>
-                                <li> <a href="#gr__clicker">Clicker</a></li>
-                                <li> <a href="#gr__autoclicker">Autoclicker</a></li>
+                                <li> <a href="#gb__coins">Coins</a></li>
+                                <li><a href="#gb__speed">Speed</a></li>
+                                <li> <a href="#gb__clicker">Clicker</a></li>
+                                <li> <a href="#gb__autoclicker">Autoclicker</a></li>
                             </ul>
                         </li>
                         <li>Character
@@ -63,16 +63,16 @@
                     </ol>
                 </navigation>
 
-                <h2 id="gr__coins">Coins</h2>
+                <h2 id="gb__coins">Coins</h2>
                 <p> Clicking on the car gives you coins. Autoclicker does it automatically. You can spend coins to unlock or upgrade cards</p>
 
-                <h2 id="gr__speed">Speed</h2>
+                <h2 id="gb__speed">Speed</h2>
                 <p>Speed is a sum of yours car-cards value. Upgrade cards and take advantage of others bonus to increese your speed. More speed = more coins</p>
 
-                <h2 id="gr__clicker">Clicker</h2>
+                <h2 id="gb__clicker">Clicker</h2>
                 <p>To earn coins - click on the car</p>
 
-                <h2 id="gr__autoclicker">Autoclicker</h2>
+                <h2 id="gb__autoclicker">Autoclicker</h2>
                 <p>Unlock Team Principial to activate autoclicker. It gives you proper amount of coins every second </p>
 
             </article>
