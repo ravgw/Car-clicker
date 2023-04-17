@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --light: rgb(209, 238, 252);
     --black: rgb(4,4,4);
     --blackTR: rgba(4, 4, 4, 0.644);
@@ -13,23 +13,11 @@
     --slategray: rgb(113, 131, 152);
     --spacecadet: rgb(45, 48, 71);
     --body: rgb(88, 134, 175)
-}
+} */
 
-.menu{
-    display: flex;
-    flex-direction: column;
+#menu{
     align-items: center;
     justify-content: center;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 100%;
-    max-width: 1000px;
-    /* min-height: 550px; */
-    max-height: 1000px;
-    background: rgb(104, 176, 252);
-    background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
-    border: 3px solid #22232e;
-    overflow: hidden;
 }
 
 .menu__board {

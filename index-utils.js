@@ -74,11 +74,12 @@ function setMenu  () {
 
 const newGame = document.querySelector('#menu__new-game')
 newGame.addEventListener('click', () => {
+    window.location.assign("./creating-game.html")
     console.log('new game')
 })
 
-const giudebookButton = document.querySelector('#accessory__guidebook')
-giudebookButton.addEventListener('click', () => {
+const guidebookButton = document.querySelector('#accessory__guidebook')
+guidebookButton.addEventListener('click', () => {
     setAccessory()
     showGuidebook()
 })

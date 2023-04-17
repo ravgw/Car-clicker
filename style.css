@@ -35,7 +35,7 @@ body {
     user-select: none;
 }
 
-#game {
+.game {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -1365,7 +1365,7 @@ body {
 }
 
 @media only screen and (min-width: 600px){
-    #game {
+    .game {
         flex-wrap: wrap;
     }
     #car {
