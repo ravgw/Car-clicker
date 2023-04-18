@@ -74,7 +74,7 @@ function setMenu  () {
 
 const newGame = document.querySelector('#menu__new-game')
 newGame.addEventListener('click', () => {
-    window.location.assign("./creating-game.html")
+    window.location.assign("./creating-new-game.html")
     console.log('new game')
 })
 
