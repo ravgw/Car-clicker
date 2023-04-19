@@ -10,7 +10,7 @@ const  door = document.createElement('p');
 door.id = 'door';
 const carNumber = document.createElement('span')
 carNumber.id = 'car-number'
-carNumber.innerText = '73'
+carNumber.innerText = '0'
 door.appendChild(carNumber)
 
 const rearTyre = document.createElement('p');

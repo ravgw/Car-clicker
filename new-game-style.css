@@ -1,3 +1,4 @@
+
 #create-new-game {
     min-width: 210px;
     overflow: hidden;
@@ -50,6 +51,17 @@
     border-top: 1px solid var(--prusianblue);
     border-radius: 0 0 10px 10px;
 }
+/* _______________________________________________________ SET NUMBERS  */
+.set-numbers__container_element {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 33%;
+    height: 100%;
+}
+#numbers-container {
+    justify-content: center;
+}
 
 #personalize__set-number {
     display: flex;
@@ -58,11 +70,55 @@
     height: 100px;
 }
 
-#set-number__container {
+#set-numbers__container {
     width: 100%;
+    height: 100px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     font-size: 2rem;
+    box-sizing: content-box;
+}
+
+.set-number__number {
+    font-size: 1.5em;
+    color: azure;
+}
+
+/* .set-number__btn:hover{
+} */
+
+#set-number__down_ones:hover + #set-number__number_ones {
+    border-bottom: 2px solid var(--prusianblue);
+}
+
+
+/* ____________________________________________________________ COLORS PALETTE */
+#car-body {
+    width: 100%;
+    height: fit-content;
+}
+#car-body__colors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 100%;
+}
+
+.color {
+    margin: 0.5rem;
+    border-width: 2px 5px 4px 1px;
+    border-color: var(--prusianblue);
+    border-style: double;
+    border-radius:  5px;
+    width: 40px;
+    height: 40px;
+}
+
+.color:hover {
+    border-color: aqua;
 }

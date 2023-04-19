@@ -70,4 +70,31 @@ function setNumber () {
     
 }
 
+function createColorsPalette (personalizeElement) {
+    const colorsPalette = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7']
+    
+    const container = personalizeElement
+    
+    for ( let i = 0; i < colorsPalette.length; i++) {
+        const color = document.createElement('span')
+        color.classList.add('color')
+        color.classList.add('color')
+        color.style.backgroundColor = `#${colorsPalette[i]}`
+        color.addEventListener('click', () => {
+            setColor(colorsPalette[i])
+        })
+        container.appendChild(color)
+    }
+}
+
+function setColor (color) {
+    const body1 = document.querySelector('#carBodyRear')
+    const body2 = document.querySelector('#carBodyFront')
+    
+    body1.style.backgroundColor = `#${color}`
+    body2.style.backgroundColor = `#${color}`
+}
+
 setNumber()
+const carBody = document.querySelector('#car-body__colors')
+createColorsPalette(carBody)
