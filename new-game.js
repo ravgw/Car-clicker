@@ -20,6 +20,7 @@ function setNumber () {
             onesValue = 0
             onesDigit.innerText = onesValue 
         }
+        displayNumber()
     })
     const downOnes = document.querySelector('#set-number__down_ones')
     downOnes.addEventListener('click', () => {
@@ -30,6 +31,7 @@ function setNumber () {
             onesValue = 9
             onesDigit.innerText = onesValue 
         }
+        displayNumber()
     })
     const upTens = document.querySelector('#set-number__up_tens')
     upTens.addEventListener('click', () => {
@@ -40,6 +42,7 @@ function setNumber () {
             tensValue = 0
             tensDigit.innerText = tensValue 
         }
+        displayNumber()
     })
     const downTens = document.querySelector('#set-number__down_tens')
     downTens.addEventListener('click', () => {
@@ -50,7 +53,20 @@ function setNumber () {
             tensValue = 9
             tensDigit.innerText = tensValue 
         }
+        displayNumber()
     })
+
+    function displayNumber () {
+        const number = document.querySelector('#car-number')
+        const ones = onesValue.toString()
+        const tens = tensValue.toString()
+
+        if (tens === '0') {
+            number.innerText = ones
+        } else {
+            number.innerText = tens+ones
+        }
+    }
     
 }
 

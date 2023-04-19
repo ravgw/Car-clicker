@@ -8,6 +8,10 @@ const carBodyFront = document.createElement('p');
 carBodyFront.id = 'carBodyFront';
 const  door = document.createElement('p');
 door.id = 'door';
+const carNumber = document.createElement('span')
+carNumber.id = 'car-number'
+carNumber.innerText = '73'
+door.appendChild(carNumber)
 
 const rearTyre = document.createElement('p');
 rearTyre.classList.add('tyres');
