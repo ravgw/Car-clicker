@@ -25,6 +25,9 @@ frontRim.classList.add('rims')
 
 const driverBody = document.createElement('p');
 driverBody.id = 'driverBody';
+const helmet = document.createElement('span')
+helmet.id = 'driverHelmet'
+driverBody.appendChild(helmet)
 
 
 clicker.appendChild(carBodyRear);

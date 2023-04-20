@@ -95,11 +95,12 @@
 
 
 /* ____________________________________________________________ COLORS PALETTE */
-#car-body {
+#personalize__element {
+    display: flex;
     width: 100%;
     height: fit-content;
 }
-#car-body__colors {
+.personalize__color-picker {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

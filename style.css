@@ -386,7 +386,7 @@ body {
     background: #aa3434;
 }
 /* helmet */
-#driverBody::before {
+#driverHelmet {
     content:'';
     position: absolute;
     top: -16px;
