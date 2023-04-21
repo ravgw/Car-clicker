@@ -70,40 +70,63 @@ function setNumber () {
     
 }
 
-function setColor () {
-    const carBody = document.querySelector('#car-body__colors')
-    const racingSuit = document.querySelector('#driverBody')
-    const helmet = document.querySelector('#driverHelmet')
 
-}
-
-function addColorsPalette (container) {
+(function addColorsPalette () {
     const colorsPalette = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7']
-    
+
+    const containers = document.querySelectorAll('.personalize__color-picker')
+    containers.forEach((container) => {
+        addPalette(container)
+    })
+
+
+    function addPalette (container) {
     for ( let i = 0; i < colorsPalette.length; i++) {
         const color = document.createElement('span')
         color.classList.add('color')
         color.title = `#${colorsPalette[i]}`
         color.style.backgroundColor = `#${colorsPalette[i]}`
         container.appendChild(color)
-    }
-}
+    }}
+})();
 
-function setCarBodyColor (color) {
+(function settingCarBodyColor () {
+    const colorPalette = (document.querySelector('#car-body__colors')).querySelectorAll('span')
     const carBodyFront = document.querySelector('#carBodyFront')
     const carBodyRear = document.querySelector('#carBodyRear')
-    carBodyFront.style.backgroundColor = color
-    carBodyRear.style.backgroundColor = color
+
+    colorPalette.forEach((color) => {
+        color.addEventListener('click', () => {
+            setColor(color, carBodyFront)
+            setColor(color, carBodyRear)
+        })
+    })
+})();
+
+(function settingRacingSuitColor () {
+    const colorPalette = (document.querySelector('#racing-suit__colors')).querySelectorAll('span')
+    const racingSuit = document.querySelector('#driverBody')
+
+    colorPalette.forEach((color) => {
+        color.addEventListener('click', () => {
+            setColor(color, racingSuit)
+        })
+    })
+})();
+
+(function settingHelmetColor () {
+    const colorPalette = (document.querySelector('#driver-helmet__colors')).querySelectorAll('span')
+    const helmet = document.querySelector('#driverHelmet')
+
+    colorPalette.forEach((color) => {
+        color.addEventListener('click', () => {
+            setColor(color, helmet)
+        })
+    })
+})();
+
+function setColor (color, part) {
+    part.style.backgroundColor = color.title
 }
-
-// carBody.addEventListener('click', (e) => {
-
-// })
-// (function setColor () {
-    
-//     addColorsPalette(carBody)
-//     carBody.addEventListener('click', (e) => {
-//     })
-// })();
 
 setNumber()
