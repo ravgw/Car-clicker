@@ -69,11 +69,36 @@ function setNumber () {
     }
     
 }
+const randomizeButton = document.querySelector('#personalize__randomize_button')
+randomizeButton.addEventListener('click', () => {
+    randomize()
+})
 
+function randomize () {
+
+    console.log('randomer')
+    const elements = [
+        document.querySelector('#carBodyFront'),
+        document.querySelector('#driverBody'),
+        document.querySelector('#driverHelmet')
+    ]
+    
+    for (let i = 0; i < elements.length; i++){
+        const random = (() => {return Math.round(Math.random() * colors.length);})();
+        let color = `#${colors[random]}`
+        setColor(color, elements[i])
+        if (i = 0) {
+            setColor(color,document.querySelector('#carBodyRear'))
+            i++
+        }
+    }
+    
+}
+    
+const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7'];
 
 (function addColorsPalette () {
-    const colorsPalette = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7']
-
+    const colorsPalette = colors
     const containers = document.querySelectorAll('.personalize__color-picker')
     containers.forEach((container) => {
         addPalette(container)
@@ -89,6 +114,7 @@ function setNumber () {
         container.appendChild(color)
     }}
 })();
+
 
 (function settingCarBodyColor () {
     const colorPalette = (document.querySelector('#car-body__colors')).querySelectorAll('span')
@@ -106,6 +132,7 @@ function setNumber () {
 (function settingRacingSuitColor () {
     const colorPalette = (document.querySelector('#racing-suit__colors')).querySelectorAll('span')
     const racingSuit = document.querySelector('#driverBody')
+    const helmet = document.querySelector('#driverHelmet')
 
     colorPalette.forEach((color) => {
         color.addEventListener('click', () => {
@@ -126,7 +153,9 @@ function setNumber () {
 })();
 
 function setColor (color, part) {
-    part.style.backgroundColor = color.title
+
+    let paint = color.title || color 
+    part.style.backgroundColor = paint
 }
 
 setNumber()
