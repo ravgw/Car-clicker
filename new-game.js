@@ -72,27 +72,28 @@ function setNumber () {
 const randomizeButton = document.querySelector('#personalize__randomize_button')
 randomizeButton.addEventListener('click', () => {
     randomize()
+    console.log('randomer')
 })
 
 function randomize () {
 
-    console.log('randomer')
     const elements = [
         document.querySelector('#carBodyFront'),
         document.querySelector('#driverBody'),
         document.querySelector('#driverHelmet')
     ]
-    
+
     for (let i = 0; i < elements.length; i++){
         const random = (() => {return Math.round(Math.random() * colors.length);})();
         let color = `#${colors[random]}`
         setColor(color, elements[i])
-        if (i = 0) {
-            setColor(color,document.querySelector('#carBodyRear'))
-            i++
+        
+        // setting correct color to whole car body
+        if ( i === 0) {
+            const carBodyRear = document.querySelector('#carBodyRear')
+            setColor(color, carBodyRear)
         }
-    }
-    
+}
 }
     
 const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7'];
