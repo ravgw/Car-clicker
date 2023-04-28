@@ -3,76 +3,91 @@ import { createCarClicker } from './dom-utils.js'
 const carSample = document.querySelector('.car-sample')
 createCarClicker(carSample)
 
+let onesDigitDisplay = 0
+let tensDigitDisplay = 0
+const onesDigit = document.querySelector('#set-number__number_ones')
+const tensDigit = document.querySelector('#set-number__number_tens')
+
 function setNumber () {
 
-    let onesValue = 0
-    let tensValue = 0
-
-    const onesDigit = document.querySelector('#set-number__number_ones')
-    const tensDigit = document.querySelector('#set-number__number_tens')
+    let onesValue = onesDigitDisplay
+    let tensValue = tensDigitDisplay
 
     const upOnes = document.querySelector('#set-number__up_ones')
     upOnes.addEventListener('click', () => {
         if ( onesValue >=0 && onesValue <=8 ) {
             onesValue++
-            onesDigit.innerText = onesValue 
+            displayNumber(onesValue,tensValue)
+            // onesDigit.innerText = onesValue 
         } else if ( onesValue === 9) {
             onesValue = 0
-            onesDigit.innerText = onesValue 
+            // onesDigit.innerText = onesValue 
+            displayNumber(onesValue,tensValue)
         }
-        displayNumber()
+        // displayNumber(onesValue,tensValue)
     })
     const downOnes = document.querySelector('#set-number__down_ones')
     downOnes.addEventListener('click', () => {
         if ( onesValue >=1 && onesValue <=9 ) {
             onesValue--
-            onesDigit.innerText = onesValue 
+            displayNumber(onesValue,tensValue)
+            // onesDigit.innerText = onesValue 
         } else if ( onesValue === 0) {
             onesValue = 9
-            onesDigit.innerText = onesValue 
+            displayNumber(onesValue,tensValue)
+            // onesDigit.innerText = onesValue 
         }
-        displayNumber()
+        // displayNumber(onesValue,tensValue)
     })
     const upTens = document.querySelector('#set-number__up_tens')
     upTens.addEventListener('click', () => {
         if ( tensValue >=0 && tensValue <=8 ) {
             tensValue++
-            tensDigit.innerText = tensValue 
+            displayNumber(onesValue,tensValue)
+            // tensDigit.innerText = tensValue 
         }  else if ( tensValue === 9) {
             tensValue = 0
-            tensDigit.innerText = tensValue 
+            // tensDigit.innerText = tensValue 
+            displayNumber(onesValue,tensValue)
         }
-        displayNumber()
+        // displayNumber(onesValue,tensValue)
     })
     const downTens = document.querySelector('#set-number__down_tens')
     downTens.addEventListener('click', () => {
         if ( tensValue >=1 && tensValue <=9 ) {
             tensValue--
-            tensDigit.innerText = tensValue 
+            displayNumber(onesValue,tensValue)
+            // tensDigit.innerText = tensValue 
         }  else if ( tensValue === 0) {
             tensValue = 9
-            tensDigit.innerText = tensValue 
+            displayNumber(onesValue,tensValue)
+            // tensDigit.innerText = tensValue 
         }
-        displayNumber()
+        // displayNumber(onesValue,tensValue)
     })
 
-    function displayNumber () {
-        const number = document.querySelector('#car-number')
-        const ones = onesValue.toString()
-        const tens = tensValue.toString()
-
-        if (tens === '0') {
-            number.innerText = ones
-        } else {
-            number.innerText = tens+ones
-        }
-    }
+    
+    onesDigitDisplay = onesValue
+    tensDigitDisplay = tensValue
     
 }
+
+function displayNumber (ones,tens) {
+    const number = document.querySelector('#car-number')
+
+    onesDigit.innerText = ones
+    tensDigit.innerText = tens
+
+    if (tens === 0) {
+        number.innerText = ones.toString()
+    } else {
+        number.innerText = tens.toString() + ones.toString()
+    }
+}
+
 const randomizeButton = document.querySelector('#personalize__randomize_button')
 randomizeButton.addEventListener('click', () => {
     randomize()
-    console.log('randomer')
 })
 
 function randomize () {
@@ -93,7 +108,23 @@ function randomize () {
             const carBodyRear = document.querySelector('#carBodyRear')
             setColor(color, carBodyRear)
         }
-}
+    }
+
+    function numbers () {
+
+        const randomizeOnes = (() => {return Math.floor(Math.random() * 10)})();
+        const randomizeTens = (() => {return Math.floor(Math.random() * 10)})();
+        
+        onesDigitDisplay = randomizeOnes
+        tensDigitDisplay = randomizeTens
+
+        onesDigit.innerText = onesDigitDisplay
+        tensDigit.innerText = tensDigitDisplay
+
+        displayNumber(randomizeOnes,randomizeTens)
+
+    }
+    numbers()
 }
     
 const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7'];

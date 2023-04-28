@@ -21,18 +21,29 @@
     border: 6px double var(--prusianblue);
     border-radius:  0 0 20px 20px;
 }
-
-.personalize__btn {
+#personalize__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    height: fit-content;
     width: 100%;
+    
+}
+.personalize__btn {
+    width: 50%;
+    height: 60px;
     border: none;
     background-color: var(--fireengine);
     color: azure;
+    border-radius: 0 0px 20px 20px;
+    border-width: 0 3px 6px 3px;
+    border-color: var(--prusianblue);
+    border-style: double;
+    font-size: 1.2rem;
 }
 #personalize__randomize {
     border-bottom: double 5px var(--prusianblue);
-}
-#personalize__confirm {
-    border-top: solid 2px var(--prusianblue);
 }
 
 .personalize__element {
@@ -47,9 +58,21 @@
     width: 100%;
     background-color: var(--selectiveyellow);
     text-align: center;
+    font-size: 1.2rem;
     border-bottom: 5px double var(--prusianblue);
     border-top: 1px solid var(--prusianblue);
     border-radius: 0 0 10px 10px;
+}
+/* _________________________________________________________ RANDOMIZE BUTTON */
+#personalize__randomize_button {
+    border-radius: 0 0px 20px 20px;
+    border-width: 0 3px 6px 3px;
+    border-color: var(--prusianblue);
+    border-style: double;
+}
+#personalize__randomize_button img {
+    width: 45px;
+    height: 45px;
 }
 /* _______________________________________________________ SET NUMBERS  */
 .set-numbers__container_element {
@@ -101,6 +124,7 @@
     height: fit-content;
 }
 .personalize__color-picker {
+    padding-top: 2rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -116,7 +140,7 @@
     border-color: var(--prusianblue);
     border-style: double;
     border-radius:  5px;
-    width: 40px;
+    width: 70px;
     height: 40px;
 }
 
