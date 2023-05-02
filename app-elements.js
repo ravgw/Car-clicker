@@ -35,9 +35,28 @@ const engine = {
         nextLvl(this)
         this.originValue++
         this.calculateValue()
+        this.save()
     },
     calculateValue: function () {
         this.value =  Math.round(this.originValue * engineers.value)
+    },
+    save: function () {
+        localStorage.setItem('engineLevel',(this.level).toString())
+        localStorage.setItem('engineValue',(this.value).toString())
+        localStorage.setItem('engineOriginValue',(this.originValue).toString())
+        localStorage.setItem('engineCost',(this.cost).toString())
+        localStorage.setItem('engineCheck','true')
+        console.log('engine saved')
+    },
+    load: function () {
+        console.log('engine bif')
+        if(localStorage.getItem('engineCheck')){
+            this.level = localStorage.getItem('engineLevel')*1
+            this.value = localStorage.getItem('engineValue')*1
+            this.originValue = localStorage.getItem('engineOriginValue')*1
+            this.cost = localStorage.getItem('engineCost')*1
+            console.log('engine load')
+        }
     }
 }
 const aerodynamics = {

@@ -95,5 +95,10 @@ backButton.addEventListener('click', () => {
     setMenu()
 })
 
+const loadSave = document.querySelector('#load-container__save-game')
+loadSave.addEventListener('click', () => {
+    console.log(localStorage)
+})
+
 addHover()
 

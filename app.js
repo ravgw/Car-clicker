@@ -1,11 +1,13 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 
+// localStorage.clear()
 function createCar() {
     const car = document.getElementById('clicker');
     if(!localStorage.length){
         createCarClicker(car);
     } else {
+        console.log(localStorage)
         createCarClicker(car);
         const carNumber = document.querySelector('#car-number')
         const bodyFront = document.querySelector('#carBodyFront')
@@ -23,6 +25,8 @@ function createCar() {
         bodyRear.style.backgroundColor = bodyColor
         driverBody.style.backgroundColor = racingSuitColor
         driverHelmet.style.backgroundColor = helmetColor
+
+        bolidParts[0].load()
     }
 }
 createCar()
@@ -374,7 +378,6 @@ const upgrade = function (object) {
     
     calculateSpeed();
     statsUpDate();
-
 }
 
 const verifyCoinnsAmount = function (object) {
@@ -735,9 +738,11 @@ function statsUpDate () {
 
     speed.innerText = `${player.speed} km/h`
 
-    console.log(stats.perClick)
+    // console.log(stats.perClick)
 } 
 
 calcPerSeconds()
+
+
 
 
