@@ -1,7 +1,27 @@
 import { createCarClicker } from './dom-utils.js'
 
+
 const carSample = document.querySelector('.car-sample')
 createCarClicker(carSample)
+
+const carPlayerScheme = {
+    number: '0',
+    body: 'FED',
+    racungSuit: '543',
+    helmet: 'DEF'
+}
+
+function updateCarScheme () {
+
+        const body = document.querySelector('#carBodyFront').style.backgroundColor
+        const racingSuit = document.querySelector('#driverBody').style.backgroundColor
+        const helmet = document.querySelector('#driverHelmet').style.backgroundColor
+
+        carPlayerScheme.body = body
+        carPlayerScheme.racungSuit = racingSuit
+        carPlayerScheme.helmet = helmet
+
+}
 
 let onesDigitDisplay = 0
 let tensDigitDisplay = 0
@@ -10,11 +30,12 @@ const tensDigit = document.querySelector('#set-number__number_tens')
 
 function setNumber () {
 
-    let onesValue = onesDigitDisplay
-    let tensValue = tensDigitDisplay
+    let onesValue
+    let tensValue
 
     const upOnes = document.querySelector('#set-number__up_ones')
     upOnes.addEventListener('click', () => {
+        retrieveGlobalDigitsValue()
         if ( onesValue >=0 && onesValue <=8 ) {
             onesValue++
             displayNumber(onesValue,tensValue)
@@ -24,10 +45,11 @@ function setNumber () {
             // onesDigit.innerText = onesValue 
             displayNumber(onesValue,tensValue)
         }
-        // displayNumber(onesValue,tensValue)
+        setGlobalDigitsValue()
     })
     const downOnes = document.querySelector('#set-number__down_ones')
     downOnes.addEventListener('click', () => {
+        retrieveGlobalDigitsValue()
         if ( onesValue >=1 && onesValue <=9 ) {
             onesValue--
             displayNumber(onesValue,tensValue)
@@ -37,10 +59,11 @@ function setNumber () {
             displayNumber(onesValue,tensValue)
             // onesDigit.innerText = onesValue 
         }
-        // displayNumber(onesValue,tensValue)
+        setGlobalDigitsValue()
     })
     const upTens = document.querySelector('#set-number__up_tens')
     upTens.addEventListener('click', () => {
+        retrieveGlobalDigitsValue()
         if ( tensValue >=0 && tensValue <=8 ) {
             tensValue++
             displayNumber(onesValue,tensValue)
@@ -50,10 +73,11 @@ function setNumber () {
             // tensDigit.innerText = tensValue 
             displayNumber(onesValue,tensValue)
         }
-        // displayNumber(onesValue,tensValue)
+        setGlobalDigitsValue()
     })
     const downTens = document.querySelector('#set-number__down_tens')
     downTens.addEventListener('click', () => {
+        retrieveGlobalDigitsValue()
         if ( tensValue >=1 && tensValue <=9 ) {
             tensValue--
             displayNumber(onesValue,tensValue)
@@ -63,13 +87,17 @@ function setNumber () {
             displayNumber(onesValue,tensValue)
             // tensDigit.innerText = tensValue 
         }
-        // displayNumber(onesValue,tensValue)
+        setGlobalDigitsValue()
     })
 
-    
+    function retrieveGlobalDigitsValue () {
+    onesValue = onesDigitDisplay
+    tensValue = tensDigitDisplay
+    }
+    function setGlobalDigitsValue () {
     onesDigitDisplay = onesValue
     tensDigitDisplay = tensValue
-    
+    }
 }
 
 function displayNumber (ones,tens) {
@@ -80,9 +108,12 @@ function displayNumber (ones,tens) {
 
     if (tens === 0) {
         number.innerText = ones.toString()
+        carPlayerScheme.number = ones.toString()
     } else {
         number.innerText = tens.toString() + ones.toString()
+        carPlayerScheme.number = tens.toString() + ones.toString()
     }
+
 }
 
 const randomizeButton = document.querySelector('#personalize__randomize_button')
@@ -125,6 +156,9 @@ function randomize () {
 
     }
     numbers()
+
+    // console.log(carPlayerScheme)
+    updateCarScheme()
 }
     
 const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7'];
@@ -157,6 +191,7 @@ const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','
         color.addEventListener('click', () => {
             setColor(color, carBodyFront)
             setColor(color, carBodyRear)
+            carPlayerScheme.body = color
         })
     })
 })();
@@ -164,11 +199,11 @@ const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','
 (function settingRacingSuitColor () {
     const colorPalette = (document.querySelector('#racing-suit__colors')).querySelectorAll('span')
     const racingSuit = document.querySelector('#driverBody')
-    const helmet = document.querySelector('#driverHelmet')
 
     colorPalette.forEach((color) => {
         color.addEventListener('click', () => {
             setColor(color, racingSuit)
+            carPlayerScheme.racungSuit = color
         })
     })
 })();
@@ -180,6 +215,7 @@ const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','
     colorPalette.forEach((color) => {
         color.addEventListener('click', () => {
             setColor(color, helmet)
+            carPlayerScheme.helmet = color
         })
     })
 })();
@@ -189,5 +225,14 @@ function setColor (color, part) {
     let paint = color.title || color 
     part.style.backgroundColor = paint
 }
+
+const confirm = document.querySelector('#personalize__confirm')
+confirm.addEventListener('click', () => {
+    localStorage.setItem('bodyNumber',carPlayerScheme.number)
+    localStorage.setItem('bodyColor',carPlayerScheme.body)
+    localStorage.setItem('racingSuitColor',carPlayerScheme.racungSuit)
+    localStorage.setItem('helmetColor',carPlayerScheme.helmet)
+    location.assign('game.html')
+})
 
 setNumber()
