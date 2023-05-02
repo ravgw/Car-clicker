@@ -1,8 +1,32 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 
-const car = document.getElementById('clicker');
-createCarClicker(car);
+function createCar() {
+    const car = document.getElementById('clicker');
+    if(!localStorage.length){
+        createCarClicker(car);
+    } else {
+        createCarClicker(car);
+        const carNumber = document.querySelector('#car-number')
+        const bodyFront = document.querySelector('#carBodyFront')
+        const bodyRear = document.querySelector('#carBodyRear')
+        const driverBody = document.querySelector('#driverBody')
+        const driverHelmet = document.querySelector('#driverHelmet')
+        
+        const number = localStorage.getItem('bodyNumber')
+        const bodyColor = localStorage.getItem('bodyColor')
+        const racingSuitColor = localStorage.getItem('racingSuitColor')
+        const helmetColor = localStorage.getItem('helmetColor')
+
+        carNumber.innerText = number
+        bodyFront.style.backgroundColor = bodyColor
+        bodyRear.style.backgroundColor = bodyColor
+        driverBody.style.backgroundColor = racingSuitColor
+        driverHelmet.style.backgroundColor = helmetColor
+    }
+}
+createCar()
+
 createCarBackground();
 
 
