@@ -11,11 +11,27 @@ export const player = {
     bonusSpeed: 0,
     teamPrincipalOwned: false,
     driverOwned: false,
+    save: function () {
+        addStorageItem('playerCoins',this.coins)
+    },
+    load: function () {
+        if(localStorage.getItem('playerCoins')) {
+            this.coins = localStorage.getItem('playerCoins')*1
+        }
+    }
 }
 
 export const stats = {
     perClick: 1,
     totalCoins: 0,
+    save: function () {
+        addStorageItem('statsTotalCoins',this.totalCoins)
+    },
+    load: function () {
+        if(localStorage.getItem('statsTotalCoins')) {
+            this.totalCoins = localStorage.getItem('statsTotalCoins')*1
+        }
+    }
 }
 
 
@@ -46,16 +62,13 @@ const engine = {
         addStorageItem('engineOriginValue',this.originValue)
         addStorageItem('engineCost',this.cost)
         addStorageItem('engineCheck','true')
-        console.log('engine saved')
     },
     load: function () {
-        console.log('engine bif')
         if(localStorage.getItem('engineCheck')){
             this.level = localStorage.getItem('engineLevel')*1
             this.value = localStorage.getItem('engineValue')*1
             this.originValue = localStorage.getItem('engineOriginValue')*1
             this.cost = localStorage.getItem('engineCost')*1
-            console.log('engine load')
         }
     }
 }

@@ -41,8 +41,6 @@ carBodyFront.appendChild(frontRim);
 
 carBodyRear.appendChild(rearTyre);
 carBodyFront.appendChild(frontTyre);
-
-
 }  
 
 export const createCarBackground = function () {
@@ -114,6 +112,7 @@ export const createHomeBoard = function (array1, array2)  {
     value.id = `${names[i]}-counter-value`
     counters.appendChild(nameTag)
     counters.appendChild(value)
+    // console.log(value)
   }
   
   // stats

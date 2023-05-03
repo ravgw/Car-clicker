@@ -1,4 +1,4 @@
-import { createCarClicker } from './dom-utils.js'
+import { numbersAdjust } from './app.js'
 
 function addHover () {
     const hoverElements = document.querySelectorAll('.menu__button')
@@ -72,12 +72,6 @@ function setMenu  () {
 
 // ___________________________ LISTENERS_______________________________
 
-const newGame = document.querySelector('#menu__new-game')
-newGame.addEventListener('click', () => {
-    window.location.assign("./creating-new-game.html")
-    console.log('new game')
-})
-
 const guidebookButton = document.querySelector('#accessory__guidebook')
 guidebookButton.addEventListener('click', () => {
     setAccessory()
@@ -97,8 +91,19 @@ backButton.addEventListener('click', () => {
 
 const loadSave = document.querySelector('#load-container__save-game')
 loadSave.addEventListener('click', () => {
-    console.log(localStorage)
+    
 })
 
+function checkGameSave () {
+    const saveName = localStorage.getItem('saveName')
+    if(saveName){
+        document.querySelector('#save-details__data').innerText = saveName
+        const valueLabel = document.querySelector('#save-details__value')
+        const saveValue = localStorage.getItem('playerCoins')*1
+        // numbersAdjust(saveValue,valueLabel)
+}
+}
+
 addHover()
+checkGameSave()
 

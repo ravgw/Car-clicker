@@ -1,8 +1,16 @@
 import { createCarClicker } from './dom-utils.js'
+import { startGame } from './app.js'
 
+const newGameCreator = function () {
+    addColorsPalette()
+    settingCarBodyColor()
+    settingRacingSuitColor()
+    settingHelmetColor()
+    setNumber()
+}
 
 const carSample = document.querySelector('.car-sample')
-createCarClicker(carSample)
+
 
 const carPlayerScheme = {
     number: '0',
@@ -117,9 +125,11 @@ function displayNumber (ones,tens) {
 }
 
 const randomizeButton = document.querySelector('#personalize__randomize_button')
+if(randomizeButton){
 randomizeButton.addEventListener('click', () => {
     randomize()
 })
+}
 
 function randomize () {
 
@@ -163,7 +173,7 @@ function randomize () {
     
 const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7'];
 
-(function addColorsPalette () {
+function addColorsPalette () {
     const colorsPalette = colors
     const containers = document.querySelectorAll('.personalize__color-picker')
     containers.forEach((container) => {
@@ -179,10 +189,10 @@ const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','
         color.style.backgroundColor = `#${colorsPalette[i]}`
         container.appendChild(color)
     }}
-})();
+};
 
 
-(function settingCarBodyColor () {
+function settingCarBodyColor () {
     const colorPalette = (document.querySelector('#car-body__colors')).querySelectorAll('span')
     const carBodyFront = document.querySelector('#carBodyFront')
     const carBodyRear = document.querySelector('#carBodyRear')
@@ -194,9 +204,9 @@ const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','
             carPlayerScheme.body = color
         })
     })
-})();
+};
 
-(function settingRacingSuitColor () {
+function settingRacingSuitColor () {
     const colorPalette = (document.querySelector('#racing-suit__colors')).querySelectorAll('span')
     const racingSuit = document.querySelector('#driverBody')
 
@@ -206,9 +216,9 @@ const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','
             carPlayerScheme.racungSuit = color
         })
     })
-})();
+};
 
-(function settingHelmetColor () {
+function settingHelmetColor () {
     const colorPalette = (document.querySelector('#driver-helmet__colors')).querySelectorAll('span')
     const helmet = document.querySelector('#driverHelmet')
 
@@ -218,7 +228,7 @@ const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','
             carPlayerScheme.helmet = color
         })
     })
-})();
+};
 
 function setColor (color, part) {
 
@@ -226,13 +236,29 @@ function setColor (color, part) {
     part.style.backgroundColor = paint
 }
 
-const confirm = document.querySelector('#personalize__confirm')
-confirm.addEventListener('click', () => {
+export const confirmFunc = function () {
     localStorage.setItem('bodyNumber',carPlayerScheme.number)
     localStorage.setItem('bodyColor',carPlayerScheme.body)
     localStorage.setItem('racingSuitColor',carPlayerScheme.racungSuit)
     localStorage.setItem('helmetColor',carPlayerScheme.helmet)
-    location.assign('game.html')
-})
 
-setNumber()
+    function saveDate () {
+        const now = new Date()
+        const day = now.getDate()
+        const month = now.getMonth()
+        const year = now.getFullYear()
+        const name = `${day}-${month}-${year}`
+        localStorage.setItem('saveName',name)
+    }
+    saveDate()
+    function replace () { 
+        location.assign('game.html')
+    }
+    replace()
+}
+
+if (carSample){
+    createCarClicker(carSample)
+    newGameCreator()
+}
+

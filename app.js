@@ -1,13 +1,38 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
+import { confirmFunc } from "./new-game.js"
 
+// document.addEventListener('load', () => {
+//     console.log('onload window')
+// })
+
+const newGame = document.querySelector('#menu__new-game')
+if(newGame) {
+newGame.addEventListener('click', () => {
+    location.assign("./creating-new-game.html")
+})
+}
 // localStorage.clear()
-function createCar() {
+const confirm = document.querySelector('#personalize__confirm')
+if(confirm){
+    confirm.addEventListener('click', () => {
+        confirmFunc()
+    })
+}
+
+
+const createCar = function() {
     const car = document.getElementById('clicker');
     if(!localStorage.length){
+        createCarBackground();
         createCarClicker(car);
+        createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
+        // activeStyleNavigation('menuHome')
+        // calcPerSeconds()
+        // speedAdjust()
     } else {
-        console.log(localStorage)
+        // console.log(localStorage)
+        createCarBackground();
         createCarClicker(car);
         const carNumber = document.querySelector('#car-number')
         const bodyFront = document.querySelector('#carBodyFront')
@@ -19,7 +44,7 @@ function createCar() {
         const bodyColor = localStorage.getItem('bodyColor')
         const racingSuitColor = localStorage.getItem('racingSuitColor')
         const helmetColor = localStorage.getItem('helmetColor')
-
+        
         carNumber.innerText = number
         bodyFront.style.backgroundColor = bodyColor
         bodyRear.style.backgroundColor = bodyColor
@@ -33,12 +58,19 @@ function createCar() {
         garageFacilities[0].load()
         garageFacilities[1].load()
         garageFacilities[2].load()
-        // garageFacilities[3].load()
+        player.load()   
+        stats.load()   
+
+        createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
+        activeStyleNavigation('menuHome')
+        calculateSpeed()
+        calcPerSeconds()
+        // speedAdjust()
+        // statsUpDate()
     }
 }
-createCar()
 
-createCarBackground();
+
 
 
 
@@ -69,7 +101,7 @@ function calculateSpeed () {
 
     player.speed = speed + bonusSpeed
     statsUpDate()
-    // console.log(player.speed + 'PS')
+    console.log(player.speed + 'PS')
 }
 
 
@@ -80,9 +112,10 @@ function addCoins () {
 
     player.coins = player.coins + perClick 
     stats.totalCoins = stats.totalCoins + perClick 
-    stats.perClick = perClick
-
+    
     statsUpDate()
+    player.save()
+    stats.save()
 }
 
 function spendCoins(cost) {
@@ -94,11 +127,8 @@ function spendCoins(cost) {
 
 function calcPerClick () {
     const sponsors = garageFacilities[0] // sponsors object
-    const speedBonus = driver.value
     const perClick = player.speed * driver.value * sponsors.value
-
-    // console.log('calcPC')
-
+    stats.perClick = perClick
     return perClick
 }
 
@@ -136,22 +166,24 @@ function calcPerSeconds () {
 //     perSec: 0,
 //     perClick: 1,
 // }
-
+if(clicker){
 clicker.addEventListener('click', (e) => {
     // console.log('LISTENER')
 
     addCoins();
     numbersAdjust(player.coins, counter)
 })
+}
 
 const speedAdjust = function () {
     // Splayer.actualSpeed = Splayer.speed + Splayer.speedBooster
     speed.textContent = `${player.speed} km/h`
 }
 
-speedAdjust();
+
 
 const bolidElement = document.getElementById('bolid-navigation')
+if(bolidElement){
 bolidElement.addEventListener('click', (e) => {
 
     if(homeBoard) {
@@ -232,8 +264,10 @@ bolidElement.addEventListener('click', (e) => {
         })
     }
     )
-    
+}
+
 const garageElement = document.getElementById('garage-navigation')
+if(garageElement){
 garageElement.addEventListener('click', (e) => {
 
     if(homeBoard) {
@@ -314,8 +348,10 @@ garageElement.addEventListener('click', (e) => {
             }
         })
 })
+}
 
 const homeElement = document.getElementById('home-navigation')
+if(homeElement){
 homeElement.addEventListener('click', (e) => {
 
 
@@ -344,6 +380,7 @@ homeElement.addEventListener('click', (e) => {
         }
     }
 })
+}
 
 const buyCharacter = function (object) {
     const character = object.type
@@ -426,8 +463,8 @@ const counterParam1 = function () {
 }
 
 let counterParam1Check = false
-const numbersAdjust = function (toAdjust, target) {
-
+export const numbersAdjust = function (toAdjust, target) {
+ 
     if (counterParam1){
         counterParam1()
         counterParam1Check = true
@@ -441,6 +478,8 @@ const numbersAdjust = function (toAdjust, target) {
         (coins < 10 ** coinsAmount[i]) 
         {
             target.innerText = `${coins} \u2234`
+            console.log(target)
+            // target.innerText = '131313'
             break
         } 
         else if 
@@ -641,58 +680,56 @@ const boostSpeed = (duration) => {
 //     speedAdjust()
 // }
 // countMultiplierSpeed();
-createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
 
-const totalValueStats = document.querySelector('#Total-counter-value')
-totalValueStats.innerText = `${stats.totalCoins} \u2234`
+
+// totalValueStats.innerText = `${stats.totalCoins} \u2234`
 const perSecStats = document.querySelector('#PS-counter-value')
-perSecStats.innerText = `0\u2234`
-const perClickStats = document.querySelector('#PC-counter-value')
-perClickStats.innerText = `${stats.perClick} \u2234`
+// perSecStats.innerText = `0\u2234`
+// perClickStats.innerText = `${stats.perClick} \u2234`
 
 // const updateHomeStats = function (object) {
-//     const element = document.querySelector(`#${object.type}-card-OLDstats-value`)
-//     if (element) {
-//         element.innerText = `${object.value}${object.actionSign}` 
-//     }
-//     OLDstats.update()
-// }
-
-
-
-const activeStyleNavigation = function (activeNavigation) {
-    let menu = activeNavigation
-
-    const speed = document.querySelector('#speed')
-    const coins = document.querySelector('#money')
-    
-    const bolid = document.querySelector('#bolid-navigation')
-    const homeButton = document.querySelector('#home-navigation')
-    const garage = document.querySelector('#garage-navigation')
-    
-    const driver = document.querySelector('#Driver-option')
-    const parts = document.querySelector('#Parts-option')
-    const tp = document.querySelector('#TeamPrincipal-option')
-    const facilities = document.querySelector('#Facilities-option')
-
-    const elements = [speed,coins,bolid,homeButton,garage,driver,parts,tp,facilities]
-
-    const leftUp = 'left-up'
-    const leftDown = 'left-down'
-    const rightUp = 'right-up'
-    const rightDown = 'right-down'
-    const nbr = 'nbr'
-
-    const bolidActive = function () {
-        removeStyle()
-        const steps = [leftUp,rightDown,leftDown,nbr,rightUp,leftUp,rightDown,nbr,nbr]
-        activate(steps, bolid)
-        bolid.classList.add('pushedKey')
-        driver.classList.add('pushedKey')
-    }
-    
-    const homeActive = function () {
-        removeStyle()
+    //     const element = document.querySelector(`#${object.type}-card-OLDstats-value`)
+    //     if (element) {
+        //         element.innerText = `${object.value}${object.actionSign}` 
+        //     }
+        //     OLDstats.update()
+        // }
+        
+        
+        
+        const activeStyleNavigation = function (activeNavigation) {
+            let menu = activeNavigation
+            
+            const speed = document.querySelector('#speed')
+            const coins = document.querySelector('#money')
+            
+            const bolid = document.querySelector('#bolid-navigation')
+            const homeButton = document.querySelector('#home-navigation')
+            const garage = document.querySelector('#garage-navigation')
+            
+            const driver = document.querySelector('#Driver-option')
+            const parts = document.querySelector('#Parts-option')
+            const tp = document.querySelector('#TeamPrincipal-option')
+            const facilities = document.querySelector('#Facilities-option')
+            
+            const elements = [speed,coins,bolid,homeButton,garage,driver,parts,tp,facilities]
+            
+            const leftUp = 'left-up'
+            const leftDown = 'left-down'
+            const rightUp = 'right-up'
+            const rightDown = 'right-down'
+            const nbr = 'nbr'
+            
+            const bolidActive = function () {
+                removeStyle()
+                const steps = [leftUp,rightDown,leftDown,nbr,rightUp,leftUp,rightDown,nbr,nbr]
+                activate(steps, bolid)
+                bolid.classList.add('pushedKey')
+                driver.classList.add('pushedKey')
+            }
+            
+            const homeActive = function () {
+                removeStyle()
         const steps = [leftDown,rightDown,leftUp,nbr,rightUp,nbr,nbr,nbr,nbr]
         activate(steps, homeButton)
         homeButton.classList.add('pushedKey')
@@ -728,28 +765,34 @@ const activeStyleNavigation = function (activeNavigation) {
             }
         }
     }
-
+    
     if (menu == 'menuBolid') {bolidActive()}
     if (menu == 'menuHome') {homeActive()}
     if (menu == 'menuGarage') {garageActive()}
 }
-activeStyleNavigation('menuHome')
+
 
 function statsUpDate () {
-
+    const perClickStats = document.querySelector('#PC-counter-value')
+    const totalValueStats = document.querySelector('#Total-counter-value')
     stats.perClick = calcPerClick()
     // console.log('2')
     numbersAdjust(player.coins, counter)
+    // console.log(stats.totalCoins + 'embebe')
     numbersAdjust(stats.totalCoins, totalValueStats)
     numbersAdjust(stats.perClick, perClickStats)
-
+    
     speed.innerText = `${player.speed} km/h`
-
-    // console.log(stats.perClick)
+    
 } 
 
-calcPerSeconds()
-
+export const startGame = function() {
+    createCar()
+}
+if(speed) {
+    console.log('sssss')
+    startGame()
+}
 
 
 
