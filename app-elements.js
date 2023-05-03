@@ -191,7 +191,23 @@ const sponsors = {
     upgrade: function () {
         nextLvl(this)
         this.value++
+        this.save()
     },
+    save: function () {
+        addStorageItem('sponsorsLevel',this.level)
+        addStorageItem('sponsorsValue',this.value)
+        addStorageItem('sponsorsSubValue',this.subValue)
+        addStorageItem('sponsorsCost',this.cost)
+        addStorageItem('sponsorsCheck','true')
+    },
+    load: function () {
+        if (localStorage.getItem('sponsorsCheck')) {
+            this.level = localStorage.getItem('sponsorsLevel')*1
+            this.value = localStorage.getItem('sponsorsValue')*1
+            this.subValue = localStorage.getItem('sponsorsSubValue')*1
+            this.cost = localStorage.getItem('sponsorsCost')*1
+        }
+    }
 
 }
 const windTunnel = {
@@ -208,7 +224,21 @@ const windTunnel = {
         nextLvl(this)
         this.value =  Number((this.value + .5).toPrecision(2))
         aerodynamics.calculateValue()
+        this.save()
     },
+    save: function () {
+        addStorageItem('windTunnelLevel',this.level)
+        addStorageItem('windTunnelValue',this.value)
+        addStorageItem('windTunnelCost',this.cost)
+        addStorageItem('windTunnelCheck','true')
+    },
+    load: function () {
+        if (localStorage.getItem('windTunnelCheck')) {
+            this.level = localStorage.getItem('windTunnelLevel')*1
+            this.value = localStorage.getItem('windTunnelValue')*1
+            this.cost = localStorage.getItem('windTunnelCost')*1
+        }
+    }
 }
 const engineers = {
     name: 'Engineers',
@@ -222,37 +252,63 @@ const engineers = {
     img: './img/engineers.webp',
     upgrade: function () {
         nextLvl(this)
-
-        // console.log(this.level+ 'level')
         this.value =  Number((this.value + .25).toPrecision(3))
         engine.calculateValue()
         suspension.calculateValue()
         turbo.calculateValue()
+        this.save()
     },
-}
-const fame = {
-    name: '?Fame?',
-    type: 'fame',
-    level: 0,
-    value: 0,
-    cost: 33000,
-    lvlUpCostMultiplier: 4,
-    actionSign: 'x',
-    description: 'skills time duration',
-    img: './img/fame.webp',
-    upgrade: function () {
-        nextLvl(this)
-        this.value = Math.round(this.value + 2)
-        sponsors.bonus = this.value
-        sponsors.calculateValue()
+    save: function () {
+        addStorageItem('engineersLevel',this.level)
+        addStorageItem('engineersValue',this.value)
+        addStorageItem('engineersCost',this.cost)
+        addStorageItem('engineersCheck','true')
     },
+    load: function () {
+        if (localStorage.getItem('engineersCheck')) {
+            this.level = localStorage.getItem('engineersLevel')*1
+            this.value = localStorage.getItem('engineersValue')*1
+            this.cost = localStorage.getItem('engineersCost')*1
+        }
+    }
 }
+// const fame = {
+//     name: '?Fame?',
+//     type: 'fame',
+//     level: 0,
+//     value: 0,
+//     cost: 33000,
+//     lvlUpCostMultiplier: 4,
+//     actionSign: 'x',
+//     description: 'skills time duration',
+//     img: './img/fame.webp',
+//     upgrade: function () {
+//         nextLvl(this)
+//         this.value = Math.round(this.value + 2)
+//         sponsors.bonus = this.value
+//         // sponsors.calculateValue()
+//         this.save()
+//     },
+//     save: function () {
+//         addStorageItem('fameLevel',this.level)
+//         addStorageItem('fameValue',this.value)
+//         addStorageItem('fameCost',this.cost)
+//         addStorageItem('fameCheck','true')
+//     },
+//     load: function () {
+//         if (localStorage.getItem('fameCheck')) {
+//             this.level = localStorage.getItem('fameLevel')*1
+//             this.value = localStorage.getItem('fameValue')*1
+//             this.cost = localStorage.getItem('fameCost')*1
+//         }
+//     }
+// }
 
 export const garageFacilities = [
     sponsors,
     windTunnel,
     engineers,
-    fame
+    // fame
 ]
 
 export const driver = {

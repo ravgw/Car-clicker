@@ -30,6 +30,10 @@ function createCar() {
         bolidParts[1].load()
         bolidParts[2].load()
         bolidParts[3].load()
+        garageFacilities[0].load()
+        garageFacilities[1].load()
+        garageFacilities[2].load()
+        // garageFacilities[3].load()
     }
 }
 createCar()
