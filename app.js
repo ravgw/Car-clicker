@@ -27,6 +27,9 @@ function createCar() {
         driverHelmet.style.backgroundColor = helmetColor
 
         bolidParts[0].load()
+        bolidParts[1].load()
+        bolidParts[2].load()
+        bolidParts[3].load()
     }
 }
 createCar()

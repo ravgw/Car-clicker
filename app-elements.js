@@ -41,11 +41,11 @@ const engine = {
         this.value =  Math.round(this.originValue * engineers.value)
     },
     save: function () {
-        localStorage.setItem('engineLevel',(this.level).toString())
-        localStorage.setItem('engineValue',(this.value).toString())
-        localStorage.setItem('engineOriginValue',(this.originValue).toString())
-        localStorage.setItem('engineCost',(this.cost).toString())
-        localStorage.setItem('engineCheck','true')
+        addStorageItem('engineLevel',this.level)
+        addStorageItem('engineValue',this.value)
+        addStorageItem('engineOriginValue',this.originValue)
+        addStorageItem('engineCost',this.cost)
+        addStorageItem('engineCheck','true')
         console.log('engine saved')
     },
     load: function () {
@@ -59,6 +59,7 @@ const engine = {
         }
     }
 }
+
 const aerodynamics = {
     name: 'Aerodynamics',
     type: 'aerodynamics',
@@ -74,9 +75,25 @@ const aerodynamics = {
         nextLvl(this)
         this.subValue++
         this.calculateValue()
+        this.save()
     },
     calculateValue: function () {
         this.value =  Math.round(this.subValue * windTunnel.value)
+    },
+    save: function () {
+        addStorageItem('aeroLevel',this.level)
+        addStorageItem('aeroValue',this.value)
+        addStorageItem('aeroSubValue',this.subValue)
+        addStorageItem('aeroCost',this.cost)
+        addStorageItem('aeroCheck','true')
+    },
+    load: function () {
+        if (localStorage.getItem('aeroCheck')) {
+            this.level = localStorage.getItem('aeroLevel')*1
+            this.value = localStorage.getItem('aeroValue')*1
+            this.subValue = localStorage.getItem('aeroSubValue')*1
+            this.cost = localStorage.getItem('aeroCost')*1
+        }
     }
 }
 const suspension = {
@@ -94,9 +111,25 @@ const suspension = {
         nextLvl(this)
         this.originValue++
         this.calculateValue()
+        this.save()
     },
     calculateValue: function () {
         this.value =  Math.round(this.originValue * engineers.value)
+    },
+    save: function () {
+        addStorageItem('suspensionLevel',this.level)
+        addStorageItem('suspensionValue',this.value)
+        addStorageItem('suspensionOriginValue',this.originValue)
+        addStorageItem('suspensionCost',this.cost)
+        addStorageItem('suspensionCheck','true')
+    },
+    load: function () {
+        if (localStorage.getItem('suspensionCheck')) {
+            this.level = localStorage.getItem('suspensionLevel')*1
+            this.value = localStorage.getItem('suspensionValue')*1
+            this.originValue = localStorage.getItem('suspensionOriginValue')*1
+            this.cost = localStorage.getItem('susupensionCost')*1
+        }
     }
 }
 const turbo = {
@@ -114,9 +147,25 @@ const turbo = {
         nextLvl(this)
         this.originValue++
         this.calculateValue()
+        this.save()
     },
     calculateValue: function () {
         this.value =  Math.round(this.originValue * engineers.value)
+    },
+    save: function () {
+        addStorageItem('turboLevel',this.level)
+        addStorageItem('turboValue',this.value)
+        addStorageItem('turboOriginValue',this.originValue)
+        addStorageItem('turboCost',this.cost)
+        addStorageItem('turboCheck','true')
+    },
+    load: function () {
+        if (localStorage.getItem('turboCheck')) {
+            this.level = localStorage.getItem('turboLevel')*1
+            this.value = localStorage.getItem('turboValue')*1
+            this.originValue = localStorage.getItem('turboOriginValue')*1
+            this.cost = localStorage.getItem('turboCost')*1
+        }
     }
 }
 
@@ -353,4 +402,6 @@ const nextLvl = function (object) {
     object.cost = Math.round(object.cost * object.lvlUpCostMultiplier)
 }
 
-
+const addStorageItem = function (key,value) {
+    localStorage.setItem(key,(value).toString())
+}
