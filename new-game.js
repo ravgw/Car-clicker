@@ -1,5 +1,5 @@
 import { createCarClicker } from './dom-utils.js'
-import { startGame } from './app.js'
+import { startNewGame } from './app.js'
 
 const newGameCreator = function () {
     addColorsPalette()
@@ -251,14 +251,24 @@ export const confirmFunc = function () {
         localStorage.setItem('saveName',name)
     }
     saveDate()
-    function replace () { 
-        location.assign('game.html')
-    }
-    replace()
+    // function replace () { 
+    //     location.assign('game.html')
+    // }
+    // replace()
+    test().then(console.log('then'))
 }
 
 if (carSample){
     createCarClicker(carSample)
     newGameCreator()
 }
+
+function test () {
+    return new Promise((resolve, reject) => {
+        location.assign('game.html')
+        console.log('promis')
+    })
+}
+
+
 

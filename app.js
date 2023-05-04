@@ -1,10 +1,7 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 import { confirmFunc } from "./new-game.js"
-
-// document.addEventListener('load', () => {
-//     console.log('onload window')
-// })
+import { numbersAdjust } from "./app-utils.js"
 
 const newGame = document.querySelector('#menu__new-game')
 if(newGame) {
@@ -101,7 +98,7 @@ function calculateSpeed () {
 
     player.speed = speed + bonusSpeed
     statsUpDate()
-    console.log(player.speed + 'PS')
+    // console.log(player.speed + 'PS')
 }
 
 
@@ -450,48 +447,6 @@ const removeAlertCssClass = function () {
     counter.classList.remove('not-enaugh');
 }
 
-const coinsAmount = []
-const coinsAmountName = ['k','m','t','aa','ab','ac','ad','ae','af','ag']
-
-
-const counterParam1 = function () {
-    for ( let i = 1; i < 11; i++) {
-        let base = 3
-        const next = base * i
-        coinsAmount.push(next)     
-    }
-}
-
-let counterParam1Check = false
-export const numbersAdjust = function (toAdjust, target) {
- 
-    if (counterParam1){
-        counterParam1()
-        counterParam1Check = true
-    }
-
-    const coins = Math.floor(toAdjust)
-    
-    for (let i = 0; i <= coinsAmount.length; i++) {
-        
-        if 
-        (coins < 10 ** coinsAmount[i]) 
-        {
-            target.innerText = `${coins} \u2234`
-            console.log(target)
-            // target.innerText = '131313'
-            break
-        } 
-        else if 
-        (coins > 10 ** coinsAmount[i] && coins < 10 ** coinsAmount[i + 1]) 
-        {
-            const value = (coins * (10 ** -(coinsAmount[i]))).toFixed(1)
-            target.innerText = `${value}${coinsAmountName[i]} \u2234`
-            break
-        }
-    }
-}
-
 // --------------------------------------------------- SKILLS
 const unlockSkill = function (character) {
     createActiveSkill(character)
@@ -786,12 +741,12 @@ function statsUpDate () {
     
 } 
 
-export const startGame = function() {
+export const startNewGame = function() {
     createCar()
 }
 if(speed) {
-    console.log('sssss')
-    startGame()
+    // console.log('sssss')
+    startNewGame()
 }
 
 

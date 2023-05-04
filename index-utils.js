@@ -100,7 +100,7 @@ function checkGameSave () {
         document.querySelector('#save-details__data').innerText = saveName
         const valueLabel = document.querySelector('#save-details__value')
         const saveValue = localStorage.getItem('playerCoins')*1
-        // numbersAdjust(saveValue,valueLabel)
+        numbersAdjust(saveValue,valueLabel)
 }
 }
 
