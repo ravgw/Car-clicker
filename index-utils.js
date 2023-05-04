@@ -1,4 +1,4 @@
-import { numbersAdjust } from './app.js'
+import { numbersAdjust } from './app-utils.js'
 
 function addHover () {
     const hoverElements = document.querySelectorAll('.menu__button')
@@ -71,6 +71,11 @@ function setMenu  () {
 
 
 // ___________________________ LISTENERS_______________________________
+const newGame = document.querySelector('#menu__new-game')
+newGame.addEventListener('click', () => {
+    location.assign("./creating-new-game.html")
+})
+
 
 const guidebookButton = document.querySelector('#accessory__guidebook')
 guidebookButton.addEventListener('click', () => {
@@ -91,7 +96,19 @@ backButton.addEventListener('click', () => {
 
 const loadSave = document.querySelector('#load-container__save-game')
 loadSave.addEventListener('click', () => {
-    
+    if(localStorage.getItem('saveName')){
+        location.assign('game.html')
+    } else {
+        console.log('save does not exist')
+    }
+})
+
+const removeGameSave = document.querySelector('#save-details__remove-game')
+removeGameSave.addEventListener('click', () => {
+    if (confirm('rly?')){
+        localStorage.clear()
+        location.reload()
+    }
 })
 
 function checkGameSave () {

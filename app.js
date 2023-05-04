@@ -1,21 +1,9 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
-import { confirmFunc } from "./new-game.js"
 import { numbersAdjust } from "./app-utils.js"
 
-const newGame = document.querySelector('#menu__new-game')
-if(newGame) {
-newGame.addEventListener('click', () => {
-    location.assign("./creating-new-game.html")
-})
-}
-// localStorage.clear()
-const confirm = document.querySelector('#personalize__confirm')
-if(confirm){
-    confirm.addEventListener('click', () => {
-        confirmFunc()
-    })
-}
+
+
 
 
 const createCar = function() {
@@ -741,13 +729,4 @@ function statsUpDate () {
     
 } 
 
-export const startNewGame = function() {
-    createCar()
-}
-if(speed) {
-    // console.log('sssss')
-    startNewGame()
-}
-
-
-
+createCar()

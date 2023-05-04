@@ -1,5 +1,4 @@
 import { createCarClicker } from './dom-utils.js'
-import { startNewGame } from './app.js'
 
 const newGameCreator = function () {
     addColorsPalette()
@@ -235,8 +234,12 @@ function setColor (color, part) {
     let paint = color.title || color 
     part.style.backgroundColor = paint
 }
+const confirm = document.querySelector('#personalize__confirm')
+confirm.addEventListener('click', () => {
+    confirmFunc()
+})
 
-export const confirmFunc = function () {
+const confirmFunc = function () {
     localStorage.setItem('bodyNumber',carPlayerScheme.number)
     localStorage.setItem('bodyColor',carPlayerScheme.body)
     localStorage.setItem('racingSuitColor',carPlayerScheme.racungSuit)
@@ -251,11 +254,11 @@ export const confirmFunc = function () {
         localStorage.setItem('saveName',name)
     }
     saveDate()
-    // function replace () { 
-    //     location.assign('game.html')
-    // }
-    // replace()
-    test().then(console.log('then'))
+    function replace () { 
+        location.replace('game.html')
+    }
+    replace()
+    // test().then(console.log('then'))
 }
 
 if (carSample){
