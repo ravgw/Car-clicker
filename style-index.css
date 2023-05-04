@@ -134,6 +134,10 @@
     justify-content: center;
 }
 
+.empty-slot{
+    animation: slot-alert 1s;
+}
+
 /* ________________________ ANIMATIONS ________________________ */
 
 .hide-element {
@@ -142,6 +146,27 @@
 
 .show-box {
     animation: show_box .4s ;
+}
+
+@keyframes slot-alert {
+    0% {
+        background-color: var(--fireengine);
+    }
+    20% {
+        background-color: transparent;
+    }
+    40% {
+        background-color: var(--fireengine);
+    }
+    60% {
+        background-color: transparent;
+    }
+    80% {
+        background-color: var(--fireengine);
+    }
+    100% {
+        background-color: transparent;
+    }
 }
 
 @keyframes hide_element {

@@ -6,7 +6,7 @@ export const game = {
     // driverOwn: false,
 }
 export const player = {
-    coins: 1313130,
+    coins: 0,
     speed: 1,
     bonusSpeed: 0,
     teamPrincipalOwned: false,

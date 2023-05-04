@@ -71,9 +71,19 @@ function setMenu  () {
 
 
 // ___________________________ LISTENERS_______________________________
+const saveName = localStorage.getItem('saveName')
+
 const newGame = document.querySelector('#menu__new-game')
 newGame.addEventListener('click', () => {
-    location.assign("./creating-new-game.html")
+    const newGame = () => {location.assign("./creating-new-game.html")}
+    const alert = 'The save slot will be overwrite and the game progress will be delete'
+
+    if(saveName){
+        confirmDeleting(alert,newGame)
+    } else {
+        newGame()
+    }
+    
 })
 
 
@@ -99,20 +109,41 @@ loadSave.addEventListener('click', () => {
     if(localStorage.getItem('saveName')){
         location.assign('game.html')
     } else {
-        console.log('save does not exist')
+        saveAlert()
     }
 })
 
+function confirmDeleting (textAlert, act) {
+    if (confirm(textAlert)){
+        localStorage.clear()
+        act()
+    }
+}
+
+function saveAlert () {
+    const alert = document.querySelector('.load-container__save-details')
+    alert.classList.remove('empty-slot')
+    alert.offsetWidth;
+    alert.classList.add('empty-slot')
+    
+}
+
 const removeGameSave = document.querySelector('#save-details__remove-game')
 removeGameSave.addEventListener('click', () => {
-    if (confirm('rly?')){
-        localStorage.clear()
+    
+    const reload = function(){
         location.reload()
+    }
+    const text = 'serio?'
+
+    if(saveName){
+        confirmDeleting(text,reload)
+    } else {
+        saveAlert()
     }
 })
 
 function checkGameSave () {
-    const saveName = localStorage.getItem('saveName')
     if(saveName){
         document.querySelector('#save-details__data').innerText = saveName
         const valueLabel = document.querySelector('#save-details__value')
