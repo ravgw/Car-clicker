@@ -71,14 +71,14 @@ function setMenu  () {
 
 
 // ___________________________ LISTENERS_______________________________
-const saveName = localStorage.getItem('saveName')
+const saveCheck = localStorage.getItem('saveExist')
 
 const newGame = document.querySelector('#menu__new-game')
 newGame.addEventListener('click', () => {
     const newGame = () => {location.assign("./creating-new-game.html")}
     const alert = 'The save slot will be overwrite and the game progress will be delete'
 
-    if(saveName){
+    if(saveCheck){
         confirmDeleting(alert,newGame)
     } else {
         newGame()
@@ -106,7 +106,7 @@ backButton.addEventListener('click', () => {
 
 const loadSave = document.querySelector('#load-container__save-game')
 loadSave.addEventListener('click', () => {
-    if(localStorage.getItem('saveName')){
+    if(localStorage.getItem('saveExist')){
         location.assign('game.html')
     } else {
         saveAlert()
@@ -136,7 +136,7 @@ removeGameSave.addEventListener('click', () => {
     }
     const text = 'serio?'
 
-    if(saveName){
+    if(saveCheck){
         confirmDeleting(text,reload)
     } else {
         saveAlert()
@@ -144,8 +144,8 @@ removeGameSave.addEventListener('click', () => {
 })
 
 function checkGameSave () {
-    if(saveName){
-        document.querySelector('#save-details__data').innerText = saveName
+    if(saveCheck){
+        document.querySelector('#save-details__data').innerText = saveCheck
         const valueLabel = document.querySelector('#save-details__value')
         const saveValue = localStorage.getItem('playerCoins')*1
         numbersAdjust(saveValue,valueLabel)

@@ -251,7 +251,7 @@ const confirmFunc = function () {
         const month = now.getMonth()
         const year = now.getFullYear()
         const name = `${day}-${month}-${year}`
-        localStorage.setItem('saveName',name)
+        localStorage.setItem('saveExist',name)
     }
     saveDate()
     function replace () { 

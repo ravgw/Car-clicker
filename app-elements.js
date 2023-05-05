@@ -17,6 +17,7 @@ export const player = {
     load: function () {
         if(localStorage.getItem('playerCoins')) {
             this.coins = localStorage.getItem('playerCoins')*1
+            console.log('player load')
         }
     }
 }

@@ -2,29 +2,44 @@ import { createCarClicker, createCarBackground, createHomeBoard, createCardEleme
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 import { numbersAdjust } from "./app-utils.js"
 
+function startGame() {
+    if (localStorage.getItem('saveExist')){
+        createCar()
+        calculateSpeed()
+        calcPerSeconds()
+        createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
+        activeStyleNavigation('menuHome')
 
+        loadObjects(bolidParts)
+        loadObjects(garageFacilities)
+        player.load()
+        stats.load()
+        statsUpDate()
+    } else {
+        createCar()
+    }
+}
+
+const loadObjects = function (objectsArray) {
+    for(let i=0; i < objectsArray.length; i++){
+        console.log(objectsArray[i])
+        objectsArray[i].load()
+    }
+}
 
 
 
 const createCar = function() {
     const car = document.getElementById('clicker');
-    if(!localStorage.length){
+
         createCarBackground();
         createCarClicker(car);
-        createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
-        // activeStyleNavigation('menuHome')
-        // calcPerSeconds()
-        // speedAdjust()
-    } else {
-        // console.log(localStorage)
-        createCarBackground();
-        createCarClicker(car);
+
         const carNumber = document.querySelector('#car-number')
         const bodyFront = document.querySelector('#carBodyFront')
         const bodyRear = document.querySelector('#carBodyRear')
         const driverBody = document.querySelector('#driverBody')
         const driverHelmet = document.querySelector('#driverHelmet')
-        
         const number = localStorage.getItem('bodyNumber')
         const bodyColor = localStorage.getItem('bodyColor')
         const racingSuitColor = localStorage.getItem('racingSuitColor')
@@ -35,25 +50,8 @@ const createCar = function() {
         bodyRear.style.backgroundColor = bodyColor
         driverBody.style.backgroundColor = racingSuitColor
         driverHelmet.style.backgroundColor = helmetColor
-
-        bolidParts[0].load()
-        bolidParts[1].load()
-        bolidParts[2].load()
-        bolidParts[3].load()
-        garageFacilities[0].load()
-        garageFacilities[1].load()
-        garageFacilities[2].load()
-        player.load()   
-        stats.load()   
-
-        createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
-        activeStyleNavigation('menuHome')
-        calculateSpeed()
-        calcPerSeconds()
-        // speedAdjust()
-        // statsUpDate()
-    }
 }
+
 
 
 
@@ -729,4 +727,4 @@ function statsUpDate () {
     
 } 
 
-createCar()
+startGame()
