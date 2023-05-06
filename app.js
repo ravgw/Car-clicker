@@ -26,7 +26,6 @@ function startGame() {
 
 const loadObjects = function (objectsArray) {
     for(let i=0; i < objectsArray.length; i++){
-        console.log(objectsArray[i])
         objectsArray[i].load()
     }
 }
