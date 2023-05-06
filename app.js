@@ -143,8 +143,6 @@ const speedAdjust = function () {
     speed.textContent = `${player.speed} km/h`
 }
 
-
-
 const bolidElement = document.getElementById('bolid-navigation')
 if(bolidElement){
 bolidElement.addEventListener('click', (e) => {
