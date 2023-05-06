@@ -1,22 +1,26 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
-import { numbersAdjust } from "./app-utils.js"
+import { checkSaveStatus, numbersAdjust } from "./app-utils.js"
 
 function startGame() {
-    if (localStorage.getItem('saveExist')){
+    if (checkSaveStatus('saveExist')){
         createCar()
-        calculateSpeed()
-        calcPerSeconds()
         createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
         activeStyleNavigation('menuHome')
-
+        calculateSpeed()
+        calcPerSeconds()
+        
+        if(checkSaveStatus('statsTotalCoins')){
         loadObjects(bolidParts)
         loadObjects(garageFacilities)
         player.load()
         stats.load()
         statsUpDate()
+        }
     } else {
         createCar()
+        createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
+        activeStyleNavigation('menuHome')
     }
 }
 
@@ -27,35 +31,28 @@ const loadObjects = function (objectsArray) {
     }
 }
 
-
-
 const createCar = function() {
     const car = document.getElementById('clicker');
 
-        createCarBackground();
-        createCarClicker(car);
+    createCarBackground();
+    createCarClicker(car);
 
-        const carNumber = document.querySelector('#car-number')
-        const bodyFront = document.querySelector('#carBodyFront')
-        const bodyRear = document.querySelector('#carBodyRear')
-        const driverBody = document.querySelector('#driverBody')
-        const driverHelmet = document.querySelector('#driverHelmet')
-        const number = localStorage.getItem('bodyNumber')
-        const bodyColor = localStorage.getItem('bodyColor')
-        const racingSuitColor = localStorage.getItem('racingSuitColor')
-        const helmetColor = localStorage.getItem('helmetColor')
-        
-        carNumber.innerText = number
-        bodyFront.style.backgroundColor = bodyColor
-        bodyRear.style.backgroundColor = bodyColor
-        driverBody.style.backgroundColor = racingSuitColor
-        driverHelmet.style.backgroundColor = helmetColor
+    const carNumber = document.querySelector('#car-number')
+    const bodyFront = document.querySelector('#carBodyFront')
+    const bodyRear = document.querySelector('#carBodyRear')
+    const driverBody = document.querySelector('#driverBody')
+    const driverHelmet = document.querySelector('#driverHelmet')
+    const number = localStorage.getItem('bodyNumber')
+    const bodyColor = localStorage.getItem('bodyColor')
+    const racingSuitColor = localStorage.getItem('racingSuitColor')
+    const helmetColor = localStorage.getItem('helmetColor')
+    
+    carNumber.innerText = number
+    bodyFront.style.backgroundColor = bodyColor
+    bodyRear.style.backgroundColor = bodyColor
+    driverBody.style.backgroundColor = racingSuitColor
+    driverHelmet.style.backgroundColor = helmetColor
 }
-
-
-
-
-
 
 
 const speed = document.getElementById('speed')
@@ -69,14 +66,22 @@ let garageMenu = false;
 let garageCards = false;
 let checkPersonal = false 
 let checkTeamPrincipal = false 
+let clickTimer;
+// let timerOn = 0;
 
-// ------------------------------------------------------------------- NEW
+if(clicker){
+    clicker.addEventListener('click', () => {
+        addCoins();
+        numbersAdjust(player.coins, counter)
+    })
+}
+
 function calculateSpeed () {
     let speed = 0
     let bonusSpeed = 0
     bolidParts.forEach(e => speed += e.value)
 
-    if(game.driverSkillStatus) {
+    if (game.driverSkillStatus) {
         bonusSpeed = player.speed
     } else {
         bonusSpeed = 0
@@ -84,12 +89,9 @@ function calculateSpeed () {
 
     player.speed = speed + bonusSpeed
     statsUpDate()
-    // console.log(player.speed + 'PS')
 }
 
-
 function addCoins () {
-
     calculateSpeed()
     const perClick = calcPerClick()
 
@@ -116,10 +118,7 @@ function calcPerClick () {
 }
 
 function calcPerSeconds () {
-
     const display = document.querySelector('#PS-counter-value')
-    // console.log(display)
-
     let param1 = player.coins
     let param2
 
@@ -140,26 +139,7 @@ function calcPerSeconds () {
     timer()
 }
 
-
-// -----------------------------------------------------------------------------------------------------------------
-
-
-// const OLDstats = {
-//     totalCoins: 0,
-//     perSec: 0,
-//     perClick: 1,
-// }
-if(clicker){
-clicker.addEventListener('click', (e) => {
-    // console.log('LISTENER')
-
-    addCoins();
-    numbersAdjust(player.coins, counter)
-})
-}
-
 const speedAdjust = function () {
-    // Splayer.actualSpeed = Splayer.speed + Splayer.speedBooster
     speed.textContent = `${player.speed} km/h`
 }
 
@@ -168,12 +148,10 @@ const speedAdjust = function () {
 const bolidElement = document.getElementById('bolid-navigation')
 if(bolidElement){
 bolidElement.addEventListener('click', (e) => {
-
     if(homeBoard) {
         hideElements('homeBoard')
         homeBoard = false
     }
-
     if (garageMenu) {
         hideElements('garage-options')
         if (garageCards) {
@@ -183,7 +161,6 @@ bolidElement.addEventListener('click', (e) => {
             hideElements('teamPrincipal')
         }
     }
-
     if(!checkPersonal) {
         createCharacterCard('driver')
         checkPersonal = true
@@ -195,7 +172,6 @@ bolidElement.addEventListener('click', (e) => {
         showElements('driver')
     }
 
-
     if(bolidMenu) {
         showElements('bolid-options')
         activeStyleNavigation('menuBolid')
@@ -204,10 +180,9 @@ bolidElement.addEventListener('click', (e) => {
         createCardNavigation('bolid-options', 'Driver', 'Parts')
         activeStyleNavigation('menuBolid')
     }
-        const partsCard = document.getElementById('Parts-option')
-        partsCard.addEventListener('click', (e) =>{
 
-
+    const partsCard = document.getElementById('Parts-option')
+    partsCard.addEventListener('click', (e) =>{
         removeAlertCssClass()
         driverCard.classList.remove('pushedKey')    
         partsCard.classList.add('pushedKey')  
@@ -252,92 +227,87 @@ bolidElement.addEventListener('click', (e) => {
 const garageElement = document.getElementById('garage-navigation')
 if(garageElement){
 garageElement.addEventListener('click', (e) => {
-
     if(homeBoard) {
         hideElements('homeBoard')
         homeBoard = false
     }
 
-        if(bolidMenu) {
-            hideElements('bolid-options')
-            if(bolidCards) {
-                hideElements('bolid')
-            }
-            if (checkPersonal) {
-                hideElements('driver')
-            }
+    if(bolidMenu) {
+        hideElements('bolid-options')
+        if(bolidCards) {
+            hideElements('bolid')
         }
+        if (checkPersonal) {
+            hideElements('driver')
+        }
+    }
 
-        if(!checkTeamPrincipal) {
-            createCharacterCard('teamPrincipal')
-            checkTeamPrincipal = true
-            if(!player.teamPrincipalOwned) {
-                createUnlockCharacter(teamPrincipal, buyCharacter)
+    if(!checkTeamPrincipal) {
+        createCharacterCard('teamPrincipal')
+        checkTeamPrincipal = true
+        if(!player.teamPrincipalOwned) {
+            createUnlockCharacter(teamPrincipal, buyCharacter)
+        }
+    } else {
+        showElements('teamPrincipal')
+    }
+    
+    if(garageMenu) {
+        showElements('garage-options')
+        activeStyleNavigation('menuGarage')
+    } else {
+        garageMenu = true
+        createCardNavigation('garage-options','TeamPrincipal', 'Facilities' )
+        activeStyleNavigation('menuGarage')
+    }
+        
+    const facilitiesCard = document.getElementById('Facilities-option')
+    facilitiesCard.addEventListener('click', (e) =>{
+        removeAlertCssClass()
+        TeamPrincipalCard.classList.remove('pushedKey')    
+        facilitiesCard.classList.add('pushedKey')  
+
+        if (checkTeamPrincipal) {
+            hideElements('teamPrincipal')
+        }
+        if(garageCards) {
+            document.querySelector('#garage').classList.remove('showMeHowToSlide')
+            let animation
+            const elements = document.querySelectorAll('.garage-slider')
+            if(!animation) {
+                elements.forEach((selector) => {
+                    selector.style = 'animation: fadeIn .3s'})
+                    animation = true
             }
+            showElements('garage')
         } else {
+            garageCards = true
+            createCardElement('garage', garageFacilities, upgrade)
+            
+            slider('.garage-cards-container-slider','.garage-element-slider')
+            document.querySelector('#garage').classList.add('showMeHowToSlide')
+        }
+    })
+
+    const TeamPrincipalCard = document.getElementById('TeamPrincipal-option')
+    TeamPrincipalCard.addEventListener('click', (e) => {
+        TeamPrincipalCard.classList.add('pushedKey')    
+        facilitiesCard.classList.remove('pushedKey')  
+
+        if(garageCards) {
+            hideElements('garage')
+        }
+        if(checkTeamPrincipal){
+            removeAlertCssClass()
             showElements('teamPrincipal')
         }
-        
-        if(garageMenu) {
-            showElements('garage-options')
-            activeStyleNavigation('menuGarage')
-        } else {
-            garageMenu = true
-            createCardNavigation('garage-options','TeamPrincipal', 'Facilities' )
-            activeStyleNavigation('menuGarage')
-        }
-        
-        const facilitiesCard = document.getElementById('Facilities-option')
-        facilitiesCard.addEventListener('click', (e) =>{
-
-            removeAlertCssClass()
-            TeamPrincipalCard.classList.remove('pushedKey')    
-            facilitiesCard.classList.add('pushedKey')  
-
-            if (checkTeamPrincipal) {
-                hideElements('teamPrincipal')
-            }
-            if(garageCards) {
-                document.querySelector('#garage').classList.remove('showMeHowToSlide')
-                let animation
-                const elements = document.querySelectorAll('.garage-slider')
-                if(!animation) {
-                    elements.forEach((selector) => {
-                        selector.style = 'animation: fadeIn .3s'})
-                        animation = true
-                }
-                showElements('garage')
-            } else {
-                garageCards = true
-                createCardElement('garage', garageFacilities, upgrade)
-                
-                slider('.garage-cards-container-slider','.garage-element-slider')
-                document.querySelector('#garage').classList.add('showMeHowToSlide')
-            }
-        })
-        const TeamPrincipalCard = document.getElementById('TeamPrincipal-option')
-        TeamPrincipalCard.addEventListener('click', (e) => {
-
-            TeamPrincipalCard.classList.add('pushedKey')    
-            facilitiesCard.classList.remove('pushedKey')  
-
-
-            if(garageCards) {
-                hideElements('garage')
-            }
-            if(checkTeamPrincipal){
-                removeAlertCssClass()
-                showElements('teamPrincipal')
-            }
-        })
+    })
 })
 }
 
 const homeElement = document.getElementById('home-navigation')
 if(homeElement){
 homeElement.addEventListener('click', (e) => {
-
-
     if(!homeBoard) {
         showElements('homeBoard')
         activeStyleNavigation('menuHome')
@@ -384,7 +354,6 @@ const buyCharacter = function (object) {
 
 const upgrade = function (object) {
 
-    
     const displayCost = document.getElementById(`${object.type}-price`)
     const displayLvl = document.getElementById(`${object.type}Lvl`)
     
@@ -392,17 +361,12 @@ const upgrade = function (object) {
         spendCoins(object.cost)
         object.upgrade()
         numbersAdjust(object.cost, displayCost)
-        // countMultiplierSpeed()
-        
         displayLvl.innerText = 'Lvl. ' + object.level
-        // updateHomeStats(object)
-        
-        if(object.addSkill) { /// TO REBUILD    
+
+        if(object.addSkill) {
             unlockSkill(object)
         }
-        
     } 
-    
     calculateSpeed();
     statsUpDate();
 }
@@ -415,8 +379,8 @@ const verifyCoinnsAmount = function (object) {
         notEnaughtCoinsAnimation(object.type)
     }
 }
-function notEnaughtCoinsAnimation (cardObjectname) {
-    const element = document.querySelector(`#${cardObjectname}-price`) || document.querySelector(`#${cardObjectname}-unlock-price`)
+function notEnaughtCoinsAnimation (cardObjectName) {
+    const element = document.querySelector(`#${cardObjectName}-price`) || document.querySelector(`#${cardObjectName}-unlock-price`)
     
     removeAlertCssClass()
     counter.offsetWidth;
@@ -426,7 +390,6 @@ function notEnaughtCoinsAnimation (cardObjectname) {
 
 
 const removeAlertCssClass = function () {
-
     const elements = document.querySelectorAll('.upgrade-price-alert')
 
     elements.forEach((e) => e.classList.remove('upgrade-price-alert'))
@@ -437,19 +400,18 @@ const removeAlertCssClass = function () {
 const unlockSkill = function (character) {
     createActiveSkill(character)
     const skill = document.querySelector(character.skillId)
+
     skill.addEventListener('click',() => {
         if (character.type === 'teamPrincipal') {
             if(character.skillAvailability){
                 boostAutoClick(character.skillDuration)
                 activateSkill(character)
-                // character.skillTimer()
             }
         }
         if (character.type === 'driver') {
             if(character.skillAvailability){
                 boostSpeed(character.skillDuration)
                 activateSkill(character)
-                // character.skillTimer()
             }
         }
     })
@@ -457,7 +419,6 @@ const unlockSkill = function (character) {
 
 
 const activateSkill = function (character) {
-
     const status = game[`${character.type}SkillStatus`]
     
     const skillActivation = function () {
@@ -475,22 +436,18 @@ const activateSkill = function (character) {
             }
         
         const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
+
         let counter = character.skillDuration
-        
         const skillTimer = function () {
             displayCounter.innerText = counter
             
             setTimeout( () => {
-                if ( counter === 0 ) 
-                {
+                if (counter === 0){
                     skillCooldown(character)
                     game[`${character.type}SkillStatus`] = 'available'
                     displayCounter.classList.remove('anim-skill-duration')
-                } 
-                else if (counter >= 1) 
-                {
-                    if (counter === 4) 
-                    {
+                } else if (counter >= 1){
+                    if (counter === 4){
                         displayCounter.classList.add('anim-skill-duration')
                     }
                     counter--
@@ -505,31 +462,26 @@ const activateSkill = function (character) {
     if(!status) {
         game[`${character.type}SkillStatus`] = 'activated'
         skillActivation()
-        } else { 
-            switch(status) {
-                case 'activated':
-                    console.log('act')
-                    break
-                case 'available':
-                    skillActivation()
-                    game[`${character.type}SkillStatus`] = 'activated'
-                    break
-                default:
-                    console.log('activeSkill switch default')
-            }
+    } else { 
+        switch(status) {
+            case 'activated':
+                console.log('act')
+                break
+            case 'available':
+                skillActivation()
+                game[`${character.type}SkillStatus`] = 'activated'
+                break
+            default:
+                console.log('activeSkill switch default')
         }
-    
-        console.log('function')
-    
+    }
 }
 
 const skillCooldown = function (character) {
     
-    
     document.querySelector(`${character.skillId} .skill-activated`).style.display = 'none'
 
-
-    if (game[`${character.type}CooldownSkillCreated`]) {
+    if (game[`${character.type}CooldownSkillCreated`]){
         const show = document.querySelector(`${character.skillId} .skill-cooldown`)
         show.style.display = 'flex'
     }
@@ -538,11 +490,8 @@ const skillCooldown = function (character) {
         game[`${character.type}CooldownSkillCreated`] = true
     }
     
-    
     const displayCounter = document.querySelector(`#${character.type}-cooldown-timer`)
-
     let time = character.skillCooldown
-
     displayCounter.innerText = time + 'm'
 
     const openSkillUp = function () {
@@ -552,13 +501,8 @@ const skillCooldown = function (character) {
         hide.style.display = 'none'
         show.style.display = 'flex'
     }
-
     character.skillTimer(openSkillUp)
-    
 }
-
-let clickTimer;
-let timerOn = 0;
 
 const autoClick = function () {
     addCoins()
@@ -574,7 +518,6 @@ const stopAutoClick = () => {
 }
 
 const boostAutoClick = (duration) => {
-
     const time = duration * 1000
 
     stopAutoClick()
@@ -590,11 +533,9 @@ const boostAutoClick = (duration) => {
     }
     boost()
     stopBoost()
-    // updateHomeStats()
 }
 
 const boostSpeed = (duration) => {
-
     const time = duration * 1000
     game.driverSkillStatus = true
     calculateSpeed()
@@ -608,69 +549,40 @@ const boostSpeed = (duration) => {
     }, time)
 
 }
-
-
-// ------------------------------------------------- END SKILLS -------------------------------------------------
-// const countMultiplierSpeed = function () {
-//     let multiplier = 0
-//     for ( let i = 0; i < bolidParts.length; i++){
-//         const x = bolidParts[i]
-//         multiplier = multiplier + x.value
-//     }
-//     player.speed = multiplier
-//     speedAdjust()
-// }
-// countMultiplierSpeed();
-
-
-// totalValueStats.innerText = `${stats.totalCoins} \u2234`
-const perSecStats = document.querySelector('#PS-counter-value')
-// perSecStats.innerText = `0\u2234`
-// perClickStats.innerText = `${stats.perClick} \u2234`
-
-// const updateHomeStats = function (object) {
-    //     const element = document.querySelector(`#${object.type}-card-OLDstats-value`)
-    //     if (element) {
-        //         element.innerText = `${object.value}${object.actionSign}` 
-        //     }
-        //     OLDstats.update()
-        // }
-        
-        
-        
-        const activeStyleNavigation = function (activeNavigation) {
-            let menu = activeNavigation
+// const perSecStats = document.querySelector('#PS-counter-value')
+const activeStyleNavigation = function (activeNavigation) {
+    let menu = activeNavigation
             
-            const speed = document.querySelector('#speed')
-            const coins = document.querySelector('#money')
+    const speed = document.querySelector('#speed')
+    const coins = document.querySelector('#money')
+    
+    const bolid = document.querySelector('#bolid-navigation')
+    const homeButton = document.querySelector('#home-navigation')
+    const garage = document.querySelector('#garage-navigation')
+    
+    const driver = document.querySelector('#Driver-option')
+    const parts = document.querySelector('#Parts-option')
+    const tp = document.querySelector('#TeamPrincipal-option')
+    const facilities = document.querySelector('#Facilities-option')
+    
+    const elements = [speed,coins,bolid,homeButton,garage,driver,parts,tp,facilities]
+    
+    const leftUp = 'left-up'
+    const leftDown = 'left-down'
+    const rightUp = 'right-up'
+    const rightDown = 'right-down'
+    const nbr = 'nbr'
             
-            const bolid = document.querySelector('#bolid-navigation')
-            const homeButton = document.querySelector('#home-navigation')
-            const garage = document.querySelector('#garage-navigation')
+    const bolidActive = function () {
+        removeStyle()
+        const steps = [leftUp,rightDown,leftDown,nbr,rightUp,leftUp,rightDown,nbr,nbr]
+        activate(steps, bolid)
+        bolid.classList.add('pushedKey')
+        driver.classList.add('pushedKey')
+    }
             
-            const driver = document.querySelector('#Driver-option')
-            const parts = document.querySelector('#Parts-option')
-            const tp = document.querySelector('#TeamPrincipal-option')
-            const facilities = document.querySelector('#Facilities-option')
-            
-            const elements = [speed,coins,bolid,homeButton,garage,driver,parts,tp,facilities]
-            
-            const leftUp = 'left-up'
-            const leftDown = 'left-down'
-            const rightUp = 'right-up'
-            const rightDown = 'right-down'
-            const nbr = 'nbr'
-            
-            const bolidActive = function () {
-                removeStyle()
-                const steps = [leftUp,rightDown,leftDown,nbr,rightUp,leftUp,rightDown,nbr,nbr]
-                activate(steps, bolid)
-                bolid.classList.add('pushedKey')
-                driver.classList.add('pushedKey')
-            }
-            
-            const homeActive = function () {
-                removeStyle()
+    const homeActive = function () {
+        removeStyle()
         const steps = [leftDown,rightDown,leftUp,nbr,rightUp,nbr,nbr,nbr,nbr]
         activate(steps, homeButton)
         homeButton.classList.add('pushedKey')
@@ -685,11 +597,9 @@ const perSecStats = document.querySelector('#PS-counter-value')
     }
     
     const activate = function (steps, button) {
-        // button.classList.add('pushedKey')
         for (let i = 0; i < elements.length; i++){
             if (elements[i]){
                 elements[i].classList.add(steps[i])
-                // style[i] = steps[i]
             }
         }
     }
@@ -717,14 +627,11 @@ function statsUpDate () {
     const perClickStats = document.querySelector('#PC-counter-value')
     const totalValueStats = document.querySelector('#Total-counter-value')
     stats.perClick = calcPerClick()
-    // console.log('2')
     numbersAdjust(player.coins, counter)
-    // console.log(stats.totalCoins + 'embebe')
     numbersAdjust(stats.totalCoins, totalValueStats)
     numbersAdjust(stats.perClick, perClickStats)
     
     speed.innerText = `${player.speed} km/h`
-    
 } 
 
 startGame()
