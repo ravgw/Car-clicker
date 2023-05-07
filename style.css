@@ -32,7 +32,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     height: -webkit-fill-available;
     width: 100vw;
     background: var(--body);
@@ -197,6 +197,8 @@ body {
     align-items: flex-end;
     padding-top: 162px;
     cursor: pointer;
+    user-select: none;
+    min-width: 220px;
 }
 .counter {
     display: flex;
@@ -309,7 +311,7 @@ body {
     left: 45px;
 }
 
-.rims {
+.rims1of3 {
     position: absolute;
     top: 16px;
     left: 38px;
@@ -319,38 +321,37 @@ body {
     border: 2px solid #333;
     border-radius: 10%;
     animation: wheels 1s infinite linear;
-    opacity: .8;
 }
-
-#carBodyFront .rims {
-    left: 63px;
-}
-
-.rims::before {
-    content: '';
+.rims2of3 {
     position: absolute;
-    left: -2px;
-    top: -2px;
-    box-sizing: border-box;
+    top: 16px;
+    left: 38px;
     width: 6px;
     height: 34px;   
     background: #777;
     border: 2px solid #222;
     border-radius: 10%;
     rotate: 60deg;
+    animation: wheels 1s infinite linear;
 }
-.rims::after {
-    content: '';
+.rims3of3 {
     position: absolute;
-    left: -2px;
-    top: -2px;
-    box-sizing: border-box;
+    top: 16px;
+    left: 38px;
     width: 6px;
     height: 34px;   
     background: #777;
     border: 2px solid #222;
     border-radius: 10%;
     rotate: 120deg;
+    animation: wheels 1s infinite linear;
+}
+
+/* correction position */
+#carBodyFront .rims1of3, 
+#carBodyFront .rims2of3,
+#carBodyFront .rims3of3 { 
+    left: 63px;
 }
 
 
@@ -1361,7 +1362,7 @@ body {
  #teamPrincipal-cooldown-timer {
     color: var(--selectiveyellow);
  }
-
+/* ________________________________________________________________________________________________________QUERIES__________________________________________________________-- */
 @media only screen and (max-height: 550px){
     .cardMainContent img {
         display: none;

@@ -18,10 +18,18 @@ rearTyre.classList.add('tyres');
 const frontTyre = document.createElement('p');
 frontTyre.classList.add('tyres');
 
-const rearRim = document.createElement('p');
-rearRim.classList.add('rims')
-const frontRim = document.createElement('p');
-frontRim.classList.add('rims')
+const rearRim1of3 = document.createElement('span');
+rearRim1of3.classList.add('rims1of3')
+const rearRim2of3 = document.createElement('span');
+rearRim2of3.classList.add('rims2of3')
+const rearRim3of3 = document.createElement('span');
+rearRim3of3.classList.add('rims3of3')
+const frontRim1of3 = document.createElement('span');
+frontRim1of3.classList.add('rims1of3')
+const frontRim2of3 = document.createElement('span');
+frontRim2of3.classList.add('rims2of3')
+const frontRim3of3 = document.createElement('span');
+frontRim3of3.classList.add('rims3of3')
 
 const driverBody = document.createElement('p');
 driverBody.id = 'driverBody';
@@ -36,8 +44,12 @@ clicker.appendChild(carBodyFront);
 carBodyRear.appendChild(door);
 carBodyRear.appendChild(driverBody);
 
-carBodyRear.appendChild(rearRim);
-carBodyFront.appendChild(frontRim);
+carBodyRear.appendChild(rearRim1of3);
+carBodyRear.appendChild(rearRim2of3);
+carBodyRear.appendChild(rearRim3of3);
+carBodyFront.appendChild(frontRim1of3);
+carBodyFront.appendChild(frontRim2of3);
+carBodyFront.appendChild(frontRim3of3);
 
 carBodyRear.appendChild(rearTyre);
 carBodyFront.appendChild(frontTyre);
