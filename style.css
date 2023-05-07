@@ -25,6 +25,11 @@ html {
     margin: 0;
     box-sizing: border-box;
     user-select: none;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 body {
@@ -37,7 +42,6 @@ body {
     width: 100vw;
     background: var(--body);
     overflow: hidden;
-    user-select: none;
 }
 
 .game {
@@ -331,7 +335,7 @@ body {
     background: #777;
     border: 2px solid #222;
     border-radius: 10%;
-    rotate: 60deg;
+    transform: rotate(60deg);
     animation: wheels 1s infinite linear;
 }
 .rims3of3 {
@@ -343,7 +347,7 @@ body {
     background: #777;
     border: 2px solid #222;
     border-radius: 10%;
-    rotate: 120deg;
+    transform: rotate(120deg);
     animation: wheels 1s infinite linear;
 }
 
@@ -362,7 +366,7 @@ body {
     left: 108px;
     width: 1px;
     height: 30px;
-    rotate: 20deg;
+    transform: rotate(20deg);
     background-color: #999;
 }
 
