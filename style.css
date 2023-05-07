@@ -418,11 +418,7 @@ body {
 }
 
 @keyframes wheels {
-    from {
-        transform: rotate(0turn);
-    }
-    
-    to {
+    100% {
         transform: rotate(1turn);
     }
 }
