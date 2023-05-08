@@ -40,8 +40,9 @@ body {
     min-height: 100vh;
     height: -webkit-fill-available;
     width: 100vw;
+    min-width: 250px;
     background: var(--body);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .game {
