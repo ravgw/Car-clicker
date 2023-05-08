@@ -1,4 +1,13 @@
 import { createCarClicker } from './dom-utils.js'
+function setWindowHeight () {
+    let height = window.innerHeight;
+    const bodyAnchor = document.querySelector('body')
+    bodyAnchor.style.height = `${height}px`
+}
+setWindowHeight()
+window.addEventListener('resize',() => {
+    setWindowHeight()
+})
 
 const newGameCreator = function () {
     addColorsPalette()
