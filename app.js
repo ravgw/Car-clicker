@@ -69,9 +69,11 @@ let clickTimer;
 // let timerOn = 0;
 
 if(clicker){
-    clicker.addEventListener('click', () => {
+    clicker.addEventListener('click', (e) => {
         addCoins();
         numbersAdjust(player.coins, counter)
+        e.preventDefault()
+        console.log(e)
     })
 }
 

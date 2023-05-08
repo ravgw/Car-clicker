@@ -40,9 +40,9 @@ body {
     min-height: 100vh;
     height: -webkit-fill-available;
     width: 100vw;
-    min-width: 250px;
+    /* min-width: 250px; */
     background: var(--body);
-    /* overflow: hidden; */
+    overflow-x: hidden;
 }
 
 .game {
@@ -202,8 +202,16 @@ body {
     align-items: flex-end;
     padding-top: 162px;
     cursor: pointer;
-    user-select: none;
+    /* user-select: none; */
+    pointer-events: auto;
     min-width: 220px;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
 }
 .counter {
     display: flex;
