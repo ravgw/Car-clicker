@@ -2,6 +2,16 @@ import { createCarClicker, createCarBackground, createHomeBoard, createCardEleme
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 import { checkSaveStatus, numbersAdjust } from "./app-utils.js"
 
+function setWindowHeight () {
+    let height = window.innerHeight;
+    const bodyAnchor = document.querySelector('body')
+    bodyAnchor.style.height = `${height}px`
+}
+setWindowHeight()
+window.addEventListener('resize',() => {
+    setWindowHeight()
+})
+
 function startGame() {
     if (checkSaveStatus('saveExist')){
         createCar()
