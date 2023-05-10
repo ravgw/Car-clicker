@@ -9,6 +9,16 @@ window.addEventListener('resize',() => {
     setWindowHeight()
 })
 
+function setWindowHeight () {
+    let height = window.innerHeight;
+    const bodyAnchor = document.querySelector('body')
+    bodyAnchor.style.height = `${height}px`
+}
+setWindowHeight()
+window.addEventListener('resize',() => {
+    setWindowHeight()
+})
+
 function addHover () {
     const hoverElements = document.querySelectorAll('.menu__button')
 
