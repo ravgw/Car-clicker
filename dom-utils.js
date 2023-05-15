@@ -135,7 +135,7 @@ export const createHomeBoard = function (array1, array2)  {
   const createStatsCardsContainer = function (arr) {
 
     const statsCardsContainer = document.createElement('div')
-    statsCardsContainer.id = `stats-cards-container`
+    statsCardsContainer.classList.add('stats-cards-container')
     homeStatsContainer.appendChild(statsCardsContainer)
 
     for (let i=0; i < arr.length; i++){
@@ -414,7 +414,7 @@ export const createCharacter = function (id, object, action) {
 
     const subLevelContainer = document.createElement('div')
     subLevelContainer.classList.add('sub-lvl-container')
-    titleContent.appendChild(subLevelContainer)
+    // titleContent.appendChild(subLevelContainer)
 
     for( let i = 0; i <=2; i++) {
       const subLevel = document.createElement('div')
