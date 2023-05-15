@@ -83,7 +83,7 @@ if(clicker){
         addCoins();
         numbersAdjust(player.coins, counter)
         e.preventDefault()
-        console.log(e)
+        // console.log(e)
     })
 }
 

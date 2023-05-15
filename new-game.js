@@ -245,6 +245,7 @@ function setColor (color, part) {
 }
 const confirm = document.querySelector('#personalize__confirm')
 confirm.addEventListener('click', () => {
+    
     confirmFunc()
 })
 
