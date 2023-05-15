@@ -59,7 +59,7 @@ body {
     background: rgb(104, 176, 252);
     background: linear-gradient(180deg, rgba(104, 176, 252) 0%, rgba(110,205,229,1) 48%);
     border: 3px solid #22232e;
-    /* overflow: scroll; */
+    overflow: hidden;
     z-index: 1;
 }
 
@@ -68,8 +68,9 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    height: 250px;
-    /* min-height: 250px; */
+    height: 25%;
+    /* overflow-x: hidden; */
+    min-height: 130px;
 }
 
 #car {
@@ -88,7 +89,8 @@ body {
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 75%;
+    min-height: 300px;
     background: var(--spacecadet);
     padding: 5px;
     padding-top: 0px;
@@ -107,19 +109,21 @@ body {
 
 /* ------------------------------------ CAR-BACKGROUND ----------------------------------- */
 #background-container {
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
     height: 250px;
     position: relative;
 }
 
 #carBackground{
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
-    max-height: 250px;
+    height: 250px;
     position: absolute;
 }
 .clouds {
@@ -209,7 +213,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    padding-top: 162px;
+    padding-bottom: 30px;
     cursor: pointer;
     /* user-select: none; */
     pointer-events: auto;
@@ -759,10 +763,8 @@ body {
 }
 
 .card img {
-    /* display: flex; */
-    /* max-width: 230px; */
-    /* max-height: 230px; */
-    height: 60%;
+    height: 40%;
+    aspect-ratio: 1;
     border: 2px solid var(--light);
     border-radius: 5px;
     padding: .5em;
@@ -1065,20 +1067,19 @@ body {
 .home-counters:last-child {
     border-radius: 0px 20px 0px 0px;
 }
+
 #home-stats-container {
-    height: 55%;
-    width: 97%;
-    padding: .5em;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: 50%;
     background: var(--steelblue);
-    border: 2px solid var(--prusianblue);
-    border-bottom: 6px double var(--prusianblue);
-    border-left: 6px double var(--prusianblue);
-}
+} 
 
-#stats-cards-container {
+
+.stats-cards-container {
     width: 47%;
     height: 100%;
     display: flex;
@@ -1087,24 +1088,21 @@ body {
 }
 
 .stats-card-infoDiv {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    overflow: hidden;
-    color: var(--spacecadet);
-    font-weight: 500;
-}   
+    display: inline-flex;
+    width: 100%;
+} 
 .stats-card-value {
-    min-width: 25%;
+    width: 30%;
+    text-align: center;
     color: var(--black);
 }
+.stats-card-nameTag {
+    text-align: end;
+    padding-right: 0.5rem;
+    width: 70%;
 
-#sponsors-card-stats-value {
-    border-radius: 0px 20px 0px 0px;
-}
-#fame-card-stats-value {
-    border-radius: 0px 0px 20px 0px;
-}
+} 
+
 #engine-card-stats-value, 
 #aerodynamics-card-stats-value,
 #suspension-card-stats-value,
@@ -1122,7 +1120,7 @@ body {
   border: solid 3px var(--prusianblue);
   border-bottom: double 4px var(--prusianbluelight);
   border-left: double 6px var(--prusianblue);
-}
+} 
 #home-skills-container {
     display: flex;
     width: 100%;
@@ -1405,6 +1403,9 @@ body {
     .game {
         overflow: scroll;
     }
+
+}
+@media only screen and (max-height: 450px){
     #home-stats-container {
         display: none;
     }
@@ -1412,6 +1413,12 @@ body {
         height: 60%;
     }
 }
+@media only screen and (min-height: 450px){
+    .card img{
+        height: 60%;
+    }
+}
+
 
 @media only screen and (min-width: 600px){
     .game {
@@ -1483,7 +1490,7 @@ body {
         background: transparent;
         border: none;
     }
-    
+    /*
     #stats-cards-container {
         width: 55%;
     }
@@ -1499,18 +1506,18 @@ body {
     .stats-card-nameTag {
         padding-right: 1rem;
         color: var(--prusianblue);
-    }
+    } */
 
     #counters {
         background: transparent;
     }
 
-    #turbo-card-stats-value {
+    /* #turbo-card-stats-value {
         border-radius: 0px 0px 20px 0px;
     }
     #engine-card-stats-value {
         border-radius: 0px 20px 0px 0px;
-    }
+    } */
 
     .unlock-info p:first-child {
         background-size: 100%;

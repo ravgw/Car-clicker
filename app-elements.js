@@ -340,7 +340,7 @@ export const driver = {
     subLevel: 0,
     value: 1,
     multiplier: 1,
-    cost: 750,
+    cost: 7,
     lvlUpCostMultiplier: 2,
     img: './img/jurek.webp',
     upgrade: function () {
