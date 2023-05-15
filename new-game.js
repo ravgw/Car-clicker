@@ -209,7 +209,7 @@ function settingCarBodyColor () {
         color.addEventListener('click', () => {
             setColor(color, carBodyFront)
             setColor(color, carBodyRear)
-            carPlayerScheme.body = color
+            carPlayerScheme.body = color.title
         })
     })
 };
@@ -221,7 +221,7 @@ function settingRacingSuitColor () {
     colorPalette.forEach((color) => {
         color.addEventListener('click', () => {
             setColor(color, racingSuit)
-            carPlayerScheme.racungSuit = color
+            carPlayerScheme.racungSuit = color.title
         })
     })
 };
@@ -233,7 +233,7 @@ function settingHelmetColor () {
     colorPalette.forEach((color) => {
         color.addEventListener('click', () => {
             setColor(color, helmet)
-            carPlayerScheme.helmet = color
+            carPlayerScheme.helmet = color.title
         })
     })
 };
