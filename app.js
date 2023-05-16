@@ -37,6 +37,7 @@ function startGame() {
 const loadObjects = function (objectsArray) {
     for(let i=0; i < objectsArray.length; i++){
         objectsArray[i].load()
+        homeMenuStatsUpdate(objectsArray[i]) 
     }
 }
 
@@ -375,9 +376,16 @@ const upgrade = function (object) {
         if(object.addSkill) {
             unlockSkill(object)
         }
+        
+        homeMenuStatsUpdate(object)
     } 
     calculateSpeed();
     statsUpDate();
+}
+const homeMenuStatsUpdate = function (object) {
+    const target = document.querySelector(`#${object.type}-card-stats-value`)
+    target.innerText = `${object.value}${object.actionSign}`
+    console.log('xD')
 }
 
 const verifyCoinnsAmount = function (object) {
