@@ -148,6 +148,7 @@ export const createHomeBoard = function (array1, array2)  {
       nameTag.classList.add('stats-card-nameTag')
       cardInfo.appendChild(nameTag)
       
+      
       const value = document.createElement('p')
       value.classList.add('stats-card-value')
       value.id = `${arr[i].type}-card-stats-value`
