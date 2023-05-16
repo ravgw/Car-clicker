@@ -146,7 +146,7 @@ const suspension = {
             this.level = localStorage.getItem('suspensionLevel')*1
             this.value = localStorage.getItem('suspensionValue')*1
             this.originValue = localStorage.getItem('suspensionOriginValue')*1
-            this.cost = localStorage.getItem('susupensionCost')*1
+            this.cost = localStorage.getItem('suspensionCost')*1
         }
     }
 }

@@ -762,8 +762,7 @@ body {
 }
 
 .card img {
-    height: 40%;
-    aspect-ratio: 1;
+    height: 80%;
     border: 2px solid var(--light);
     border-radius: 5px;
     padding: .5em;
@@ -885,9 +884,12 @@ body {
 
 /* character cards */
 #teamPrincipal-character-card, #driver-character-card{
+    overflow: hidden;
     cursor: default;
 }
 #teamPrincipal-character-card img, #driver-character-card img{
+    height: 40%;
+    aspect-ratio: 1/1;
     padding: 0px;
     border-radius: 10px;
     border-color: var(--spacecadet);
