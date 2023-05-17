@@ -1,9 +1,6 @@
 import { createCarClicker } from './dom-utils.js'
-function setWindowHeight () {
-    let height = window.innerHeight;
-    const bodyAnchor = document.querySelector('body')
-    bodyAnchor.style.height = `${height}px`
-}
+import { setWindowHeight } from './app-utils.js'
+
 setWindowHeight()
 window.addEventListener('resize',() => {
     setWindowHeight()

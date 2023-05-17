@@ -347,24 +347,42 @@ export const driver = {
     cost: 7,
     lvlUpCostMultiplier: 2,
     img: './img/jurek.webp',
+    save: function () {
+        addStorageItem('driverBought',this.bought)
+        addStorageItem('driverAddSkill',this.addSkill)
+        addStorageItem('driverSkillCooldown', this.skillCooldown)
+        addStorageItem('driverCurrentCooldown',this.skillCurrentCooldown)
+        addStorageItem('driverSkillAvailability', this.skillAvailability)
+        addStorageItem('driver.level',this.level)
+        addStorageItem('driver.value',this.value)
+        addStorageItem('driver.cost',this.cost)
+        addStorageItem('driverCheck','true')
+    },
+    load: function () {
+        if (localStorage.getItem('driverCheck')) {
+            this.bought = localStorage.getItem('driverBought')
+            this.addSkill = localStorage.getItem('driverAddSkill')
+            this.skillCooldown = localStorage.getItem('driverSkillCooldown')*1
+            this.skillCurrentCooldown = localStorage.getItem('driverCurrentCooldown')*1
+            this.skillAvailability = localStorage.getItem('driverSkillAvailability')
+            this.level = localStorage.getItem('driver.level')*1
+            this.value = localStorage.getItem('driver.value')*1
+            this.cost = localStorage.getItem('driver.cost')*1
+        }
+    },
     upgrade: function () {
 
-        if (this.subLevel === 3){
-            this.level++
-            this.subLevel = 0
-        } else {
-            this.subLevel++
-        }
+        this.level++
 
         this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
         const x = Number((this.value + .05).toPrecision(3))
         this.value = x
 
-        if (this.level === 2 && this.subLevel === 0) {
+        if (this.level === 2) {
             this.addSkill = true
-        } else {
-            this.addSkill = false
         }
+
+        this.save()
     },
     skillTimer: function (callback) {
         this.skillAvailability = false

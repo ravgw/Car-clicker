@@ -1,19 +1,23 @@
 import { createCarClicker, createCarBackground, createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter, createCharacter, createActiveSkill, createSkillActivated, createSkillCooldown } from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
-import { checkSaveStatus, numbersAdjust } from "./app-utils.js"
+import { checkSaveStatus, numbersAdjust, setWindowHeight, setCharacterCard, showCharacter, verifyCoinnsAmount, spendCoins, removeAlertCssClass} from "./app-utils.js"
 
-function setWindowHeight () {
-    let height = window.innerHeight;
-    const bodyAnchor = document.querySelector('body')
-    bodyAnchor.style.height = `${height}px`
-}
-setWindowHeight()
-window.addEventListener('resize',() => {
+
+
+function startGame () {
     setWindowHeight()
-})
+    window.addEventListener('resize',() => {
+        setWindowHeight()
+    })
 
-function startGame() {
     if (checkSaveStatus('saveExist')){
+        loadSaveGame()
+    } else {
+        startNewGame()
+    }
+}
+
+function loadSaveGame () {
         createCar()
         createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
         activeStyleNavigation('menuHome')
@@ -25,13 +29,15 @@ function startGame() {
         loadObjects(garageFacilities)
         player.load()
         stats.load()
+        driver.load()
         statsUpDate()
         }
-    } else {
-        createCar()
-        createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
-        activeStyleNavigation('menuHome')
-    }
+}
+
+function startNewGame () {
+    createCar()
+    createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
+    activeStyleNavigation('menuHome')
 }
 
 const loadObjects = function (objectsArray) {
@@ -69,12 +75,24 @@ const speed = document.getElementById('speed')
 const counter = document.getElementById('money')
 const clicker = document.getElementById('clicker')
 
+const gameElementsStatus = {
+    // homeBoard: true,
+    // bolidMenu: false,
+    // bolidCards: false,
+    // garageMenu: false,
+    // garageCards: false,
+    // checkDriverCard: false, 
+    driverOwned: driver.bought,
+    // checkTeamPrincipal: false, 
+}
+
 let homeBoard = true
-let bolidMenu = false;
-let bolidCards = false;
-let garageMenu = false;
-let garageCards = false;
-let checkPersonal = false 
+let bolidMenu = false
+let bolidCards = false
+let garageMenu = false
+let garageCards = false
+let checkDriverCard = false 
+// let driverOwned = driver.bought
 let checkTeamPrincipal = false 
 let clickTimer;
 // let timerOn = 0;
@@ -115,12 +133,7 @@ function addCoins () {
     stats.save()
 }
 
-function spendCoins(cost) {
-    if(player.coins >= cost) {
-        player.coins = player.coins - cost
-        numbersAdjust(player.coins, counter)
-    }
-}
+
 
 function calcPerClick () {
     const sponsors = garageFacilities[0] // sponsors object
@@ -158,6 +171,7 @@ const speedAdjust = function () {
 const bolidElement = document.getElementById('bolid-navigation')
 if(bolidElement){
 bolidElement.addEventListener('click', (e) => {
+    // check & set navigation status
     if(homeBoard) {
         hideElements('homeBoard')
         homeBoard = false
@@ -171,15 +185,23 @@ bolidElement.addEventListener('click', (e) => {
             hideElements('teamPrincipal')
         }
     }
-    if(!checkPersonal) {
+
+    // create/check & set driver card
+    if(!checkDriverCard) {
         createCharacterCard('driver')
-        checkPersonal = true
-        if(!player.driverOwned) {
-            createUnlockCharacter(driver, buyCharacter)
-        }
+        checkDriverCard = true
+
+        setCharacterCard(driver)
+
+        // if(!driver.bought) {
+        //     createUnlockCharacter(driver, buyCharacter)
+        // } else {
+        //     createCharacter(driver.type, driver, upgrade)
+        //     console.log('3')
+        //     // showElements('driver')
+        // }
     } else {
-        removeAlertCssClass()
-        showElements('driver')
+        showCharacter('driver')
     }
 
     if(bolidMenu) {
@@ -197,7 +219,7 @@ bolidElement.addEventListener('click', (e) => {
         driverCard.classList.remove('pushedKey')    
         partsCard.classList.add('pushedKey')  
 
-            if (checkPersonal) {
+            if (checkDriverCard) {
                 hideElements('driver')
             }
             if (bolidCards) {
@@ -226,7 +248,7 @@ bolidElement.addEventListener('click', (e) => {
             if(bolidCards) {
                 hideElements('bolid')
             }
-            if(checkPersonal){
+            if(checkDriverCard){
                 showElements('driver') 
             }
         })
@@ -247,7 +269,7 @@ garageElement.addEventListener('click', (e) => {
         if(bolidCards) {
             hideElements('bolid')
         }
-        if (checkPersonal) {
+        if (checkDriverCard) {
             hideElements('driver')
         }
     }
@@ -329,7 +351,7 @@ homeElement.addEventListener('click', (e) => {
         if (bolidCards) {
             hideElements('bolid')
         }
-        if (checkPersonal){
+        if (checkDriverCard){
             hideElements('driver')
         }
     }
@@ -345,24 +367,8 @@ homeElement.addEventListener('click', (e) => {
 })
 }
 
-const buyCharacter = function (object) {
-    const character = object.type
-    if (!object.bought) {
-        if(verifyCoinnsAmount(object)) {
-            player[`${character}Owned`] = 'true'
-            spendCoins(object.cost)
-            createCharacter(character, object, upgrade)
-            if (character === 'teamPrincipal'){
-                startAutoClick()
-            }
-            if (character === 'driver') {
-                driver.value = 1.05
-            }
-        } 
-    } 
-}
 
-const upgrade = function (object) {
+export const upgrade = function (object) {
 
     const displayCost = document.getElementById(`${object.type}-price`)
     const displayLvl = document.getElementById(`${object.type}Lvl`)
@@ -384,34 +390,11 @@ const upgrade = function (object) {
 }
 const homeMenuStatsUpdate = function (object) {
     const target = document.querySelector(`#${object.type}-card-stats-value`)
+    if(target){
     target.innerText = `${object.value}${object.actionSign}`
-    console.log('xD')
-}
-
-const verifyCoinnsAmount = function (object) {
-    if(player.coins >= object.cost) {
-        return true
-    } 
-    else {
-        notEnaughtCoinsAnimation(object.type)
     }
 }
-function notEnaughtCoinsAnimation (cardObjectName) {
-    const element = document.querySelector(`#${cardObjectName}-price`) || document.querySelector(`#${cardObjectName}-unlock-price`)
-    
-    removeAlertCssClass()
-    counter.offsetWidth;
-    counter.classList.add('not-enaugh');
-    element.classList.add('upgrade-price-alert');
-}
 
-
-const removeAlertCssClass = function () {
-    const elements = document.querySelectorAll('.upgrade-price-alert')
-
-    elements.forEach((e) => e.classList.remove('upgrade-price-alert'))
-    counter.classList.remove('not-enaugh');
-}
 
 // --------------------------------------------------- SKILLS
 const unlockSkill = function (character) {
