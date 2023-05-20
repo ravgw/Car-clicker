@@ -3,7 +3,6 @@ export const game = {
     teamPrincipalActivatedSkillCreated: false,
     driverSkillStatus: false,
     autoclickStatus: false,
-    // driverOwn: false,
 }
 export const player = {
     coins: 0,
@@ -436,6 +435,29 @@ export const teamPrincipal = {
     cost: 3900,
     lvlUpCostMultiplier: 2,
     img: './img/mateusz.webp',
+    save: function () {
+        addStorageItem('teamPrincipalBought',this.bought)
+        addStorageItem('teamPrincipalAddSkill',this.addSkill)
+        addStorageItem('teamPrincipalSkillCooldown', this.skillCooldown)
+        addStorageItem('teamPrincipalCurrentCooldown',this.skillCurrentCooldown)
+        addStorageItem('teamPrincipalSkillAvailability', this.skillAvailability)
+        addStorageItem('teamPrincipal.level',this.level)
+        addStorageItem('teamPrincipal.value',this.value)
+        addStorageItem('teamPrincipal.cost',this.cost)
+        addStorageItem('teamPrincipalCheck','true')
+    },
+    load: function () {
+        if (localStorage.getItem('teamPrincipalCheck')) {
+            this.bought = localStorage.getItem('teamPrincipalBought')
+            this.addSkill = localStorage.getItem('teamPrincipalAddSkill')
+            this.skillCooldown = localStorage.getItem('teamPrincipalSkillCooldown')*1
+            this.skillCurrentCooldown = localStorage.getItem('teamPrincipalCurrentCooldown')*1
+            this.skillAvailability = localStorage.getItem('teamPrincipalSkillAvailability')
+            this.level = localStorage.getItem('teamPrincipal.level')*1
+            this.value = localStorage.getItem('teamPrincipal.value')*1
+            this.cost = localStorage.getItem('teamPrincipal.cost')*1
+        }
+    },
     upgrade: function () {
 
         if (this.subLevel === 3){

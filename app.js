@@ -1,6 +1,6 @@
 import { createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter} from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats } from "./app-elements.js"
-import { checkSaveStatus, numbersAdjust, setWindowHeight, setCharacterCard, showCharacter, removeAlertCssClass, loadObjects, createCar, activeStyleNavigation, calcPerSeconds, calculateSpeed, upgrade, addCoins, statsUpDate} from "./app-utils.js"
+import { checkSaveStatus, numbersAdjust, setWindowHeight, setCharacterCard, showCharacter, removeAlertCssClass, loadObjects, createCar, activeStyleNavigation, calcPerSeconds, calculateSpeed, upgrade, addCoins, statsUpDate, unlockSkill} from "./app-utils.js"
 
 
 
@@ -18,6 +18,14 @@ function startGame () {
 }
 
 function loadSaveGame () {
+    function setSkills () {
+        if(localStorage.getItem('teamPrincipalAddSkill')){
+            unlockSkill(teamPrincipal)
+        }
+        if(localStorage.getItem('driverAddSkill')){
+            unlockSkill(driver)
+        }
+    }
         createCar()
         createHomeBoard(bolidParts, garageFacilities,driver,teamPrincipal);
         activeStyleNavigation('menuHome')
@@ -31,7 +39,9 @@ function loadSaveGame () {
         stats.load()
         driver.load()
         statsUpDate()
+        setSkills()
         }
+
 }
 
 function startNewGame () {
@@ -65,7 +75,7 @@ let garageMenu = false
 let garageCards = false
 let checkDriverCard = false 
 // let driverOwned = driver.bought
-let checkTeamPrincipal = false 
+let checkTeamPrincipalCard = false 
 let clickTimer;
 // let timerOn = 0;
 
@@ -83,7 +93,7 @@ if(clicker){
 const bolidElement = document.getElementById('bolid-navigation')
 if(bolidElement){
 bolidElement.addEventListener('click', (e) => {
-    // check & set navigation status
+// check & set navigation status
     if(homeBoard) {
         hideElements('homeBoard')
         homeBoard = false
@@ -93,25 +103,16 @@ bolidElement.addEventListener('click', (e) => {
         if (garageCards) {
             hideElements('garage')
         }
-        if (checkTeamPrincipal) {
+        if (checkTeamPrincipalCard) {
             hideElements('teamPrincipal')
         }
     }
 
-    // create/check & set driver card
+// create/check & set driver card
     if(!checkDriverCard) {
         createCharacterCard('driver')
         checkDriverCard = true
-
         setCharacterCard(driver)
-
-        // if(!driver.bought) {
-        //     createUnlockCharacter(driver, buyCharacter)
-        // } else {
-        //     createCharacter(driver.type, driver, upgrade)
-        //     console.log('3')
-        //     // showElements('driver')
-        // }
     } else {
         showCharacter('driver')
     }
@@ -171,6 +172,7 @@ bolidElement.addEventListener('click', (e) => {
 const garageElement = document.getElementById('garage-navigation')
 if(garageElement){
 garageElement.addEventListener('click', (e) => {
+// check & set navigation status
     if(homeBoard) {
         hideElements('homeBoard')
         homeBoard = false
@@ -186,16 +188,15 @@ garageElement.addEventListener('click', (e) => {
         }
     }
 
-    if(!checkTeamPrincipal) {
+// create/check & set driver card
+    if(!checkTeamPrincipalCard) {
         createCharacterCard('teamPrincipal')
-        checkTeamPrincipal = true
-        if(!player.teamPrincipalOwned) {
-            createUnlockCharacter(teamPrincipal, buyCharacter)
-        }
+        checkTeamPrincipalCard = true
+        setCharacterCard(teamPrincipal)
     } else {
-        showElements('teamPrincipal')
+        showCharacter('teamPrincipal')
     }
-    
+
     if(garageMenu) {
         showElements('garage-options')
         activeStyleNavigation('menuGarage')
@@ -211,7 +212,7 @@ garageElement.addEventListener('click', (e) => {
         TeamPrincipalCard.classList.remove('pushedKey')    
         facilitiesCard.classList.add('pushedKey')  
 
-        if (checkTeamPrincipal) {
+        if (checkTeamPrincipalCard) {
             hideElements('teamPrincipal')
         }
         if(garageCards) {
@@ -241,7 +242,7 @@ garageElement.addEventListener('click', (e) => {
         if(garageCards) {
             hideElements('garage')
         }
-        if(checkTeamPrincipal){
+        if(checkTeamPrincipalCard){
             removeAlertCssClass()
             showElements('teamPrincipal')
         }

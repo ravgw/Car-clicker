@@ -134,8 +134,7 @@ export const setCharacterCard = function(character) {
     if(!character.bought) {
         createUnlockCharacter(character, buyCharacter)
     } else {
-        createCharacter(driver.type, driver, upgrade)
-        console.log('3')
+        createCharacter(character.type, character, upgrade)
         // showElements('driver')
     }
 }
@@ -189,7 +188,7 @@ const homeMenuStatsUpdate = function (object) {
 
 
 // --------------------------------------------------- SKILLS
-const unlockSkill = function (character) {
+export const unlockSkill = function (character) {
     createActiveSkill(character)
     const skill = document.querySelector(character.skillId)
 
@@ -204,6 +203,7 @@ const unlockSkill = function (character) {
             if(character.skillAvailability){
                 boostSpeed(character.skillDuration)
                 activateSkill(character)
+                // console.log(character.skillAvailability)
             }
         }
     })
@@ -221,10 +221,12 @@ const activateSkill = function (character) {
             if (!requiredElement){ 
                 createSkillActivated(character)
                 game[`${character.type}ActivatedSkillCreated`] = true
+                console.log('req el false')
             }
             if (requiredElement) {
                 const showElement = document.querySelector(`${character.skillId} .skill-activated`)
                 showElement.style.display = 'flex'
+                console.log('req el true')
             }
         
         const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
@@ -264,6 +266,7 @@ const activateSkill = function (character) {
                 game[`${character.type}SkillStatus`] = 'activated'
                 break
             default:
+                console.log(game[`${character.type}SkillStatus`])
                 console.log('activeSkill switch default')
         }
     }
