@@ -1,4 +1,4 @@
-import { createCharacter, createUnlockCharacter, createCarBackground, createCarClicker, showElements, createActiveSkill} from './dom-utils.js'
+import { createCharacter, createUnlockCharacter, createCarBackground, createCarClicker, showElements, createActiveSkill, createSkillCooldown, createSkillActivated} from './dom-utils.js'
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats, game } from "./app-elements.js"
 
 const coinsAmount = []
@@ -8,8 +8,8 @@ export function setWindowHeight () {
     let height = window.innerHeight;
     const bodyAnchor = document.querySelector('body')
     bodyAnchor.style.height = `${height}px`
-    console.log('XD')
 }
+
 export const loadObjects = function (objectsArray) {
     for(let i=0; i < objectsArray.length; i++){
         objectsArray[i].load()
@@ -195,14 +195,14 @@ export const unlockSkill = function (character) {
     skill.addEventListener('click',() => {
         if (character.type === 'teamPrincipal') {
             if(character.skillAvailability){
-                boostAutoClick(character.skillDuration)
+                // boostAutoClick(character.skillDuration)
                 activateSkill(character)
             }
         }
         if (character.type === 'driver') {
             if(character.skillAvailability){
-                boostSpeed(character.skillDuration)
                 activateSkill(character)
+                // boostSpeed(character.skillDuration)
                 // console.log(character.skillAvailability)
             }
         }
@@ -210,8 +210,11 @@ export const unlockSkill = function (character) {
 }
 
 
+console.log(game.driverSkillStatus)
 const activateSkill = function (character) {
-    const status = game[`${character.type}SkillStatus`]
+    console.log(game.driverSkillStatus)
+    let obj = `${character.type}SkillStatus`
+    let status = game[`${character.type}SkillStatus`]
     
     const skillActivation = function () {
         const hidePreviousElement = document.querySelector(`${character.skillId} .skill-available-container`)
@@ -256,6 +259,7 @@ const activateSkill = function (character) {
     if(!status) {
         game[`${character.type}SkillStatus`] = 'activated'
         skillActivation()
+        console.log(game.driverSkillStatus)
     } else { 
         switch(status) {
             case 'activated':
@@ -331,8 +335,9 @@ const boostAutoClick = (duration) => {
 }
 
 const boostSpeed = (duration) => {
+    console.log('boostSpeed')
     const time = duration * 1000
-    game.driverSkillStatus = true
+    // game.driverSkillStatus = true
     calculateSpeed()
     speedAdjust()
     

@@ -2,7 +2,7 @@ export const game = {
     driverActivatedSkillCreated: false,
     teamPrincipalActivatedSkillCreated: false,
     driverSkillStatus: false,
-    autoclickStatus: false,
+    teamPrincipalSkillStatus: false,
 }
 export const player = {
     coins: 0,
@@ -16,7 +16,6 @@ export const player = {
     load: function () {
         if(localStorage.getItem('playerCoins')) {
             this.coins = localStorage.getItem('playerCoins')*1
-            console.log('player load')
         }
     }
 }
