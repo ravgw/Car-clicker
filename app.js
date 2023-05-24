@@ -38,7 +38,9 @@ function loadSaveGame () {
         player.load()
         stats.load()
         driver.load()
+        teamPrincipal.load()
         statsUpDate()
+        calculateSpeed()
         setSkills()
         }
 

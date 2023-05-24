@@ -154,6 +154,7 @@ const buyCharacter = function (object) {
             // if (character === 'driver') {
             //     driver.value = 1.05
             // }
+            object.save()
         } 
     } 
 }
@@ -193,51 +194,37 @@ export const unlockSkill = function (character) {
     const skill = document.querySelector(character.skillId)
 
     skill.addEventListener('click',() => {
-        if (character.type === 'teamPrincipal') {
-            if(character.skillAvailability){
-                // boostAutoClick(character.skillDuration)
-                activateSkill(character)
-            }
-        }
-        if (character.type === 'driver') {
-            if(character.skillAvailability){
-                activateSkill(character)
-                // boostSpeed(character.skillDuration)
-                // console.log(character.skillAvailability)
-            }
-        }
+        checkSkillAvailability(character)
     })
 }
 
+const checkSkillAvailability = function (character) {
 
-console.log(game.driverSkillStatus)
-const activateSkill = function (character) {
-    console.log(game.driverSkillStatus)
-    let obj = `${character.type}SkillStatus`
-    let status = game[`${character.type}SkillStatus`]
-    
-    const skillActivation = function () {
-        const hidePreviousElement = document.querySelector(`${character.skillId} .skill-available-container`)
-        hidePreviousElement.style.display = 'none'
-        const requiredElement = game[`${character.type}ActivatedSkillCreated`]
+    let skillStatus = character.skillAvailability
+    // console.log(skillStatus)
 
-            if (!requiredElement){ 
-                createSkillActivated(character)
-                game[`${character.type}ActivatedSkillCreated`] = true
-                console.log('req el false')
-            }
-            if (requiredElement) {
-                const showElement = document.querySelector(`${character.skillId} .skill-activated`)
-                showElement.style.display = 'flex'
-                console.log('req el true')
-            }
+    if(skillStatus) {
+        character.skillAvailability = false
+        skillActivation(character)
+    }
+}
+
+
+const skillActivation = function (character) {
+
+        setDisplayElement(character)
         
         const displayCounter = document.querySelector(`#${character.type}-skill-timer`)
-
         let counter = character.skillDuration
+
+        if(character.type === 'driver') {
+            boostSpeed(character.skillDuration)
+        }
+        if(character.type === 'teamPrincipal') {
+            boostAutoClick()
+        }
         const skillTimer = function () {
-            displayCounter.innerText = counter
-            
+            displayCounter.innerText = counter     
             setTimeout( () => {
                 if (counter === 0){
                     skillCooldown(character)
@@ -254,29 +241,30 @@ const activateSkill = function (character) {
             },1000)
         }
         skillTimer()
-    }
-
-    if(!status) {
-        game[`${character.type}SkillStatus`] = 'activated'
-        skillActivation()
-        console.log(game.driverSkillStatus)
-    } else { 
-        switch(status) {
-            case 'activated':
-                console.log('act')
-                break
-            case 'available':
-                skillActivation()
-                game[`${character.type}SkillStatus`] = 'activated'
-                break
-            default:
-                console.log(game[`${character.type}SkillStatus`])
-                console.log('activeSkill switch default')
-        }
-    }
 }
 
-const skillCooldown = function (character) {
+const setDisplayElement = function (character) {
+
+    const hidePreviousElement = document.querySelector(`${character.skillId} .skill-available-container`)
+    hidePreviousElement.style.display = 'none'
+    const requiredElement = game[`${character.type}ActivatedSkillCreated`]
+
+        if (!requiredElement){ 
+            createSkillActivated(character)
+            game[`${character.type}ActivatedSkillCreated`] = true
+            // console.log('req el false')
+        }
+        if (requiredElement) {
+            const showElement = document.querySelector(`${character.skillId} .skill-activated`)
+            showElement.style.display = 'flex'
+            // console.log('req el true')
+        }
+
+}
+
+
+
+const skillCooldown = function(character) {
     
     document.querySelector(`${character.skillId} .skill-activated`).style.display = 'none'
 
@@ -337,12 +325,12 @@ const boostAutoClick = (duration) => {
 const boostSpeed = (duration) => {
     console.log('boostSpeed')
     const time = duration * 1000
-    // game.driverSkillStatus = true
+    driver.skillStatus = true
     calculateSpeed()
     speedAdjust()
     
     setTimeout( () => {
-        game.driverSkillStatus = false
+        driver.skillStatus = false
         calculateSpeed()
         speedAdjust()
         console.log('boostSpeed Set timeOut')
@@ -438,7 +426,7 @@ export function calculateSpeed () {
     let bonusSpeed = 0
     bolidParts.forEach(e => speed += e.value)
 
-    if (game.driverSkillStatus) {
+    if (driver.skillStatus) {
         bonusSpeed = player.speed
     } else {
         bonusSpeed = 0

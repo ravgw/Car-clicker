@@ -5,7 +5,7 @@ export const game = {
     teamPrincipalSkillStatus: false,
 }
 export const player = {
-    coins: 0,
+    coins: 999,
     speed: 1,
     bonusSpeed: 0,
     teamPrincipalOwned: false,
@@ -51,8 +51,8 @@ const engine = {
         this.originValue++
         this.calculateValue()
         this.save()
-        console.log(engineTest)
-        console.log(this.value)
+        // console.log(engineTest)
+        // console.log(this.value)
     },
     calculateValue: function () {
         this.value =  Math.round(this.originValue * engineers.value)
@@ -336,6 +336,7 @@ export const driver = {
     skillId: '#skill-1',
     skillCooldown: 5,
     skillCurrentCooldown: 0,
+    skillStatus: false,
     skillAvailability: true,
     skillDescription: `Gain x2 speed`,
     level: 1,
@@ -378,6 +379,7 @@ export const driver = {
 
         if (this.level === 2) {
             this.addSkill = true
+            this.skillAvailability = true
         }
 
         this.save()
@@ -428,10 +430,10 @@ export const teamPrincipal = {
     skillAvailability: true,
     skillDescription: `Speed up time x4`,
     level: 1,
-    subLevel: 0,
+    // subLevel: 0,
     value: 1,
     multiplier: 1,
-    cost: 3900,
+    cost: 39,
     lvlUpCostMultiplier: 2,
     img: './img/mateusz.webp',
     save: function () {
@@ -458,26 +460,26 @@ export const teamPrincipal = {
         }
     },
     upgrade: function () {
-
-        if (this.subLevel === 3){
-            this.level++
-            this.subLevel = 0
-        } else {
-            this.subLevel++
-        }
+        
+        this.level++
+        // if (this.subLevel === 3){
+        //     this.subLevel = 0
+        // } else {
+        //     this.subLevel++
+        // }
 
         this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
         const x = (this.value + .5)
         this.value = x
 
-        if (this.level === 2 && this.subLevel === 0) {
+        if (this.level === 2) {
             this.addSkill = true
-        } else {
-            this.addSkill = false
+            this.skillAvailability = true
         }
+        this.save()
     },
     skillTimer: function (callback) {
-        this.skillAvailability = false
+        // this.skillAvailability = false
 
         const displayCounter = document.querySelector('#teamPrincipal-cooldown-timer')
 
