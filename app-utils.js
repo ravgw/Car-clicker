@@ -440,7 +440,7 @@ export function calculateSpeed () {
 
 function calcPerClick () {
     const sponsors = garageFacilities[0] // sponsors object
-    const perClick = player.speed * driver.value * sponsors.value
+    const perClick = Math.floor(player.speed * driver.value * sponsors.value)
     stats.perClick = perClick
     return perClick
 }
