@@ -148,9 +148,9 @@ const buyCharacter = function (object) {
             // console.log(object.bought)
             spendCoins(object.cost)
             createCharacter(character, object, upgrade)
-            // if (character === 'teamPrincipal'){
-            //     startAutoClick()
-            // }
+            if (character === 'teamPrincipal'){
+                startAutoClick()
+            }
             // if (character === 'driver') {
             //     driver.value = 1.05
             // }
@@ -190,7 +190,9 @@ const homeMenuStatsUpdate = function (object) {
 
 // --------------------------------------------------- SKILLS
 export const unlockSkill = function (character) {
+    if (character.addSkill){
     createActiveSkill(character)
+    }
     const skill = document.querySelector(character.skillId)
 
     skill.addEventListener('click',() => {
@@ -291,6 +293,8 @@ const skillCooldown = function(character) {
     character.skillTimer(openSkillUp)
 }
 
+let clickTimer
+
 const autoClick = function () {
     addCoins()
     clickTimer = setTimeout(autoClick, 1000)
@@ -308,8 +312,8 @@ const boostAutoClick = (duration) => {
     const time = duration * 1000
 
     stopAutoClick()
-    const boost = function (callback) {
-        player.autoCoins()
+    const boost = function () {
+        // player.autoCoins()
         clickTimer = setTimeout(boost, 250)
     }
     const stopBoost = function () {

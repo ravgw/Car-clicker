@@ -5,7 +5,7 @@ export const game = {
     teamPrincipalSkillStatus: false,
 }
 export const player = {
-    coins: 999,
+    coins: 99,
     speed: 1,
     bonusSpeed: 0,
     teamPrincipalOwned: false,

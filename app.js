@@ -19,10 +19,12 @@ function startGame () {
 
 function loadSaveGame () {
     function setSkills () {
-        if(localStorage.getItem('teamPrincipalAddSkill')){
+        if(JSON.parse(localStorage.getItem('teamPrincipalAddSkill'))){
+            // console.log(typeof(checkTpSkill))
             unlockSkill(teamPrincipal)
         }
-        if(localStorage.getItem('driverAddSkill')){
+        if(JSON.parse(localStorage.getItem('driverAddSkill'))){
+            // console.log(typeof(checkDriverSkill))
             unlockSkill(driver)
         }
     }
@@ -275,7 +277,7 @@ homeElement.addEventListener('click', (e) => {
         if (garageCards) {
         hideElements('garage')
         }
-        if(checkTeamPrincipal){
+        if(checkTeamPrincipalCard){
             hideElements('teamPrincipal')
         }
     }

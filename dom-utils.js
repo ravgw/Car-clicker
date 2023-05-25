@@ -464,26 +464,23 @@ export const createCharacter = function (id, object, action) {
     upgrade.addEventListener('touchend', (e) => e.stopPropagation())
     upgradeContent.appendChild(price)
 
-    let subLvl = 0
-    const subUpgrade = function () {
-      if (subLvl <= 2) {
-        const element = document.querySelector(`#${object.name}-sub-lvl-${subLvl}`)
-        element.classList.add('sub-lvl-bck')
-        subLvl++
-        if (subLvl === 3) {
-          upgrade.innerText = 'LEVEL UP'
-        }
-      } else {
-        for( let i = 0; i <=2; i++) {
-        const element = document.querySelector(`#${object.name}-sub-lvl-${i}`)
-        element.classList.remove('sub-lvl-bck')
-        upgrade.innerText = 'Upgrade'
-        subLvl = 0
-      }
-    }}
-
-
-
+    // let subLvl = 0
+    // const subUpgrade = function () {
+    //   if (subLvl <= 2) {
+    //     const element = document.querySelector(`#${object.name}-sub-lvl-${subLvl}`)
+    //     element.classList.add('sub-lvl-bck')
+    //     subLvl++
+    //     if (subLvl === 3) {
+    //       upgrade.innerText = 'LEVEL UP'
+    //     }
+    //   } else {
+    //     for( let i = 0; i <=2; i++) {
+    //     const element = document.querySelector(`#${object.name}-sub-lvl-${i}`)
+    //     element.classList.remove('sub-lvl-bck')
+    //     upgrade.innerText = 'Upgrade'
+    //     subLvl = 0
+    //   }
+    // }}
 }
 
 export function hideElements (element) {
