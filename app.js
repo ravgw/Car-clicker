@@ -1,6 +1,6 @@
 import { createHomeBoard, createCardElement, createCardNavigation, hideElements, showElements, createCharacterCard, slider, createUnlockCharacter} from "./dom-utils.js";
 import { bolidParts, garageFacilities, driver, teamPrincipal, player, stats } from "./app-elements.js"
-import { checkSaveStatus, numbersAdjust, setWindowHeight, setCharacterCard, showCharacter, removeAlertCssClass, loadObjects, createCar, activeStyleNavigation, calcPerSeconds, calculateSpeed, upgrade, addCoins, statsUpDate, unlockSkill} from "./app-utils.js"
+import { checkSaveStatus, numbersAdjust, setWindowHeight, setCharacterCard, showCharacter, removeAlertCssClass, loadObjects, createCar, activeStyleNavigation, calcPerSeconds, calculateSpeed, upgrade, addCoins, statsUpDate, unlockSkill, checkAutoClickAvailability} from "./app-utils.js"
 
 
 
@@ -44,6 +44,7 @@ function loadSaveGame () {
         statsUpDate()
         calculateSpeed()
         setSkills()
+        checkAutoClickAvailability()
         }
 
 }

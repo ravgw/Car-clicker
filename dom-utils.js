@@ -204,7 +204,9 @@ export const createHomeBoard = function (array1, array2)  {
 export const createActiveSkill = function (character) { 
 
   const unuse = document.querySelector(`${character.skillId} .unlock-info`)
+  if(unuse) {
   unuse.remove()
+  }
   
 
   const node = document.querySelector(character.skillId)

@@ -474,3 +474,9 @@ export function calcPerSeconds () {
 const speedAdjust = function () {
     speed.textContent = `${player.speed} km/h`
 }
+
+export function checkAutoClickAvailability () {
+    if(JSON.parse(localStorage.getItem('teamPrincipalBought'))){
+        startAutoClick()
+    }
+}
