@@ -431,12 +431,14 @@ export function calculateSpeed () {
     bolidParts.forEach(e => speed += e.value)
 
     if (driver.skillStatus) {
-        bonusSpeed = player.speed
+        bonusSpeed = speed
     } else {
         bonusSpeed = 0
     }
 
     player.speed = speed + bonusSpeed
+    // console.log(speed)
+    // console.log(bonusSpeed)
     statsUpDate()
 }
 
