@@ -203,25 +203,29 @@ export const createHomeBoard = function (array1, array2)  {
 
 export const createActiveSkill = function (character) { 
 
-  const unuse = document.querySelector(`${character.skillId} .unlock-info`)
-  if(unuse) {
-  unuse.remove()
+  if(!character.skillCreated) {
+    const unuse = document.querySelector(`${character.skillId} .unlock-info`)
+      if(unuse) {
+      unuse.remove()
+      }
+      
+
+    const node = document.querySelector(character.skillId)
+    // node.classList.add('skills-available-container')
+
+    const container = document.createElement('div')
+
+    container.classList.add('skill-available-container')
+    // container.style.background = `url(${character.img})`
+
+    const description = document.createElement('p')
+    description.id = `skill-info-${character.type}`
+    description.innerText = character.skillDescription
+
+    node.appendChild(container)
+    container.appendChild(description)
+    character.skillCreated = true
   }
-  
-
-  const node = document.querySelector(character.skillId)
-  // node.classList.add('skills-available-container')
-
-  const container = document.createElement('div')
-  container.classList.add('skill-available-container')
-  // container.style.background = `url(${character.img})`
-
-  const description = document.createElement('p')
-  description.id = `skill-info-${character.type}`
-  description.innerText = character.skillDescription
-
-  node.appendChild(container)
-  container.appendChild(description)
 }
 
 export const createSkillCooldown = function (character) {

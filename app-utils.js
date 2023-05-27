@@ -294,35 +294,38 @@ const skillCooldown = function(character) {
 }
 
 let clickTimer
+let autoClickInterval = 1000
 
 const autoClick = function () {
     addCoins()
-    clickTimer = setTimeout(autoClick, 1000)
+    clickTimer = setTimeout(autoClick, autoClickInterval)
 }
 
-const startAutoClick = () => {
-    autoClick()
+const startAutoClick = (interval) => {
+    autoClick(interval)
 }
 
 const stopAutoClick = () => {
     clearTimeout(clickTimer)
 }
 
-const boostAutoClick = (duration) => {
-    const time = duration * 1000
+const boostAutoClick = () => {
+    const duration = teamPrincipal.skillDuration * 1000
 
     stopAutoClick()
-    const boost = function () {
-        // player.autoCoins()
-        clickTimer = setTimeout(boost, 250)
-    }
+    autoClickInterval = 250
+    startAutoClick()
+    
     const stopBoost = function () {
         setTimeout(() => {
+            console.log(autoClickInterval + 'stop')
             stopAutoClick()
+            autoClickInterval = 1000
             startAutoClick()
-        }, time)
+            console.log(autoClickInterval + "start")
+        }, duration)
     }
-    boost()
+    console.log(duration + "boost")
     stopBoost()
 }
 
@@ -479,6 +482,6 @@ const speedAdjust = function () {
 
 export function checkAutoClickAvailability () {
     if(JSON.parse(localStorage.getItem('teamPrincipalBought'))){
-        startAutoClick()
+        startAutoClick(1000)
     }
 }
