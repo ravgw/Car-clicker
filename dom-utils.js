@@ -1,4 +1,4 @@
-
+import { numbersAdjust } from './app-utils.js'
 export const createCarClicker = function (target) {
 const clicker = target
 
@@ -291,6 +291,7 @@ const createCard = function (improvments, action) {
       const cost = document.createElement('p')
       cost.id = `${improvments.type}-price`
       cost.innerText = `${improvments.cost} \u2234`
+      numbersAdjust(improvments.cost, cost)
 
       upgradeContainer.appendChild(cost)
       upgradeContainer.appendChild(upgrade)

@@ -3,9 +3,11 @@ export const game = {
     teamPrincipalActivatedSkillCreated: false,
     driverSkillStatus: false,
     teamPrincipalSkillStatus: false,
+    driverCooldownSkillCreated: false,
+    teamPrincipalCooldownSkillCreated: false,
 }
 export const player = {
-    coins: 99,
+    coins: 400,
     speed: 1,
     bonusSpeed: 0,
     teamPrincipalOwned: false,
@@ -335,8 +337,9 @@ export const driver = {
     skillCreated: false,
     skillDuration: 10,
     skillId: '#skill-1',
-    skillCooldown: 5,
+    skillCooldown: 2,
     skillCurrentCooldown: 0,
+    skillCurrentCooldownSec: 59,
     skillStatus: false,
     skillAvailability: true,
     skillDescription: `Gain x2 speed`,
@@ -352,6 +355,7 @@ export const driver = {
         addStorageItem('driverAddSkill',this.addSkill)
         addStorageItem('driverSkillCooldown', this.skillCooldown)
         addStorageItem('driverCurrentCooldown',this.skillCurrentCooldown)
+        addStorageItem('driverCurrentCooldownSec',this.skillCurrentCooldownSec)
         addStorageItem('driverSkillAvailability', this.skillAvailability)
         addStorageItem('driver.level',this.level)
         addStorageItem('driver.value',this.value)
@@ -364,6 +368,7 @@ export const driver = {
             this.addSkill = localStorage.getItem('driverAddSkill')
             this.skillCooldown = localStorage.getItem('driverSkillCooldown')*1
             this.skillCurrentCooldown = localStorage.getItem('driverCurrentCooldown')*1
+            this.skillCurrentCooldownSec = localStorage.getItem('driverCurrentCooldownSec')*1
             this.skillAvailability = localStorage.getItem('driverSkillAvailability')
             this.level = localStorage.getItem('driver.level')*1
             this.value = localStorage.getItem('driver.value')*1
@@ -387,37 +392,44 @@ export const driver = {
     },
     skillTimer: function (callback) {
         this.skillAvailability = false
-
+        
         const displayCounter = document.querySelector('#driver-cooldown-timer')
-
+        
         const timer = function () {
-        if (driver.skillCooldown > 1) {
-            setTimeout(()=>{
-                driver.skillCooldown--
-                displayCounter.innerText = driver.skillCooldown + 'm'
-                timer()
-            },60*1000)
-        } else if (driver.skillCooldown === 1) {
-            let i = 59
-            const seconds = function() {
-                if (i >= 1) {
-                setTimeout(()=> {
-                    i--
-                    displayCounter.innerText = i + 's'
-                    seconds()
-                },1000)
-            } else {
-                driver.skillAvailability = true
-                driver.skillCurrentCooldown = driver.skillCooldown 
-                callback()
+            addStorageItem('driverCurrentCooldown',driver.skillCurrentCooldown)
+            if (driver.skillCurrentCooldown > 1) {
+                console.log('wkszy od 1')
+                setTimeout(()=>{
+                    driver.skillCurrentCooldown--
+                    displayCounter.innerText = driver.skillCurrentCooldown + 'm'
+                    timer()
+                },60*1000)
+            } else if (driver.skillCurrentCooldown === 1) {
+                let i = driver.skillCurrentCooldownSec
+                const seconds = function() {
+                    if (i >= 1) {
+                        addStorageItem('driverCurrentCooldown',driver.skillCurrentCooldown)
+                        setTimeout(()=> {
+                            i--
+                            driver.skillCurrentCooldownSec = i
+                            addStorageItem('driverCurrentCooldownSec',driver.skillCurrentCooldownSec)
+                            displayCounter.innerText = i + 's'
+                            seconds()},1000)
+                        } else {
+                            driver.skillAvailability = true
+                            driver.skillCurrentCooldown = 0
+                            addStorageItem('driverCurrentCooldown',driver.skillCurrentCooldown)
+                            driver.skillCurrentCooldownSec = 59
+                            addStorageItem('driverCurrentCooldownSec',driver.skillCurrentCooldownSec)
+                            callback()
+                    }
+                } 
+            seconds()
             }
-        } 
-        seconds()
+        }
+        timer()
     }
-}
-timer()
-}
-}
+    }
 
 export const teamPrincipal = {
     name: 'Mateusz',
@@ -429,6 +441,7 @@ export const teamPrincipal = {
     skillDuration: 7,
     skillCooldown: 7,
     skillCurrentCooldown: 0,
+    skillCurrentCooldownSec: 59,
     skillAvailability: true,
     skillDescription: `Speed up time x4`,
     level: 1,
@@ -481,36 +494,43 @@ export const teamPrincipal = {
         this.save()
     },
     skillTimer: function (callback) {
-        // this.skillAvailability = false
-
+        this.skillAvailability = false
+        
         const displayCounter = document.querySelector('#teamPrincipal-cooldown-timer')
-
+        
         const timer = function () {
-        if (teamPrincipal.skillCooldown > 1) {
-            setTimeout(()=>{
-                teamPrincipal.skillCooldown--
-                displayCounter.innerText = teamPrincipal.skillCooldown + 'm'
-                timer()
-            },60*1000)
-        } else if (teamPrincipal.skillCooldown === 1) {
-            let i = 10
-            const seconds = function() {
-                if (i >= 1) {
-                setTimeout(()=> {
-                    i--
-                    displayCounter.innerText = i + 's'
-                    seconds()
-                },1000)
-            } else {
-                teamPrincipal.skillAvailability = true
-                teamPrincipal.skillCurrentCooldown = teamPrincipal.skillCooldown
-                callback()
+            addStorageItem('teamPrincipalCurrentCooldown',teamPrincipal.skillCurrentCooldown)
+            if (teamPrincipal.skillCurrentCooldown > 1) {
+                console.log('wkszy od 1')
+                setTimeout(()=>{
+                    teamPrincipal.skillCurrentCooldown--
+                    displayCounter.innerText = teamPrincipal.skillCurrentCooldown + 'm'
+                    timer()
+                },60*1000)
+            } else if (teamPrincipal.skillCurrentCooldown === 1) {
+                let i = teamPrincipal.skillCurrentCooldownSec
+                const seconds = function() {
+                    if (i >= 1) {
+                        addStorageItem('teamPrincipalCurrentCooldown',teamPrincipal.skillCurrentCooldown)
+                        setTimeout(()=> {
+                            i--
+                            teamPrincipal.skillCurrentCooldownSec = i
+                            addStorageItem('teamPrincipalCurrentCooldownSec',teamPrincipal.skillCurrentCooldownSec)
+                            displayCounter.innerText = i + 's'
+                            seconds()},1000)
+                        } else {
+                            teamPrincipal.skillAvailability = true
+                            teamPrincipal.skillCurrentCooldown = 0
+                            addStorageItem('teamPrincipalCurrentCooldown',teamPrincipal.skillCurrentCooldown)
+                            teamPrincipal.skillCurrentCooldownSec = 59
+                            addStorageItem('teamPrincipalCurrentCooldownSec',teamPrincipal.skillCurrentCooldownSec)
+                            callback()
+                    }
+                } 
+            seconds()
             }
-        } 
-        seconds()
-    }
-}
-timer()
+        }
+        timer()
     }
 }
 
