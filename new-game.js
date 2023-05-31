@@ -176,7 +176,7 @@ function randomize () {
     updateCarScheme()
 }
     
-const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7'];
+const colors = ['FF1B1C','FF7F11','6E44FF','690375','323031','FFC857','E6E6E6','FF8552','248232','2176FF','E8EBF7','156064','00C49A','F8E16C','F9E900','00C2D1','ED33B9'];
 
 function addColorsPalette () {
     const colorsPalette = colors
