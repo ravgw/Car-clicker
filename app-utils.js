@@ -162,6 +162,11 @@ const buyCharacter = function (object) {
 
 export const upgrade = function (object) {
 
+    console.log(object.maxLevel)
+    if(object.maxLevel) {
+        characterMaxLevelStyle(object)
+    } else {
+
     const displayCost = document.getElementById(`${object.type}-price`)
     const displayLvl = document.getElementById(`${object.type}Lvl`)
     
@@ -179,6 +184,7 @@ export const upgrade = function (object) {
     } 
     calculateSpeed();
     statsUpDate();
+    }
 }
 const homeMenuStatsUpdate = function (object) {
     const target = document.querySelector(`#${object.type}-card-stats-value`)
@@ -187,7 +193,15 @@ const homeMenuStatsUpdate = function (object) {
     }
 }
 
+export const characterMaxLevelStyle = function (character) {
+    const unnecessaryElement = document.querySelector(`#${character.type}-price`)
+    const setElement = document.querySelector(`#${character.type}-character-card .character-upgrade h1`)
+    unnecessaryElement.style.display = 'none'
+    setElement.style.width = '95%'
+    setElement.innerText = 'MAX LEVEL'
+}
 
+// #driver-character-card > div > div.character-upgrade > h1
 // --------------------------------------------------- SKILLS
 export const unlockSkill = function (character) {
     if (character.addSkill){

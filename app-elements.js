@@ -7,7 +7,7 @@ export const game = {
     teamPrincipalCooldownSkillCreated: false,
 }
 export const player = {
-    coins: 400,
+    coins: 40000,
     speed: 1,
     bonusSpeed: 0,
     teamPrincipalOwned: false,
@@ -335,16 +335,16 @@ export const driver = {
     bought: false,
     addSkill: false,
     skillCreated: false,
-    skillDuration: 10,
+    skillDuration: 15,
     skillId: '#skill-1',
-    skillCooldown: 2,
+    skillCooldown: 9,
     skillCurrentCooldown: 0,
     skillCurrentCooldownSec: 59,
     skillStatus: false,
     skillAvailability: true,
     skillDescription: `Gain x2 speed`,
     level: 1,
-    subLevel: 0,
+    maxLevel: false,
     value: 1,
     multiplier: 1,
     cost: 7,
@@ -353,43 +353,53 @@ export const driver = {
     save: function () {
         addStorageItem('driverBought',this.bought)
         addStorageItem('driverAddSkill',this.addSkill)
+        addStorageItem('driverSkillDuration', this.skillDuration)
         addStorageItem('driverSkillCooldown', this.skillCooldown)
         addStorageItem('driverCurrentCooldown',this.skillCurrentCooldown)
         addStorageItem('driverCurrentCooldownSec',this.skillCurrentCooldownSec)
         addStorageItem('driverSkillAvailability', this.skillAvailability)
-        addStorageItem('driver.level',this.level)
-        addStorageItem('driver.value',this.value)
-        addStorageItem('driver.cost',this.cost)
+        addStorageItem('driverLevel',this.level)
+        addStorageItem('driverMaxLevel',this.maxLevel)
+        addStorageItem('driverValue',this.value)
+        addStorageItem('driverCost',this.cost)
         addStorageItem('driverCheck','true')
     },
     load: function () {
         if (localStorage.getItem('driverCheck')) {
             this.bought = localStorage.getItem('driverBought')
             this.addSkill = localStorage.getItem('driverAddSkill')
+            this.skillDuration = localStorage.getItem('driverSkillDuration')*1
             this.skillCooldown = localStorage.getItem('driverSkillCooldown')*1
             this.skillCurrentCooldown = localStorage.getItem('driverCurrentCooldown')*1
             this.skillCurrentCooldownSec = localStorage.getItem('driverCurrentCooldownSec')*1
             this.skillAvailability = localStorage.getItem('driverSkillAvailability')
-            this.level = localStorage.getItem('driver.level')*1
-            this.value = localStorage.getItem('driver.value')*1
-            this.cost = localStorage.getItem('driver.cost')*1
+            this.level = localStorage.getItem('driverLevel')*1
+            this.maxLevel = (JSON.parse(localStorage.getItem('driverMaxLevel')))
+            this.value = localStorage.getItem('driverValue')*1
+            this.cost = localStorage.getItem('driverCost')*1
         }
     },
     upgrade: function () {
 
-        this.level++
+        if(!this.maxLevel) {
 
-        this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
-        const x = Number((this.value + .05).toPrecision(3))
-        this.value = x
-
-        if (this.level === 2) {
-            this.addSkill = true
-            this.skillAvailability = true
+            this.level++
+            this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
+            const x = Number((this.value + .05).toPrecision(3))
+            this.value = x
+            if (this.level === 2) {
+                this.addSkill = true
+                this.skillAvailability = true
+            }
+            upgradeSkill(this)
         }
 
+        if(this.level === 10) {
+            this.maxLevel = true
+        }
         this.save()
     },
+
     skillTimer: function (callback) {
         this.skillAvailability = false
         
@@ -438,14 +448,14 @@ export const teamPrincipal = {
     addSkill: false,
     skillCreated: false,
     skillId: '#skill-2',
-    skillDuration: 7,
+    skillDuration: 20,
     skillCooldown: 7,
     skillCurrentCooldown: 0,
     skillCurrentCooldownSec: 59,
     skillAvailability: true,
     skillDescription: `Speed up time x4`,
     level: 1,
-    // subLevel: 0,
+    maxLevel: false,
     value: 1,
     multiplier: 1,
     cost: 39,
@@ -454,43 +464,50 @@ export const teamPrincipal = {
     save: function () {
         addStorageItem('teamPrincipalBought',this.bought)
         addStorageItem('teamPrincipalAddSkill',this.addSkill)
+        addStorageItem('teamPrincipalSkillDuration', this.skillDuration)
         addStorageItem('teamPrincipalSkillCooldown', this.skillCooldown)
         addStorageItem('teamPrincipalCurrentCooldown',this.skillCurrentCooldown)
+        addStorageItem('teamPrincipalCurrentCooldownSec',this.skillCurrentCooldownSec)
         addStorageItem('teamPrincipalSkillAvailability', this.skillAvailability)
-        addStorageItem('teamPrincipal.level',this.level)
-        addStorageItem('teamPrincipal.value',this.value)
-        addStorageItem('teamPrincipal.cost',this.cost)
+        addStorageItem('teamPrincipalLevel',this.level)
+        addStorageItem('teamPrincipalMaxLevel',this.maxLevel)
+        addStorageItem('teamPrincipalValue',this.value)
+        addStorageItem('teamPrincipalCost',this.cost)
         addStorageItem('teamPrincipalCheck','true')
     },
     load: function () {
         if (localStorage.getItem('teamPrincipalCheck')) {
             this.bought = localStorage.getItem('teamPrincipalBought')
             this.addSkill = localStorage.getItem('teamPrincipalAddSkill')
+            this.skillDuration = localStorage.getItem('teamPrincipalSkillDuration')*1
             this.skillCooldown = localStorage.getItem('teamPrincipalSkillCooldown')*1
             this.skillCurrentCooldown = localStorage.getItem('teamPrincipalCurrentCooldown')*1
+            this.skillCurrentCooldownSec = localStorage.getItem('teamPrincipalCurrentCooldownSec')*1
             this.skillAvailability = localStorage.getItem('teamPrincipalSkillAvailability')
-            this.level = localStorage.getItem('teamPrincipal.level')*1
-            this.value = localStorage.getItem('teamPrincipal.value')*1
-            this.cost = localStorage.getItem('teamPrincipal.cost')*1
+            this.level = localStorage.getItem('teamPrincipalLevel')*1
+            this.maxLevel = (JSON.parse(localStorage.getItem('teamPrincipalMaxLevel')))
+            this.value = localStorage.getItem('teamPrincipalValue')*1
+            this.cost = localStorage.getItem('teamPrincipalCost')*1
         }
     },
     upgrade: function () {
-        
-        this.level++
-        // if (this.subLevel === 3){
-        //     this.subLevel = 0
-        // } else {
-        //     this.subLevel++
-        // }
+        if (!this.maxLevel) {
+            this.level++
+            this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
+            const x = (this.value + .5)
+            this.value = x
 
-        this.cost = Math.round(this.cost * this.lvlUpCostMultiplier)
-        const x = (this.value + .5)
-        this.value = x
-
-        if (this.level === 2) {
-            this.addSkill = true
-            this.skillAvailability = true
+            if (this.level === 2) {
+                this.addSkill = true
+                this.skillAvailability = true
+            }
+            upgradeSkill(this)
         }
+
+        if(this.level === 10) {
+            this.maxLevel = true
+        }
+        
         this.save()
     },
     skillTimer: function (callback) {
@@ -541,4 +558,11 @@ const nextLvl = function (object) {
 
 const addStorageItem = function (key,value) {
     localStorage.setItem(key,(value).toString())
+}
+
+const upgradeSkill = function (character) {
+    if (character.level%2 === 0) {
+        character.skillDuration = character.skillDuration + 5
+        character.skillCooldown = character.skillCooldown - 1 
+    }
 }
