@@ -7,7 +7,7 @@ export const game = {
     teamPrincipalCooldownSkillCreated: false,
 }
 export const player = {
-    coins: 40000,
+    coins: 0,
     speed: 1,
     bonusSpeed: 0,
     teamPrincipalOwned: false,
@@ -333,7 +333,7 @@ export const driver = {
     bought: false,
     addSkill: false,
     skillCreated: false,
-    skillDuration: 15,
+    skillDuration: 20,
     skillId: '#skill-1',
     skillCooldown: 9,
     skillCurrentCooldown: 0,
@@ -345,7 +345,7 @@ export const driver = {
     maxLevel: false,
     value: 1,
     multiplier: 1,
-    cost: 7,
+    cost: 7000,
     lvlUpCostMultiplier: 2,
     img: './img/jurek.webp',
     save: function () {
@@ -446,7 +446,7 @@ export const teamPrincipal = {
     addSkill: false,
     skillCreated: false,
     skillId: '#skill-2',
-    skillDuration: 20,
+    skillDuration: 25,
     skillCooldown: 7,
     skillCurrentCooldown: 0,
     skillCurrentCooldownSec: 59,
@@ -456,7 +456,7 @@ export const teamPrincipal = {
     maxLevel: false,
     value: 1,
     multiplier: 1,
-    cost: 39,
+    cost: 900,
     lvlUpCostMultiplier: 2,
     img: './img/mateusz.webp',
     save: function () {
