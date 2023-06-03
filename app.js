@@ -73,11 +73,9 @@ const gameElementsStatus = {
 }
 
 let homeBoard = true
-let bolidMenu = false
-let bolidCards = false
+
 let garageMenu = false
 let garageCards = false
-let checkDriverCard = false 
 // let driverOwned = driver.bought
 let checkTeamPrincipalCard = false 
 let clickTimer;
@@ -93,88 +91,17 @@ if(clicker){
 }
 
 
-
-const bolidElement = document.getElementById('bolid-navigation')
-if(bolidElement){
-bolidElement.addEventListener('click', (e) => {
-// check & set navigation status
-    if(homeBoard) {
-        hideElements('homeBoard')
-        homeBoard = false
-    }
-    if (garageMenu) {
-        hideElements('garage-options')
-        if (garageCards) {
-            hideElements('garage')
-        }
-        if (checkTeamPrincipalCard) {
-            hideElements('teamPrincipal')
-        }
-    }
-
-// create/check & set driver card
-    if(!checkDriverCard) {
-        createCharacterCard('driver')
-        checkDriverCard = true
-        setCharacterCard(driver)
-        if(JSON.parse(localStorage.getItem('driverMaxLevel'))){
-            characterMaxLevelStyle(driver)
-        }
-    } else {
-        showCharacter('driver')
-    }
-
-    if(bolidMenu) {
-        showElements('bolid-options')
-        activeStyleNavigation('menuBolid')
-    } else {
-        bolidMenu = true
-        createCardNavigation('bolid-options', 'Driver', 'Parts')
-        activeStyleNavigation('menuBolid')
-    }
-
-    const partsCard = document.getElementById('Parts-option')
-    partsCard.addEventListener('click', (e) =>{
-        removeAlertCssClass()
-        driverCard.classList.remove('pushedKey')    
-        partsCard.classList.add('pushedKey')  
-
-            if (checkDriverCard) {
-                hideElements('driver')
-            }
-            if (bolidCards) {
-                document.querySelector('#bolid').classList.remove('showMeHowToSlide')
-                let animation
-                const elements = document.querySelectorAll('.bolid-slider')
-                if(!animation) {
-                    elements.forEach((selector) => {
-                        selector.style = 'animation: fadeIn .3s'})
-                        animation = true
-                }
-                showElements('bolid')
-            } else {
-                bolidCards = true
-                createCardElement('bolid', bolidParts, upgrade )
-                slider('.bolid-cards-container-slider','.bolid-element-slider')
-                document.querySelector('#bolid').classList.add('showMeHowToSlide')
-            }
-        })
-        const driverCard = document.getElementById('Driver-option')
-        driverCard.addEventListener('click', (e) => {
-
-        driverCard.classList.add('pushedKey')    
-        partsCard.classList.remove('pushedKey')  
-
-            if(bolidCards) {
-                hideElements('bolid')
-            }
-            if(checkDriverCard){
-                showElements('driver') 
-            }
-        })
-    }
-    )
+const navigationStatus = {
+    mainNavi: 'homeBoard',
+    subNavi: 'none,'
 }
+const subNavi = navigationStatus.subNavi
+
+const hideCarNavi = function (subNavi) {
+    hideElements('bolid-options')
+    hideElements(subNavi)
+}
+
 
 const garageElement = document.getElementById('garage-navigation')
 if(garageElement){
@@ -292,3 +219,151 @@ homeElement.addEventListener('click', (e) => {
 
 
 startGame()
+
+// let setCarMenu = function() {
+//     createCardNavigation('bolid-options', 'Driver', 'Parts')
+//     activeStyleNavigation('menuBolid')
+//     setCarMenu = function () {
+//         showElements('bolid-options')
+//         activeStyleNavigation('menuBolid')
+//     }
+// }
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+// _______________________________________________________________________________________________________________________
+
+
+
+
+const bolidElement = document.getElementById('bolid-navigation')
+let bolidMenu = false
+let bolidCards = false
+let checkDriverCard = false 
+if(bolidElement){
+    bolidElement.addEventListener('click', (e) => {
+        // FIRST USE -> CREATE (IN CREATE, FUNCTION IS OVERRIDING TO SHOW AND SET CREATED ELEMENTS)
+        createBolidNavigation()
+    })
+}
+
+const setPartsCards = function() {
+    removeAlertCssClass()
+    document.getElementById('Driver-option').classList.remove('pushedKey')    
+    document.getElementById('Parts-option').classList.add('pushedKey')  
+    
+    if (checkDriverCard) {
+        hideElements('driver')
+    }
+    if (bolidCards) {
+        document.querySelector('#bolid').classList.remove('showMeHowToSlide')
+        let animation
+        const elements = document.querySelectorAll('.bolid-slider')
+        if(!animation) {
+            elements.forEach((selector) => {
+                selector.style = 'animation: fadeIn .3s'})
+                animation = true
+            }
+            showElements('bolid')
+            // console.log('bolid cards animation ' + Math.random())
+        } else {
+            // console.log('bolid cards else ' + Math.random())
+            bolidCards = true
+            createCardElement('bolid', bolidParts, upgrade )
+            slider('.bolid-cards-container-slider','.bolid-element-slider')
+            document.querySelector('#bolid').classList.add('showMeHowToSlide')
+        }
+    bolidNavigationLastElement = setPartsCards
+}
+
+const setDriverCard = function(){
+    // showElements('driver') 
+    document.getElementById('Driver-option').classList.add('pushedKey')    
+    document.getElementById('Parts-option').classList.remove('pushedKey')  
+
+        if(bolidCards) {
+            hideElements('bolid')
+        }
+        if(checkDriverCard){
+            showElements('driver') 
+        }
+    bolidNavigationLastElement = setDriverCard
+}
+    
+let bolidNavigationLastElement = setDriverCard
+
+let createBolidNavigation = function() {
+
+    createCardNavigation('bolid-options', 'Driver', 'Parts')
+    bolidMenu = true
+    activeStyleNavigation('menuBolid')
+    createCharacterCard('driver')
+    checkDriverCard = true
+    setCharacterCard(driver)
+    if(JSON.parse(localStorage.getItem('driverMaxLevel'))){
+        characterMaxLevelStyle(driver)
+    }
+
+    const partsCard = document.getElementById('Parts-option')
+    partsCard.addEventListener('click', (e) =>{
+       setPartsCards()
+    })
+    
+    const driverCard = document.getElementById('Driver-option')
+    driverCard.addEventListener('click', (e) => {
+        setDriverCard()
+    })
+    
+    setBolidNavigation('per per')
+
+    // OVERRIDING FUNCTION - FROM CREATE TO SHOWING / SETTING
+    createBolidNavigation = setBolidNavigation
+    
+    // check & set navigation status
+    // setBolidNavigation(bolidNavigationStatus)
+
+    // setBolidNavigation()
+    
+    // // create/check & set driver card
+    //     if(!checkDriverCard) {
+        //     } else {
+            //         showCharacter('driver')
+            //     }
+            
+            //     if(bolidMenu) {
+                //     } else {
+                    //     }
+                    //     // setCarMenu()
+                    //     setPartsCards()
+                    
+                    // setDriverCard()
+}
+                
+
+
+const setBolidNavigation = function() {
+        if(homeBoard) {
+            hideElements('homeBoard')
+            homeBoard = false
+        }
+        if (garageMenu) {
+            hideElements('garage-options')
+            if (garageCards) {
+                hideElements('garage')
+            }
+            if (checkTeamPrincipalCard) {
+                hideElements('teamPrincipal')
+            }
+        }
+        showElements('bolid-options') 
+        activeStyleNavigation('menuBolid')
+        bolidNavigationLastElement()
+}
+
+          

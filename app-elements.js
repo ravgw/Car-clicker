@@ -53,8 +53,6 @@ const engine = {
         this.originValue++
         this.calculateValue()
         this.save()
-        // console.log(engineTest)
-        // console.log(this.value)
     },
     calculateValue: function () {
         this.value =  Math.round(this.originValue * engineers.value)
