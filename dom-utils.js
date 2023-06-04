@@ -20,16 +20,22 @@ frontTyre.classList.add('tyres');
 
 const rearRim1of3 = document.createElement('span');
 rearRim1of3.classList.add('rims1of3')
+rearRim1of3.classList.add('rims')
 const rearRim2of3 = document.createElement('span');
 rearRim2of3.classList.add('rims2of3')
+rearRim2of3.classList.add('rims')
 const rearRim3of3 = document.createElement('span');
 rearRim3of3.classList.add('rims3of3')
+rearRim3of3.classList.add('rims')
 const frontRim1of3 = document.createElement('span');
 frontRim1of3.classList.add('rims1of3')
+frontRim1of3.classList.add('rims')
 const frontRim2of3 = document.createElement('span');
 frontRim2of3.classList.add('rims2of3')
+frontRim2of3.classList.add('rims')
 const frontRim3of3 = document.createElement('span');
 frontRim3of3.classList.add('rims3of3')
+frontRim3of3.classList.add('rims')
 
 const driverBody = document.createElement('p');
 driverBody.id = 'driverBody';

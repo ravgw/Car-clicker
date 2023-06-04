@@ -59,6 +59,7 @@ export function addCoins () {
     statsUpDate()
     player.save()
     stats.save()
+    speedUpDisplayAnimation()
 }
 
 export function spendCoins(cost) {
@@ -513,4 +514,12 @@ export function checkAutoClickAvailability () {
     if(JSON.parse(localStorage.getItem('teamPrincipalBought'))){
         startAutoClick(1000)
     }
+}
+
+const speedUpDisplayAnimation = function() {
+    const elements = document.querySelectorAll('.rims')
+
+    elements.forEach(element => 
+        element.style = 'animation-duration: 1s'
+    )
 }

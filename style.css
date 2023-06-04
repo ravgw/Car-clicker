@@ -345,7 +345,9 @@ body {
     background: #777;
     border: 2px solid #333;
     border-radius: 10%;
-    animation: wheels1 1s infinite linear;
+    animation: wheels1 linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 .rims2of3 {
     position: absolute;
@@ -357,7 +359,9 @@ body {
     border: 2px solid #222;
     border-radius: 10%;
     transform: rotate(60deg);
-    animation: wheels2 1s infinite linear;
+    animation: wheels2 linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 .rims3of3 {
     position: absolute;
@@ -369,7 +373,9 @@ body {
     border: 2px solid #222;
     border-radius: 10%;
     transform: rotate(120deg);
-    animation: wheels3 1s infinite linear;
+    animation: wheels3 linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 /* correction position */
