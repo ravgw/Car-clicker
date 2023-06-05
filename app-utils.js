@@ -59,7 +59,7 @@ export function addCoins () {
     statsUpDate()
     player.save()
     stats.save()
-    speedUpDisplayAnimation()
+    speedUpDisplayAnimation(16)
 }
 
 export function spendCoins(cost) {
@@ -516,10 +516,41 @@ export function checkAutoClickAvailability () {
     }
 }
 
-const speedUpDisplayAnimation = function() {
-    const elements = document.querySelectorAll('.rims')
+const speedUpDisplayAnimation = function(speedUpLevel) {
 
-    elements.forEach(element => 
-        element.style = 'animation-duration: 1s'
+    let rimsValue = 2
+    let kerbsTrackValue = 38
+    let fansValue = 28
+
+    function calcSpeedUp() {
+        for(let i = 0; i < speedUpLevel; i ++) {
+            rimsValue = rimsValue - 0.1
+            kerbsTrackValue = kerbsTrackValue - 2.05
+            fansValue = fansValue - 1.5
+            console.log(rimsValue)
+        }
+    }
+    calcSpeedUp()
+
+    const rimsElements = document.querySelectorAll('.rims')
+    const fans = document.querySelector('#fans')
+    const track = document.querySelector('#track')
+    const kerbs = document.querySelector('#kerbs')
+
+    rimsElements.forEach(rimElement => 
+        rimElement.style = `animation-duration: ${rimsValue}s`
     )
+    track.style = `animation-duration: ${kerbsTrackValue}s`
+    kerbs.style = `animation-duration: ${kerbsTrackValue}s`
+    fans.style = `animation-duration: ${fansValue}s`
+
+    function trelo() {
+        let k = 1
+        for( let j =0; j < 17; j++){
+            k = Math.floor( k + 2 + (k/4))
+                console.log(k)
+                console.log('count')
+        }
+    }
+    trelo()
 }

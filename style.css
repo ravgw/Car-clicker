@@ -182,7 +182,9 @@ body {
     background: url('./fans.webp') repeat-x;
     height: 148px;
     border-bottom: 50px solid #565;
-    animation: horizon 20s infinite linear;
+    animation: horizon linear;
+    animation-duration: 28s;
+    animation-iteration-count: infinite;
     z-index: -1;
 }
 
@@ -193,7 +195,9 @@ body {
     height: 1600px;
     border-top: 10px dashed #f00;
     border-radius: 50%;
-    animation: kerbs 20s infinite linear;
+    animation: kerbs linear;
+    animation-duration: 28s;
+    animation-iteration-count: infinite;
 }
 
 #track {
@@ -204,7 +208,9 @@ body {
     border-radius: 50%;
     background: var(--spacecadet);
     border-top: 10px solid #fff;
-    animation: kerbs 20s infinite linear;
+    animation: kerbs linear;
+    animation-duration: 28s;
+    animation-iteration-count: infinite;
 }
 
 /* ----------------------------------- CAR-CLICKER ----------------------------------- */
