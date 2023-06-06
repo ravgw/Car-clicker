@@ -7,8 +7,8 @@ export const game = {
     teamPrincipalCooldownSkillCreated: false,
 }
 export const player = {
-    coins: 0,
-    speed: 1,
+    coins:  0,
+    speed: 0,
     bonusSpeed: 0,
     teamPrincipalOwned: false,
     driverOwned: false,

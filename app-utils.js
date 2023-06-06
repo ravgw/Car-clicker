@@ -59,7 +59,6 @@ export function addCoins () {
     statsUpDate()
     player.save()
     stats.save()
-    speedUpDisplayAnimation(16)
 }
 
 export function spendCoins(cost) {
@@ -163,7 +162,6 @@ const buyCharacter = function (object) {
 
 export const upgrade = function (object) {
 
-    console.log(object.maxLevel)
     if(object.maxLevel) {
         characterMaxLevelStyle(object)
     } else {
@@ -185,6 +183,7 @@ export const upgrade = function (object) {
     } 
     calculateSpeed();
     statsUpDate();
+    setDisplayAnimation()
     }
 }
 const homeMenuStatsUpdate = function (object) {
@@ -254,6 +253,7 @@ const skillActivation = function (character) {
                     skillCooldown(character)
                     game[`${character.type}SkillStatus`] = 'available'
                     displayCounter.classList.remove('anim-skill-duration')
+                    setDisplayAnimation()
                 } else if (counter >= 1){
                     if (counter === 4){
                         displayCounter.classList.add('anim-skill-duration')
@@ -265,6 +265,8 @@ const skillActivation = function (character) {
             },1000)
         }
         skillTimer()
+
+        setDisplayAnimation()
 }
 
 const setDisplayElement = function (character) {
@@ -473,6 +475,7 @@ export function calculateSpeed () {
     // console.log(speed)
     // console.log(bonusSpeed)
     statsUpDate()
+
 }
 
 
@@ -516,7 +519,40 @@ export function checkAutoClickAvailability () {
     }
 }
 
-const speedUpDisplayAnimation = function(speedUpLevel) {
+//  SETTING ANIMATION
+
+const calcAnimationLevel = function() {
+    const carSpeed = player.speed
+    const array = checkpointSpeedArray()
+    let level = 1
+
+    for( let i = 1; i < array.length + 1; i++) {
+        if( carSpeed <= array[i]){
+            level = i
+            break;
+        }
+    }
+    return level
+}
+
+let checkpointSpeedArray = function() {
+    const levels = []
+    let x = 1
+    for( let i = 0; i<17; i++){
+        if( i < 7 ){
+            x = Math.floor(x + 1)
+            levels.push(x)
+        } else {
+            x = Math.floor(x + i + (x/6))
+            levels.push(x)
+        }
+    }
+    return levels
+}
+
+export const setDisplayAnimation = function() {
+
+    const speedUpLevel = calcAnimationLevel()
 
     let rimsValue = 2
     let kerbsTrackValue = 38
@@ -527,7 +563,6 @@ const speedUpDisplayAnimation = function(speedUpLevel) {
             rimsValue = rimsValue - 0.1
             kerbsTrackValue = kerbsTrackValue - 2.05
             fansValue = fansValue - 1.5
-            console.log(rimsValue)
         }
     }
     calcSpeedUp()
@@ -544,13 +579,4 @@ const speedUpDisplayAnimation = function(speedUpLevel) {
     kerbs.style = `animation-duration: ${kerbsTrackValue}s`
     fans.style = `animation-duration: ${fansValue}s`
 
-    function trelo() {
-        let k = 1
-        for( let j =0; j < 17; j++){
-            k = Math.floor( k + 2 + (k/4))
-                console.log(k)
-                console.log('count')
-        }
-    }
-    trelo()
 }
